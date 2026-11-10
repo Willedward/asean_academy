@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l4-001",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -24,11 +24,19 @@
         },
         {
           "type": "display_math",
-          "latex": "3x+5=26\\qquad kx=28"
+          "latex": "3x+5=26\\qquad(k-1)x=28"
         },
         {
           "type": "text",
-          "text": "Find k."
+          "text": "Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -37,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "4",
-        "canonical_latex": "4",
+        "canonical_answer": "5",
+        "canonical_latex": "5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -59,7 +67,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Use that value in kx = 28."
+              "text": "Use that value of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " in the second equation, then solve for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -69,7 +93,7 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "x=7"
             }
           ],
@@ -80,8 +104,16 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "7k=28"
+              "type": "inline_math",
+              "latex": "7(k-1)=28"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k-1=4"
             }
           ],
           "mark_type": "M",
@@ -91,8 +123,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k=4"
+              "type": "inline_math",
+              "latex": "k=5"
             }
           ],
           "mark_type": "A",

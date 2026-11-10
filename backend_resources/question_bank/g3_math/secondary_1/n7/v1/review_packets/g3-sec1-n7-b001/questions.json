@@ -124,7 +124,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l1-002",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -144,7 +144,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "For the equation below, enter 1 if "
+            "text": "For the equation below, is "
           },
           {
             "type": "inline_math",
@@ -152,15 +152,11 @@
           },
           {
             "type": "text",
-            "text": " is a solution and 0 if it is not."
+            "text": " a solution? Enter 1 for yes and 0 for no."
           },
           {
             "type": "display_math",
             "latex": "2x+1=7"
-          },
-          {
-            "type": "text",
-            "text": "Enter 1 or 0."
           }
         ],
         "marks": 1,
@@ -247,14 +243,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l2-001",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.1",
-    "title": "Completing an inverse-operation statement",
+    "title": "Two linked steps",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -267,11 +263,27 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The equation is rewritten in the form "
+            "text": "The equation below is solved by subtracting "
           },
           {
             "type": "inline_math",
-            "latex": "x=17-k"
+            "latex": "p"
+          },
+          {
+            "type": "text",
+            "text": " from both sides and then dividing both sides by "
+          },
+          {
+            "type": "inline_math",
+            "latex": "q"
+          },
+          {
+            "type": "text",
+            "text": ". Find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "p+q"
           },
           {
             "type": "text",
@@ -279,19 +291,7 @@
           },
           {
             "type": "display_math",
-            "latex": "x+9=17"
-          },
-          {
-            "type": "text",
-            "text": "Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "k"
-          },
-          {
-            "type": "text",
-            "text": "."
+            "latex": "2x+9=17"
           }
         ],
         "marks": 2,
@@ -300,8 +300,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "9",
-          "canonical_latex": "9",
+          "canonical_answer": "11",
+          "canonical_latex": "11",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -313,7 +313,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Undo the addition on the left."
+                "text": "Undo the addition first, then the multiplication."
               }
             ]
           },
@@ -322,23 +322,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract the number that is added to "
-              },
-              {
-                "type": "inline_math",
-                "latex": "x"
-              },
-              {
-                "type": "text",
-                "text": " from both sides, then compare your new equation with "
-              },
-              {
-                "type": "inline_math",
-                "latex": "x=17-k"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Decide which number to subtract and which number to divide by, then add those two numbers."
               }
             ]
           }
@@ -348,8 +332,16 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=17-9"
+                "type": "inline_math",
+                "latex": "p=9"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "q=2"
               }
             ],
             "mark_type": "M",
@@ -359,8 +351,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "k=9"
+                "type": "inline_math",
+                "latex": "p+q=9+2=11"
               }
             ],
             "mark_type": "A",
@@ -389,14 +381,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l2-002",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.1",
-    "title": "Choosing a balancing divisor",
+    "title": "Testing a solution",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -409,11 +401,35 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Both sides are divided by the same positive number to obtain "
+            "text": "Which value of "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": " is the solution of the equation? Enter 1 for "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x=6"
+          },
+          {
+            "type": "text",
+            "text": ", 2 for "
           },
           {
             "type": "inline_math",
             "latex": "x=7"
+          },
+          {
+            "type": "text",
+            "text": " and 3 for "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x=8"
           },
           {
             "type": "text",
@@ -422,10 +438,6 @@
           {
             "type": "display_math",
             "latex": "3x=21"
-          },
-          {
-            "type": "text",
-            "text": "State the divisor."
           }
         ],
         "marks": 2,
@@ -434,8 +446,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "3",
-          "canonical_latex": "3",
+          "canonical_answer": "2",
+          "canonical_latex": "2",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -447,15 +459,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The factor multiplying "
-              },
-              {
-                "type": "inline_math",
-                "latex": "x"
-              },
-              {
-                "type": "text",
-                "text": " must be removed."
+                "text": "A solution makes both sides equal when it is substituted."
               }
             ]
           },
@@ -464,15 +468,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Which number multiplies "
+                "text": "Work out "
               },
               {
                 "type": "inline_math",
-                "latex": "x"
+                "latex": "3x"
               },
               {
                 "type": "text",
-                "text": "? Divide both sides by that number."
+                "text": " for each of the three values and compare it with 21."
               }
             ]
           }
@@ -482,8 +486,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{3x}{3}=\\frac{21}{3}"
+                "type": "inline_math",
+                "latex": "3(7)=21"
               }
             ],
             "mark_type": "M",
@@ -493,8 +497,12 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{divisor}=3"
+                "type": "inline_math",
+                "latex": "x=7"
+              },
+              {
+                "type": "text",
+                "text": " is the solution, so the code is 2."
               }
             ],
             "mark_type": "A",
@@ -523,14 +531,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l3-001",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.1",
-    "title": "Completing an equivalent equation",
+    "title": "Equations with no solution",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -543,23 +551,11 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The first equation is rewritten without changing its solution set."
+            "text": "How many solutions does the equation have? Enter 0 for no solutions, 1 for exactly one solution and 9 for infinitely many solutions."
           },
           {
             "type": "display_math",
-            "latex": "2x+7=19\\quad\\Longleftrightarrow\\quad2x=k"
-          },
-          {
-            "type": "text",
-            "text": "Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "k"
-          },
-          {
-            "type": "text",
-            "text": "."
+            "latex": "2(x+3)=2x+5"
           }
         ],
         "marks": 3,
@@ -568,8 +564,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "12",
-          "canonical_latex": "12",
+          "canonical_answer": "0",
+          "canonical_latex": "0",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -581,7 +577,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract 7 from both sides."
+                "text": "Expand the bracket on the left-hand side."
               }
             ]
           },
@@ -590,15 +586,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Compute "
+                "text": "Subtract the "
               },
               {
                 "type": "inline_math",
-                "latex": "19-7"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": "-term from both sides and see what statement remains."
               }
             ]
           }
@@ -608,8 +604,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2x=19-7"
+                "type": "inline_math",
+                "latex": "2x+6=2x+5"
               }
             ],
             "mark_type": "M",
@@ -619,8 +615,24 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2x=12"
+                "type": "text",
+                "text": "Subtracting "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2x"
+              },
+              {
+                "type": "text",
+                "text": " from both sides leaves 6 on the left and 5 on the right, which are not equal for any value of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -630,8 +642,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "k=12"
+                "type": "text",
+                "text": "There are no solutions, so the answer is 0."
               }
             ],
             "mark_type": "A",
@@ -660,14 +672,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l3-002",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.1",
-    "title": "Clearing a denominator consistently",
+    "title": "Choosing an equivalent equation",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -680,27 +692,43 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Multiply every term by 3 to obtain "
+            "text": "Which equation has the same solution as "
           },
           {
             "type": "inline_math",
-            "latex": "x+6=k"
-          },
-          {
-            "type": "text",
-            "text": "."
-          },
-          {
-            "type": "display_math",
             "latex": "\\frac{x}{3}+2=7"
           },
           {
             "type": "text",
-            "text": "Find "
+            "text": "? Enter 1 for "
           },
           {
             "type": "inline_math",
-            "latex": "k"
+            "latex": "x+2=21"
+          },
+          {
+            "type": "text",
+            "text": ", 2 for "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x+6=21"
+          },
+          {
+            "type": "text",
+            "text": ", 3 for "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x+6=7"
+          },
+          {
+            "type": "text",
+            "text": " and 4 for "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x+2=7"
           },
           {
             "type": "text",
@@ -713,8 +741,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "21",
-          "canonical_latex": "21",
+          "canonical_answer": "2",
+          "canonical_latex": "2",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -726,7 +754,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Every term, including 2 and 7, must be multiplied by 3."
+                "text": "To clear the denominator, every term must be multiplied by 3."
               }
             ]
           },
@@ -735,7 +763,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The right-hand side becomes 7 times 3."
+                "text": "Multiply each term of the equation, including 2 and 7, by 3, then compare the result with the choices."
               }
             ]
           }
@@ -745,8 +773,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x+6=7\\times3"
+                "type": "text",
+                "text": "Multiply every term by 3."
               }
             ],
             "mark_type": "M",
@@ -756,7 +784,7 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "x+6=21"
               }
             ],
@@ -767,8 +795,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "k=21"
+                "type": "text",
+                "text": "The code is 2."
               }
             ],
             "mark_type": "A",
@@ -797,7 +825,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n7-l4-001",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -821,11 +849,19 @@
           },
           {
             "type": "display_math",
-            "latex": "3x+5=26\\qquad kx=28"
+            "latex": "3x+5=26\\qquad(k-1)x=28"
           },
           {
             "type": "text",
-            "text": "Find k."
+            "text": "Find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "k"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 3,
@@ -834,8 +870,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "4",
-          "canonical_latex": "4",
+          "canonical_answer": "5",
+          "canonical_latex": "5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -856,7 +892,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use that value in kx = 28."
+                "text": "Use that value of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " in the second equation, then solve for "
+              },
+              {
+                "type": "inline_math",
+                "latex": "k"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -866,7 +918,7 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "x=7"
               }
             ],
@@ -877,8 +929,16 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "7k=28"
+                "type": "inline_math",
+                "latex": "7(k-1)=28"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "k-1=4"
               }
             ],
             "mark_type": "M",
@@ -888,8 +948,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "k=4"
+                "type": "inline_math",
+                "latex": "k=5"
               }
             ],
             "mark_type": "A",
@@ -1535,7 +1595,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l4-002",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1555,14 +1615,6 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Expand both bracketed expressions before collecting terms."
-          },
-          {
-            "type": "display_math",
-            "latex": "3(2x-5)-4(x+1)=13"
-          },
-          {
-            "type": "text",
             "text": "Find the value of "
           },
           {
@@ -1572,6 +1624,10 @@
           {
             "type": "text",
             "text": "."
+          },
+          {
+            "type": "display_math",
+            "latex": "3(2x-5)-4(x+1)=13"
           }
         ],
         "marks": 3,
@@ -1593,15 +1649,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The left side simplifies to "
-              },
-              {
-                "type": "inline_math",
-                "latex": "2x-19"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Expand each bracket, taking care with the signs."
               }
             ]
           },
@@ -1610,15 +1658,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
+                "text": "Collect the "
               },
               {
                 "type": "inline_math",
-                "latex": "2x-19=13"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": "-terms and the constants on the left before solving."
               }
             ]
           }
@@ -2138,7 +2186,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l3-005",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2158,11 +2206,11 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Clear denominators 3 and 2 using their lowest common multiple."
+            "text": "Clear denominators 5 and 2 using their lowest common multiple."
           },
           {
             "type": "display_math",
-            "latex": "\\frac{x+2}{3}+\\frac{x-1}{2}=6"
+            "latex": "\\frac{x+2}{5}+\\frac{x-1}{2}=2"
           },
           {
             "type": "text",
@@ -2183,8 +2231,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "7",
-          "canonical_latex": "7",
+          "canonical_answer": "3",
+          "canonical_latex": "3",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2196,7 +2244,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply every term by 6."
+                "text": "Multiply every term by 10."
               }
             ]
           },
@@ -2205,15 +2253,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "This gives "
+                "text": "Write the result as "
               },
               {
                 "type": "inline_math",
-                "latex": "2(x+2)+3(x-1)=36"
+                "latex": "2(x+2)+5(x-1)=20"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": ", then expand and collect."
               }
             ]
           }
@@ -2223,8 +2271,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2(x+2)+3(x-1)=36"
+                "type": "inline_math",
+                "latex": "2(x+2)+5(x-1)=20"
               }
             ],
             "mark_type": "M",
@@ -2234,8 +2282,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "5x+1=36"
+                "type": "inline_math",
+                "latex": "7x-1=20"
               }
             ],
             "mark_type": "M",
@@ -2245,8 +2293,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=7"
+                "type": "inline_math",
+                "latex": "x=3"
               }
             ],
             "mark_type": "A",
@@ -2549,7 +2597,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l1-006",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2569,23 +2617,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Eight identical notebooks cost S$24 altogether. Let "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": " be the cost of one notebook in dollars. Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": "."
+            "text": "Eight identical notebooks cost S$24 altogether. Let the cost of one notebook be S$x. Find x. Enter only the number."
           }
         ],
         "marks": 1,
@@ -2932,7 +2964,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l3-007",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3007,15 +3039,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "In five years, write "
+                "text": "Write the father's age in five years in terms of "
               },
               {
                 "type": "inline_math",
-                "latex": "3x+5=44"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": ", then set it equal to 44."
               }
             ]
           }
@@ -3077,7 +3109,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l3-008",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3144,15 +3176,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
+                "text": "Multiply the height by the width to write the area in terms of "
               },
               {
                 "type": "inline_math",
-                "latex": "7(x+3)=98"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": ", then set it equal to 98."
               }
             ]
           }
@@ -3214,14 +3246,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l4-004",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.4",
-    "title": "Purchase followed by a refund",
+    "title": "Pen price from change received",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3234,23 +3266,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Noah buys 4 identical pens and a S$6 notebook. He pays with S$50 and receives S$12 change. Let "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": " dollars be the price of one pen. Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": "."
+            "text": "Noah buys 4 identical pens and a S$6 notebook. He pays with S$50 and receives S$12 change. Let the price of one pen be S$x. Find x. Enter only the number."
           }
         ],
         "marks": 3,
@@ -3289,15 +3305,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Model the purchase by "
+                "text": "Write the total cost of the pens and notebook in terms of "
               },
               {
                 "type": "inline_math",
-                "latex": "4x+6=38"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": ", then set it equal to the amount spent."
               }
             ]
           }

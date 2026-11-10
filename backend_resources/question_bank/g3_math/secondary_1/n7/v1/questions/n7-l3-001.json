@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-001",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.1",
-  "title": "Completing an equivalent equation",
+  "title": "Equations with no solution",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,23 +20,11 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The first equation is rewritten without changing its solution set."
+          "text": "How many solutions does the equation have? Enter 0 for no solutions, 1 for exactly one solution and 9 for infinitely many solutions."
         },
         {
           "type": "display_math",
-          "latex": "2x+7=19\\quad\\Longleftrightarrow\\quad2x=k"
-        },
-        {
-          "type": "text",
-          "text": "Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "latex": "2(x+3)=2x+5"
         }
       ],
       "marks": 3,
@@ -45,8 +33,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "12",
-        "canonical_latex": "12",
+        "canonical_answer": "0",
+        "canonical_latex": "0",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +46,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 7 from both sides."
+              "text": "Expand the bracket on the left-hand side."
             }
           ]
         },
@@ -67,15 +55,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Compute "
+              "text": "Subtract the "
             },
             {
               "type": "inline_math",
-              "latex": "19-7"
+              "latex": "x"
             },
             {
               "type": "text",
-              "text": "."
+              "text": "-term from both sides and see what statement remains."
             }
           ]
         }
@@ -85,8 +73,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "2x=19-7"
+              "type": "inline_math",
+              "latex": "2x+6=2x+5"
             }
           ],
           "mark_type": "M",
@@ -96,8 +84,24 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "2x=12"
+              "type": "text",
+              "text": "Subtracting "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x"
+            },
+            {
+              "type": "text",
+              "text": " from both sides leaves 6 on the left and 5 on the right, which are not equal for any value of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -107,8 +111,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k=12"
+              "type": "text",
+              "text": "There are no solutions, so the answer is 0."
             }
           ],
           "mark_type": "A",
