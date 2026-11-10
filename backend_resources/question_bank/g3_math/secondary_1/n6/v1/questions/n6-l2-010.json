@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l2-010",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N6",
   "primary_outcome": "6.2",
-  "title": "Completing a value table",
+  "title": "Sum of a table of values",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -36,15 +36,15 @@
         },
         {
           "type": "text",
-          "text": ", 0, 1 and 2. Find the y-value corresponding to "
+          "text": ", 0, 1 and 2. Find the sum of the four "
         },
         {
           "type": "inline_math",
-          "latex": "x=-1"
+          "latex": "y"
         },
         {
           "type": "text",
-          "text": "."
+          "text": "-values in the table."
         }
       ],
       "marks": 2,
@@ -53,8 +53,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "-5",
-        "canonical_latex": "-5",
+        "canonical_answer": "-8",
+        "canonical_latex": "-8",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -66,7 +66,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Replace "
+              "text": "Find the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": "-value for each "
             },
             {
               "type": "inline_math",
@@ -74,7 +82,7 @@
             },
             {
               "type": "text",
-              "text": " by -1 in the rule."
+              "text": "-value."
             }
           ]
         },
@@ -83,15 +91,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
+              "text": "Substitute each of the four "
             },
             {
               "type": "inline_math",
-              "latex": "2(-1)-3"
+              "latex": "x"
             },
             {
               "type": "text",
-              "text": "."
+              "text": "-values, then add the results."
             }
           ]
         }
@@ -101,8 +109,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "y=2(-1)-3"
+              "type": "inline_math",
+              "latex": "y=-5,-3,-1,1"
             }
           ],
           "mark_type": "M",
@@ -112,8 +120,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "y=-5"
+              "type": "inline_math",
+              "latex": "-5-3-1+1=-8"
             }
           ],
           "mark_type": "A",

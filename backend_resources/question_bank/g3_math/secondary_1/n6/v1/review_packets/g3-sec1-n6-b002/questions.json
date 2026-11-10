@@ -116,7 +116,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n6-l2-008",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -175,15 +175,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Replace "
+                "text": "Keep the "
               },
               {
                 "type": "inline_math",
-                "latex": "x=-7"
+                "latex": "y"
               },
               {
                 "type": "text",
-                "text": " by 7 while keeping y unchanged."
+                "text": "-coordinate the same and change the sign of the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "-coordinate."
               }
             ]
           }
@@ -619,14 +627,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n6-l1-008",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N6",
     "primary_outcome": "6.2",
-    "title": "Input from an ordered pair",
+    "title": "Reading a table of values (input)",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -639,15 +647,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The point "
-          },
-          {
-            "type": "inline_math",
-            "latex": "(-3, 8)"
-          },
-          {
-            "type": "text",
-            "text": " represents a relationship between "
+            "text": "A relationship has this table of values: when "
           },
           {
             "type": "inline_math",
@@ -655,11 +655,35 @@
           },
           {
             "type": "text",
-            "text": " and y. State the input value "
+            "text": " is "
+          },
+          {
+            "type": "inline_math",
+            "latex": "-3"
+          },
+          {
+            "type": "text",
+            "text": ", 0 and 3, "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": " is 8, 5 and 2. State the value of "
           },
           {
             "type": "inline_math",
             "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": " when "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=8"
           },
           {
             "type": "text",
@@ -685,7 +709,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "The input is represented by the first coordinate."
+                "text": "Find the column of the table where "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": " is 8."
               }
             ]
           },
@@ -694,7 +726,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Read the first number in the ordered pair, including its sign."
+                "text": "Read the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "-value, including its sign, listed for that "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-value."
               }
             ]
           }
@@ -734,14 +782,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n6-l2-010",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N6",
     "primary_outcome": "6.2",
-    "title": "Completing a value table",
+    "title": "Sum of a table of values",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -770,15 +818,15 @@
           },
           {
             "type": "text",
-            "text": ", 0, 1 and 2. Find the y-value corresponding to "
+            "text": ", 0, 1 and 2. Find the sum of the four "
           },
           {
             "type": "inline_math",
-            "latex": "x=-1"
+            "latex": "y"
           },
           {
             "type": "text",
-            "text": "."
+            "text": "-values in the table."
           }
         ],
         "marks": 2,
@@ -787,8 +835,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "-5",
-          "canonical_latex": "-5",
+          "canonical_answer": "-8",
+          "canonical_latex": "-8",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -800,7 +848,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Replace "
+                "text": "Find the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-value for each "
               },
               {
                 "type": "inline_math",
@@ -808,7 +864,7 @@
               },
               {
                 "type": "text",
-                "text": " by -1 in the rule."
+                "text": "-value."
               }
             ]
           },
@@ -817,15 +873,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
+                "text": "Substitute each of the four "
               },
               {
                 "type": "inline_math",
-                "latex": "2(-1)-3"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": "-values, then add the results."
               }
             ]
           }
@@ -835,8 +891,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "y=2(-1)-3"
+                "type": "inline_math",
+                "latex": "y=-5,-3,-1,1"
               }
             ],
             "mark_type": "M",
@@ -846,8 +902,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "y=-5"
+                "type": "inline_math",
+                "latex": "-5-3-1+1=-8"
               }
             ],
             "mark_type": "A",
@@ -876,7 +932,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n6-l2-011",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -900,7 +956,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "(0, 2)"
+            "latex": "(0,3)"
           },
           {
             "type": "text",
@@ -908,7 +964,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "(1, 6)"
+            "latex": "(1,8)"
           },
           {
             "type": "text",
@@ -916,7 +972,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "(2, 10)"
+            "latex": "(2,13)"
           },
           {
             "type": "text",
@@ -945,8 +1001,8 @@
         "response": {
           "type": "algebraic_expression",
           "comparison_mode": "symbolic_equivalence",
-          "canonical_expression": "4*x+2",
-          "canonical_latex": "4x+2",
+          "canonical_expression": "5*x+3",
+          "canonical_latex": "5x+3",
           "variables": [
             "x"
           ],
@@ -985,15 +1041,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "The change is 4 and the pair "
+                "text": "Use the change in "
               },
               {
                 "type": "inline_math",
-                "latex": "(0, 2)"
+                "latex": "y"
               },
               {
                 "type": "text",
-                "text": " gives the constant term."
+                "text": " for an increase of 1 in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": ", and the pair "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(0,3)"
+              },
+              {
+                "type": "text",
+                "text": " for the constant term."
               }
             ]
           }
@@ -1003,8 +1075,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\Delta y=4\\text{ when }\\Delta x=1"
+                "type": "inline_math",
+                "latex": "\\Delta y=5\\text{ when }\\Delta x=1"
               }
             ],
             "mark_type": "M",
@@ -1014,8 +1086,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "y=4x+2"
+                "type": "inline_math",
+                "latex": "y=5x+3"
               }
             ],
             "mark_type": "A",
@@ -1044,7 +1116,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n6-l3-010",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1064,15 +1136,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The cost per person "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": " dollars for a $72 booking is "
+            "text": "The cost per person is S$y for a S$72 booking, where "
           },
           {
             "type": "inline_math",
@@ -1080,7 +1144,7 @@
           },
           {
             "type": "text",
-            "text": ", where "
+            "text": " and "
           },
           {
             "type": "inline_math",
@@ -1096,7 +1160,7 @@
           },
           {
             "type": "text",
-            "text": " when 9 people share the booking."
+            "text": " when 9 people share the booking. Enter only the number."
           }
         ],
         "marks": 2,
@@ -1320,7 +1384,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n6-l5-002",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1340,7 +1404,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A delivery service models cost by "
+            "text": "A delivery service charges S$y for a distance of "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": " km, where "
           },
           {
             "type": "inline_math",
@@ -1352,7 +1424,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "(4, 18)"
+            "latex": "(4,18)"
           },
           {
             "type": "text",
@@ -1360,11 +1432,11 @@
           },
           {
             "type": "inline_math",
-            "latex": "(10, 36)"
+            "latex": "(10,36)"
           },
           {
             "type": "text",
-            "text": " lie on its graph. A second service charges "
+            "text": " lie on its graph. A second service charges S$y where "
           },
           {
             "type": "inline_math",
@@ -1372,15 +1444,7 @@
           },
           {
             "type": "text",
-            "text": ". Find the distance "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": " at which both services charge the same amount."
+            "text": ". Find the distance, in km, at which both services charge the same amount."
           }
         ],
         "marks": 3,
@@ -1437,7 +1501,15 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
+                "latex": "a=\\frac{36-18}{10-4}=3"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
                 "latex": "18=3(4)+b\\Rightarrow b=6"
               }
             ],
@@ -1448,7 +1520,7 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "3x+6=2x+17"
               }
             ],
@@ -1459,7 +1531,7 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "x=11"
               }
             ],
@@ -1898,14 +1970,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n6-l3-013",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N6",
     "primary_outcome": "6.3",
-    "title": "Same output from two functions",
+    "title": "Equal outputs from two relationships",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1918,11 +1990,11 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Functions "
+            "text": "Relationships "
           },
           {
             "type": "inline_math",
-            "latex": "f"
+            "latex": "y=5x-4"
           },
           {
             "type": "text",
@@ -1930,27 +2002,19 @@
           },
           {
             "type": "inline_math",
-            "latex": "g"
+            "latex": "y=2x+11"
           },
           {
             "type": "text",
-            "text": " are given by "
+            "text": " give the same value of "
           },
           {
             "type": "inline_math",
-            "latex": "f(x)=5x-4"
+            "latex": "y"
           },
           {
             "type": "text",
-            "text": " and "
-          },
-          {
-            "type": "inline_math",
-            "latex": "g(x)=2x+11"
-          },
-          {
-            "type": "text",
-            "text": ". Find "
+            "text": " for one value of "
           },
           {
             "type": "inline_math",
@@ -1958,11 +2022,11 @@
           },
           {
             "type": "text",
-            "text": " when "
+            "text": ". Find that value of "
           },
           {
             "type": "inline_math",
-            "latex": "f(x)=g(x)"
+            "latex": "y"
           },
           {
             "type": "text",
@@ -1975,8 +2039,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "5",
-          "canonical_latex": "5",
+          "canonical_answer": "21",
+          "canonical_latex": "21",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1988,7 +2052,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set the two function expressions equal."
+                "text": "Set the two expressions for "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": " equal."
               }
             ]
           },
@@ -1997,15 +2069,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
+                "text": "Solve for "
               },
               {
                 "type": "inline_math",
-                "latex": "5x-4=2x+11"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": ", then substitute into either expression."
               }
             ]
           }
@@ -2015,7 +2087,7 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "5x-4=2x+11"
               }
             ],
@@ -2026,8 +2098,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "3x=15"
+                "type": "inline_math",
+                "latex": "x=5"
               }
             ],
             "mark_type": "M",
@@ -2037,8 +2109,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=5"
+                "type": "inline_math",
+                "latex": "y=5(5)-4=21"
               }
             ],
             "mark_type": "A",
@@ -2067,14 +2139,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n6-l4-006",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N6",
     "primary_outcome": "6.3",
-    "title": "Composing two linear rules",
+    "title": "Line with related gradient and intercept",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2087,51 +2159,35 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Functions "
+            "text": "A line "
           },
           {
             "type": "inline_math",
-            "latex": "f"
+            "latex": "y=ax+b"
           },
           {
             "type": "text",
-            "text": " and "
+            "text": " passes through "
           },
           {
             "type": "inline_math",
-            "latex": "g"
+            "latex": "(2,15)"
           },
           {
             "type": "text",
-            "text": " are "
+            "text": ". Its gradient is twice its "
           },
           {
             "type": "inline_math",
-            "latex": "f(x)=3x-2"
+            "latex": "y"
           },
           {
             "type": "text",
-            "text": " and "
+            "text": "-intercept. Find "
           },
           {
             "type": "inline_math",
-            "latex": "g(x)=5-2x"
-          },
-          {
-            "type": "text",
-            "text": ". Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": " if "
-          },
-          {
-            "type": "inline_math",
-            "latex": "f(g(x))=19"
+            "latex": "a"
           },
           {
             "type": "text",
@@ -2144,8 +2200,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "-1",
-          "canonical_latex": "-1",
+          "canonical_answer": "6",
+          "canonical_latex": "6",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2157,23 +2213,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute "
+                "text": "Write the gradient in terms of the "
               },
               {
                 "type": "inline_math",
-                "latex": "g"
+                "latex": "y"
               },
               {
                 "type": "text",
-                "text": "(x) in place of the input of "
-              },
-              {
-                "type": "inline_math",
-                "latex": "f"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "-intercept."
               }
             ]
           },
@@ -2182,15 +2230,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Simplify "
+                "text": "Substitute the point into "
               },
               {
                 "type": "inline_math",
-                "latex": "3(5-2x)-2"
+                "latex": "y=ax+b"
               },
               {
                 "type": "text",
-                "text": " before solving."
+                "text": " and solve."
               }
             ]
           }
@@ -2200,8 +2248,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "13-6x=19"
+                "type": "inline_math",
+                "latex": "a=2b"
               }
             ],
             "mark_type": "M",
@@ -2211,8 +2259,16 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "-6x=6"
+                "type": "inline_math",
+                "latex": "15=2a+b=2(2b)+b=5b"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b=3"
               }
             ],
             "mark_type": "M",
@@ -2222,8 +2278,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=-1"
+                "type": "inline_math",
+                "latex": "a=2(3)=6"
               }
             ],
             "mark_type": "A",
@@ -2375,7 +2431,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n6-l2-013",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2395,15 +2451,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A straight line passes through "
-          },
-          {
-            "type": "inline_math",
-            "latex": "(0,-3)"
-          },
-          {
-            "type": "text",
-            "text": " and follows "
+            "text": "A straight line has equation "
           },
           {
             "type": "inline_math",
@@ -2411,7 +2459,15 @@
           },
           {
             "type": "text",
-            "text": ". Find the y-coordinate of the point on the line with "
+            "text": ". Find the "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": "-coordinate of the point on the line with "
           },
           {
             "type": "inline_math",
@@ -2509,7 +2565,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n6-l3-014",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2533,7 +2589,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "(-2, 7)"
+            "latex": "(-3,9)"
           },
           {
             "type": "text",
@@ -2541,7 +2597,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "(4,-5)"
+            "latex": "(2,-1)"
           },
           {
             "type": "text",
@@ -2612,8 +2668,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "7=-2(-2)+b"
+                "type": "inline_math",
+                "latex": "a=\\frac{-1-9}{2-(-3)}=-2"
               }
             ],
             "mark_type": "M",
@@ -2623,8 +2679,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "b=3"
+                "type": "inline_math",
+                "latex": "9=-2(-3)+b\\Rightarrow b=3"
               }
             ],
             "mark_type": "M",
@@ -2634,7 +2690,7 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "y=-2x+3"
               }
             ],
@@ -3394,7 +3450,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n6-l4-008",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3426,7 +3482,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "A(2, 1)"
+            "latex": "A(2,1)"
           },
           {
             "type": "text",
@@ -3434,7 +3490,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "B(x, 10)"
+            "latex": "B(p,10)"
           },
           {
             "type": "text",
@@ -3442,19 +3498,35 @@
           },
           {
             "type": "inline_math",
-            "latex": "x>2"
+            "latex": "p>2"
           },
           {
             "type": "text",
-            "text": ". The horizontal segment from A to "
+            "text": ". The horizontal segment from "
           },
           {
             "type": "inline_math",
-            "latex": "(x, 1)"
+            "latex": "A"
           },
           {
             "type": "text",
-            "text": " and the vertical segment to B form a right triangle. Find its area."
+            "text": " to "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(p,1)"
+          },
+          {
+            "type": "text",
+            "text": " and the vertical segment to "
+          },
+          {
+            "type": "inline_math",
+            "latex": "B"
+          },
+          {
+            "type": "text",
+            "text": " form a right triangle. Find its area."
           }
         ],
         "marks": 3,
@@ -3495,8 +3567,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "36=3(x-2)"
+                "type": "inline_math",
+                "latex": "\\frac{9}{p-2}=\\frac34\\Rightarrow p-2=12"
               }
             ],
             "mark_type": "M",
@@ -3506,8 +3578,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x-2=12"
+                "type": "text",
+                "text": "Horizontal length 12, vertical length 9"
               }
             ],
             "mark_type": "M",
@@ -3517,7 +3589,7 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "\\text{Area}=\\frac12(12)(9)=54"
               }
             ],
