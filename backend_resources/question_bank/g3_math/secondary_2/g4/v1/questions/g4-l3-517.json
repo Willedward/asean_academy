@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l3-517",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Design technicians noted soft ground around the supports while preparing a replacement frame. A rectangular section of the aquaculture walkway measures 21 m by 28 m. A cable runs straight from one corner to the opposite corner. Find the cable length in metres. Enter the numerical value only."
+          "text": "A long rectangular strip of farmland measures 15 m by 112 m. A cable runs straight from one corner to the opposite corner to an irrigation pump. Find the length d of the cable in metres. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "35",
-        "canonical_latex": "35",
+        "canonical_answer": "113",
+        "canonical_latex": "113",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -64,7 +64,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "d^{2}=21^{2}+28^{2}"
+              "latex": "d^{2}=15^{2}+112^{2}"
             },
             {
               "type": "text",
@@ -79,22 +79,33 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
-            },
-            {
-              "type": "display_math",
-              "latex": "d=\\sqrt{21^2+28^2}=35"
+              "text": "Two adjacent sides of the rectangle meet at a right angle, so the diagonal is the hypotenuse of a right-angled triangle with shorter sides 15 m and 112 m."
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "By Pythagoras’ theorem,"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{35}"
+              "latex": "d^2=15^2+112^2=225+12544=12769"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "d=\\sqrt{12769}=113"
             }
           ],
           "mark_type": "A",
@@ -109,8 +120,8 @@
       "asset_key": "g4-l3-517-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l3-517-diagram-r3.svg",
-      "alt_text": "Rectangle 28 m by 21 m with a cable along the diagonal from one corner to the opposite corner, labelled d. Not drawn to scale.",
+      "path": "assets/g4-l3-517-diagram-r4.svg",
+      "alt_text": "Rectangle 112 m by 15 m with a cable along the diagonal from one corner to the opposite corner, labelled d. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
@@ -120,11 +131,11 @@
         "inputs": {
           "sides": [
             {
-              "value": 21,
+              "value": 15,
               "unit": "m"
             },
             {
-              "value": 28,
+              "value": 112,
               "unit": "m"
             }
           ]
@@ -133,17 +144,17 @@
         "dimensions": {
           "sides": [
             {
-              "value": 28,
+              "value": 112,
               "unit": "m"
             },
             {
-              "value": 21,
+              "value": 15,
               "unit": "m"
             }
           ]
         },
         "forbidden_visible_labels": [
-          "35"
+          "113"
         ],
         "unknowns": [
           {
@@ -152,26 +163,26 @@
           }
         ],
         "task": "find_hypotenuse",
-        "drawn_to_scale": true,
+        "drawn_to_scale": false,
         "viewbox": [
           600.0,
-          446.0
+          300.0
         ],
         "points": {
           "A": [
-            120.0,
-            326.0
+            110.0,
+            140.44
           ],
           "B": [
-            120.0,
+            110.0,
             56.0
           ],
           "C": [
-            480.0,
-            326.0
+            490.0,
+            140.44
           ],
           "D": [
-            480.0,
+            490.0,
             56.0
           ]
         },
@@ -224,11 +235,11 @@
         ],
         "labels": [
           {
-            "text": "21 m",
+            "text": "15 m",
             "target": "segment:AB"
           },
           {
-            "text": "28 m",
+            "text": "112 m",
             "target": "segment:AC"
           },
           {
@@ -250,22 +261,13 @@
               "AC",
               "BD"
             ]
-          },
-          {
-            "type": "length_ratio",
-            "segments": [
-              "AB",
-              "AC"
-            ],
-            "value": 0.75,
-            "tolerance": 0.02
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "b4e6e9f21f3bbcfc9ad83cf95e13ae21cfc27f8fa5820c2a5deb28b824f0be28",
+      "sha256": "f6f9b552c4d91219ee27e0a36894092e05e3f92d2434745d6493853f3ba70eed",
       "width": 600,
-      "height": 446
+      "height": 300
     }
   ],
   "provenance": {
