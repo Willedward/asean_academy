@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l2-030",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The vertical scale in the figure labels equally spaced ticks. How large is the anomalous interval between neighbouring labels? Enter the numerical value only."
+          "text": "The vertical scale in the figure has equally spaced ticks, but one step between neighbouring labels is larger than the others. By what factor is that step compressed compared with each normal step? Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "30",
-        "canonical_latex": "30",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract each pair of adjacent labels."
+              "text": "Find the size of a normal step and the size of the odd step."
             }
           ]
         },
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the pair whose gap is unlike the others, then subtract."
+              "text": "Divide the size of the odd step by the size of a normal step."
             }
           ]
         }
@@ -70,12 +70,31 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
+              "type": "text",
+              "text": "The normal step is 10 and the odd step is "
+            },
+            {
+              "type": "inline_math",
               "latex": "50-20=30"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
-          "mark_type": "B",
-          "mark_value": 2
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "30\\div10=3"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
         }
       ]
     }
@@ -86,7 +105,7 @@
       "asset_key": "s1-l2-030-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l2-030-diagram-r2.svg",
+      "path": "assets/s1-l2-030-diagram-r3.svg",
       "alt_text": "Vertical scale marked 0, 10, 20, 50, 60.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

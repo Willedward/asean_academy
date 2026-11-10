@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-029",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A student council divides all 360 volunteer hours among service, sports and arts and wants to stress the split. Enter the most suitable code only."
+          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A student council divides all 360 volunteer hours among service, sports and arts and wants to stress how the total is shared. For the reason code, use 1 if a bar graph cannot show hours, 2 if a bar graph cannot show three categories, or 3 if a bar graph shows the separate amounts but does not stress that they make up one whole. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "5",
-        "canonical_latex": "5",
+        "canonical_answer": "53",
+        "canonical_latex": "53",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Match the information need to the main strength of each representation."
+              "text": "Ask whether the three amounts together make up one whole."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The three categories form a complete whole."
+              "text": "The three amounts are a complete whole. Choose the display that stresses how the whole is shared, then think about what a bar graph does not show."
             }
           ]
         }
@@ -61,8 +61,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "A pie chart stresses how the 360 hours are shared among the three activities. A bar graph shows the separate amounts but does not stress that they make up one whole, so the reason code is 3."
+            },
+            {
               "type": "display_math",
-              "latex": "\\text{Best choice code}=5"
+              "latex": "\\text{Code}=53"
             }
           ],
           "mark_type": "B",
