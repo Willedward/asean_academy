@@ -361,7 +361,7 @@ def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     )
     assert n7_lesson_response.status_code == 200
     assert n7_lesson_response.headers["content-type"].startswith("image/svg+xml")
-    assert b"Solving an inequality on a number line" in n7_lesson_response.content
+    assert "The solution x ≤ 3".encode() in n7_lesson_response.content
 
     s1_lesson_response = get(
         "/api/v1/content-assets/lesson/s1-lesson-05/s1-lesson-05-diagram"

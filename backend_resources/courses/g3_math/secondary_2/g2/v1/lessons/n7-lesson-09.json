@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n7",
   "status": "draft",
@@ -62,19 +62,31 @@
       "blocks": [
         {
           "type": "text",
-          "text": "If AB=0, then A=0 or B=0. Set each linear factor equal to zero and solve, keeping both roots unless a stated context excludes one. Substitute each root into the original equation, especially when rearrangement occurred."
+          "text": "If AB = 0, then A = 0 or B = 0. Set each linear factor equal to zero and solve, keeping both roots unless a stated context excludes one. Substitute each root into the original equation, especially when rearrangement occurred."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-09-errors",
+      "position": 4,
+      "type": "explanation",
+      "title": "Common errors",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not factorise until one side is zero: x² + 2x = 15 cannot be solved as x(x + 2) = 15 by setting each factor to 15. Do not divide both sides by x, because that loses the root x = 0. Remember the signs: the factor (x + 5) gives the root x = −5, not 5."
         }
       ]
     },
     {
       "stable_key": "n7-09-example-1",
-      "position": 4,
+      "position": 5,
       "type": "worked_example",
-      "title": "Solve a monic quadratic",
+      "title": "Worked example: solve a monic quadratic",
       "prompt": [
         {
           "type": "text",
-          "text": "Solve x²-7x+12=0."
+          "text": "Solve x² − 8x + 15 = 0."
         }
       ],
       "steps": [
@@ -83,7 +95,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Find two numbers with sum -7 and product 12."
+              "text": "Find two numbers with sum −8 and product 15: −3 and −5."
             }
           ]
         },
@@ -91,8 +103,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "Factorise: (x-3)(x-4)=0."
+              "type": "display_math",
+              "latex": "(x-3)(x-5)=0"
             }
           ]
         },
@@ -100,23 +112,23 @@
           "position": 3,
           "content": [
             {
-              "type": "text",
-              "text": "Thus x=3 or x=4."
+              "type": "display_math",
+              "latex": "x-3=0\\ \\text{ or }\\ x-5=0\\quad\\Rightarrow\\quad x=3\\ \\text{ or }\\ x=5"
             }
           ]
         }
       ],
-      "verification_note": "Both 9-21+12 and 16-28+12 equal zero."
+      "verification_note": "Both roots work: 9 − 24 + 15 = 0 and 25 − 40 + 15 = 0."
     },
     {
       "stable_key": "n7-09-example-2",
-      "position": 5,
+      "position": 6,
       "type": "worked_example",
-      "title": "Rearrange first",
+      "title": "Worked example: rearrange first",
       "prompt": [
         {
           "type": "text",
-          "text": "Solve x²+2x=15."
+          "text": "Solve x² + 2x = 15."
         }
       ],
       "steps": [
@@ -125,7 +137,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Move 15 left: x²+2x-15=0."
+              "text": "Subtract 15 so that one side is zero."
+            },
+            {
+              "type": "display_math",
+              "latex": "x^2+2x-15=0"
             }
           ]
         },
@@ -134,7 +150,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Factorise: (x+5)(x-3)=0."
+              "text": "Find two numbers with sum 2 and product −15: 5 and −3."
+            },
+            {
+              "type": "display_math",
+              "latex": "(x+5)(x-3)=0"
             }
           ]
         },
@@ -142,30 +162,80 @@
           "position": 3,
           "content": [
             {
-              "type": "text",
-              "text": "Hence x=-5 or x=3."
+              "type": "display_math",
+              "latex": "x=-5\\ \\text{ or }\\ x=3"
             }
           ]
         }
       ],
-      "verification_note": "Substitution gives 25-10=15 and 9+6=15."
+      "verification_note": "Substitution gives 25 − 10 = 15 and 9 + 6 = 15."
+    },
+    {
+      "stable_key": "n7-09-example-3",
+      "position": 7,
+      "type": "worked_example",
+      "title": "Worked example: a non-monic quadratic",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Solve 2x² + 5x − 3 = 0."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply a and c: 2 × (−3) = −6. Find two numbers with product −6 and sum 5: 6 and −1. Use them to split 5x."
+            },
+            {
+              "type": "display_math",
+              "latex": "2x^2+6x-x-3=0"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Factorise in pairs, then take out the common bracket."
+            },
+            {
+              "type": "display_math",
+              "latex": "2x(x+3)-1(x+3)=0\\quad\\Rightarrow\\quad(2x-1)(x+3)=0"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "2x-1=0\\ \\text{ or }\\ x+3=0\\quad\\Rightarrow\\quad x=\\tfrac12\\ \\text{ or }\\ x=-3"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Check: 2(½)² + 5(½) − 3 = 0.5 + 2.5 − 3 = 0 and 2(9) − 15 − 3 = 0. Expanding (2x − 1)(x + 3) gives 2x² + 5x − 3."
     },
     {
       "stable_key": "n7-09-recall",
-      "position": 6,
+      "position": 8,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "Solve (x-2)(x-6)=0 and enter the larger root."
+          "text": "Solve (x + 1)(x − 9) = 0 and enter the larger root."
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "6",
-        "canonical_latex": "6",
+        "canonical_answer": "9",
+        "canonical_latex": "9",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -174,23 +244,23 @@
       "feedback": [
         {
           "type": "text",
-          "text": "The roots are 2 and 6."
+          "text": "x + 1 = 0 gives x = −1 and x − 9 = 0 gives x = 9, so the larger root is 9."
         }
       ]
     },
     {
       "stable_key": "n7-09-summary",
-      "position": 7,
+      "position": 9,
       "type": "summary",
       "title": "Lesson checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Name the mathematical relationship, choose a method that preserves it, and show each transformation clearly."
+          "text": "Rearrange so that one side is zero, factorise, then set each factor equal to zero."
         },
         {
           "type": "text",
-          "text": "Check the result in every original condition and interpret endpoints, coordinates, roots or quantities in the form requested."
+          "text": "For ax² + bx + c with a ≠ 1, split the middle term using two numbers whose product is ac and sum is b. Check every root in the original equation."
         }
       ]
     }

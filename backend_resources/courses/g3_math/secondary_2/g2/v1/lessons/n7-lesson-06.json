@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n7",
   "status": "draft",
@@ -11,7 +11,7 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   },
   "stable_key": "n7-lesson-06",
   "position": 2,
@@ -38,7 +38,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Most steps used for equations also work for inequalities: simplify both sides, collect variable terms and isolate the variable. Addition and subtraction preserve order. Multiplication or division by a positive number also preserves order."
+          "text": "Most steps used for equations also work for inequalities: simplify both sides, collect variable terms and isolate the variable. Addition and subtraction preserve order. Multiplication or division by a positive number also preserves order. The diagram shows the solution x ≤ 3 from the first worked example: a filled circle at 3 and shading to the left."
         },
         {
           "type": "asset_ref",
@@ -54,7 +54,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "If 2<5, multiplying by -1 gives -2>-5. The order reverses because points reflect across zero. Therefore dividing -3x>12 by -3 produces x<-4. Write the reversed sign during the division step rather than trying to repair it later."
+          "text": "If 2<5, multiplying by -1 gives -2>-5. The order reverses because points reflect across zero. Therefore dividing −3x > 12 by −3 produces x < −4. Write the reversed sign during the division step rather than trying to repair it later."
         }
       ]
     },
@@ -71,14 +71,26 @@
       ]
     },
     {
-      "stable_key": "n7-06-example-1",
+      "stable_key": "n7-06-errors",
       "position": 4,
+      "type": "explanation",
+      "title": "Common errors",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "The most common error is forgetting to reverse the sign after dividing by a negative number. Others are using a filled circle for < or >, shading the wrong way, and writing 4 > x as x > 4 instead of x < 4. Testing one value from the shaded part catches all of these."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-06-example-1",
+      "position": 5,
       "type": "worked_example",
-      "title": "Solve and draw",
+      "title": "Worked example: solve and draw",
       "prompt": [
         {
           "type": "text",
-          "text": "Solve 3x+2≤14 and describe its number-line graph."
+          "text": "Solve 4x − 3 ≤ 9 and describe its number-line graph."
         }
       ],
       "steps": [
@@ -87,7 +99,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 2: 3x≤12."
+              "text": "Add 3 to both sides."
+            },
+            {
+              "type": "display_math",
+              "latex": "4x\\le12"
             }
           ]
         },
@@ -96,7 +112,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide by 3: x≤4."
+              "text": "Divide both sides by 4, a positive number, so the sign stays the same."
+            },
+            {
+              "type": "display_math",
+              "latex": "x\\le3"
             }
           ]
         },
@@ -105,22 +125,22 @@
           "content": [
             {
               "type": "text",
-              "text": "Place a filled circle at 4 and shade left."
+              "text": "Draw a filled circle at 3, because 3 is included, and shade to the left, as in the diagram."
             }
           ]
         }
       ],
-      "verification_note": "The test value x=0 gives 2≤14, so the shaded side is correct."
+      "verification_note": "The test value x = 0 gives −3 ≤ 9, which is true, so the shaded side is correct; x = 4 gives 13 ≤ 9, which is false."
     },
     {
       "stable_key": "n7-06-example-2",
-      "position": 5,
+      "position": 6,
       "type": "worked_example",
-      "title": "Handle a negative coefficient",
+      "title": "Worked example: handle a negative coefficient",
       "prompt": [
         {
           "type": "text",
-          "text": "Solve 7-2x>15."
+          "text": "Solve 7 − 2x > 15."
         }
       ],
       "steps": [
@@ -129,7 +149,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 7: -2x>8."
+              "text": "Subtract 7 from both sides."
+            },
+            {
+              "type": "display_math",
+              "latex": "-2x>8"
             }
           ]
         },
@@ -138,25 +162,20 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide by -2 and reverse the sign."
-            }
-          ]
-        },
-        {
-          "position": 3,
-          "content": [
+              "text": "Divide both sides by −2 and reverse the sign."
+            },
             {
-              "type": "text",
-              "text": "The solution is x<-4."
+              "type": "display_math",
+              "latex": "x<-4"
             }
           ]
         }
       ],
-      "verification_note": "Testing x=-5 gives 17>15, while x=0 does not work."
+      "verification_note": "Testing x = −5 gives 7 + 10 = 17 > 15, which is true, while x = 0 gives 7 > 15, which is false."
     },
     {
       "stable_key": "n7-06-recall",
-      "position": 6,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -184,17 +203,17 @@
     },
     {
       "stable_key": "n7-06-summary",
-      "position": 7,
+      "position": 8,
       "type": "summary",
       "title": "Lesson checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Name the mathematical relationship, choose a method that preserves it, and show each transformation clearly."
+          "text": "Solve an inequality like an equation, but reverse the sign whenever you multiply or divide both sides by a negative number."
         },
         {
           "type": "text",
-          "text": "Check the result in every original condition and interpret endpoints, coordinates, roots or quantities in the form requested."
+          "text": "On a number line, use an open circle for < or > and a filled circle for ≤ or ≥, shade towards the solutions, and test one shaded value in the original inequality."
         }
       ]
     }
@@ -204,16 +223,123 @@
       "asset_key": "n7-lesson-06-diagram",
       "kind": "number_line",
       "format": "svg",
-      "path": "assets/n7-lesson-06-number-line.svg",
-      "alt_text": "A number line showing an open circle at three and shading to the left for x less than three.",
+      "path": "assets/n7-lesson-06-number-line-r2.svg",
+      "alt_text": "Number line from −3 to 7 with a filled circle at 3 and the line shaded to the left of 3, showing x ≤ 3.",
       "generation_spec": {
-        "renderer": "nextscholar-chart-svg-v1",
-        "diagram_kind": "inequality_number_line",
-        "lesson_key": "n7-lesson-06"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "number_line",
+        "lesson_key": "n7-lesson-06",
+        "template": "number_line",
+        "inputs": {
+          "boundary": 3,
+          "relation": "<=",
+          "x_min": -3,
+          "x_max": 7,
+          "title": "The solution x ≤ 3",
+          "alt_text": "Number line from −3 to 7 with a filled circle at 3 and the line shaded to the left of 3, showing x ≤ 3."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "boundary",
+            "kind": "closed-boundary",
+            "value": "3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "440",
+              "cy": "250",
+              "r": "10"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:-3",
+            "axis": "x",
+            "value": "-3",
+            "position": "80",
+            "label": "-3"
+          },
+          {
+            "key": "x:-2",
+            "axis": "x",
+            "value": "-2",
+            "position": "140",
+            "label": "-2"
+          },
+          {
+            "key": "x:-1",
+            "axis": "x",
+            "value": "-1",
+            "position": "200",
+            "label": "-1"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "260",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "320",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "380",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "440",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "500",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "560",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "620",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "680",
+            "label": "7"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
       },
-      "sha256": "6fdd3063ff64391ece70555c9ab8425fff42e642a4f17445280f97611b1537b8",
-      "width": 960,
-      "height": 460
+      "sha256": "e6979c4d07f52c41a229f96f92519fcf2d83a420485b1ac93fe3d940f7c23a35",
+      "width": 720,
+      "height": 480
     }
   ]
 }
