@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s2-lesson-02",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-s2",
@@ -38,7 +38,7 @@
         },
         {
           "type": "text",
-          "text": "This counting formula applies only when the elementary outcomes are equally likely. The six faces of a fair die are equally likely, but the totals from two dice are not: there is one ordered outcome producing 2 and six producing 7. When outcomes carry different probabilities, add the probabilities of the outcomes in the event instead of merely counting labels."
+          "text": "This counting formula applies only when the elementary outcomes are equally likely. The six faces of a fair die are equally likely, but the totals from two dice are not: there is one ordered outcome producing a total of 2, (1, 1), but three producing a total of 4, (1, 3), (2, 2) and (3, 1). When outcomes carry different probabilities, add the probabilities of the outcomes in the event instead of merely counting labels."
         }
       ]
     },
@@ -58,7 +58,7 @@
         },
         {
           "type": "text",
-          "text": "The table shows three colour choices followed by two coin results, giving 3 × 2 = 6 outcomes. The two highlighted outcomes form the event ‘red is chosen’, so its probability is 2/6 = 1/3. A product counts all outcomes only when each first-stage choice can be paired with every second-stage choice."
+          "text": "The table shows a colour chosen at random from three, followed by a fair coin, giving 3 × 2 = 6 equally likely outcomes. The two outcomes in the Red column, RH and RT, form the event ‘red is chosen’, so its probability is 2/6 = 1/3. A product counts all outcomes only when each first-stage choice can be paired with every second-stage choice."
         },
         {
           "type": "display_math",
@@ -172,8 +172,54 @@
       "verification_note": "The only outcome outside the event is 4, so the complement has probability 1/6 and 5/6 + 1/6 = 1."
     },
     {
-      "stable_key": "s2-22-model-checks",
+      "stable_key": "s2-22-replacement-example",
       "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: list outcomes without replacement",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A bag holds two red counters, R1 and R2, and one blue counter, B. Two counters are taken out one after the other, without replacement. Find the probability that both are red."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Without replacement, the second counter cannot be the one already taken. List the ordered outcomes systematically, first counter first."
+            },
+            {
+              "type": "display_math",
+              "latex": "R1R2,\\ R1B,\\ R2R1,\\ R2B,\\ BR1,\\ BR2"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "There are 6 equally likely ordered outcomes. Both counters are red in R1R2 and R2R1."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "P(\\text{both red})=\\frac26=\\frac13"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The complement, at least one blue, contains the other 4 outcomes, and 2/6 + 4/6 = 1. Naming the two red counters R1 and R2 makes every outcome equally likely."
+    },
+    {
+      "stable_key": "s2-22-model-checks",
+      "position": 6,
       "type": "explanation",
       "title": "Check equally likely outcomes and wording",
       "blocks": [
@@ -197,7 +243,7 @@
     },
     {
       "stable_key": "s2-22-recall",
-      "position": 6,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -225,7 +271,7 @@
     },
     {
       "stable_key": "s2-lesson-02-summary",
-      "position": 7,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
@@ -249,16 +295,111 @@
       "asset_key": "s2-lesson-02-sample-space",
       "kind": "table",
       "format": "svg",
-      "path": "assets/s2-lesson-02-sample-space.svg",
-      "alt_text": "A sample-space table pairs red, blue and green choices with heads and tails, creating six equally likely outcomes; the two red outcomes are highlighted.",
+      "path": "assets/s2-lesson-02-sample-space-r2.svg",
+      "alt_text": "Sample-space table. The columns are the colours red, blue and green, chosen at random, and the rows are the coin results H and T. The six cells are RH, BH, GH, RT, BT and GT, each an equally likely outcome.",
       "generation_spec": {
-        "renderer": "nextscholar-probability-svg-v1",
-        "diagram_kind": "two_stage_sample_space",
-        "lesson_key": "s2-lesson-02"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "data_table",
+        "lesson_key": "s2-lesson-02",
+        "template": "data_table",
+        "inputs": {
+          "columns": [
+            "Red",
+            "Blue",
+            "Green"
+          ],
+          "rows": [
+            "H",
+            "T"
+          ],
+          "cells": [
+            [
+              "RH",
+              "BH",
+              "GH"
+            ],
+            [
+              "RT",
+              "BT",
+              "GT"
+            ]
+          ],
+          "title": "One colour at random, then a fair coin",
+          "alt_text": "Sample-space table. The columns are the colours red, blue and green, chosen at random, and the rows are the coin results H and T. The six cells are RH, BH, GH, RT, BT and GT, each an equally likely outcome."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "cell-0-0",
+            "kind": "table-cell",
+            "value": "RH",
+            "tag": "text",
+            "geometry": {
+              "x": "291.25",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-0-1",
+            "kind": "table-cell",
+            "value": "BH",
+            "tag": "text",
+            "geometry": {
+              "x": "428.75",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-0-2",
+            "kind": "table-cell",
+            "value": "GH",
+            "tag": "text",
+            "geometry": {
+              "x": "566.25",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-1-0",
+            "kind": "table-cell",
+            "value": "RT",
+            "tag": "text",
+            "geometry": {
+              "x": "291.25",
+              "y": "277.24"
+            }
+          },
+          {
+            "key": "cell-1-1",
+            "kind": "table-cell",
+            "value": "BT",
+            "tag": "text",
+            "geometry": {
+              "x": "428.75",
+              "y": "277.24"
+            }
+          },
+          {
+            "key": "cell-1-2",
+            "kind": "table-cell",
+            "value": "GT",
+            "tag": "text",
+            "geometry": {
+              "x": "566.25",
+              "y": "277.24"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
       },
-      "sha256": "ba5ea2c5d4247dd1943635e702cd4b490e516296d21800bb60bc9ea82946b61f",
-      "width": 940,
-      "height": 500
+      "sha256": "d0718d16651637932c346d5f04be4996cf74d6b91c3e3faf061bf74adcf172da",
+      "width": 720,
+      "height": 480
     }
   ],
   "provenance": {
@@ -267,6 +408,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Initial expanded S2 lesson draft; awaiting Mathematics and editorial review and the complete S2 question bank before course integration."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

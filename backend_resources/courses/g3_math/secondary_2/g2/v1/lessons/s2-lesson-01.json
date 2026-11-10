@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s2-lesson-01",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-s2",
@@ -40,7 +40,7 @@
         },
         {
           "type": "text",
-          "text": "The point 1/2 represents an even chance: the event and its opposite are equally likely. Words such as unlikely and likely describe regions rather than exact values, so translate them carefully. An event with probability 0.48 is slightly less likely than an even chance, while probability 0.8 is likely but still not certain."
+          "text": "The diagram marks the probability 0.68 from the first worked example: it lies between 1/2 and 1, so the event is likely but not certain. The point 1/2 represents an even chance: the event and its opposite are equally likely. Words such as unlikely and likely describe regions rather than exact values: unlikely covers the values between 0 and 1/2, and likely covers the values between 1/2 and 1. An event with probability 0.48 is slightly less likely than an even chance, while probability 0.8 is likely but still not certain."
         }
       ]
     },
@@ -148,7 +148,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply the estimated probability by the new number of trials."
+              "text": "Expected frequency = probability × number of trials, so multiply the estimated probability by the new number of trials."
             },
             {
               "type": "display_math",
@@ -166,7 +166,7 @@
           ]
         }
       ],
-      "verification_note": "The prediction preserves the observed rate: 45/200 = 0.225, the same relative frequency as 18/80."
+      "verification_note": "The prediction preserves the observed rate: 45/200 = 0.225, the same relative frequency as 18/80. The formula also works backwards: to expect 90 gold results you would need about 90 ÷ 0.225 = 400 spins."
     },
     {
       "stable_key": "s2-21-theory-experiment",
@@ -248,16 +248,120 @@
       "asset_key": "s2-lesson-01-probability-scale",
       "kind": "number_line",
       "format": "svg",
-      "path": "assets/s2-lesson-01-probability-scale.svg",
-      "alt_text": "A probability scale from 0 to 1, with impossible at 0, unlikely near one quarter, an even chance at one half, likely near three quarters and certain at 1.",
+      "path": "assets/s2-lesson-01-probability-scale-r2.svg",
+      "alt_text": "Probability scale from 0 to 1 with the point P at 0.68, between the even-chance point 0.5 and certainty at 1.",
       "generation_spec": {
-        "renderer": "nextscholar-probability-svg-v1",
+        "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "probability_scale",
-        "lesson_key": "s2-lesson-01"
+        "lesson_key": "s2-lesson-01",
+        "template": "probability_scale",
+        "inputs": {
+          "value": 0.68,
+          "title": "P(ferry arrives within five minutes) = 0.68",
+          "alt_text": "Probability scale from 0 to 1 with the point P at 0.68, between the even-chance point 0.5 and certainty at 1."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "probability",
+            "kind": "probability-point",
+            "value": "0.68",
+            "tag": "circle",
+            "geometry": {
+              "cx": "477.6",
+              "cy": "255",
+              "r": "10"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "90",
+            "label": "0"
+          },
+          {
+            "key": "x:0.1",
+            "axis": "x",
+            "value": "0.1",
+            "position": "147",
+            "label": ""
+          },
+          {
+            "key": "x:0.2",
+            "axis": "x",
+            "value": "0.2",
+            "position": "204",
+            "label": ""
+          },
+          {
+            "key": "x:0.3",
+            "axis": "x",
+            "value": "0.3",
+            "position": "261",
+            "label": ""
+          },
+          {
+            "key": "x:0.4",
+            "axis": "x",
+            "value": "0.4",
+            "position": "318",
+            "label": ""
+          },
+          {
+            "key": "x:0.5",
+            "axis": "x",
+            "value": "0.5",
+            "position": "375",
+            "label": "0.5"
+          },
+          {
+            "key": "x:0.6",
+            "axis": "x",
+            "value": "0.6",
+            "position": "432",
+            "label": ""
+          },
+          {
+            "key": "x:0.7",
+            "axis": "x",
+            "value": "0.7",
+            "position": "489",
+            "label": ""
+          },
+          {
+            "key": "x:0.8",
+            "axis": "x",
+            "value": "0.8",
+            "position": "546",
+            "label": ""
+          },
+          {
+            "key": "x:0.9",
+            "axis": "x",
+            "value": "0.9",
+            "position": "603",
+            "label": ""
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "660",
+            "label": "1"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
       },
-      "sha256": "7cad87901c600142a227742059da67aa01a55285f3c203f3aca0031100dcdfe5",
-      "width": 940,
-      "height": 420
+      "sha256": "7efe7a86a6c02a56a385ac3b2e343d7f2d6564834e83224a0d9edc092fe2f4ac",
+      "width": 720,
+      "height": 480
     }
   ],
   "provenance": {
@@ -266,6 +370,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Initial expanded S2 lesson draft; awaiting Mathematics and editorial review and the complete S2 question bank before course integration."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
