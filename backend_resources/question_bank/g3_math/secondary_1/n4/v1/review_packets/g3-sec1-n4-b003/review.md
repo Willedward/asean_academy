@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l3-016 — Average assembly rate
+## n4-l3-016 — Comparing value for money
 
 [Open this question in the HTML preview](index.html#n4-l3-016)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l5-004 — Journey sections with a rest
+## n4-l5-004 — Who finishes first
 
 [Open this question in the HTML preview](index.html#n4-l5-004)
 
