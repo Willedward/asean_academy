@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l2-525",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.2",
-  "title": "Similar picture frames",
+  "title": "Enlargement with a change of units",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A picture frame design is magnified by factor 4. Calculate the copied length corresponding to a 9 cm rail. Enter the numerical value only."
+          "text": "A 9 cm rail on a picture frame design is enlarged by scale factor 40. Find the length of the enlarged rail in metres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "36",
-        "canonical_latex": "36",
+        "canonical_answer": "3.6",
+        "canonical_latex": "3.6",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Corresponding sides are multiplied by the same scale factor."
+              "text": "Corresponding sides are multiplied by the scale factor."
             }
           ]
         },
@@ -51,15 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
-            },
-            {
-              "type": "inline_math",
-              "latex": "9\\times 4"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Multiply first, then convert from centimetres to metres."
             }
           ]
         }
@@ -69,8 +61,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Multiply by the scale factor. "
+            },
+            {
               "type": "display_math",
-              "latex": "L=9\\times 4"
+              "latex": "9\\times40=360\\text{ cm}"
             }
           ],
           "mark_type": "M",
@@ -80,8 +76,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Convert to metres: "
+            },
+            {
               "type": "display_math",
-              "latex": "L=36"
+              "latex": "3.6\\text{ m}"
             }
           ],
           "mark_type": "A",
