@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s2-l5-503",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A bag contains cards numbered 1 to 5. Two cards are drawn without replacement, in order, and then a fair coin is tossed. Find the probability that the two card numbers total 6 and the coin shows heads. Give your answer as a fraction in simplest form."
+          "text": "A bag contains cards numbered 1 to 5. Two cards are drawn at random without replacement, in order, and then a fair coin is tossed. Find the probability that the two card numbers total 6 and the coin shows heads. Give your answer as a fraction in simplest form."
         }
       ],
       "marks": 5,
@@ -44,7 +44,7 @@
           "content": [
             {
               "type": "text",
-              "text": "List ordered card pairs totalling 6, then include the coin outcome."
+              "text": "List the ordered pairs of cards first, then pair each one with H or T."
             }
           ]
         },
@@ -53,15 +53,7 @@
           "content": [
             {
               "type": "text",
-              "text": "There are four favourable ordered pairs among 5 times 4; multiply by "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\frac{1}{2}"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "There are 20 ordered card pairs and 40 outcomes once the coin is included. List the card pairs that total 6."
             }
           ]
         }
@@ -71,8 +63,20 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The pairs totalling 6 are (1,5), (5,1), (2,4), (4,2). With heads, that gives 4 favourable outcomes out of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "20\\times2=40"
+            },
+            {
+              "type": "text",
+              "text": ". "
+            },
+            {
               "type": "display_math",
-              "latex": "P=\\frac{4}{5\\cdot4}\\cdot\\frac12=\\frac{1}{10}"
+              "latex": "P=\\frac{4}{40}"
             }
           ],
           "mark_type": "M",
