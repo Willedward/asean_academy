@@ -29,6 +29,8 @@ OPEN_CLOZE_PROMPT = re.compile(
     r"^Gap \d+(?: \([A-Z]+\))?: write (?:one word|the correct form of the word)\.$"
 )
 TARGET_WORD = re.compile(r"What does [“\"]([^”\"]+)[”\"]")
+# Older items ask "What does tentative mean?" without quotation marks.
+UNQUOTED_TARGET_WORD = re.compile(r"What does ([A-Za-z’'-]+) mean")
 BANNED_TERMS = (
     "blueprint",
     "confound",
@@ -133,6 +135,73 @@ def _part_findings(question: EnglishObjectiveQuestion) -> list[QualityFinding]:
                     "key_uniquely_longest",
                     location,
                     f"The key has {key_length} characters; the longest other option has {max(others)}.",
+                )
+            )
+    return findings
+
+
+def _banked_cloze_order_findings(question: EnglishObjectiveQuestion) -> list[QualityFinding]:
+    """Flag keys that a learner could collect by working through the bank in order."""
+
+    if question.question_type != "banked_cloze" or len(question.parts) < 3:
+        return []
+    bank = [option.key for option in question.parts[0].response.options]
+    positions = [bank.index(part.response.correct_key) for part in question.parts]
+    steps = list(zip(positions, positions[1:], strict=False))
+    ascending = all(later > earlier for earlier, later in steps)
+    in_place = sum(1 for gap, position in enumerate(positions) if gap == position)
+    next_word = sum(1 for earlier, later in steps if later == earlier + 1)
+    if not (ascending or 2 * in_place > len(positions) or 2 * next_word > len(steps)):
+        return []
+    keys = "".join(part.response.correct_key for part in question.parts)
+    return [
+        QualityFinding(
+            "banked_cloze_keys_follow_bank_order",
+            question.stable_key,
+            f"The gap keys {keys} follow the word-bank order. Reorder the bank.",
+        )
+    ]
+
+
+def _passage_text(question: EnglishObjectiveQuestion, passages) -> str | None:
+    if question.passage_ref is None:
+        return ""
+    if passages is None:
+        return None
+    ref = question.passage_ref
+    for passage in passages:
+        if (passage.stable_key, passage.revision) == (ref.stable_key, ref.revision):
+            return " ".join(passage.paragraphs)
+    return None
+
+
+def _appears(text: str, target: str) -> bool:
+    text = text.casefold()
+    target = target.casefold()
+    if target.startswith("-") or target.endswith("-"):
+        # Affix items such as “un-” ask about part of a word.
+        return target.strip("-") in text
+    return re.search(rf"(?<![\w-]){re.escape(target)}(?![\w-])", text) is not None
+
+
+def _target_word_findings(question: EnglishObjectiveQuestion, passages) -> list[QualityFinding]:
+    """Flag “What does X mean?” parts whose sentence or passage never uses X."""
+
+    passage_text = _passage_text(question, passages)
+    if passage_text is None:
+        return []
+    findings = []
+    for part in question.parts:
+        match = TARGET_WORD.search(part.prompt) or UNQUOTED_TARGET_WORD.search(part.prompt)
+        if not match:
+            continue
+        context = f"{part.prompt[: match.start()]} {passage_text}"
+        if not _appears(context, match.group(1)):
+            findings.append(
+                QualityFinding(
+                    "target_word_missing_from_context",
+                    f"{question.stable_key}#{part.position}",
+                    f"“{match.group(1)}” does not appear in the sentence or passage it asks about.",
                 )
             )
     return findings
@@ -245,12 +314,16 @@ def _banned_term_findings(questions, lessons) -> list[QualityFinding]:
     return findings
 
 
-def english_quality_findings(questions, lessons, forms) -> list[QualityFinding]:
+def english_quality_findings(questions, lessons, forms, passages=None) -> list[QualityFinding]:
+    """Return rule findings. Without passages, passage-based items skip the target-word rule."""
+
     by_key = {question.stable_key: question for question in questions}
     findings = []
     for question in questions:
         findings.extend(_title_findings(question))
         findings.extend(_part_findings(question))
+        findings.extend(_banked_cloze_order_findings(question))
+        findings.extend(_target_word_findings(question, passages))
     findings.extend(_form_findings(forms, by_key))
     findings.extend(_protected_reuse_findings(questions, lessons))
     findings.extend(_lesson_copy_findings(questions, lessons))
