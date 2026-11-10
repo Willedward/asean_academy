@@ -793,7 +793,7 @@ def test_postgres_english_e1_checkpoint_persists_and_records_mastery_atomically(
             "session_id": session_id,
             "question_key": question["stable_key"],
             "question_revision": question["revision"],
-            "answers": {"1": "A", "2": "A", "3": "A", "4": "A", "5": "B"},
+            "answers": {"1": "A", "2": "C", "3": "B", "4": "A", "5": "B"},
         },
     )
     assert answered.status_code == 200, answered.text
