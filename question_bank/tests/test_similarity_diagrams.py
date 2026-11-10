@@ -47,6 +47,10 @@ CASES = {
     ),
     "sas_condition": ({}, ["1"]),
     "shared_side": ({}, ["1"]),
+    "congruent_angle_expressions": (
+        {"a": linear(2, 10), "p": linear(3, -15), "q": linear(2, 0)},
+        ["70"],
+    ),
     "similar_edges": ({"small": cm(3), "large": cm(6)}, ["2"]),
     "similar_perimeter": ({"perimeter": cm(24), "factor": 3}, ["72"]),
     "similar_angle": ({"given": 48}, ["48"]),
@@ -576,3 +580,26 @@ def test_shared_side_can_label_its_sides_in_x_and_withhold_the_perimeter(tmp_pat
     assert {"44", "5", "13", "9"} <= set(spec["forbidden_visible_labels"])
     assert "answer_kind" not in spec
     assert sim.shared_side(inputs, ["40"]).content_findings
+
+
+def test_congruent_angle_expressions_marks_correspondence_and_withholds_angle_c(tmp_path):
+    diagram, answers = render("congruent_angle_expressions")
+    spec = diagram.generation_spec
+    stated = (
+        "Triangles ABC and PQR are congruent, with A, B and C corresponding to P, Q and R. "
+        "Angle A = (2x + 10)°, angle P = (3x − 15)° and angle Q = 2x°."
+    )
+
+    assert findings(tmp_path, diagram, answers, stated=stated) == []
+    # x = 25 gives angles 60°, 50° and 70°; none is printed.
+    assert {"70", "25", "60", "50"} <= set(spec["forbidden_visible_labels"])
+    drawn = {item["marker_key"]: item["drawn_degrees"] for item in spec["angles"]}
+    assert drawn["angle-A"] == pytest.approx(60, abs=0.5)
+    assert drawn["angle-P"] == pytest.approx(60, abs=0.5)
+    assert drawn["angle-Q"] == pytest.approx(50, abs=0.5)
+    inputs = CASES["congruent_angle_expressions"][0]
+    assert sim.congruent_angle_expressions(inputs, ["60"]).content_findings
+    with pytest.raises(UnsupportedDiagram):
+        sim.congruent_angle_expressions(
+            {"a": linear(2, 10), "p": linear(3, -15), "q": linear(5, 0)}
+        )

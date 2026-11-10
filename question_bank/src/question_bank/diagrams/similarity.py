@@ -510,6 +510,75 @@ def sas_condition(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagra
     )
 
 
+def _angle_text(item: dict[str, int]) -> str:
+    """Write an angle expression in x, such as (2x + 10)° or 2x°."""
+    if item["constant"] == 0:
+        coefficient = "" if item["coefficient"] == 1 else item["coefficient"]
+        return f"{coefficient}x°"
+    return _text(item, "°")
+
+
+def congruent_angle_expressions(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """Congruent triangles ABC and PQR whose angles A, P and Q are given in x; find angle C.
+
+    The figure shows the correspondence: one arc at A and at P, two arcs at B and at Q. The
+    expressions themselves stay in the question (recorded in ``omitted_givens``), because a label
+    such as (2x + 10)° does not fit inside the angle beside its arc. Both triangles are drawn with
+    their true angles; angle C, the answer, is not labelled.
+    """
+    a_expr, p_expr, q_expr = inputs["a"], inputs["p"], inputs["q"]
+    x = _solve_equal(a_expr, p_expr)
+    angle_a = a_expr["coefficient"] * x + a_expr["constant"]
+    angle_b = q_expr["coefficient"] * x + q_expr["constant"]
+    angle_c = 180 - angle_a - angle_b
+    _require(min(angle_a, angle_b, angle_c) > 0, "The expressions give an impossible triangle.")
+    ra, rb = math.radians(angle_a), math.radians(angle_b)
+    ac = math.sin(rb) / math.sin(ra + rb)
+    base = [(0.0, 0.0), (1.0, 0.0), (ac * math.cos(ra), ac * math.sin(ra))]
+    _, _, x1, _ = _span(base)
+    # PQR is ABC turned through 180°, so every angle keeps its size and its partner.
+    copy = _placed_right_of(_rotated(base, 180), x1 + 0.45)
+    points = {"A": base[0], "B": base[1], "C": base[2], "P": copy[0], "Q": copy[1], "R": copy[2]}
+    figure = _Scene(points, max_width=500, max_height=230, top=48)
+    figure.shape("ABC", "ABC")
+    figure.shape("PQR", "PQR", fill=FILL_ALT)
+    figure.relate("congruent", figures=["ABC", "PQR"])
+    canvas = figure.canvas
+    canvas.angle_arc("angle-A", "A", "B", "C", 34, round(angle_a, 2))
+    canvas.angle_arc("angle-P", "P", "Q", "R", 34, round(angle_a, 2))
+    for vertex, first, second in (("B", "C", "A"), ("Q", "R", "P")):
+        canvas.angle_arc(f"angle-{vertex}", vertex, first, second, 30, round(angle_b, 2))
+        canvas.angle_arc(f"angle-{vertex}2", vertex, first, second, 38, round(angle_b, 2))
+    figure.relate("matching_angles", angles=["angle-A", "angle-P"], figures=["ABC", "PQR"])
+    figure.relate("matching_angles", angles=["angle-B", "angle-Q"], figures=["ABC", "PQR"])
+    first, second = figure.centre("ABC"), figure.centre("PQR")
+    for name in "ABC":
+        figure.vertex_label(name, away_from=first)
+    for name in "PQR":
+        figure.vertex_label(name, away_from=second)
+    labels = {key: _angle_text(inputs[key]) for key in ("a", "p", "q")}
+    reason = "An angle expression stated in the question; the arcs show which angles correspond."
+    for key in ("a", "p", "q"):
+        for value in (inputs[key]["coefficient"], abs(inputs[key]["constant"])):
+            if value and not any(item["value"] == number(value) for item in figure.omitted):
+                figure.omit(number(value), reason)
+    return figure.scene(
+        template="congruent_angle_expressions",
+        inputs=inputs,
+        kind="congruent_triangles",
+        dimensions={"A": labels["a"], "P": labels["p"], "Q": labels["q"]},
+        title="Congruent triangles ABC and PQR",
+        alt_text=(
+            "Two triangles ABC and PQR, with PQR turned upside down. Angles A and P each have one "
+            "arc, and angles B and Q each have two arcs."
+        ),
+        answers=answers,
+        derived=[x, angle_a, angle_b, angle_c],
+        findings=_key_findings(angle_c, answers),
+        extra={"forbid_right_angle_marker": True},
+    )
+
+
 def shared_side(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
     """Triangles ABC and ADC on either side of their shared side AC.
 
@@ -1769,6 +1838,7 @@ TEMPLATES: dict[str, Callable[..., Diagram]] = {
         congruent_pentagons,
         sas_condition,
         shared_side,
+        congruent_angle_expressions,
         similar_edges,
         similar_perimeter,
         similar_angle,
