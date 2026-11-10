@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n5",
   "status": "draft",
@@ -90,7 +90,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Simplify 1/(x-2)+2/(x-3)."
+          "text": "Simplify "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{1}{x-2}+\\frac{2}{x-3}"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "steps": [
@@ -131,7 +139,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Simplify 1/(x²-9)+2/(x-3)."
+          "text": "Simplify "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{1}{x^2-9}+\\frac{2}{x-3}"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "steps": [
@@ -172,7 +188,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Simplify 1/(x-3)-2/(x-3)²."
+          "text": "Simplify "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{1}{x-3}-\\frac{2}{(x-3)^2}"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "response": {
