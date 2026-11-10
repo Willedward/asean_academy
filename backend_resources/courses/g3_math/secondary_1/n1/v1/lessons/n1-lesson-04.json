@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-lesson-04",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n1",
@@ -90,8 +90,84 @@
       ]
     },
     {
-      "stable_key": "calculator-brackets-example",
+      "stable_key": "standard-form",
       "position": 4,
+      "type": "explanation",
+      "title": "Standard form for very large and very small numbers",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A number in standard form is written as "
+        },
+        {
+          "type": "inline_math",
+          "latex": "A\\times10^n"
+        },
+        {
+          "type": "text",
+          "text": ", where "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1\\le A<10"
+        },
+        {
+          "type": "text",
+          "text": " and n is an integer. Large numbers have a positive power of 10, and small numbers have a negative one. For example, "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3\\,450\\,000=3.45\\times10^6"
+        },
+        {
+          "type": "text",
+          "text": ", because the decimal point moves 6 places to the left, and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "0.000\\,482=4.82\\times10^{-4}"
+        },
+        {
+          "type": "text",
+          "text": ", because it moves 4 places to the right."
+        },
+        {
+          "type": "display_math",
+          "latex": "3\\,450\\,000=3.45\\times10^6,\\qquad 0.000\\,482=4.82\\times10^{-4}"
+        },
+        {
+          "type": "text",
+          "text": "To multiply or divide numbers in standard form, work with the numbers A and the powers of 10 separately, using "
+        },
+        {
+          "type": "inline_math",
+          "latex": "10^a\\times10^b=10^{a+b}"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "10^a\\div10^b=10^{a-b}"
+        },
+        {
+          "type": "text",
+          "text": ". Then adjust the result so that the first number is between 1 and 10. A calculator display such as 4.72E5 means "
+        },
+        {
+          "type": "inline_math",
+          "latex": "4.72\\times10^5"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ]
+    },
+    {
+      "stable_key": "calculator-brackets-example",
+      "position": 5,
       "type": "worked_example",
       "title": "Worked example: enter a multi-step expression",
       "prompt": [
@@ -153,7 +229,7 @@
     },
     {
       "stable_key": "calculator-rounding-example",
-      "position": 5,
+      "position": 6,
       "type": "worked_example",
       "title": "Worked example: preserve an unrounded value",
       "prompt": [
@@ -201,8 +277,57 @@
       "verification_note": "The fourth decimal digit is 4, so the third decimal digit remains unchanged. Rounding each term first could give a different result."
     },
     {
+      "stable_key": "standard-form-example",
+      "position": 7,
+      "type": "worked_example",
+      "title": "Worked example: multiply in standard form",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(4.8\\times10^6)\\times(2.5\\times10^{-2})"
+        },
+        {
+          "type": "text",
+          "text": ", giving your answer in standard form."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply the numbers and the powers of 10 separately."
+            },
+            {
+              "type": "display_math",
+              "latex": "4.8\\times2.5=12,\\qquad 10^6\\times10^{-2}=10^{4}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The result 12 × 10⁴ is not yet in standard form, because 12 is not between 1 and 10. Write 12 as 1.2 × 10."
+            },
+            {
+              "type": "display_math",
+              "latex": "12\\times10^4=1.2\\times10\\times10^4=1.2\\times10^5"
+            }
+          ]
+        }
+      ],
+      "verification_note": "As ordinary numbers, 4 800 000 × 0.025 = 120 000, and 1.2 × 10⁵ = 120 000."
+    },
+    {
       "stable_key": "calculator-recall",
-      "position": 6,
+      "position": 8,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -238,7 +363,7 @@
     },
     {
       "stable_key": "calculator-summary",
-      "position": 7,
+      "position": 9,
       "type": "summary",
       "title": "Calculator checklist",
       "blocks": [

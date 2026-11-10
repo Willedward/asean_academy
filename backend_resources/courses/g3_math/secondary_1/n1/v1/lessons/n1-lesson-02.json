@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n1",
@@ -49,7 +49,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Squaring multiplies a number by itself, while cubing multiplies three equal factors. A square root reverses squaring and a cube root reverses cubing. For positive numbers, the symbol "
+          "text": "Squaring multiplies a number by itself, while cubing multiplies three equal factors. A square root reverses squaring and a cube root reverses cubing. The symbol "
         },
         {
           "type": "inline_math",
@@ -57,7 +57,7 @@
         },
         {
           "type": "text",
-          "text": " means the non-negative square root. A negative number has no real square root, but it can have a real cube root because three negative factors give a negative product."
+          "text": " means the non-negative square root, for any x ≥ 0. A negative number has no real square root, but it can have a real cube root because three negative factors give a negative product."
         },
         {
           "type": "display_math",
@@ -197,8 +197,57 @@
       "verification_note": "Squaring 14 gives 196, cubing 6 gives 216, and the final arithmetic is 20 minus 9."
     },
     {
-      "stable_key": "hcf-lcm-recall",
+      "stable_key": "roots-prime-factor-example",
       "position": 6,
+      "type": "worked_example",
+      "title": "Worked example: a square root by prime factorisation",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\sqrt{784}"
+        },
+        {
+          "type": "text",
+          "text": " using prime factorisation."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide repeatedly by primes to write 784 as a product of prime powers."
+            },
+            {
+              "type": "display_math",
+              "latex": "784=2\\times392=2^2\\times196=2^3\\times98=2^4\\times49=2^4\\times7^2"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "A square root halves every index, because the prime factors can be split into two equal groups."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\sqrt{2^4\\times7^2}=2^2\\times7=28"
+            }
+          ]
+        }
+      ],
+      "verification_note": "28² = 784. The method works because both indices, 4 and 2, are even; a number with an odd index in its prime factorisation is not a perfect square."
+    },
+    {
+      "stable_key": "hcf-lcm-recall",
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -236,13 +285,37 @@
       "feedback": [
         {
           "type": "text",
-          "text": "The prime factorizations are 72 = 2^3 × 3^2 and 120 = 2^3 × 3 × 5. The shared prime powers are 2^3 × 3 = 24."
+          "text": "The prime factorisations are "
+        },
+        {
+          "type": "inline_math",
+          "latex": "72=2^3\\times3^2"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "120=2^3\\times3\\times5"
+        },
+        {
+          "type": "text",
+          "text": ". The shared prime powers give the HCF "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2^3\\times3=24"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ]
     },
     {
       "stable_key": "hcf-lcm-summary",
-      "position": 7,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
