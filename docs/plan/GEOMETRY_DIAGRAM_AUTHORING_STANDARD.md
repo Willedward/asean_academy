@@ -36,11 +36,15 @@ input always gives byte-identical output.
 
 | Renderer | `diagram_kind` | Templates |
 | --- | --- | --- |
-| right-triangle v2 | `right_triangle` | `find_hypotenuse`, `missing_leg`, `right_angle_specification`, `tangent_adjacent`, `tangent_opposite`, `find_angle`, `converse_test`, `perimeter_verify`, `rectangle_diagonal`, `diagonal_route`, `cable_allowance`, `elevation_observer`, `two_position`; lessons `lesson_pythagoras`, `lesson_converse`, `lesson_trigonometry` |
+| right-triangle v2 | `right_triangle` | `find_hypotenuse`, `missing_leg`, `right_angle_specification`, `tangent_adjacent`, `tangent_opposite`, `find_angle`, `sine_opposite`, `cosine_adjacent`, `sine_angle`, `cosine_angle`, `converse_test`, `perimeter_verify`, `rectangle_diagonal`, `diagonal_route`, `cable_allowance`, `elevation_observer`, `two_position`; lessons `lesson_pythagoras`, `lesson_converse`, `lesson_trigonometry` |
 | mensuration v2 | `pyramid` | `rectangular_pyramid_volume`, `pyramid_base_area_volume`, `pyramid_height`, `pyramid_covering_cost`, `pyramid_volume_constraint`; lesson `lesson_pyramid` |
 | mensuration v2 | `cone`, `cone_cylinder`, `inverted_cone_liquid` | `cone_volume`, `cone_curved_area`, `cone_total_area`, `cone_cylinder_factor`, `liquid_depth`; lesson `lesson_cone` |
 | mensuration v2 | `sphere`, `hollow_sphere`, `hemisphere` | `sphere_surface_area`, `sphere_volume_radius`, `sphere_volume_diameter`, `sphere_percentage_change`, `hollow_shell`, `sphere_core_removed`, `hemisphere_curved_area`; lesson `lesson_sphere` |
 | mensuration v2 | `cone_hemisphere`, `separate_solids` | `cone_hemisphere_volume`, `cone_hemisphere_area`, `equal_volume_cone_sphere`, `recast_spheres_cones` |
+
+The four sine and cosine templates (hypotenuse given with an angle, or with one shorter side) have no
+prompt pattern yet: store `generation_spec.template` and `inputs` (`angle`, `hypotenuse`, optional
+`label` and `places`; or `hypotenuse` with `opposite` or `adjacent`).
 
 Templates are matched on the mathematical wording of the prompt, not on the title or the
 opening context sentence. If a reworded prompt no longer matches, store

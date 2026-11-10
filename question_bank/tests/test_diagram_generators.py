@@ -289,12 +289,14 @@ def test_all_sec2_g4_g5_questions_and_lessons_regenerate_and_validate(repository
     for key in ("g4-lesson-01", "g4-lesson-02", "g4-lesson-03", "g5-lesson-06"):
         lesson = json.loads((course / "lessons" / f"{key}.json").read_text())
         for asset in lesson["assets"]:
-            assert asset["asset_key"] in LESSON_TEMPLATES
+            stored = asset["generation_spec"].get("template") in rt.TEMPLATES
+            assert asset["asset_key"] in LESSON_TEMPLATES or stored
             diagram = render_lesson_asset(lesson, asset)
             assert render_lesson_asset(lesson, asset).svg == diagram.svg
             assert _findings_from_memory(diagram, None) == []
             rendered += 1
-    assert rendered == 6
+    # g4-lesson-03 also draws its sine and cosine worked examples from stored inputs.
+    assert rendered == 8
 
 
 def _findings_from_memory(diagram, context):
@@ -336,3 +338,67 @@ def test_stored_v2_inputs_take_precedence_over_prompt_wording(repository_root):
 
     assert request.source == "generation_spec"
     assert request.template == "find_hypotenuse"
+
+
+HYPOTENUSE_CASES = {
+    "sine_opposite": (
+        {"angle": 70, "hypotenuse": q(6, "m"), "label": "h"},
+        ["5.64"],
+        "A 6 m ladder makes an angle of 70° with the ground. Find the height h.",
+        ("AB", "h"),
+    ),
+    "cosine_adjacent": (
+        {"angle": 35, "hypotenuse": q(12)},
+        ["9.83"],
+        "The hypotenuse is 12 cm and one acute angle is 35°. Find the adjacent side x.",
+        ("AC", "x"),
+    ),
+    "sine_angle": (
+        {"opposite": q(5), "hypotenuse": q(13)},
+        ["22.6"],
+        "The side opposite θ is 5 cm and the hypotenuse is 13 cm. Find θ.",
+        None,
+    ),
+    "cosine_angle": (
+        {"adjacent": q(2, "m"), "hypotenuse": q(7, "m")},
+        ["73.4"],
+        "The side adjacent to θ is 2 m and the hypotenuse is 7 m. Find θ.",
+        None,
+    ),
+}
+
+
+@pytest.mark.parametrize("template", sorted(HYPOTENUSE_CASES))
+def test_sine_and_cosine_templates_label_the_hypotenuse_and_withhold_the_answer(
+    tmp_path, template
+):
+    inputs, answers, stated, unknown_side = HYPOTENUSE_CASES[template]
+    diagram = rt.TEMPLATES[template](inputs, answers)
+    again = rt.TEMPLATES[template](inputs, answers)
+    spec = diagram.generation_spec
+    texts = visible_text(diagram.svg)
+
+    assert diagram.svg == again.svg
+    assert diagram.content_findings == []
+    assert answers[0] in spec["forbidden_visible_labels"]
+    assert not any(answers[0] in text for text in texts)
+    assert {"vertex": "A", "arms": ["B", "C"], "marker_size": 22} in spec["right_angles"]
+    hypotenuse = inputs["hypotenuse"]
+    assert f"{hypotenuse['value']} {hypotenuse['unit']}" in texts
+    if unknown_side is None:
+        assert {"target": "angle:C", "label": "θ"} in spec["unknowns"]
+    else:
+        key, label = unknown_side
+        assert {"target": f"segment:{key}", "label": label} in spec["unknowns"]
+    # The third side is neither given nor asked, so it carries no label.
+    assert len([label for label in spec["labels"] if label["target"].startswith("segment")]) == 2
+    assert findings_for(tmp_path, diagram, answers, stated) == []
+
+
+def test_sine_and_cosine_templates_check_the_key_and_refuse_impossible_givens():
+    assert rt.sine_opposite({"angle": 70, "hypotenuse": q(6, "m")}, ["2.05"]).content_findings
+    assert rt.cosine_angle({"adjacent": q(2), "hypotenuse": q(7)}, ["16.6"]).content_findings
+    with pytest.raises(rt.UnsupportedDiagram):
+        rt.sine_angle({"opposite": q(9), "hypotenuse": q(7)})
+    with pytest.raises(rt.UnsupportedDiagram):
+        rt.cosine_adjacent({"angle": 95, "hypotenuse": q(7)})
