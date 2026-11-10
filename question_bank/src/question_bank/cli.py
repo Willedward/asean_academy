@@ -533,7 +533,9 @@ def main(argv=None):
         foundation = validate_english_foundation(args.root.resolve())
         count = write_quality_baseline(
             args.root.resolve(),
-            english_quality_findings(foundation.questions, foundation.lessons, foundation.forms),
+            english_quality_findings(
+                foundation.questions, foundation.lessons, foundation.forms, foundation.passages
+            ),
         )
         print(json.dumps({"accepted_findings": count}, indent=2))
         return 0
