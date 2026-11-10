@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l2-002",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A 14 m by 10 m rectangular floor has a 6 m by 4 m rectangular section removed from one corner. Find the remaining area in m². Enter the numerical value only."
+          "text": "A 13 m by 9 m rectangular floor has a 5 m by 400 cm rectangular section removed from one corner. Find the remaining area in m². Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "116",
-        "canonical_latex": "116",
+        "canonical_answer": "97",
+        "canonical_latex": "97",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use large rectangle area minus removed rectangle area."
+              "text": "Convert 400 cm to metres first."
             }
           ]
         },
@@ -51,15 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
-            },
-            {
-              "type": "inline_math",
-              "latex": "140-24"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Subtract the area of the removed section from the area of the floor."
             }
           ]
         }
@@ -69,12 +61,31 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "A=14(10)-6(4)=116"
+              "type": "inline_math",
+              "latex": "400\\text{ cm}=4\\text{ m}"
+            },
+            {
+              "type": "text",
+              "text": ", so the removed area is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "5(4)=20\\text{ m}^2"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "A=13(9)-20=97"
             }
           ],
           "mark_type": "A",
-          "mark_value": 2
+          "mark_value": 1
         }
       ]
     }

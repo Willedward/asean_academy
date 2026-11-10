@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l4-001",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,31 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A composite figure consists of a square of side "
+          "text": "A composite figure consists of a square of side 6 cm and a rectangle 6 cm by "
         },
         {
           "type": "inline_math",
-          "latex": "x"
+          "latex": "(x+4)"
         },
         {
           "type": "text",
-          "text": " cm and a rectangle "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": " cm by "
-        },
-        {
-          "type": "inline_math",
-          "latex": "(x+4)\\text{ cm}"
-        },
-        {
-          "type": "text",
-          "text": ", without overlap. Its total area is 96 cm². Find "
+          "text": " cm, without overlap. Its total area is 96 cm². Find "
         },
         {
           "type": "inline_math",
@@ -74,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the two areas into one quadratic equation."
+              "text": "Write the area of each part in terms of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -83,15 +75,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
-            },
-            {
-              "type": "inline_math",
-              "latex": "x^{2}+x(x+4)=96"
-            },
-            {
-              "type": "text",
-              "text": " and take the positive root."
+              "text": "Add the two areas, set the total equal to 96 and solve the linear equation."
             }
           ]
         }
@@ -101,8 +85,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x^2+x(x+4)=96"
+              "type": "inline_math",
+              "latex": "36+6(x+4)=96"
             }
           ],
           "mark_type": "M",
@@ -112,8 +96,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "2x^2+4x-96=0"
+              "type": "inline_math",
+              "latex": "6x+60=96"
             }
           ],
           "mark_type": "M",
@@ -123,8 +107,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "(x-6)(x+8)=0"
+              "type": "inline_math",
+              "latex": "6x=36"
             }
           ],
           "mark_type": "M",
@@ -134,7 +118,7 @@
           "position": 4,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "x=6"
             }
           ],
