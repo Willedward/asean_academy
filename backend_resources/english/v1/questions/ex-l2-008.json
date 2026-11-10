@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "ex-l2-008",
   "bank_key": "english-ex-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -21,10 +21,22 @@
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "Read all answer explanations before restarting"},
-          {"key": "B", "text": "Create several new attempts and keep the highest score"},
-          {"key": "C", "text": "Ask classmates about the unfinished questions"},
-          {"key": "D", "text": "Resume the saved attempt, record the interruption and avoid discussing unseen items"}
+          {
+            "key": "A",
+            "text": "Read all answer explanations before restarting"
+          },
+          {
+            "key": "B",
+            "text": "Create several new attempts and keep the highest score as the baseline"
+          },
+          {
+            "key": "C",
+            "text": "Ask classmates about the unfinished questions"
+          },
+          {
+            "key": "D",
+            "text": "Resume the saved attempt, record the interruption and avoid discussing unseen items"
+          }
         ],
         "correct_key": "D",
         "choice_rationales": {
@@ -43,26 +55,42 @@
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "Repeat the identical form with correct answers highlighted"},
-          {"key": "B", "text": "Compare only the questions previously answered correctly"},
-          {"key": "C", "text": "Use a secure matched form covering the same blueprint with fresh prompts"},
-          {"key": "D", "text": "Replace the test with a confidence rating"}
+          {
+            "key": "A",
+            "text": "Repeat the identical form with correct answers highlighted"
+          },
+          {
+            "key": "B",
+            "text": "Compare only the questions previously answered correctly"
+          },
+          {
+            "key": "C",
+            "text": "Use a secure matched form covering the same skills with fresh prompts"
+          },
+          {
+            "key": "D",
+            "text": "Replace the test with a confidence rating"
+          }
         ],
         "correct_key": "C",
         "choice_rationales": {
           "A": "Answer recall would dominate the result.",
-          "B": "Removing weak areas changes the blueprint.",
+          "B": "Removing weak areas changes what is tested.",
           "C": "A matched fresh form preserves comparability while testing transfer.",
           "D": "Self-report is different evidence from objective performance."
         }
       },
       "hint": "Protected checkpoint: no hint is available.",
-      "correct_explanation": "A parallel form measures the same constructs using unseen material, reducing simple recall."
+      "correct_explanation": "A parallel form measures the same skills using unseen material, reducing simple recall."
     }
   ],
   "provenance": {
     "authoring_method": "original_authored",
-    "source_refs": ["candidate-report-2026-english-format", "ies-adolescent-literacy-guide", "nextscholar-english-curriculum-design-v1"],
+    "source_refs": [
+      "candidate-report-2026-english-format",
+      "ies-adolescent-literacy-guide",
+      "nextscholar-english-curriculum-design-v1"
+    ],
     "created_at": "2026-10-28T00:00:00+08:00",
     "authored_by": "Codex English V3-B E0 checkpoint milestone",
     "reviewed_at": null,
