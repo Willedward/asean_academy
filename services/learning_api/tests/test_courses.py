@@ -326,7 +326,7 @@ def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     )
     assert s2_lesson_response.status_code == 200
     assert s2_lesson_response.headers["content-type"].startswith("image/svg+xml")
-    assert b"Probability scale" in s2_lesson_response.content
+    assert b"P(ferry arrives within five minutes) = 0.68" in s2_lesson_response.content
 
     n2_lesson_response = get(
         "/api/v1/content-assets/lesson/n2-lesson-04/n2-lesson-04-map-scales"
