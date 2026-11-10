@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-s1",
@@ -34,7 +34,7 @@
         },
         {
           "type": "text",
-          "text": "Tables support exact lookup. Bar graphs compare separate categories, so bars usually have gaps. Line graphs connect ordered observations and emphasise change, often over time. The visual model contrasts these two purposes: the bars compare clubs, while the connected points follow attendance from Monday to Friday."
+          "text": "Tables support exact lookup. Bar graphs compare separate categories, so bars usually have gaps. Line graphs connect ordered observations and emphasise change, often over time. The line graph below follows club attendance from Monday to Friday, the data in the first worked example. Its vertical axis starts at 30, so it carries a break mark, and each grid interval is 2."
         },
         {
           "type": "asset_ref",
@@ -249,16 +249,215 @@
       "asset_key": "s1-lesson-02-chart-reading",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-lesson-02-chart-reading.svg",
-      "alt_text": "A bar graph comparing three clubs and a line graph showing attendance from Monday to Friday.",
+      "path": "assets/s1-lesson-02-chart-reading-r3.svg",
+      "alt_text": "Line graph of club attendance from Monday to Friday: 32, 36, 34, 42 and 46. The vertical axis starts at 30, shown by a break mark, with ticks every 2 up to 48.",
       "generation_spec": {
-        "renderer": "nextscholar-statistics-svg-v1",
-        "diagram_kind": "bar_and_line_graph_reading",
-        "lesson_key": "s1-lesson-02"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "line_chart",
+        "lesson_key": "s1-lesson-02",
+        "template": "line_chart",
+        "inputs": {
+          "categories": [
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri"
+          ],
+          "values": [
+            32,
+            36,
+            34,
+            42,
+            46
+          ],
+          "y_min": 30,
+          "y_max": 48,
+          "tick_step": 2,
+          "axis_break": true,
+          "y_label": "Attendance",
+          "title": "Club attendance, Monday to Friday",
+          "alt_text": "Line graph of club attendance from Monday to Friday: 32, 36, 34, 42 and 46. The vertical axis starts at 30, shown by a break mark, with ticks every 2 up to 48."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "32",
+            "tag": "circle",
+            "geometry": {
+              "cx": "149",
+              "cy": "353.888889",
+              "r": "6"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "36",
+            "tag": "circle",
+            "geometry": {
+              "cx": "267",
+              "cy": "291.666667",
+              "r": "6"
+            }
+          },
+          {
+            "key": "point-2",
+            "kind": "point",
+            "value": "34",
+            "tag": "circle",
+            "geometry": {
+              "cx": "385",
+              "cy": "322.777778",
+              "r": "6"
+            }
+          },
+          {
+            "key": "point-3",
+            "kind": "point",
+            "value": "42",
+            "tag": "circle",
+            "geometry": {
+              "cx": "503",
+              "cy": "198.333333",
+              "r": "6"
+            }
+          },
+          {
+            "key": "point-4",
+            "kind": "point",
+            "value": "46",
+            "tag": "circle",
+            "geometry": {
+              "cx": "621",
+              "cy": "136.111111",
+              "r": "6"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:30",
+            "axis": "y",
+            "value": "30",
+            "position": "385",
+            "label": "30"
+          },
+          {
+            "key": "y:32",
+            "axis": "y",
+            "value": "32",
+            "position": "353.888889",
+            "label": "32"
+          },
+          {
+            "key": "y:34",
+            "axis": "y",
+            "value": "34",
+            "position": "322.777778",
+            "label": "34"
+          },
+          {
+            "key": "y:36",
+            "axis": "y",
+            "value": "36",
+            "position": "291.666667",
+            "label": "36"
+          },
+          {
+            "key": "y:38",
+            "axis": "y",
+            "value": "38",
+            "position": "260.555556",
+            "label": "38"
+          },
+          {
+            "key": "y:40",
+            "axis": "y",
+            "value": "40",
+            "position": "229.444444",
+            "label": "40"
+          },
+          {
+            "key": "y:42",
+            "axis": "y",
+            "value": "42",
+            "position": "198.333333",
+            "label": "42"
+          },
+          {
+            "key": "y:44",
+            "axis": "y",
+            "value": "44",
+            "position": "167.222222",
+            "label": "44"
+          },
+          {
+            "key": "y:46",
+            "axis": "y",
+            "value": "46",
+            "position": "136.111111",
+            "label": "46"
+          },
+          {
+            "key": "y:48",
+            "axis": "y",
+            "value": "48",
+            "position": "105",
+            "label": "48"
+          },
+          {
+            "key": "x:Mon",
+            "axis": "x",
+            "value": "Mon",
+            "position": "149",
+            "label": "Mon"
+          },
+          {
+            "key": "x:Tue",
+            "axis": "x",
+            "value": "Tue",
+            "position": "267",
+            "label": "Tue"
+          },
+          {
+            "key": "x:Wed",
+            "axis": "x",
+            "value": "Wed",
+            "position": "385",
+            "label": "Wed"
+          },
+          {
+            "key": "x:Thu",
+            "axis": "x",
+            "value": "Thu",
+            "position": "503",
+            "label": "Thu"
+          },
+          {
+            "key": "x:Fri",
+            "axis": "x",
+            "value": "Fri",
+            "position": "621",
+            "label": "Fri"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 30.0,
+          "y_max": 48.0,
+          "tick_step": 2.0
+        }
       },
-      "sha256": "4b026623c35c2c02529258bbb1f5024e1c626bf2a853d695aa7d40ab55e6fff2",
-      "width": 940,
-      "height": 500
+      "sha256": "ca51c323240714ee684c7873985178e0e023474c5ceef5bfeae043f9aac0ac15",
+      "width": 720,
+      "height": 480
     }
   ],
   "provenance": {
@@ -267,6 +466,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Revision 2 expands the teaching sequence, visual model and worked examples; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
