@@ -1,7 +1,11 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
-import type { HintResponse, NextQuestionResponse } from "@/lib/api/practice";
+import type {
+  GiveUpResponse,
+  HintResponse,
+  NextQuestionResponse,
+} from "@/lib/api/practice";
 
 import { LivePracticeView } from "./live-practice-view";
 
@@ -65,6 +69,8 @@ const hint: HintResponse = {
 } as HintResponse;
 
 describe("LivePracticeView hints", () => {
+  afterEach(cleanup);
+
   it("keeps a hint's text and inline maths in one line of flow", () => {
     render(
       <LivePracticeView
@@ -95,5 +101,62 @@ describe("LivePracticeView hints", () => {
     expect(flow?.className ?? "").not.toMatch(/\bflex\b/);
     expect(flow?.querySelector(".katex")).not.toBeNull();
     expect(flow?.textContent).toContain("into the equation.");
+  });
+});
+
+const solution = {
+  parts: [
+    {
+      position: 1,
+      label: null,
+      canonical_latex: "270",
+      steps: [
+        { content: [{ type: "display_math", latex: "1.8\\times150=270" }] },
+      ],
+    },
+  ],
+} as unknown as GiveUpResponse["solution"];
+
+function renderView(overrides: {
+  solution?: GiveUpResponse["solution"] | null;
+}) {
+  return render(
+    <LivePracticeView
+      sessionId={current.session.session_id}
+      current={current}
+      answers={{}}
+      attempt={null}
+      hints={[]}
+      solution={overrides.solution ?? null}
+      error={null}
+      busy={false}
+      allAnswersPresent={false}
+      onAnswerChange={vi.fn()}
+      onCheckAnswers={vi.fn()}
+      onOpenHint={vi.fn()}
+      onRevealSolution={vi.fn()}
+      onContinue={vi.fn()}
+    />,
+  );
+}
+
+describe("LivePracticeView readability", () => {
+  afterEach(cleanup);
+
+  it("shows the question prompt at body size, not as muted helper text", () => {
+    renderView({});
+    const prompt = screen.getByText("Find the value.");
+    expect(prompt.className).not.toMatch(/text-ns-muted|text-sm/);
+    expect(prompt.className).toMatch(/text-ns-ink/);
+  });
+
+  it("starts a display-maths step level with its step number", () => {
+    const { container } = renderView({ solution });
+    const step = container
+      .querySelector("ol li .katex-display")
+      ?.closest("li > div");
+    expect(step).not.toBeNull();
+    expect(step?.className).toContain("[&_.katex-display]:my-0");
+    expect(step?.className).toContain("[&_.katex-display>.katex]:text-left");
   });
 });
