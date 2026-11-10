@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l4-016",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "On this timeline, every gap between neighbouring labelled years is drawn 2 cm long. If 2 cm correctly represents one year, how long should the gap that spans more than one year be? Give your answer in cm. Enter the numerical value only."
+          "text": "On this timeline, every gap between neighbouring labelled years is drawn 2 cm long. If 2 cm is meant to represent one year, how many cm longer should the whole timeline be to be drawn to scale? Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Work out how many years that gap actually spans."
+              "text": "Work out how long each gap should be, using 2 cm for one year."
             }
           ]
         },
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply the number of years in that gap by 2 cm."
+              "text": "Add the correct lengths of the three gaps, then subtract the length actually drawn."
             }
           ]
         }
@@ -70,12 +70,31 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "(2024-2020)(2)=8"
+              "type": "text",
+              "text": "The gaps cover 1, 4 and 2 years, so they should be 2 cm, 8 cm and 4 cm: 14 cm in total. The drawn timeline is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3\\times2=6"
+            },
+            {
+              "type": "text",
+              "text": " cm."
             }
           ],
-          "mark_type": "B",
-          "mark_value": 4
+          "mark_type": "M",
+          "mark_value": 3
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "14-6=8"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
         }
       ]
     }
@@ -86,8 +105,8 @@
       "asset_key": "s1-l4-016-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l4-016-diagram-r2.svg",
-      "alt_text": "Horizontal timeline with the years 2019, 2020, 2024 and 2025 at equal 2 cm gaps.",
+      "path": "assets/s1-l4-016-diagram-r3.svg",
+      "alt_text": "Horizontal timeline with the years 2014, 2015, 2019 and 2021 at equal 2 cm gaps.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "vertical_scale",
@@ -96,14 +115,14 @@
         "template": "vertical_scale",
         "inputs": {
           "ticks": [
+            2014,
+            2015,
             2019,
-            2020,
-            2024,
-            2025
+            2021
           ],
           "title": "Timeline",
           "orientation": "horizontal",
-          "alt_text": "Horizontal timeline with the years 2019, 2020, 2024 and 2025 at equal 2 cm gaps."
+          "alt_text": "Horizontal timeline with the years 2014, 2015, 2019 and 2021 at equal 2 cm gaps."
         },
         "viewbox": [
           720,
@@ -112,38 +131,38 @@
         "chart_marks": [],
         "chart_ticks": [
           {
+            "key": "x:2014",
+            "axis": "x",
+            "value": "2014",
+            "position": "90",
+            "label": "2014"
+          },
+          {
+            "key": "x:2015",
+            "axis": "x",
+            "value": "2015",
+            "position": "270",
+            "label": "2015"
+          },
+          {
             "key": "x:2019",
             "axis": "x",
             "value": "2019",
-            "position": "90",
+            "position": "450",
             "label": "2019"
           },
           {
-            "key": "x:2020",
+            "key": "x:2021",
             "axis": "x",
-            "value": "2020",
-            "position": "270",
-            "label": "2020"
-          },
-          {
-            "key": "x:2024",
-            "axis": "x",
-            "value": "2024",
-            "position": "450",
-            "label": "2024"
-          },
-          {
-            "key": "x:2025",
-            "axis": "x",
-            "value": "2025",
+            "value": "2021",
             "position": "630",
-            "label": "2025"
+            "label": "2021"
           }
         ],
         "forbidden_visible_labels": [],
         "min_phone_font_px": 12.43
       },
-      "sha256": "356908e38cc43b74b765e7e8d7606bef8c0af3af905be2dff15bfeb89b0379ea",
+      "sha256": "6c30424d227bd55aae518274b45167d69475902081fe0dead3aeb78c8e3729d8",
       "width": 720,
       "height": 480
     }

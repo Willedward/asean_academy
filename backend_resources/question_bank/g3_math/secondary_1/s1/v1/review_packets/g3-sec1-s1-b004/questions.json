@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l1-018",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -21,7 +21,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for qualitative data and code 2 for quantitative data. Which code describes the data item ‘number of siblings’? Enter the numerical value only."
+            "text": "Use code 1 for categorical data (names or qualities) and code 2 for numerical data (counts or measurements). Which code describes the data item ‘number of siblings’? Enter the code only."
           }
         ],
         "marks": 1,
@@ -43,7 +43,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Decide whether the values are numerical counts."
+                "text": "Decide whether the values are names or numbers."
               }
             ]
           },
@@ -52,7 +52,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "A number of siblings is a numerical quantity."
+                "text": "Ask whether the answer to ‘How many siblings?’ is a name or a count."
               }
             ]
           }
@@ -62,8 +62,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "The number of siblings is a count, so the data item is numerical."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{number of siblings is quantitative}\\Rightarrow 2"
+                "latex": "\\Rightarrow 2"
               }
             ],
             "mark_type": "A",
@@ -92,7 +96,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-024",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -112,7 +116,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Intervals are coded 1: 0–9, 2: 10–19, 3: 20–29 and 4: 30–39. Enter the code of the interval containing the value 27."
+            "text": "Whole numbers are grouped into intervals coded 1: 0–9, 2: 10–19, 3: 20–29 and 4: 30–39. Enter the code of the interval containing the value 27."
           }
         ],
         "marks": 2,
@@ -143,7 +147,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "27 lies from 20 through 29."
+                "text": "Compare 27 with the smallest and largest whole numbers in each interval."
               }
             ]
           }
@@ -372,7 +376,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-024",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -433,12 +437,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "14\\div0.35=40"
+                "type": "inline_math",
+                "latex": "0.35N=14"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "N=\\frac{14}{0.35}=40"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -463,7 +478,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-025",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -524,12 +539,39 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "48-3-2+1=44"
+                "type": "text",
+                "text": "Remove "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3+2=5"
+              },
+              {
+                "type": "text",
+                "text": " records: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "48-5=43"
+              },
+              {
+                "type": "text",
+                "text": "."
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "43+1=44"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -554,14 +596,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l4-013",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "S1",
     "primary_outcome": "1.1",
-    "title": "Stratified response count",
+    "title": "Response totals across four levels",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -574,7 +616,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A school samples 30 students from each of four levels. Response rates are 90%, 80%, 70% and 60% respectively. After removing 6 incomplete responses, how many complete responses remain? Enter the numerical value only."
+            "text": "A school samples 30 students from each of four levels. Response rates are 90%, 80%, 70% and 60% respectively. After 6 incomplete responses are removed from those received, what percentage of the students sampled gave a complete response? Enter the percentage without the % sign."
           }
         ],
         "marks": 4,
@@ -583,12 +625,20 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "84",
-          "canonical_latex": "84",
+          "canonical_answer": "70",
+          "canonical_latex": "70",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
-          "unit": null
+          "unit": {
+            "canonical": "%",
+            "accepted": [
+              "%",
+              "percent",
+              "per cent"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
@@ -596,7 +646,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate responses from each level."
+                "text": "Find the number of responses from each level, then the total."
               }
             ]
           },
@@ -605,7 +655,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add the four response counts, then remove six."
+                "text": "Remove the 6 incomplete responses, then compare the number that remain with the 120 students sampled."
               }
             ]
           }
@@ -615,8 +665,24 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
+                "type": "text",
+                "text": "Responses received: "
+              },
+              {
+                "type": "inline_math",
                 "latex": "30(0.9+0.8+0.7+0.6)=90"
+              },
+              {
+                "type": "text",
+                "text": ". Complete responses: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "90-6=84"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -626,8 +692,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "90-6=84"
+                "type": "inline_math",
+                "latex": "\\frac{84}{120}\\times100=70"
               }
             ],
             "mark_type": "A",
@@ -1506,14 +1572,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-027",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "S1",
     "primary_outcome": "1.2",
-    "title": "Interpret a changing scale",
+    "title": "Count scale intervals",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -1576,12 +1642,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "(8-3)(5)=25"
+                "type": "text",
+                "text": "The points are 5 intervals apart, and each interval is 5 units."
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "5\\times5=25"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -1592,7 +1669,7 @@
         "asset_key": "s1-l3-027-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l3-027-diagram-r2.svg",
+        "path": "assets/s1-l3-027-diagram-r3.svg",
         "alt_text": "Vertical scale marked every 5 units from 0 to 40, with points at 15 and 40.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -1744,7 +1821,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l4-014",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1764,7 +1841,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A pie chart shows 30% of 180 students prefer cycling. A pictogram accounts for 38 of these cycling students from two classes. How many cycling students come from the remaining class? Enter the numerical value only."
+            "text": "A pie chart of 180 students has a sector of 108° for cycling. A pictogram of the cycling students in two classes has 5.5 icons for Class A and 4 icons for Class B, and each icon represents 4 students. How many cycling students come from the remaining class? Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -1786,7 +1863,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate the total cycling frequency."
+                "text": "Find the total number of cycling students from the sector angle."
               }
             ]
           },
@@ -1795,7 +1872,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract the two-class pictogram count."
+                "text": "Use the key to convert each class's icons to students, then subtract both classes from the total."
               }
             ]
           }
@@ -1805,8 +1882,24 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "0.30(180)=54"
+                "type": "text",
+                "text": "Cycling students: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{108}{360}\\times180=54"
+              },
+              {
+                "type": "text",
+                "text": ". Classes A and B: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "5.5\\times4+4\\times4=38"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -1816,7 +1909,7 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "54-38=16"
               }
             ],
@@ -1846,7 +1939,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l5-004",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1866,7 +1959,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A school has 480 students. A pie chart shows 37.5% join sports clubs. A bar chart of these members shows football 54, badminton 46 and swimming x. A pictogram shows that 20% of swimming members compete for the school. If 16 swimmers compete, find x. Enter the numerical value only."
+            "text": "A school has 480 students. In a pie chart, sports clubs have a sector of 135°. A bar chart of these members shows football 54, badminton 46 and swimming x. A pictogram of the swimming members who compete has 4 icons, and each icon represents 4 students. What percentage of the swimming members compete? Enter the percentage without the % sign."
           }
         ],
         "marks": 5,
@@ -1875,12 +1968,20 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "80",
-          "canonical_latex": "80",
+          "canonical_answer": "20",
+          "canonical_latex": "20",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
-          "unit": null
+          "unit": {
+            "canonical": "%",
+            "accepted": [
+              "%",
+              "percent",
+              "per cent"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
@@ -1888,7 +1989,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use the pictogram statement to recover the swimming membership."
+                "text": "First find the number of sports club members, then the value of x."
               }
             ]
           },
@@ -1897,7 +1998,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Check that all sports bars sum to the pie-chart subtotal."
+                "text": "Use the bar-chart total to find x, then express the competing swimmers as a percentage of x."
               }
             ]
           }
@@ -1907,8 +2008,24 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "0.20x=16\\Rightarrow x=80"
+                "type": "text",
+                "text": "Sports club members: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{135}{360}\\times480=180"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=180-54-46=80"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -1918,8 +2035,16 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "0.375(480)=180"
+                "type": "text",
+                "text": "Competing swimmers: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4\\times4=16"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -1929,8 +2054,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "54+46+80=180"
+                "type": "inline_math",
+                "latex": "\\frac{16}{80}\\times100=20"
               }
             ],
             "mark_type": "A",
@@ -1959,7 +2084,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l1-020",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1979,7 +2104,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A primary-school poster needs a friendly approximate display of three recycling totals using repeated bottle symbols. Enter the most suitable code only."
+            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A primary-school poster needs a friendly display of three recycling totals that young children can count picture by picture. Enter the most suitable code only."
           }
         ],
         "marks": 1,
@@ -2001,7 +2126,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Think about what young children could count and enjoy on a poster."
               }
             ]
           },
@@ -2010,7 +2135,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The poster uses repeated bottle symbols for approximate totals. Ask which display is built from repeated pictures."
+                "text": "The display is for young children, so counting matters more than exact values. Ask which display is built from repeated pictures."
               }
             ]
           }
@@ -2020,8 +2145,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "A display of repeated small pictures is friendly and easy for young children to count. A table would give exact totals, but it is not picture-based."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=3"
+                "latex": "\\text{Code}=3"
               }
             ],
             "mark_type": "B",
@@ -2050,7 +2179,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-028",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2092,7 +2221,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Ask whether the four device types together make up one whole shipment."
               }
             ]
           },
@@ -2101,7 +2230,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The categories partition one shipment."
+                "text": "The four device types share one shipment. Ask which display shows each type as part of one whole."
               }
             ]
           }
@@ -2111,99 +2240,12 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Best choice code}=5"
-              }
-            ],
-            "mark_type": "A",
-            "mark_value": 2
-          }
-        ]
-      }
-    ],
-    "total_marks": 2,
-    "assets": [],
-    "provenance": {
-      "authoring_method": "original_generated",
-      "style_references": [
-        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
-        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
-        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
-        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
-        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
-      ],
-      "created_at": "2026-10-13T16:00:00+08:00",
-      "authored_by": "OpenAI Codex",
-      "reviewed_at": null,
-      "reviewed_by": null,
-      "review_notes": null
-    }
-  },
-  {
-    "schema_version": "1.0.0",
-    "revision": 2,
-    "stable_key": "s1-l2-029",
-    "bank_key": "g3-sec1-s1-v1",
-    "curriculum_version": "g3_math_v1_draft",
-    "school_level": "secondary_1",
-    "topic_code": "S1",
-    "primary_outcome": "1.3",
-    "title": "Exact bus timetable counts",
-    "difficulty": 2,
-    "calculator_allowed": false,
-    "question_type": "structured",
-    "status": "draft",
-    "stem": [],
-    "parts": [
-      {
-        "position": 1,
-        "label": null,
-        "prompt": [
-          {
-            "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A transport planner needs exact passenger counts at 15 stops and three different times. Enter the most suitable code only."
-          }
-        ],
-        "marks": 2,
-        "primary_outcome": "1.3",
-        "secondary_outcomes": [],
-        "response": {
-          "type": "numeric",
-          "comparison_mode": "exact_numeric",
-          "canonical_answer": "1",
-          "canonical_latex": "1",
-          "accepted_answers": [],
-          "absolute_tolerance": null,
-          "rounding_precision": null,
-          "unit": null
-        },
-        "hints": [
-          {
-            "stage": 1,
-            "content": [
-              {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
-              }
-            ]
-          },
-          {
-            "stage": 2,
-            "content": [
-              {
-                "type": "text",
-                "text": "The planner needs exact counts for every stop at each time. Ask which display shows each exact number so it can be found quickly."
-              }
-            ]
-          }
-        ],
-        "solution": [
-          {
-            "position": 1,
-            "content": [
+                "text": "A pie chart shows what share of the one shipment each device type makes up. A table would give the exact percentages, but it would not show the shares as parts of one whole."
+              },
               {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=1"
+                "latex": "\\text{Code}=5"
               }
             ],
             "mark_type": "B",
@@ -2232,14 +2274,109 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
+    "stable_key": "s1-l2-029",
+    "bank_key": "g3-sec1-s1-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "S1",
+    "primary_outcome": "1.3",
+    "title": "Stop counts on a pie chart",
+    "difficulty": 2,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "A transport planner draws a pie chart of the passenger counts at 15 stops. Use code 1 if a pie chart cannot show named stops, code 2 if its 15 thin sectors would be hard to compare, or code 3 if a pie chart can show only data in time order. Enter the code only."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "1.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "2",
+          "canonical_latex": "2",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Picture a circle divided into 15 sectors."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Fifteen sectors around one circle would be narrow. Think about what that means for a reader comparing the stops."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "With 15 thin sectors, readers would find it hard to compare the stops. A pie chart can label named stops, so that is not the problem."
+              },
+              {
+                "type": "display_math",
+                "latex": "\\text{Code}=2"
+              }
+            ],
+            "mark_type": "B",
+            "mark_value": 2
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-13T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 3,
     "stable_key": "s1-l3-028",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "S1",
     "primary_outcome": "1.3",
-    "title": "Show continuous sensor behaviour",
+    "title": "Reading a pressure sensor",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2252,7 +2389,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A sensor reports pressure every minute and engineers need to see sudden spikes. Enter the most suitable code only."
+            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A sensor reports the pressure every minute for 90 minutes, and engineers need to see sudden spikes. For the reason code, use 1 if 90 bars would be crowded and make the spikes hard to follow, 2 if bar graphs cannot show pressure, or 3 if bar graphs need fewer than ten readings. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
           }
         ],
         "marks": 3,
@@ -2261,8 +2398,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "4",
-          "canonical_latex": "4",
+          "canonical_answer": "41",
+          "canonical_latex": "41",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2274,7 +2411,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Decide what the engineers need to see from one minute to the next."
               }
             ]
           },
@@ -2283,7 +2420,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The pressure is recorded every minute in time order, and engineers want to see sudden jumps. Ask which display shows one value moving from reading to reading."
+                "text": "The readings are in time order, and engineers want to see sudden jumps. Choose the display that shows one value moving from reading to reading, then think about what 90 bars would look like."
               }
             ]
           }
@@ -2293,8 +2430,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "A line graph joins the 90 readings in order, so a sudden spike stands out. Using 90 separate bars would be crowded and would make the spikes hard to follow, so the reason code is 1."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=4"
+                "latex": "\\text{Code}=41"
               }
             ],
             "mark_type": "B",
@@ -2323,7 +2464,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-029",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2343,7 +2484,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A student council divides all 360 volunteer hours among service, sports and arts and wants to stress the split. Enter the most suitable code only."
+            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A student council divides all 360 volunteer hours among service, sports and arts and wants to stress how the total is shared. For the reason code, use 1 if a bar graph cannot show hours, 2 if a bar graph cannot show three categories, or 3 if a bar graph shows the separate amounts but does not stress that they make up one whole. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
           }
         ],
         "marks": 3,
@@ -2352,8 +2493,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "5",
-          "canonical_latex": "5",
+          "canonical_answer": "53",
+          "canonical_latex": "53",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2365,7 +2506,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Ask whether the three amounts together make up one whole."
               }
             ]
           },
@@ -2374,7 +2515,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The three categories form a complete whole."
+                "text": "The three amounts are a complete whole. Choose the display that stresses how the whole is shared, then think about what a bar graph does not show."
               }
             ]
           }
@@ -2384,8 +2525,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "A pie chart stresses how the 360 hours are shared among the three activities. A bar graph shows the separate amounts but does not stress that they make up one whole, so the reason code is 3."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=5"
+                "latex": "\\text{Code}=53"
               }
             ],
             "mark_type": "B",
@@ -2414,14 +2559,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l4-015",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "S1",
     "primary_outcome": "1.3",
-    "title": "Composition with few categories",
+    "title": "Electricity mix for a school",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2434,7 +2579,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A sustainability report has four non-overlapping sources that total 100%. It needs a compact overview, while exact figures will appear separately. Enter the most suitable code only."
+            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A school's electricity comes from solar 40%, wind 30%, gas 20% and other sources 10%. A report needs one compact chart showing each share, and exact figures appear separately. For the reason code, use 1 if a bar graph cannot show percentages, 2 if a bar graph would compare the sources but not show them as parts of one whole, or 3 if a bar graph needs at least five categories. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
           }
         ],
         "marks": 4,
@@ -2443,8 +2588,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "5",
-          "canonical_latex": "5",
+          "canonical_answer": "52",
+          "canonical_latex": "52",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2456,7 +2601,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Ask whether the four sources together make up one whole."
               }
             ]
           },
@@ -2465,7 +2610,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The four sources do not overlap and together make 100%, with exact figures given elsewhere. Ask which display gives a quick overview of shares of one whole."
+                "text": "The four percentages add up to 100%, and exact figures appear separately. Choose the display that gives a quick overview of shares of one whole, then think about what a bar graph does not show."
               }
             ]
           }
@@ -2475,8 +2620,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "A pie chart shows the four sources as parts of the school's whole electricity supply in one compact chart. A bar graph would compare the sources but would not show them as parts of one whole, so the reason code is 2."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=5"
+                "latex": "\\text{Code}=52"
               }
             ],
             "mark_type": "B",
@@ -2505,7 +2654,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l1-021",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2566,6 +2715,10 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Showing only the two months of rising sales leaves out the decline before them, so the period was chosen to support the claim. The axis and labels are not what misleads here."
+              },
+              {
                 "type": "display_math",
                 "latex": "\\text{selective time period}\\Rightarrow 5"
               }
@@ -2596,7 +2749,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l2-030",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2625,7 +2778,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The vertical scale in the figure labels equally spaced ticks. How large is the anomalous interval between neighbouring labels? Enter the numerical value only."
+            "text": "The vertical scale in the figure has equally spaced ticks, but one step between neighbouring labels is larger than the others. By what factor is that step compressed compared with each normal step? Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -2634,8 +2787,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "30",
-          "canonical_latex": "30",
+          "canonical_answer": "3",
+          "canonical_latex": "3",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2647,7 +2800,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract each pair of adjacent labels."
+                "text": "Find the size of a normal step and the size of the odd step."
               }
             ]
           },
@@ -2656,7 +2809,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find the pair whose gap is unlike the others, then subtract."
+                "text": "Divide the size of the odd step by the size of a normal step."
               }
             ]
           }
@@ -2666,12 +2819,31 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
+                "type": "text",
+                "text": "The normal step is 10 and the odd step is "
+              },
+              {
+                "type": "inline_math",
                 "latex": "50-20=30"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
-            "mark_type": "B",
-            "mark_value": 2
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "30\\div10=3"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
           }
         ]
       }
@@ -2682,7 +2854,7 @@
         "asset_key": "s1-l2-030-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l2-030-diagram-r2.svg",
+        "path": "assets/s1-l2-030-diagram-r3.svg",
         "alt_text": "Vertical scale marked 0, 10, 20, 50, 60.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -3012,7 +3184,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-030",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3082,12 +3254,31 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "(2023-2019)-1=3"
+                "type": "text",
+                "text": "The middle interval covers "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2020-2016=4"
+              },
+              {
+                "type": "text",
+                "text": " years, but it is drawn as one square."
               }
             ],
-            "mark_type": "B",
-            "mark_value": 3
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "4-1=3"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
           }
         ]
       }
@@ -3098,8 +3289,8 @@
         "asset_key": "s1-l3-030-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l3-030-diagram-r2.svg",
-        "alt_text": "Horizontal time axis with the years 2018, 2019, 2023 and 2024, each one grid square from the next.",
+        "path": "assets/s1-l3-030-diagram-r3.svg",
+        "alt_text": "Horizontal time axis with the years 2015, 2016, 2020 and 2021, each one grid square from the next.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
           "diagram_kind": "vertical_scale",
@@ -3108,14 +3299,14 @@
           "template": "vertical_scale",
           "inputs": {
             "ticks": [
-              2018,
-              2019,
-              2023,
-              2024
+              2015,
+              2016,
+              2020,
+              2021
             ],
             "title": "Time axis",
             "orientation": "horizontal",
-            "alt_text": "Horizontal time axis with the years 2018, 2019, 2023 and 2024, each one grid square from the next."
+            "alt_text": "Horizontal time axis with the years 2015, 2016, 2020 and 2021, each one grid square from the next."
           },
           "viewbox": [
             720,
@@ -3124,38 +3315,38 @@
           "chart_marks": [],
           "chart_ticks": [
             {
-              "key": "x:2018",
+              "key": "x:2015",
               "axis": "x",
-              "value": "2018",
+              "value": "2015",
               "position": "90",
-              "label": "2018"
+              "label": "2015"
             },
             {
-              "key": "x:2019",
+              "key": "x:2016",
               "axis": "x",
-              "value": "2019",
+              "value": "2016",
               "position": "270",
-              "label": "2019"
+              "label": "2016"
             },
             {
-              "key": "x:2023",
+              "key": "x:2020",
               "axis": "x",
-              "value": "2023",
+              "value": "2020",
               "position": "450",
-              "label": "2023"
+              "label": "2020"
             },
             {
-              "key": "x:2024",
+              "key": "x:2021",
               "axis": "x",
-              "value": "2024",
+              "value": "2021",
               "position": "630",
-              "label": "2024"
+              "label": "2021"
             }
           ],
           "forbidden_visible_labels": [],
           "min_phone_font_px": 12.43
         },
-        "sha256": "8313eefce2046b2cb41439162e47a3fa38049bb1994cd6129dd364f8da2ee34c",
+        "sha256": "434338260b21bd9cd1c1ab6d482daa4dd51216d12861750ea11b4ec5d3b66258",
         "width": 720,
         "height": 480
       }
@@ -3178,7 +3369,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-031",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3229,7 +3420,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The picture grows by 27 while the data grows by 3."
+                "text": "Find how many times the picture grows, then compare it with the true factor of 3."
               }
             ]
           }
@@ -3239,12 +3430,31 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{3^3}{3}=9"
+                "type": "text",
+                "text": "Tripling the diameter multiplies the volume by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3^3=27"
+              },
+              {
+                "type": "text",
+                "text": ", while the value is multiplied by 3."
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "\\frac{27}{3}=9"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -3269,7 +3479,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l4-016",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3298,7 +3508,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "On this timeline, every gap between neighbouring labelled years is drawn 2 cm long. If 2 cm correctly represents one year, how long should the gap that spans more than one year be? Give your answer in cm. Enter the numerical value only."
+            "text": "On this timeline, every gap between neighbouring labelled years is drawn 2 cm long. If 2 cm is meant to represent one year, how many cm longer should the whole timeline be to be drawn to scale? Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -3320,7 +3530,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Work out how many years that gap actually spans."
+                "text": "Work out how long each gap should be, using 2 cm for one year."
               }
             ]
           },
@@ -3329,7 +3539,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply the number of years in that gap by 2 cm."
+                "text": "Add the correct lengths of the three gaps, then subtract the length actually drawn."
               }
             ]
           }
@@ -3339,12 +3549,31 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "(2024-2020)(2)=8"
+                "type": "text",
+                "text": "The gaps cover 1, 4 and 2 years, so they should be 2 cm, 8 cm and 4 cm: 14 cm in total. The drawn timeline is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3\\times2=6"
+              },
+              {
+                "type": "text",
+                "text": " cm."
               }
             ],
-            "mark_type": "B",
-            "mark_value": 4
+            "mark_type": "M",
+            "mark_value": 3
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "14-6=8"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
           }
         ]
       }
@@ -3355,8 +3584,8 @@
         "asset_key": "s1-l4-016-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l4-016-diagram-r2.svg",
-        "alt_text": "Horizontal timeline with the years 2019, 2020, 2024 and 2025 at equal 2 cm gaps.",
+        "path": "assets/s1-l4-016-diagram-r3.svg",
+        "alt_text": "Horizontal timeline with the years 2014, 2015, 2019 and 2021 at equal 2 cm gaps.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
           "diagram_kind": "vertical_scale",
@@ -3365,14 +3594,14 @@
           "template": "vertical_scale",
           "inputs": {
             "ticks": [
+              2014,
+              2015,
               2019,
-              2020,
-              2024,
-              2025
+              2021
             ],
             "title": "Timeline",
             "orientation": "horizontal",
-            "alt_text": "Horizontal timeline with the years 2019, 2020, 2024 and 2025 at equal 2 cm gaps."
+            "alt_text": "Horizontal timeline with the years 2014, 2015, 2019 and 2021 at equal 2 cm gaps."
           },
           "viewbox": [
             720,
@@ -3381,38 +3610,38 @@
           "chart_marks": [],
           "chart_ticks": [
             {
+              "key": "x:2014",
+              "axis": "x",
+              "value": "2014",
+              "position": "90",
+              "label": "2014"
+            },
+            {
+              "key": "x:2015",
+              "axis": "x",
+              "value": "2015",
+              "position": "270",
+              "label": "2015"
+            },
+            {
               "key": "x:2019",
               "axis": "x",
               "value": "2019",
-              "position": "90",
+              "position": "450",
               "label": "2019"
             },
             {
-              "key": "x:2020",
+              "key": "x:2021",
               "axis": "x",
-              "value": "2020",
-              "position": "270",
-              "label": "2020"
-            },
-            {
-              "key": "x:2024",
-              "axis": "x",
-              "value": "2024",
-              "position": "450",
-              "label": "2024"
-            },
-            {
-              "key": "x:2025",
-              "axis": "x",
-              "value": "2025",
+              "value": "2021",
               "position": "630",
-              "label": "2025"
+              "label": "2021"
             }
           ],
           "forbidden_visible_labels": [],
           "min_phone_font_px": 12.43
         },
-        "sha256": "356908e38cc43b74b765e7e8d7606bef8c0af3af905be2dff15bfeb89b0379ea",
+        "sha256": "6c30424d227bd55aae518274b45167d69475902081fe0dead3aeb78c8e3729d8",
         "width": 720,
         "height": 480
       }
@@ -3435,7 +3664,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l5-005",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3455,7 +3684,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A value rises from 120 to 132, a true increase of 10%. A truncated bar chart makes it appear to rise by 60% relative to the first displayed bar height. Find the baseline used by the chart. Enter the numerical value only."
+            "text": "Bars for values 150 and 180 are drawn from the same truncated baseline, so their displayed heights are in the ratio 3 : 5. Find the baseline used by the chart. Enter the numerical value only."
           }
         ],
         "marks": 5,
@@ -3464,8 +3693,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "100",
-          "canonical_latex": "100",
+          "canonical_answer": "105",
+          "canonical_latex": "105",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3477,7 +3706,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The displayed increase is 12 and equals 60% of the first displayed height."
+                "text": "Each displayed height is the value minus the baseline."
               }
             ]
           },
@@ -3486,7 +3715,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Recover the first height, then subtract it from 120."
+                "text": "Write the ratio of the two displayed heights as an equation in the baseline b."
               }
             ]
           }
@@ -3496,8 +3725,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "12=0.60(120-b)"
+                "type": "inline_math",
+                "latex": "\\frac{150-b}{180-b}=\\frac{3}{5}"
               }
             ],
             "mark_type": "M",
@@ -3507,8 +3736,20 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "120-b=20"
+                "type": "inline_math",
+                "latex": "5(150-b)=3(180-b)"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "750-5b=540-3b"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -3518,8 +3759,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "b=100"
+                "type": "inline_math",
+                "latex": "b=105"
               }
             ],
             "mark_type": "A",

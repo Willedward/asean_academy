@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-030",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -70,12 +70,31 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "(2023-2019)-1=3"
+              "type": "text",
+              "text": "The middle interval covers "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2020-2016=4"
+            },
+            {
+              "type": "text",
+              "text": " years, but it is drawn as one square."
             }
           ],
-          "mark_type": "B",
-          "mark_value": 3
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "4-1=3"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
         }
       ]
     }
@@ -86,8 +105,8 @@
       "asset_key": "s1-l3-030-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l3-030-diagram-r2.svg",
-      "alt_text": "Horizontal time axis with the years 2018, 2019, 2023 and 2024, each one grid square from the next.",
+      "path": "assets/s1-l3-030-diagram-r3.svg",
+      "alt_text": "Horizontal time axis with the years 2015, 2016, 2020 and 2021, each one grid square from the next.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "vertical_scale",
@@ -96,14 +115,14 @@
         "template": "vertical_scale",
         "inputs": {
           "ticks": [
-            2018,
-            2019,
-            2023,
-            2024
+            2015,
+            2016,
+            2020,
+            2021
           ],
           "title": "Time axis",
           "orientation": "horizontal",
-          "alt_text": "Horizontal time axis with the years 2018, 2019, 2023 and 2024, each one grid square from the next."
+          "alt_text": "Horizontal time axis with the years 2015, 2016, 2020 and 2021, each one grid square from the next."
         },
         "viewbox": [
           720,
@@ -112,38 +131,38 @@
         "chart_marks": [],
         "chart_ticks": [
           {
-            "key": "x:2018",
+            "key": "x:2015",
             "axis": "x",
-            "value": "2018",
+            "value": "2015",
             "position": "90",
-            "label": "2018"
+            "label": "2015"
           },
           {
-            "key": "x:2019",
+            "key": "x:2016",
             "axis": "x",
-            "value": "2019",
+            "value": "2016",
             "position": "270",
-            "label": "2019"
+            "label": "2016"
           },
           {
-            "key": "x:2023",
+            "key": "x:2020",
             "axis": "x",
-            "value": "2023",
+            "value": "2020",
             "position": "450",
-            "label": "2023"
+            "label": "2020"
           },
           {
-            "key": "x:2024",
+            "key": "x:2021",
             "axis": "x",
-            "value": "2024",
+            "value": "2021",
             "position": "630",
-            "label": "2024"
+            "label": "2021"
           }
         ],
         "forbidden_visible_labels": [],
         "min_phone_font_px": 12.43
       },
-      "sha256": "8313eefce2046b2cb41439162e47a3fa38049bb1994cd6129dd364f8da2ee34c",
+      "sha256": "434338260b21bd9cd1c1ab6d482daa4dd51216d12861750ea11b4ec5d3b66258",
       "width": 720,
       "height": 480
     }
