@@ -99,6 +99,25 @@ describe("MathContent", () => {
     expect(plainText).toBe("Calculate | Then compare | ");
   });
 
+  it("keeps spaced numbers and map scales on one line", () => {
+    const { container } = render(
+      <p>
+        <MathContent
+          blocks={[
+            {
+              type: "text",
+              text: "On a map with scale 1 : 60 000, a 6 250 000 m² farm. Ages 12 and 15.",
+            },
+          ]}
+        />
+      </p>,
+    );
+
+    expect(container.textContent).toBe(
+      "On a map with scale 1\u00a0:\u00a060\u00a0000, a 6\u00a0250\u00a0000 m² farm. Ages 12 and 15.",
+    );
+  });
+
   it("leaves KaTeX's MathML to name the maths", () => {
     const { container } = render(
       <MathContent

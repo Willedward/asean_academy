@@ -74,7 +74,21 @@ function textBlock(blocks: ContentBlock[], index: number, text: string) {
   if (previous?.type === "inline_math")
     start = touchingTrail(blocks[index]).length;
   if (next?.type === "inline_math") end -= touchingLead(blocks[index]).length;
-  return textWithSeparator(previous, start < end ? text.slice(start, end) : "");
+  return keepNumbersTogether(
+    textWithSeparator(previous, start < end ? text.slice(start, end) : ""),
+  );
+}
+
+/**
+ * Plain-text numbers use spaces between digit groups ("60 000") and around ratio
+ * colons ("1 : 50 000"). A normal space lets the line break inside the number,
+ * showing "1 : 60" at the end of one line and "000" on the next, so those spaces
+ * become no-break spaces. They look the same.
+ */
+function keepNumbersTogether(text: string) {
+  return text
+    .replace(/(\d) (?=\d{3}(?!\d))/g, "$1\u00a0")
+    .replace(/(\d) : (?=\d)/g, "$1\u00a0:\u00a0");
 }
 
 /**
