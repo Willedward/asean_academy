@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n4-l4-016",
   "bank_key": "g3-sec1-n4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A train is 180 m long and passes completely through a 270 m platform in 30 seconds. Assuming constant speed, find the train's speed in kilometres per hour."
+          "text": "A train is 180 m long and passes completely through a 270 m platform in 30 seconds. (It passes completely when the front has entered the platform and the rear has left it.) Assuming constant speed, find the train's speed in kilometres per hour."
         }
       ],
       "marks": 4,
@@ -69,7 +69,7 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "\\text{Distance travelled}=180+270=450\\text{ m}"
             }
           ],
@@ -80,7 +80,7 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "\\text{Speed}=\\frac{450}{30}=15\\text{ m/s}"
             }
           ],
@@ -91,8 +91,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "15\\times3.6=54\\text{ km/h}"
+              "type": "inline_math",
+              "latex": "15\\times3.6"
             }
           ],
           "mark_type": "M",
@@ -102,8 +102,8 @@
           "position": 4,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\therefore\\ 54\\text{ km/h}"
+              "type": "inline_math",
+              "latex": "=54\\text{ km/h}"
             }
           ],
           "mark_type": "A",
