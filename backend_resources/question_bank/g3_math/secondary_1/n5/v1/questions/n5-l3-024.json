@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-l3-024",
   "bank_key": "g3-sec1-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "There are q counters. After r pupils each take s counters, write the number of counters remaining."
+          "text": "There are q counters. After r students each take s counters, write the number of counters remaining."
         }
       ],
       "marks": 3,
@@ -46,7 +46,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Represent each described number before combining them."
+              "text": "Write an expression for each quantity described, then combine them."
             }
           ]
         },
@@ -55,7 +55,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Check the place value or spacing between consecutive integers carefully."
+              "text": "Work out how many counters are taken altogether."
             }
           ]
         }
@@ -65,8 +65,24 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "r\\text{ pupils take }rs"
+              "type": "text",
+              "text": "The "
+            },
+            {
+              "type": "inline_math",
+              "latex": "r"
+            },
+            {
+              "type": "text",
+              "text": " students take "
+            },
+            {
+              "type": "inline_math",
+              "latex": "rs"
+            },
+            {
+              "type": "text",
+              "text": " counters."
             }
           ],
           "mark_type": "M",
@@ -76,8 +92,16 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "q-rs"
+              "type": "text",
+              "text": "Subtract the counters taken from the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "q"
+            },
+            {
+              "type": "text",
+              "text": " counters."
             }
           ],
           "mark_type": "M",
@@ -87,7 +111,7 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "q-rs"
             }
           ],
