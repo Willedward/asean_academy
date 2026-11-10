@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-g4",
   "status": "draft",
@@ -11,7 +11,7 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
   },
   "stable_key": "g4-lesson-03",
   "position": 3,
@@ -101,14 +101,14 @@
       "verification_note": "The rise is shorter than the horizontal run because the angle is less than 45°."
     },
     {
-      "stable_key": "g4-43-example-angle",
+      "stable_key": "g4-43-example-hypotenuse",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example: calculate an angle",
+      "title": "Worked example: use sine when the hypotenuse is given",
       "prompt": [
         {
           "type": "text",
-          "text": "A right triangle has opposite side 9 cm and adjacent side 12 cm relative to θ. Find θ correct to 1 decimal place."
+          "text": "A 6 m ladder leans against a vertical wall and makes an angle of 70° with the horizontal ground. Find the height the ladder reaches up the wall, correct to 2 decimal places."
         }
       ],
       "steps": [
@@ -116,8 +116,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The ladder is the hypotenuse, 6 m. The height up the wall is opposite the 70° angle. Opposite and hypotenuse are in the sine ratio."
+            },
+            {
               "type": "display_math",
-              "latex": "\\tan\\theta=\\frac{9}{12}=0.75"
+              "latex": "\\sin70^\\circ=\\frac{h}{6}"
             }
           ]
         },
@@ -126,28 +130,65 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\theta=\\tan^{-1}(0.75)=36.9^\\circ"
+              "latex": "h=6\\sin70^\\circ=5.638\\ldots=5.64\\text{ m}"
             }
           ]
         }
       ],
-      "verification_note": "Check that the calculator is in degree mode and that tan 36.9° is approximately 0.75."
+      "verification_note": "The height is less than the 6 m ladder, as every shorter side must be. Tangent would not work here, because the adjacent side is not known."
+    },
+    {
+      "stable_key": "g4-43-example-angle",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: calculate an angle with inverse cosine",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A 7 m ladder leans against a vertical wall. Its foot is 2 m from the wall on horizontal ground. Find the angle θ between the ladder and the ground, correct to 1 decimal place."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Relative to θ, the 2 m distance along the ground is adjacent and the 7 m ladder is the hypotenuse, so use cosine."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\cos\\theta=\\frac{2}{7}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\theta=\\cos^{-1}\\left(\\frac{2}{7}\\right)=73.398\\ldots^\\circ=73.4^\\circ"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Check in degree mode: cos 73.4° ≈ 0.286, and 2 ÷ 7 ≈ 0.286. The angle is steep because the foot of the ladder is close to the wall."
     },
     {
       "stable_key": "g4-43-elevation",
-      "position": 5,
+      "position": 6,
       "type": "explanation",
       "title": "Angles of elevation and depression",
       "blocks": [
         {
           "type": "text",
-          "text": "An angle of elevation is measured upward from a horizontal line; an angle of depression is measured downward from a horizontal line. Parallel horizontal lines make the corresponding acute angles equal. Add observer or instrument height only after calculating the vertical difference from eye level."
+          "text": "An angle of elevation is measured upward from a horizontal line; an angle of depression is measured downward from a horizontal line. The horizontal lines through the two points are parallel, so the angle of elevation from the lower point equals the angle of depression from the higher point: they are alternate angles. Add observer or instrument height only after calculating the vertical difference from eye level."
         }
       ]
     },
     {
       "stable_key": "g4-43-precision",
-      "position": 6,
+      "position": 7,
       "type": "explanation",
       "title": "Calculator and precision checks",
       "blocks": [
@@ -163,20 +204,20 @@
     },
     {
       "stable_key": "g4-43-recall",
-      "position": 7,
+      "position": 8,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "Relative to angle θ, the opposite side is 5 and the adjacent side is 5. Enter θ in degrees."
+          "text": "In a right-angled triangle, the hypotenuse is 10 cm and one acute angle θ is 30°. Enter the length of the side opposite θ, in cm."
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "45",
-        "canonical_latex": "45",
+        "canonical_answer": "5",
+        "canonical_latex": "5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -185,13 +226,13 @@
       "feedback": [
         {
           "type": "text",
-          "text": "tan θ = 5/5 = 1, so θ = tan⁻¹(1) = 45°."
+          "text": "The hypotenuse is known and the opposite side is needed, so use sine: opposite = 10 sin 30° = 10 × 0.5 = 5 cm."
         }
       ]
     },
     {
       "stable_key": "g4-lesson-03-summary",
-      "position": 8,
+      "position": 9,
       "type": "summary",
       "title": "Lesson checklist",
       "blocks": [
@@ -211,16 +252,144 @@
       "asset_key": "g4-lesson-03-trigonometry",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-lesson-03-trigonometry.svg",
-      "alt_text": "A right triangle showing opposite, adjacent and hypotenuse relative to theta alongside sine, cosine and tangent ratios.",
+      "path": "assets/g4-lesson-03-trigonometry-r2.svg",
+      "alt_text": "Right-angled triangle with the acute angle θ marked at the base. The side opposite θ is labelled opposite, the side next to θ is labelled adjacent and the side opposite the right angle is labelled hypotenuse, with sin θ = opposite ÷ hypotenuse, cos θ = adjacent ÷ hypotenuse and tan θ = opposite ÷ adjacent.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "trigonometric_ratios",
-        "lesson_key": "g4-lesson-03"
+        "renderer": "nextscholar-right-triangle-svg-v2",
+        "diagram_kind": "right_triangle",
+        "lesson_key": "g4-lesson-03",
+        "template": "lesson_trigonometry",
+        "inputs": {
+          "legs": [
+            3,
+            4
+          ]
+        },
+        "not_to_scale": false,
+        "dimensions": {
+          "reference_angle": "θ"
+        },
+        "forbidden_visible_labels": [],
+        "unknowns": [],
+        "task": "teaching",
+        "drawn_to_scale": true,
+        "viewbox": [
+          600.0,
+          461.0
+        ],
+        "points": {
+          "A": [
+            150.0,
+            281.0
+          ],
+          "B": [
+            150.0,
+            56.0
+          ],
+          "C": [
+            450.0,
+            281.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_size": 22
+          }
+        ],
+        "angles": [
+          {
+            "vertex": "C",
+            "arms": [
+              "A",
+              "B"
+            ],
+            "marker_key": "angle-C",
+            "drawn_degrees": 36.87,
+            "degrees": 36.87
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-C",
+            "center": [
+              450.0,
+              281.0
+            ],
+            "radius": 52.0,
+            "start_ray_point": [
+              150.0,
+              281.0
+            ],
+            "end_ray_point": [
+              150.0,
+              56.0
+            ],
+            "large_arc": 0,
+            "sweep": 1
+          }
+        ],
+        "labels": [
+          {
+            "text": "θ",
+            "target": "angle:C"
+          },
+          {
+            "text": "opposite",
+            "target": "segment:AB"
+          },
+          {
+            "text": "adjacent",
+            "target": "segment:AC"
+          },
+          {
+            "text": "hypotenuse",
+            "target": "segment:BC"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AB",
+              "AC"
+            ],
+            "value": 0.75,
+            "tolerance": 0.02
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "e252a2dea54b4b06ac01ec437a533a75524cd216cd0051b3b13dbd222bdca4fd",
-      "width": 940,
-      "height": 470
+      "sha256": "f8a25504a00c01f804e9118d8a9f7598ce48f5ca3e6172417df1fbf59c71d4c2",
+      "width": 600,
+      "height": 461
     }
   ]
 }
