@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l4-004",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G1",
   "primary_outcome": "1.6",
-  "title": "Large polygon interior sum",
+  "title": "Polygon with one angle left out",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A convex polygon has interior-angle sum 1980°. Find the number of sides."
+          "text": "The sum of all but one of the interior angles of a convex polygon is 1900°. Find the number of sides of the polygon."
         }
       ],
       "marks": 3,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the general interior-sum formula."
+              "text": "The full interior-angle sum is a multiple of 180°, and it is more than 1900° by less than 180°."
             }
           ]
         },
@@ -51,15 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
+              "text": "Use "
             },
             {
               "type": "inline_math",
-              "latex": "(n-2)180=1980"
+              "latex": "(n-2)180"
             },
             {
               "type": "text",
-              "text": "."
+              "text": " for the full sum and find the multiple of 180° that fits."
             }
           ]
         }
@@ -69,8 +69,16 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "(n-2)180=1980"
+              "type": "inline_math",
+              "latex": "(n-2)180=1900+a"
+            },
+            {
+              "type": "text",
+              "text": ", where "
+            },
+            {
+              "type": "inline_math",
+              "latex": "0<a<180"
             }
           ],
           "mark_type": "M",
@@ -80,7 +88,23 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
+              "latex": "1980=11\\times180"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "a=80"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
               "latex": "n-2=11"
             }
           ],
@@ -91,7 +115,7 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "n=13"
             }
           ],

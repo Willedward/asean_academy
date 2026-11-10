@@ -383,28 +383,19 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "g1-l3-001",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G1",
     "primary_outcome": "1.1",
-    "title": "Angles in a two-to-three ratio",
+    "title": "Angle type from a ratio",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [
-      {
-        "type": "text",
-        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
-      },
-      {
-        "type": "asset_ref",
-        "asset_key": "g1-l3-001-diagram"
-      }
-    ],
+    "stem": [],
     "parts": [
       {
         "position": 1,
@@ -412,7 +403,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two adjacent angles form a straight angle and are in the ratio 2:3. Find the larger angle in degrees."
+            "text": "Two adjacent angles form a straight angle and are in the ratio 2:7. Use acute = 1, right = 2, obtuse = 3 and reflex = 4. Enter the code of the larger angle."
           }
         ],
         "marks": 3,
@@ -421,8 +412,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "108",
-          "canonical_latex": "108",
+          "canonical_answer": "3",
+          "canonical_latex": "3",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -443,7 +434,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Share 180° into 5 equal ratio parts."
+                "text": "Share 180° into 9 equal ratio parts to find the larger angle."
               }
             ]
           }
@@ -453,8 +444,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2+3=5"
+                "type": "inline_math",
+                "latex": "2+7=9"
               }
             ],
             "mark_type": "M",
@@ -464,8 +455,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "180^\\circ\\div5=36^\\circ"
+                "type": "inline_math",
+                "latex": "180^\\circ\\div9=20^\\circ"
               }
             ],
             "mark_type": "M",
@@ -475,8 +466,16 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "3(36^\\circ)=108^\\circ"
+                "type": "text",
+                "text": "Larger angle "
+              },
+              {
+                "type": "inline_math",
+                "latex": "=7(20^\\circ)=140^\\circ"
+              },
+              {
+                "type": "text",
+                "text": ", which is obtuse, so the code is 3."
               }
             ],
             "mark_type": "A",
@@ -486,173 +485,7 @@
       }
     ],
     "total_marks": 3,
-    "assets": [
-      {
-        "asset_key": "g1-l3-001-diagram",
-        "kind": "geometry",
-        "format": "svg",
-        "path": "assets/g1-l3-001-diagram-r4.svg",
-        "alt_text": "A straight line with one ray from a point on it. The two adjacent angles are marked 2k and 3k, where k is the size of one ratio part. Not drawn to scale.",
-        "generation_spec": {
-          "renderer": "nextscholar-plane-geometry-svg-v1",
-          "diagram_kind": "angles_on_line",
-          "question_key": "g1-l3-001",
-          "outcome": "1.1",
-          "template": "straight_line_ratio",
-          "inputs": {
-            "ratio": [
-              2,
-              3
-            ]
-          },
-          "not_to_scale": true,
-          "dimensions": {
-            "ratio": [
-              2,
-              3
-            ],
-            "angle_sum": 180
-          },
-          "forbidden_visible_labels": [
-            "108",
-            "72",
-            "36"
-          ],
-          "unknowns": [],
-          "viewbox": [
-            600.0,
-            325.0
-          ],
-          "points": {
-            "L": [
-              60.0,
-              250.7
-            ],
-            "O": [
-              300.0,
-              250.7
-            ],
-            "R": [
-              540.0,
-              250.7
-            ],
-            "T": [
-              368.46,
-              40.0
-            ]
-          },
-          "segments": [
-            {
-              "key": "LR",
-              "from": "L",
-              "to": "R",
-              "hidden": false,
-              "role": "edge"
-            },
-            {
-              "key": "OT",
-              "from": "O",
-              "to": "T",
-              "hidden": false,
-              "role": "edge"
-            }
-          ],
-          "right_angles": [],
-          "angles": [
-            {
-              "vertex": "O",
-              "arms": [
-                "R",
-                "T"
-              ],
-              "marker_key": "angle-first",
-              "drawn_degrees": 72.0,
-              "degrees": 72.0
-            },
-            {
-              "vertex": "O",
-              "arms": [
-                "T",
-                "L"
-              ],
-              "marker_key": "angle-second",
-              "drawn_degrees": 108.0,
-              "degrees": 108.0
-            }
-          ],
-          "angle_markers": [
-            {
-              "marker_key": "angle-first",
-              "center": [
-                300.0,
-                250.7
-              ],
-              "radius": 56.0,
-              "start_ray_point": [
-                540.0,
-                250.7
-              ],
-              "end_ray_point": [
-                368.46,
-                40.0
-              ],
-              "large_arc": 0,
-              "sweep": 0
-            },
-            {
-              "marker_key": "angle-second",
-              "center": [
-                300.0,
-                250.7
-              ],
-              "radius": 40.0,
-              "start_ray_point": [
-                368.46,
-                40.0
-              ],
-              "end_ray_point": [
-                60.0,
-                250.7
-              ],
-              "large_arc": 0,
-              "sweep": 0
-            }
-          ],
-          "labels": [
-            {
-              "text": "2k",
-              "target": "angle:angle-first"
-            },
-            {
-              "text": "3k",
-              "target": "angle:angle-second"
-            }
-          ],
-          "relationships": [
-            {
-              "type": "collinear",
-              "points": [
-                "L",
-                "O",
-                "R"
-              ]
-            },
-            {
-              "type": "angle_sum",
-              "angles": [
-                "angle-first",
-                "angle-second"
-              ],
-              "value": 180
-            }
-          ],
-          "min_phone_font_px": 13.13
-        },
-        "sha256": "00be94686be34bddb173559cccf5afde906a6f826be52661818d437aabe3031a",
-        "width": 600,
-        "height": 325
-      }
-    ],
+    "assets": [],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1483,7 +1316,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g1-l4-002",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1507,7 +1340,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "(7x-13)^\\circ"
+            "latex": "(7x-20)^\\circ"
           },
           {
             "type": "text",
@@ -1515,11 +1348,11 @@
           },
           {
             "type": "inline_math",
-            "latex": "(5x+27)^\\circ"
+            "latex": "(5x+24)^\\circ"
           },
           {
             "type": "text",
-            "text": ". Find the acute angle formed by the two lines."
+            "text": ". Find the acute angle formed by the two lines, in degrees."
           }
         ],
         "marks": 3,
@@ -1528,8 +1361,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "53",
-          "canonical_latex": "53",
+          "canonical_answer": "46",
+          "canonical_latex": "46",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1541,7 +1374,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "First equate the opposite obtuse angles."
+                "text": "Equate the vertically opposite angles."
               }
             ]
           },
@@ -1550,7 +1383,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The acute angle is supplementary to the common obtuse angle."
+                "text": "Find the common angle, then use the straight-line fact to find the other angle."
               }
             ]
           }
@@ -1560,8 +1393,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "7x-13=5x+27"
+                "type": "inline_math",
+                "latex": "7x-20=5x+24"
               }
             ],
             "mark_type": "M",
@@ -1571,8 +1404,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=20\\Rightarrow7x-13=127"
+                "type": "inline_math",
+                "latex": "x=22\\Rightarrow7x-20=134"
               }
             ],
             "mark_type": "M",
@@ -1582,8 +1415,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "180^\\circ-127^\\circ=53^\\circ"
+                "type": "inline_math",
+                "latex": "180^\\circ-134^\\circ=46^\\circ"
               }
             ],
             "mark_type": "A",
@@ -2037,7 +1870,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g1-l3-003",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2066,7 +1899,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Co-interior angles between parallel lines are in the ratio 2:3. Find the larger angle in degrees."
+            "text": "Co-interior angles between parallel lines are in the ratio 4:5. Find the larger angle in degrees."
           }
         ],
         "marks": 2,
@@ -2075,8 +1908,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "108",
-          "canonical_latex": "108",
+          "canonical_answer": "100",
+          "canonical_latex": "100",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2097,7 +1930,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Divide 180° into five ratio parts."
+                "text": "Divide 180° into nine ratio parts."
               }
             ]
           }
@@ -2107,8 +1940,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "180^\\circ\\div5=36^\\circ"
+                "type": "inline_math",
+                "latex": "180^\\circ\\div9=20^\\circ"
               }
             ],
             "mark_type": "M",
@@ -2118,8 +1951,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "3(36^\\circ)=108^\\circ"
+                "type": "inline_math",
+                "latex": "5(20^\\circ)=100^\\circ"
               }
             ],
             "mark_type": "A",
@@ -2134,8 +1967,8 @@
         "asset_key": "g1-l3-003-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g1-l3-003-diagram-r3.svg",
-        "alt_text": "Two parallel horizontal lines, shown with arrow marks, cut by one transversal. The two angles between the lines on the right of the transversal are marked 2k at the lower line and 3k at the upper line, where k is the size of one ratio part. Not drawn to scale.",
+        "path": "assets/g1-l3-003-diagram-r4.svg",
+        "alt_text": "Two parallel horizontal lines, shown with arrow marks, cut by one transversal. The two angles between the lines on the right of the transversal are marked 4k at the lower line and 5k at the upper line, where k is the size of one ratio part. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-plane-geometry-svg-v1",
           "diagram_kind": "parallel_lines",
@@ -2144,22 +1977,22 @@
           "template": "parallel_cointerior_ratio",
           "inputs": {
             "ratio": [
-              2,
-              3
+              4,
+              5
             ]
           },
           "not_to_scale": true,
           "dimensions": {
             "ratio": [
-              2,
-              3
+              4,
+              5
             ],
             "angle_sum": 180
           },
           "forbidden_visible_labels": [
-            "108",
-            "72",
-            "36"
+            "100",
+            "80",
+            "20"
           ],
           "unknowns": [],
           "parallel_marks": [
@@ -2172,39 +2005,39 @@
           ],
           "viewbox": [
             600.0,
-            377.0
+            392.0
           ],
           "points": {
             "L1": [
               65.0,
-              83.24
+              86.2
             ],
             "L2": [
               535.0,
-              83.24
+              86.2
             ],
             "M1": [
               65.0,
-              249.62
+              261.81
             ],
             "M2": [
               535.0,
-              249.62
+              261.81
             ],
             "D": [
-              256.33,
-              249.62
+              266.96,
+              261.81
             ],
             "U": [
-              310.39,
-              83.24
+              297.92,
+              86.2
             ],
             "T1": [
-              239.03,
-              302.86
+              257.05,
+              318.01
             ],
             "T2": [
-              327.69,
+              307.83,
               30.0
             ]
           },
@@ -2240,8 +2073,8 @@
                 "U"
               ],
               "marker_key": "angle-first",
-              "drawn_degrees": 72.0,
-              "degrees": 72.0
+              "drawn_degrees": 80.0,
+              "degrees": 80.0
             },
             {
               "vertex": "U",
@@ -2250,25 +2083,25 @@
                 "L2"
               ],
               "marker_key": "angle-second",
-              "drawn_degrees": 108.0,
-              "degrees": 108.0
+              "drawn_degrees": 100.0,
+              "degrees": 100.0
             }
           ],
           "angle_markers": [
             {
               "marker_key": "angle-first",
               "center": [
-                256.33,
-                249.62
+                266.96,
+                261.81
               ],
               "radius": 46.0,
               "start_ray_point": [
                 535.0,
-                249.62
+                261.81
               ],
               "end_ray_point": [
-                310.39,
-                83.24
+                297.92,
+                86.2
               ],
               "large_arc": 0,
               "sweep": 0
@@ -2276,17 +2109,17 @@
             {
               "marker_key": "angle-second",
               "center": [
-                310.39,
-                83.24
+                297.92,
+                86.2
               ],
               "radius": 46.0,
               "start_ray_point": [
-                256.33,
-                249.62
+                266.96,
+                261.81
               ],
               "end_ray_point": [
                 535.0,
-                83.24
+                86.2
               ],
               "large_arc": 0,
               "sweep": 0
@@ -2294,11 +2127,11 @@
           ],
           "labels": [
             {
-              "text": "2k",
+              "text": "4k",
               "target": "angle:angle-first"
             },
             {
-              "text": "3k",
+              "text": "5k",
               "target": "angle:angle-second"
             }
           ],
@@ -2323,9 +2156,9 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "d6166ea1cd281b314cf459b970f4be6b45e8f5de8afa433f6639e04d9b7e9d2b",
+        "sha256": "89eb155fa198f59dd9c3a4373b24d9b13894d5fb270794f248a018c28ead5725",
         "width": 600,
-        "height": 377
+        "height": 392
       }
     ],
     "provenance": {
@@ -2346,7 +2179,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g1-l5-001",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2375,7 +2208,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two parallel horizontal lines are crossed by two transversals that meet between them. One transversal makes an acute angle of 38° with the parallels and the other makes an acute angle of 67° on the opposite side. Find the angle between the upward rays of the transversals."
+            "text": "Two parallel horizontal lines are crossed by two transversals that meet between them. One transversal makes an acute angle of 38° with the parallels and the other makes an acute angle of 67° on the opposite side. Find, in degrees, the angle between the upward rays of the transversals."
           }
         ],
         "marks": 3,
@@ -2397,7 +2230,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Transfer both acute inclinations to one horizontal line using corresponding angles."
+                "text": "Draw a line through the meeting point, parallel to the given lines."
               }
             ]
           },
@@ -2406,7 +2239,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The three angles across the upper straight line total 180°."
+                "text": "Use alternate angles at the meeting point, then the fact that the three angles on the new line lie on a straight line."
               }
             ]
           }
@@ -2416,8 +2249,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "38^\\circ+x+67^\\circ=180^\\circ"
+                "type": "text",
+                "text": "Draw a line through P parallel to the given lines. Alternate angles give 38° and 67° at P, on either side of x."
               }
             ],
             "mark_type": "M",
@@ -2427,8 +2260,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=180^\\circ-105^\\circ"
+                "type": "inline_math",
+                "latex": "38^\\circ+x+67^\\circ=180^\\circ"
               }
             ],
             "mark_type": "M",
@@ -2438,7 +2271,7 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "x=75^\\circ"
               }
             ],
@@ -2454,7 +2287,7 @@
         "asset_key": "g1-l5-001-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g1-l5-001-diagram-r3.svg",
+        "path": "assets/g1-l5-001-diagram-r4.svg",
         "alt_text": "Two parallel horizontal lines, shown with arrow marks, and two transversals that cross at point P between them. Going up from P, one transversal reaches the upper line to the left, making an angle marked 38° with it, and the other reaches it to the right, making an angle marked 67°. The angle at P between the two upward rays is marked x. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-plane-geometry-svg-v1",
@@ -3149,7 +2982,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g1-l3-005",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3178,7 +3011,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The exterior angle at the vertex of an isosceles triangle is 124°. Find either equal base angle in degrees."
+            "text": "The exterior angle at the apex (the vertex where the two equal sides meet) of an isosceles triangle is 124°. Find either equal base angle in degrees."
           }
         ],
         "marks": 3,
@@ -3257,7 +3090,7 @@
         "asset_key": "g1-l3-005-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g1-l3-005-diagram-r2.svg",
+        "path": "assets/g1-l3-005-diagram-r3.svg",
         "alt_text": "An isosceles triangle with its two equal sides shown by tick marks. One equal side is extended beyond the apex, and the exterior angle between this extension and the other equal side is marked 124°. Each base angle is marked x. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-plane-geometry-svg-v1",
@@ -3895,14 +3728,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g1-l4-003",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G1",
     "primary_outcome": "1.5",
-    "title": "Perpendicular diagonal in a parallelogram",
+    "title": "Exactly one pair of parallel sides",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3915,7 +3748,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Using codes 1–6, a non-square parallelogram has perpendicular diagonals. Enter its most specific code."
+            "text": "Use this code: square = 1, non-square rectangle = 2, non-square rhombus = 3, other parallelogram = 4, kite = 5, trapezium = 6 (exactly one pair of parallel sides). A quadrilateral has exactly one pair of parallel sides and its diagonals are perpendicular. Enter its most specific code."
           }
         ],
         "marks": 2,
@@ -3924,8 +3757,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "3",
-          "canonical_latex": "3",
+          "canonical_answer": "6",
+          "canonical_latex": "6",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3937,7 +3770,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "A parallelogram's diagonals already bisect each other."
+                "text": "Count the pairs of parallel sides in each listed shape."
               }
             ]
           },
@@ -3946,7 +3779,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Adding perpendicularity makes it a rhombus; non-square removes code 1."
+                "text": "Compare the number of parallel pairs in each listed shape with the condition given."
               }
             ]
           }
@@ -3956,8 +3789,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{parallelogram}+\\text{perpendicular diagonals}=\\text{rhombus}"
+                "type": "text",
+                "text": "Exactly one pair of parallel sides fits only the trapezium. The perpendicular diagonals do not change this."
               }
             ],
             "mark_type": "M",
@@ -3967,8 +3800,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{code}=3"
+                "type": "inline_math",
+                "latex": "\\text{code}=6"
               }
             ],
             "mark_type": "A",
@@ -3997,7 +3830,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "g1-l1-005",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4048,7 +3881,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "How many triangles can a triangle be split into?"
+                "text": "Think about how the angles of a triangle fit together."
               }
             ]
           },
@@ -4083,7 +3916,7 @@
         "asset_key": "g1-l1-005-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g1-l1-005-diagram-r4.svg",
+        "path": "assets/g1-l1-005-diagram-r5.svg",
         "alt_text": "A triangle with its three interior angles marked a, b and c. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-plane-geometry-svg-v1",
@@ -4501,14 +4334,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g1-l4-004",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G1",
     "primary_outcome": "1.6",
-    "title": "Large polygon interior sum",
+    "title": "Polygon with one angle left out",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -4521,7 +4354,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A convex polygon has interior-angle sum 1980°. Find the number of sides."
+            "text": "The sum of all but one of the interior angles of a convex polygon is 1900°. Find the number of sides of the polygon."
           }
         ],
         "marks": 3,
@@ -4543,7 +4376,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use the general interior-sum formula."
+                "text": "The full interior-angle sum is a multiple of 180°, and it is more than 1900° by less than 180°."
               }
             ]
           },
@@ -4552,15 +4385,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
+                "text": "Use "
               },
               {
                 "type": "inline_math",
-                "latex": "(n-2)180=1980"
+                "latex": "(n-2)180"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": " for the full sum and find the multiple of 180° that fits."
               }
             ]
           }
@@ -4570,8 +4403,16 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "(n-2)180=1980"
+                "type": "inline_math",
+                "latex": "(n-2)180=1900+a"
+              },
+              {
+                "type": "text",
+                "text": ", where "
+              },
+              {
+                "type": "inline_math",
+                "latex": "0<a<180"
               }
             ],
             "mark_type": "M",
@@ -4581,7 +4422,23 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
+                "latex": "1980=11\\times180"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a=80"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
                 "latex": "n-2=11"
               }
             ],
@@ -4592,7 +4449,7 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "n=13"
               }
             ],
@@ -4924,7 +4781,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "g1-l2-007",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4953,7 +4810,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Equal-radius arcs construct an equilateral triangle on a ray. What angle is formed at the ray's endpoint, in degrees?"
+            "text": "Equal-radius arcs construct an equilateral triangle on a segment AB drawn along a ray from A. What angle is formed at A, in degrees?"
           }
         ],
         "marks": 1,
@@ -5010,7 +4867,7 @@
         "asset_key": "g1-l2-007-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g1-l2-007-diagram-r4.svg",
+        "path": "assets/g1-l2-007-diagram-r5.svg",
         "alt_text": "A ray from endpoint A passes through B. Compass arcs of equal radius centred at A and B meet at C. The sides AB, BC and CA of the triangle have the same tick mark. The angle at A between the ray and AC is marked x. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-plane-geometry-svg-v1",

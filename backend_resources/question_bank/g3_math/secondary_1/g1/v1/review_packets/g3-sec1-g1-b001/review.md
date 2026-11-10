@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l3-001 — Angles in a two-to-three ratio
+## g1-l3-001 — Angle type from a ratio
 
 [Open this question in the HTML preview](index.html#g1-l3-001)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l4-003 — Perpendicular diagonal in a parallelogram
+## g1-l4-003 — Exactly one pair of parallel sides
 
 [Open this question in the HTML preview](index.html#g1-l4-003)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l4-004 — Large polygon interior sum
+## g1-l4-004 — Polygon with one angle left out
 
 [Open this question in the HTML preview](index.html#g1-l4-004)
 

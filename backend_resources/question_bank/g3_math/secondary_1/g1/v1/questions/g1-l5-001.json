@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g1-l5-001",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two parallel horizontal lines are crossed by two transversals that meet between them. One transversal makes an acute angle of 38° with the parallels and the other makes an acute angle of 67° on the opposite side. Find the angle between the upward rays of the transversals."
+          "text": "Two parallel horizontal lines are crossed by two transversals that meet between them. One transversal makes an acute angle of 38° with the parallels and the other makes an acute angle of 67° on the opposite side. Find, in degrees, the angle between the upward rays of the transversals."
         }
       ],
       "marks": 3,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Transfer both acute inclinations to one horizontal line using corresponding angles."
+              "text": "Draw a line through the meeting point, parallel to the given lines."
             }
           ]
         },
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The three angles across the upper straight line total 180°."
+              "text": "Use alternate angles at the meeting point, then the fact that the three angles on the new line lie on a straight line."
             }
           ]
         }
@@ -70,8 +70,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "38^\\circ+x+67^\\circ=180^\\circ"
+              "type": "text",
+              "text": "Draw a line through P parallel to the given lines. Alternate angles give 38° and 67° at P, on either side of x."
             }
           ],
           "mark_type": "M",
@@ -81,8 +81,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=180^\\circ-105^\\circ"
+              "type": "inline_math",
+              "latex": "38^\\circ+x+67^\\circ=180^\\circ"
             }
           ],
           "mark_type": "M",
@@ -92,7 +92,7 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "x=75^\\circ"
             }
           ],
@@ -108,7 +108,7 @@
       "asset_key": "g1-l5-001-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l5-001-diagram-r3.svg",
+      "path": "assets/g1-l5-001-diagram-r4.svg",
       "alt_text": "Two parallel horizontal lines, shown with arrow marks, and two transversals that cross at point P between them. Going up from P, one transversal reaches the upper line to the left, making an angle marked 38° with it, and the other reaches it to the right, making an angle marked 67°. The angle at P between the two upward rays is marked x. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-plane-geometry-svg-v1",
