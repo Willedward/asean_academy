@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l4-510",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Safety inspectors noted restricted clearance for equipment while preparing a replacement frame. Two shorter sides of a triangular frame for the laboratory equipment stand are 12 cm and 16 cm. The angle between them must be 90°. Find the required longest side x in centimetres. Enter the numerical value only."
+          "text": "Steel bars are welded together for a laboratory equipment stand. The shorter sides of a triangular frame in the stand are 36 cm and 77 cm. The angle between them must be 90°. Find the length of the third bar x in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "20",
-        "canonical_latex": "20",
+        "canonical_answer": "85",
+        "canonical_latex": "85",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -64,7 +64,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "x^{2}=12^{2}+16^{2}"
+              "latex": "x^{2}=36^{2}+77^{2}"
             },
             {
               "type": "text",
@@ -79,22 +79,44 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
-            },
-            {
-              "type": "display_math",
-              "latex": "x^2=12^2+16^2\\Rightarrow x=20"
+              "text": "The 90° angle lies between the two shorter sides, so the longest side x is the hypotenuse."
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "By Pythagoras’ theorem,"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{20}"
+              "latex": "x^2=36^2+77^2=1296+5929=7225"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "x=\\sqrt{7225}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "x=85"
             }
           ],
           "mark_type": "A",
@@ -109,8 +131,8 @@
       "asset_key": "g4-l4-510-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l4-510-diagram-r3.svg",
-      "alt_text": "Triangle with shorter sides 12 cm and 16 cm meeting at a marked right angle; the longest side is labelled x. Not drawn to scale.",
+      "path": "assets/g4-l4-510-diagram-r4.svg",
+      "alt_text": "Triangle with shorter sides 36 cm and 77 cm meeting at a marked right angle; the longest side is labelled x. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
@@ -120,11 +142,11 @@
         "inputs": {
           "legs": [
             {
-              "value": 12,
+              "value": 36,
               "unit": "cm"
             },
             {
-              "value": 16,
+              "value": 77,
               "unit": "cm"
             }
           ]
@@ -133,17 +155,17 @@
         "dimensions": {
           "perpendicular_sides": [
             {
-              "value": 12,
+              "value": 36,
               "unit": "cm"
             },
             {
-              "value": 16,
+              "value": 77,
               "unit": "cm"
             }
           ]
         },
         "forbidden_visible_labels": [
-          "20"
+          "85"
         ],
         "unknowns": [
           {
@@ -155,12 +177,12 @@
         "drawn_to_scale": true,
         "viewbox": [
           600.0,
-          446.0
+          344.0
         ],
         "points": {
           "A": [
             120.0,
-            326.0
+            224.31
           ],
           "B": [
             120.0,
@@ -168,7 +190,7 @@
           ],
           "C": [
             480.0,
-            326.0
+            224.31
           ]
         },
         "segments": [
@@ -206,11 +228,11 @@
         ],
         "labels": [
           {
-            "text": "12 cm",
+            "text": "36 cm",
             "target": "segment:AB"
           },
           {
-            "text": "16 cm",
+            "text": "77 cm",
             "target": "segment:AC"
           },
           {
@@ -225,15 +247,15 @@
               "AB",
               "AC"
             ],
-            "value": 0.75,
+            "value": 0.4675,
             "tolerance": 0.02
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "b7767a3b5a8f1d048b587aee62c236c05abc13eb48dc84c5f5b0563cd09a1bf7",
+      "sha256": "8a5ae28093c90f268ba8a77945cc254347657ecc4ad3e5a2c2029e299a152e86",
       "width": 600,
-      "height": 446
+      "height": 344
     }
   ],
   "provenance": {
