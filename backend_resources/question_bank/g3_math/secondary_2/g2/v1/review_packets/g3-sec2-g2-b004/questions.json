@@ -2419,7 +2419,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 5,
+    "revision": 6,
     "stable_key": "g2-l5-504",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2439,7 +2439,31 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A triangle of area 32 cm² is enlarged by scale factor 3/2 and then reduced by scale factor 2/3. The resulting triangle is enlarged again by scale factor 5/2. Find its final area. Give your answer in square centimetres. Enter the numerical value only."
+            "text": "A triangle of area 32 cm² is enlarged by scale factor "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{3}{2}"
+          },
+          {
+            "type": "text",
+            "text": " and then reduced by scale factor "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{2}{3}"
+          },
+          {
+            "type": "text",
+            "text": ". The resulting triangle is enlarged again by scale factor "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{5}{2}"
+          },
+          {
+            "type": "text",
+            "text": ". Find its final area. Give your answer in square centimetres. Enter the numerical value only."
           }
         ],
         "marks": 4,
