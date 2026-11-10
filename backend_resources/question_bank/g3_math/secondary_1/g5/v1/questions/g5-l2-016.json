@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l2-016",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G5",
   "primary_outcome": "5.1",
-  "title": "Trapezium window area",
+  "title": "Finding a parallel side",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A trapezium window has parallel sides 14 cm and 8 cm and perpendicular height 7 cm. Find its area in cm². Enter the numerical value only."
+          "text": "A trapezium window has area 77 cm², perpendicular height 7 cm and one parallel side 14 cm. Find the other parallel side in cm. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "77",
-        "canonical_latex": "77",
+        "canonical_answer": "8",
+        "canonical_latex": "8",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the parallel sides before halving."
+              "text": "Substitute the values into the trapezium area formula."
             }
           ]
         },
@@ -51,11 +51,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
+              "text": "Form "
             },
             {
               "type": "inline_math",
-              "latex": "\\frac{1}{2}(14+8)(7)"
+              "latex": "\\frac{1}{2}(14+b)(7)=77"
+            },
+            {
+              "type": "text",
+              "text": " and solve for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "b"
             },
             {
               "type": "text",
@@ -69,12 +77,31 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "A=\\frac12(14+8)(7)=77"
+              "type": "inline_math",
+              "latex": "\\frac12(14+b)(7)=77"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "14+b=22"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "b=8"
             }
           ],
           "mark_type": "A",
-          "mark_value": 2
+          "mark_value": 1
         }
       ]
     }

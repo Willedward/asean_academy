@@ -100,14 +100,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-016",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G5",
     "primary_outcome": "5.1",
-    "title": "Trapezium window area",
+    "title": "Finding a parallel side",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -120,7 +120,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A trapezium window has parallel sides 14 cm and 8 cm and perpendicular height 7 cm. Find its area in cm². Enter the numerical value only."
+            "text": "A trapezium window has area 77 cm², perpendicular height 7 cm and one parallel side 14 cm. Find the other parallel side in cm. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -129,8 +129,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "77",
-          "canonical_latex": "77",
+          "canonical_answer": "8",
+          "canonical_latex": "8",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -142,7 +142,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add the parallel sides before halving."
+                "text": "Substitute the values into the trapezium area formula."
               }
             ]
           },
@@ -151,11 +151,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
+                "text": "Form "
               },
               {
                 "type": "inline_math",
-                "latex": "\\frac{1}{2}(14+8)(7)"
+                "latex": "\\frac{1}{2}(14+b)(7)=77"
+              },
+              {
+                "type": "text",
+                "text": " and solve for "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b"
               },
               {
                 "type": "text",
@@ -169,12 +177,31 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "A=\\frac12(14+8)(7)=77"
+                "type": "inline_math",
+                "latex": "\\frac12(14+b)(7)=77"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "14+b=22"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b=8"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -199,7 +226,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-017",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -269,11 +296,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "b=\\frac{96}{8}=12"
+                "latex": "b=\\frac{96}{8}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "b=12"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -548,14 +586,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l1-013",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G5",
     "primary_outcome": "5.2",
-    "title": "Perimeter of a noticeboard",
+    "title": "Perimeter of a notched noticeboard",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -568,7 +606,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A rectangular noticeboard measures 12 cm by 7 cm. Find its perimeter in cm. Enter the numerical value only."
+            "text": "A rectangular noticeboard measures 12 cm by 7 cm. A 3 cm by 2 cm rectangle is cut from one corner. Find the perimeter of the remaining L-shape in cm. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -590,7 +628,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "A rectangle has two lengths and two widths."
+                "text": "Trace all six edges of the L-shape."
               }
             ]
           },
@@ -599,15 +637,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
-              },
-              {
-                "type": "inline_math",
-                "latex": "2(12+7)"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "The two cut edges together fill the same length as the removed part of each original side, so add the edges around the shape."
               }
             ]
           }
@@ -647,7 +677,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-018",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -717,102 +747,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "A=15(12)-11(8)=180-88=92"
+                "latex": "A=15(12)-11(8)=180-88"
               }
             ],
-            "mark_type": "A",
-            "mark_value": 2
-          }
-        ]
-      }
-    ],
-    "total_marks": 2,
-    "assets": [],
-    "provenance": {
-      "authoring_method": "original_generated",
-      "style_references": [
-        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
-        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
-        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
-        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
-        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
-      ],
-      "created_at": "2026-10-13T11:30:00+08:00",
-      "authored_by": "OpenAI Codex",
-      "reviewed_at": null,
-      "reviewed_by": null,
-      "review_notes": null
-    }
-  },
-  {
-    "schema_version": "1.0.0",
-    "revision": 1,
-    "stable_key": "g5-l2-019",
-    "bank_key": "g3-sec1-g5-v1",
-    "curriculum_version": "g3_math_v1_draft",
-    "school_level": "secondary_1",
-    "topic_code": "G5",
-    "primary_outcome": "5.2",
-    "title": "Platform made from two parts",
-    "difficulty": 2,
-    "calculator_allowed": false,
-    "question_type": "structured",
-    "status": "draft",
-    "stem": [],
-    "parts": [
-      {
-        "position": 1,
-        "label": null,
-        "prompt": [
-          {
-            "type": "text",
-            "text": "A platform consists of a trapezium with parallel sides 8 m and 14 m and height 5 m, joined without overlap to a 14 m by 4 m rectangle. Find the total area in m². Enter the numerical value only."
-          }
-        ],
-        "marks": 2,
-        "primary_outcome": "5.2",
-        "secondary_outcomes": [],
-        "response": {
-          "type": "numeric",
-          "comparison_mode": "exact_numeric",
-          "canonical_answer": "111",
-          "canonical_latex": "111",
-          "accepted_answers": [],
-          "absolute_tolerance": null,
-          "rounding_precision": null,
-          "unit": null
-        },
-        "hints": [
-          {
-            "stage": 1,
-            "content": [
-              {
-                "type": "text",
-                "text": "Find each component area before adding."
-              }
-            ]
+            "mark_type": "M",
+            "mark_value": 1
           },
           {
-            "stage": 2,
-            "content": [
-              {
-                "type": "text",
-                "text": "The trapezium area is 55 m² and the rectangle area is 56 m²."
-              }
-            ]
-          }
-        ],
-        "solution": [
-          {
-            "position": 1,
+            "position": 2,
             "content": [
               {
                 "type": "display_math",
-                "latex": "A=\\frac12(8+14)(5)+14(4)=55+56=111"
+                "latex": "A=92"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -838,6 +788,108 @@
   {
     "schema_version": "1.0.0",
     "revision": 2,
+    "stable_key": "g5-l2-019",
+    "bank_key": "g3-sec1-g5-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "G5",
+    "primary_outcome": "5.2",
+    "title": "Platform made from two parts",
+    "difficulty": 2,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "A platform consists of a trapezium with parallel sides 6 m and 12 m and height 5 m, joined without overlap to a 14 m by 4 m rectangle. Find the total area in m². Enter the numerical value only."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "5.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "101",
+          "canonical_latex": "101",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Find each component area before adding."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Find the trapezium area and the rectangle area, then add them."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "A=\\frac12(6+12)(5)+14(4)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "=45+56=101"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-13T11:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 3,
     "stable_key": "g5-l3-018",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -908,11 +960,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "A=20(14)-16(10)=280-160=120"
+                "latex": "A=20(14)-16(10)=280-160"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "A=120"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -923,7 +986,7 @@
         "asset_key": "g5-l3-018-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-018-diagram-r2.svg",
+        "path": "assets/g5-l3-018-diagram-r3.svg",
         "alt_text": "A rectangular frame 20 cm by 14 cm outside, with a smaller rectangle inside it. The shaded border between them is 2 cm wide, and equal marks show it has the same width on all four sides. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-sec1-mensuration-svg-v1",
@@ -1715,7 +1778,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-020",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1785,11 +1848,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\ell=\\frac{540}{45}=12"
+                "latex": "\\ell=\\frac{540}{45}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\ell=12"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -1814,7 +1888,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-021",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1884,11 +1958,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "V=50(30)(20)=30000"
+                "latex": "V=50(30)(20)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=30000"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -2039,7 +2124,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l3-020",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2126,11 +2211,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "S=\\frac{22}{7}(7^2)+2\\left(\\frac{22}{7}\\right)(7)(8)=154+352=506"
+                "latex": "S=\\frac{22}{7}(7^2)+2\\left(\\frac{22}{7}\\right)(7)(8)=154+352"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "S=506"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -2141,7 +2237,7 @@
         "asset_key": "g5-l3-020-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-020-diagram-r3.svg",
+        "path": "assets/g5-l3-020-diagram-r4.svg",
         "alt_text": "A cylinder that is open at the top, with radius 7 cm and height 8 cm. The inside of the rim is shaded, and the far half of the base is dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-sec1-mensuration-svg-v1",
@@ -2839,7 +2935,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-022",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2913,11 +3009,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "V=100(40)(25)=100000\\text{ cm}^3"
+                "latex": "V=100(40)(25)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=100000\\text{ cm}^3"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -2942,7 +3049,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-021",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3004,11 +3111,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "V=1.2(0.5)(0.4)=0.24\\text{ m}^3"
+                "latex": "V=1.2(0.5)(0.4)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=0.24\\text{ m}^3"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -3033,7 +3151,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-022",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3095,11 +3213,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "N=\\frac{180000}{60000}=3"
+                "latex": "N=\\frac{180000}{60000}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "N=3"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -3124,14 +3253,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l4-011",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G5",
     "primary_outcome": "5.4",
-    "title": "Number of slabs from mixed units",
+    "title": "Blocks with the same volume as a slab",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -3144,7 +3273,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A concrete slab has volume 0.18 m³. Each small block measures 30 cm by 20 cm by 10 cm. How many blocks have the same total volume? Enter the numerical value only."
+            "text": "A concrete slab has volume 0.18 m³. Each small block measures 30 cm by 20 cm by 10 cm. How many such blocks have a total volume equal to the slab's volume? Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -3186,11 +3315,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "N=\\frac{180000}{30(20)(10)}=30"
+                "latex": "N=\\frac{180000}{30(20)(10)}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 3
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "N=30"
               }
             ],
             "mark_type": "A",
-            "mark_value": 4
+            "mark_value": 1
           }
         ]
       }
@@ -3215,7 +3355,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l1-016",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3235,7 +3375,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A solid consists of two prisms with volumes 150 cm³ and 90 cm³ joined without overlap. Find its volume in cm³. Enter the numerical value only."
+            "text": "A solid consists of a 5 cm by 5 cm by 6 cm cuboid and a prism of volume 90 cm³, joined without overlap. Find its volume in cm³. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -3257,7 +3397,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add the component volumes."
+                "text": "Find the volume of the cuboid, then add the volume of the prism."
               }
             ]
           },
@@ -3270,11 +3410,11 @@
               },
               {
                 "type": "inline_math",
-                "latex": "150+90"
+                "latex": "5\\times5\\times6"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": ", then add 90."
               }
             ]
           }
@@ -3284,8 +3424,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "V=150+90=240"
+                "type": "inline_math",
+                "latex": "V=5(5)(6)+90=240"
               }
             ],
             "mark_type": "A",
@@ -3314,7 +3454,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-023",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3384,11 +3524,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "V=12(8)+240=336"
+                "latex": "V=12(8)+240"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=336"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -3413,7 +3564,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-023",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3433,7 +3584,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A cuboid 10 cm by 5 cm by 4 cm and a cylinder of radius 3.5 cm and height 8 cm are fully submerged. Using "
+            "text": "A cuboid 10 cm by 5 cm by 4 cm and a cylinder of radius 3.5 cm and height 8 cm are fully submerged in water. Using "
           },
           {
             "type": "inline_math",
@@ -3441,7 +3592,7 @@
           },
           {
             "type": "text",
-            "text": ", find their total displacement in cm³. Enter the numerical value only."
+            "text": ", find the total volume of water displaced in cm³. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -3482,12 +3633,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "V=10(5)(4)+\\frac{22}{7}(3.5^2)(8)=200+308=508"
+                "type": "inline_math",
+                "latex": "V=10(5)(4)+\\frac{22}{7}(3.5^2)(8)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "=200+308=508"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -3512,7 +3674,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-024",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3574,11 +3736,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "V=0.75[12(10)(8)+6(5)(4)]=810"
+                "latex": "V=0.75[12(10)(8)+6(5)(4)]"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=810"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -3603,7 +3776,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l4-012",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3674,11 +3847,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "S=2(10(8)+10(6)+8(6))+6(4^2)-2(4^2)=440"
+                "latex": "S=2(10(8)+10(6)+8(6))+6(4^2)-2(4^2)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 3
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "S=440"
               }
             ],
             "mark_type": "A",
-            "mark_value": 4
+            "mark_value": 1
           }
         ]
       }
@@ -3689,7 +3873,7 @@
         "asset_key": "g5-l4-012-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l4-012-diagram-r3.svg",
+        "path": "assets/g5-l4-012-diagram-r4.svg",
         "alt_text": "A cuboid with edges 10 cm, 8 cm and 6 cm, with a cube of side 4 cm attached on its top face. Hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-sec1-mensuration-svg-v1",
