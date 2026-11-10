@@ -2344,7 +2344,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l3-014",
     "bank_key": "g3-sec1-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2364,7 +2364,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Simplify 5(2a - 3) - 2(3a + 4)."
+            "text": "Simplify "
+          },
+          {
+            "type": "inline_math",
+            "latex": "5(2a-3)-2(3a+4)"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 3,
