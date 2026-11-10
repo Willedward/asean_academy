@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g1-l3-003",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Co-interior angles between parallel lines are in the ratio 2:3. Find the larger angle in degrees."
+          "text": "Co-interior angles between parallel lines are in the ratio 4:5. Find the larger angle in degrees."
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "108",
-        "canonical_latex": "108",
+        "canonical_answer": "100",
+        "canonical_latex": "100",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide 180° into five ratio parts."
+              "text": "Divide 180° into nine ratio parts."
             }
           ]
         }
@@ -70,8 +70,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "180^\\circ\\div5=36^\\circ"
+              "type": "inline_math",
+              "latex": "180^\\circ\\div9=20^\\circ"
             }
           ],
           "mark_type": "M",
@@ -81,8 +81,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "3(36^\\circ)=108^\\circ"
+              "type": "inline_math",
+              "latex": "5(20^\\circ)=100^\\circ"
             }
           ],
           "mark_type": "A",
@@ -97,8 +97,8 @@
       "asset_key": "g1-l3-003-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l3-003-diagram-r3.svg",
-      "alt_text": "Two parallel horizontal lines, shown with arrow marks, cut by one transversal. The two angles between the lines on the right of the transversal are marked 2k at the lower line and 3k at the upper line, where k is the size of one ratio part. Not drawn to scale.",
+      "path": "assets/g1-l3-003-diagram-r4.svg",
+      "alt_text": "Two parallel horizontal lines, shown with arrow marks, cut by one transversal. The two angles between the lines on the right of the transversal are marked 4k at the lower line and 5k at the upper line, where k is the size of one ratio part. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-plane-geometry-svg-v1",
         "diagram_kind": "parallel_lines",
@@ -107,22 +107,22 @@
         "template": "parallel_cointerior_ratio",
         "inputs": {
           "ratio": [
-            2,
-            3
+            4,
+            5
           ]
         },
         "not_to_scale": true,
         "dimensions": {
           "ratio": [
-            2,
-            3
+            4,
+            5
           ],
           "angle_sum": 180
         },
         "forbidden_visible_labels": [
-          "108",
-          "72",
-          "36"
+          "100",
+          "80",
+          "20"
         ],
         "unknowns": [],
         "parallel_marks": [
@@ -135,39 +135,39 @@
         ],
         "viewbox": [
           600.0,
-          377.0
+          392.0
         ],
         "points": {
           "L1": [
             65.0,
-            83.24
+            86.2
           ],
           "L2": [
             535.0,
-            83.24
+            86.2
           ],
           "M1": [
             65.0,
-            249.62
+            261.81
           ],
           "M2": [
             535.0,
-            249.62
+            261.81
           ],
           "D": [
-            256.33,
-            249.62
+            266.96,
+            261.81
           ],
           "U": [
-            310.39,
-            83.24
+            297.92,
+            86.2
           ],
           "T1": [
-            239.03,
-            302.86
+            257.05,
+            318.01
           ],
           "T2": [
-            327.69,
+            307.83,
             30.0
           ]
         },
@@ -203,8 +203,8 @@
               "U"
             ],
             "marker_key": "angle-first",
-            "drawn_degrees": 72.0,
-            "degrees": 72.0
+            "drawn_degrees": 80.0,
+            "degrees": 80.0
           },
           {
             "vertex": "U",
@@ -213,25 +213,25 @@
               "L2"
             ],
             "marker_key": "angle-second",
-            "drawn_degrees": 108.0,
-            "degrees": 108.0
+            "drawn_degrees": 100.0,
+            "degrees": 100.0
           }
         ],
         "angle_markers": [
           {
             "marker_key": "angle-first",
             "center": [
-              256.33,
-              249.62
+              266.96,
+              261.81
             ],
             "radius": 46.0,
             "start_ray_point": [
               535.0,
-              249.62
+              261.81
             ],
             "end_ray_point": [
-              310.39,
-              83.24
+              297.92,
+              86.2
             ],
             "large_arc": 0,
             "sweep": 0
@@ -239,17 +239,17 @@
           {
             "marker_key": "angle-second",
             "center": [
-              310.39,
-              83.24
+              297.92,
+              86.2
             ],
             "radius": 46.0,
             "start_ray_point": [
-              256.33,
-              249.62
+              266.96,
+              261.81
             ],
             "end_ray_point": [
               535.0,
-              83.24
+              86.2
             ],
             "large_arc": 0,
             "sweep": 0
@@ -257,11 +257,11 @@
         ],
         "labels": [
           {
-            "text": "2k",
+            "text": "4k",
             "target": "angle:angle-first"
           },
           {
-            "text": "3k",
+            "text": "5k",
             "target": "angle:angle-second"
           }
         ],
@@ -286,9 +286,9 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "d6166ea1cd281b314cf459b970f4be6b45e8f5de8afa433f6639e04d9b7e9d2b",
+      "sha256": "89eb155fa198f59dd9c3a4373b24d9b13894d5fb270794f248a018c28ead5725",
       "width": 600,
-      "height": 377
+      "height": 392
     }
   ],
   "provenance": {
