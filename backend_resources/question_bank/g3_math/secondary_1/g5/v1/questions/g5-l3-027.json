@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l3-027",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G5",
   "primary_outcome": "5.2",
-  "title": "Walkway beside two regions",
+  "title": "Planting area in a park section",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A park section contains a 12 m by 8 m rectangle and a non-overlapping trapezium with parallel sides 8 m and 14 m and height 6 m. If 18 m² is reserved for plants, find the remaining area in m². Enter the numerical value only."
+          "text": "A park section contains a 12 m by 8 m rectangle and a non-overlapping trapezium with parallel sides 10 m and 16 m and height 6 m. If 18 m² is reserved for plants, find the remaining area in m². Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "144",
-        "canonical_latex": "144",
+        "canonical_answer": "156",
+        "canonical_latex": "156",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -61,12 +61,23 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "A=12(8)+\\frac12(8+14)(6)-18=144"
+              "type": "inline_math",
+              "latex": "A=12(8)+\\frac12(10+16)(6)-18"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "=96+78-18=156"
             }
           ],
           "mark_type": "A",
-          "mark_value": 3
+          "mark_value": 1
         }
       ]
     }

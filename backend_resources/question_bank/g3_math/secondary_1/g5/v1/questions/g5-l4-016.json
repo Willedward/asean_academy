@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l4-016",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A rectangular banner has area 28 800 cm\u00b2 and width 1.2 m. Its length is increased by 25% while the width stays fixed. Find the new area in m\u00b2. Enter the numerical value only."
+          "text": "A rectangular banner has area 28 800 cm² and width 1.2 m. Its length is increased by 25% while the width stays fixed. Find the new area in m². Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The original area is 2.88 m\u00b2; a 25% length increase gives a 25% area increase."
+              "text": "The original area is 2.88 m²; a 25% length increase gives a 25% area increase."
             }
           ]
         }
@@ -62,11 +62,22 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "A_{new}=2.88(1.25)=3.6\\text{ m}^2"
+              "latex": "A_{new}=2.88(1.25)"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 3
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "A_{new}=3.6\\text{ m}^2"
             }
           ],
           "mark_type": "A",
-          "mark_value": 4
+          "mark_value": 1
         }
       ]
     }

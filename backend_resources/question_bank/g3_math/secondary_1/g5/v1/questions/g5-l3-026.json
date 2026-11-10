@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l3-026",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A trapezium has area 120 cm\u00b2. A parallelogram of base 7 cm and height 6 cm is marked inside it. Find the remaining unmarked area in cm\u00b2. Enter the numerical value only."
+          "text": "A trapezium has parallel sides 9 cm and 15 cm and height 10 cm. A parallelogram of base 7 cm and height 6 cm is marked inside it. Find the remaining unmarked area in cm². Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract the parallelogram area from the trapezium area."
+              "text": "Find the area of the trapezium first."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The marked parallelogram has area 42 cm\u00b2."
+              "text": "Subtract the parallelogram area from the trapezium area."
             }
           ]
         }
@@ -61,12 +61,31 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "A=120-7(6)=120-42=78"
+              "type": "inline_math",
+              "latex": "A_T=\\frac12(9+15)(10)=120"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "A_P=7(6)=42"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "120-42=78"
             }
           ],
           "mark_type": "A",
-          "mark_value": 3
+          "mark_value": 1
         }
       ]
     }
