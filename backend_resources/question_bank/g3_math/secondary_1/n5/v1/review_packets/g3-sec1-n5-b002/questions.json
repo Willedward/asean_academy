@@ -110,7 +110,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n5-l2-009",
     "bank_key": "g3-sec1-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -130,7 +130,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "An odd integer is represented by 2k+1, where k is an integer. Write the next odd integer."
+            "text": "An odd integer is represented by "
+          },
+          {
+            "type": "inline_math",
+            "latex": "2k+1"
+          },
+          {
+            "type": "text",
+            "text": ", where "
+          },
+          {
+            "type": "inline_math",
+            "latex": "k"
+          },
+          {
+            "type": "text",
+            "text": " is an integer. Write the next odd integer."
           }
         ],
         "marks": 2,
