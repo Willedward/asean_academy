@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-024",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.1",
-  "title": "Recognising an equivalent rearrangement",
+  "title": "Equation or expression",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Adding "
+          "text": "Use code 1 for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2x+5"
+        },
+        {
+          "type": "text",
+          "text": ", code 2 for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2x+5=11"
+        },
+        {
+          "type": "text",
+          "text": ", code 3 for 5 and code 4 for "
         },
         {
           "type": "inline_math",
@@ -28,31 +44,7 @@
         },
         {
           "type": "text",
-          "text": " to both sides produces an equation of the form "
-        },
-        {
-          "type": "inline_math",
-          "latex": "7=3+kx"
-        },
-        {
-          "type": "text",
-          "text": "."
-        },
-        {
-          "type": "display_math",
-          "latex": "7-x=3"
-        },
-        {
-          "type": "text",
-          "text": "Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "text": ". Enter the code of the one that is an equation."
         }
       ],
       "marks": 2,
@@ -61,8 +53,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -74,15 +66,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add one copy of "
-            },
-            {
-              "type": "inline_math",
-              "latex": "x"
-            },
-            {
-              "type": "text",
-              "text": " to each side."
+              "text": "An equation states that two expressions are equal."
             }
           ]
         },
@@ -91,23 +75,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add "
-            },
-            {
-              "type": "inline_math",
-              "latex": "x"
-            },
-            {
-              "type": "text",
-              "text": " to both sides, then compare the right-hand side with "
-            },
-            {
-              "type": "inline_math",
-              "latex": "3+kx"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Look for the only choice that contains an equals sign."
             }
           ]
         }
@@ -117,8 +85,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "7=3+x"
+              "type": "text",
+              "text": "An equation has an equals sign."
             }
           ],
           "mark_type": "M",
@@ -128,8 +96,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k=1"
+              "type": "text",
+              "text": "The code is 2."
             }
           ],
           "mark_type": "A",
