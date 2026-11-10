@@ -108,7 +108,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l1-519",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -132,7 +132,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "f(x)=2x^{2}+3x-3"
+            "latex": "f(x)=4+3x-6x^{2}"
           },
           {
             "type": "text",
@@ -153,8 +153,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "2",
-          "canonical_latex": "2",
+          "canonical_answer": "-6",
+          "canonical_latex": "-6",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -186,7 +186,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "a=2"
+                "latex": "a=-6"
               }
             ],
             "mark_type": "A",
@@ -215,7 +215,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l2-524",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -301,11 +301,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=2"
+              },
+              {
+                "type": "text",
+                "text": " and simplify the known terms. "
               },
               {
                 "type": "display_math",
-                "latex": "-19=-3(2)^2-3(2)+k\\Rightarrow k=-1."
+                "latex": "-19=-3(2)^2-3(2)+k=-18+k"
               }
             ],
             "mark_type": "M",
@@ -316,11 +324,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "-1"
+                "latex": "k=-1"
               }
             ],
             "mark_type": "A",
@@ -349,7 +357,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l2-525",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -435,11 +443,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=2"
+              },
+              {
+                "type": "text",
+                "text": " and simplify the known terms. "
               },
               {
                 "type": "display_math",
-                "latex": "13=4(2)^2+p(2)+1\\Rightarrow p=-2."
+                "latex": "13=4(2)^2+2p+1=17+2p"
               }
             ],
             "mark_type": "M",
@@ -450,11 +466,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "-2"
+                "latex": "2p=-4,\\ p=-2"
               }
             ],
             "mark_type": "A",
@@ -483,7 +499,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l2-526",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -541,7 +557,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute the supplied input or point into the quadratic rule."
+                "text": "Work out each function value separately before subtracting."
               }
             ]
           },
@@ -550,7 +566,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Keep negative inputs in brackets, then isolate the one unknown coefficient."
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=3"
+              },
+              {
+                "type": "text",
+                "text": " and then "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=-1"
+              },
+              {
+                "type": "text",
+                "text": ", keeping the negative input in brackets."
               }
             ]
           }
@@ -561,11 +593,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "Substitute each input. "
               },
               {
                 "type": "display_math",
-                "latex": "f(3)=9,\\ f(-1)=5,\\ f(3)-f(-1)=4."
+                "latex": "f(3)=9-3+3=9,\\quad f(-1)=1+1+3=5"
               }
             ],
             "mark_type": "M",
@@ -576,11 +608,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "Subtract: "
               },
               {
                 "type": "display_math",
-                "latex": "4"
+                "latex": "f(3)-f(-1)=9-5=4"
               }
             ],
             "mark_type": "A",
@@ -609,7 +641,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l2-527",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -687,11 +719,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=-2"
+              },
+              {
+                "type": "text",
+                "text": ", keeping it in brackets. "
               },
               {
                 "type": "display_math",
-                "latex": "f(-2)=-2(-2)^2-4=-12."
+                "latex": "f(-2)=-2(-2)^2-4=-8-4"
               }
             ],
             "mark_type": "M",
@@ -702,11 +742,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "-12"
+                "latex": "f(-2)=-12"
               }
             ],
             "mark_type": "A",
@@ -735,7 +775,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l3-524",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -817,11 +857,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=4"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "inline_math",
+                "latex": "f(x)=50"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "50=3(4)^2+4q-2\\Rightarrow q=1."
+                "latex": "50=3(4)^2+4q-2=46+4q"
               }
             ],
             "mark_type": "M",
@@ -832,11 +888,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "1"
+                "latex": "4q=4,\\ q=1"
               }
             ],
             "mark_type": "A",
@@ -865,14 +921,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l3-525",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N6",
     "primary_outcome": "6.6",
-    "title": "Factorised quadratic: the remaining zero",
+    "title": "Positive zero with a repeated factor",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -885,19 +941,19 @@
         "prompt": [
           {
             "type": "inline_math",
-            "latex": "g(x)=(x-4)(x-8)"
+            "latex": "g(x)=(x+6)(4x-10)"
           },
           {
             "type": "text",
-            "text": ". One zero is "
+            "text": ". Find the positive zero of "
           },
           {
             "type": "inline_math",
-            "latex": "x=4"
+            "latex": "g"
           },
           {
             "type": "text",
-            "text": ". Find the other zero."
+            "text": "."
           }
         ],
         "marks": 3,
@@ -906,8 +962,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "8",
-          "canonical_latex": "8",
+          "canonical_answer": "2.5",
+          "canonical_latex": "2.5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -919,7 +975,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the given point, zero or pair of inputs into an equation using the function rule."
+                "text": "A zero is a value of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " that makes "
+              },
+              {
+                "type": "inline_math",
+                "latex": "g(x)=0"
+              },
+              {
+                "type": "text",
+                "text": ", so set each factor equal to zero."
               }
             ]
           },
@@ -928,7 +1000,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Simplify all known terms first, then solve for the remaining value and substitute back to check."
+                "text": "Solve "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x+6=0"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4x-10=0"
+              },
+              {
+                "type": "text",
+                "text": ", then decide which solution is positive."
               }
             ]
           }
@@ -939,11 +1027,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "Set each factor equal to zero. "
               },
               {
                 "type": "display_math",
-                "latex": "g(x)=0\\Rightarrow x-4=0\\text{ or }x-8=0,\\text{ so the other zero is }8."
+                "latex": "x+6=0\\text{ or }4x-10=0\\Rightarrow x=-6\\text{ or }x=\\tfrac{5}{2}"
               }
             ],
             "mark_type": "M",
@@ -954,11 +1042,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "The positive zero is "
               },
               {
                 "type": "display_math",
-                "latex": "8"
+                "latex": "x=2.5"
               }
             ],
             "mark_type": "A",
@@ -987,7 +1075,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l3-526",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1081,11 +1169,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "Find each "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-value. "
               },
               {
                 "type": "display_math",
-                "latex": "y(2)-y(-2)=(4)-(-8)=12."
+                "latex": "y(-2)=-4-6+2=-8,\\quad y(2)=-4+6+2=4"
               }
             ],
             "mark_type": "M",
@@ -1096,11 +1192,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "The change is "
               },
               {
                 "type": "display_math",
-                "latex": "12"
+                "latex": "4-(-8)=12"
               }
             ],
             "mark_type": "A",
@@ -1129,7 +1225,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l3-527",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1211,11 +1307,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=3"
+              },
+              {
+                "type": "text",
+                "text": " and simplify. "
               },
               {
                 "type": "display_math",
-                "latex": "13=k(3)^2-3(3)+4\\Rightarrow 9k=18\\Rightarrow k=2."
+                "latex": "13=9k-9+4=9k-5"
               }
             ],
             "mark_type": "M",
@@ -1226,11 +1330,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "2"
+                "latex": "9k=18,\\ k=2"
               }
             ],
             "mark_type": "A",
@@ -1259,7 +1363,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l4-513",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1357,11 +1461,43 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "Subtract the equations for "
+              },
+              {
+                "type": "inline_math",
+                "latex": "f(1)"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "f(-1)"
+              },
+              {
+                "type": "text",
+                "text": " to eliminate "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "c"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "f(1)-f(-1)=2b\\Rightarrow -1-(3)=2b\\Rightarrow b=-2."
+                "latex": "f(1)-f(-1)=2b\\Rightarrow -1-3=2b"
               }
             ],
             "mark_type": "M",
@@ -1372,11 +1508,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "-2"
+                "latex": "b=-2"
               }
             ],
             "mark_type": "A",
@@ -1405,7 +1541,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l4-514",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1487,11 +1623,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=5"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "inline_math",
+                "latex": "f(x)=16"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "16=k(5-1)(5-4)=4k\\Rightarrow k=4."
+                "latex": "16=k(5-1)(5-4)=4k"
               }
             ],
             "mark_type": "M",
@@ -1502,11 +1654,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "4"
+                "latex": "k=4"
               }
             ],
             "mark_type": "A",
@@ -1535,7 +1687,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l5-504",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1676,12 +1828,72 @@
             "position": 1,
             "content": [
               {
+                "type": "inline_math",
+                "latex": "c=f(0)=0"
+              },
+              {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": ". Adding "
+              },
+              {
+                "type": "inline_math",
+                "latex": "f(1)"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "f(-1)"
+              },
+              {
+                "type": "text",
+                "text": " gives "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2a+2c=4"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a=2"
+              },
+              {
+                "type": "text",
+                "text": ". Subtracting gives "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2b=0"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b=0"
+              },
+              {
+                "type": "text",
+                "text": ". Hence "
+              },
+              {
+                "type": "inline_math",
+                "latex": "f(x)=2x^2"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "c=0,\\ f(1)+f(-1)=2a+2c\\Rightarrow a=2,\\ f(1)-f(-1)=2b\\Rightarrow b=0.\\ f(4)=2(4)^2+0(4)+0=32."
+                "latex": "f(4)=2(4)^2"
               }
             ],
             "mark_type": "M",
@@ -1692,11 +1904,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "32"
+                "latex": "f(4)=32"
               }
             ],
             "mark_type": "A",
@@ -1971,14 +2183,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l2-528",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N6",
     "primary_outcome": "6.7",
-    "title": "Crossing point on the y-axis",
+    "title": "y-intercept from turning-point form",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1995,11 +2207,27 @@
           },
           {
             "type": "inline_math",
-            "latex": "y=-x^{2}-6x-7"
+            "latex": "y=-(x-2)^{2}+6"
           },
           {
             "type": "text",
-            "text": ", find the y-coordinate where the graph crosses the y-axis."
+            "text": ", find the "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": "-coordinate of the point where the graph crosses the "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": "-axis."
           }
         ],
         "marks": 2,
@@ -2008,8 +2236,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "-7",
-          "canonical_latex": "-7",
+          "canonical_answer": "2",
+          "canonical_latex": "2",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2021,15 +2249,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use "
+                "text": "The graph crosses the "
               },
               {
                 "type": "inline_math",
-                "latex": "x=\\frac{-b}{2a}"
+                "latex": "y"
               },
               {
                 "type": "text",
-                "text": ", set "
+                "text": "-axis where "
               },
               {
                 "type": "inline_math",
@@ -2037,7 +2265,7 @@
               },
               {
                 "type": "text",
-                "text": " for the y-intercept, or reflect the input across the axis."
+                "text": "."
               }
             ]
           },
@@ -2046,7 +2274,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Once the axis input is known, substitute it into the original rule to find the turning value."
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=0"
+              },
+              {
+                "type": "text",
+                "text": ", square the bracket first, and take care with the minus sign in front."
               }
             ]
           }
@@ -2057,11 +2293,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
-              },
-              {
-                "type": "text",
-                "text": "At the y-intercept "
+                "text": "Substitute "
               },
               {
                 "type": "inline_math",
@@ -2069,15 +2301,11 @@
               },
               {
                 "type": "text",
-                "text": ", so "
+                "text": ". "
               },
               {
-                "type": "inline_math",
-                "latex": "y=-7"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "type": "display_math",
+                "latex": "y=-(0-2)^2+6=-4+6"
               }
             ],
             "mark_type": "M",
@@ -2088,11 +2316,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "-7"
+                "latex": "y=2"
               }
             ],
             "mark_type": "A",
@@ -2384,7 +2612,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l2-530",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2442,23 +2670,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use "
+                "text": "You are given the axis, so you already know the "
               },
               {
                 "type": "inline_math",
-                "latex": "x=\\frac{-b}{2a}"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": ", set "
-              },
-              {
-                "type": "inline_math",
-                "latex": "x=0"
-              },
-              {
-                "type": "text",
-                "text": " for the y-intercept, or reflect the input across the axis."
+                "text": "-coordinate of the turning point."
               }
             ]
           },
@@ -2467,7 +2687,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Once the axis input is known, substitute it into the original rule to find the turning value."
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=-1"
+              },
+              {
+                "type": "text",
+                "text": " into the rule, keeping it in brackets."
               }
             ]
           }
@@ -2478,11 +2706,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "Substitute the axis value "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=-1"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "y(-1)=-3(-1)^2-6(-1)-8=-5."
+                "latex": "y(-1)=-3(-1)^2-6(-1)-8=-3+6-8"
               }
             ],
             "mark_type": "M",
@@ -2493,7 +2729,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-coordinate of the turning point is "
               },
               {
                 "type": "display_math",
@@ -2526,7 +2770,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l2-531",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2576,23 +2820,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use "
+                "text": "With no "
               },
               {
                 "type": "inline_math",
-                "latex": "x=\\frac{-b}{2a}"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": ", set "
+                "text": " term, the graph of "
               },
               {
                 "type": "inline_math",
-                "latex": "x=0"
+                "latex": "y=x^2-3"
               },
               {
                 "type": "text",
-                "text": " for the y-intercept, or reflect the input across the axis."
+                "text": " is symmetrical about the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-axis."
               }
             ]
           },
@@ -2601,7 +2853,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Once the axis input is known, substitute it into the original rule to find the turning value."
+                "text": "Replacing "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-x"
+              },
+              {
+                "type": "text",
+                "text": " gives the same "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-value. Which vertical line does that describe?"
               }
             ]
           }
@@ -2611,12 +2887,52 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "type": "inline_math",
+                "latex": "y=x^2-3"
               },
               {
-                "type": "display_math",
-                "latex": "x=-\\frac{b}{2a}=-\\frac{0}{2(1)}=0."
+                "type": "text",
+                "text": " has no "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " term, so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-x"
+              },
+              {
+                "type": "text",
+                "text": " give the same "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-value. The graph is symmetrical about the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-axis."
               }
             ],
             "mark_type": "M",
@@ -2627,11 +2943,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "The axis of symmetry is "
               },
               {
                 "type": "display_math",
-                "latex": "0"
+                "latex": "x=0"
               }
             ],
             "mark_type": "A",
@@ -2660,7 +2976,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l3-528",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2746,11 +3062,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "The axis is halfway between the roots, so write the midpoint equation. "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{-2+r_2}{2}=1\\Rightarrow r_2=4."
+                "latex": "\\frac{-2+r_2}{2}=1"
               }
             ],
             "mark_type": "M",
@@ -2761,11 +3077,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "4"
+                "latex": "r_2=4"
               }
             ],
             "mark_type": "A",
@@ -2794,7 +3110,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l3-529",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2872,11 +3188,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "The axis is halfway between the roots "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=-1"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=5"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "x=\\frac{-1+(5)}{2}=2."
+                "latex": "x=\\frac{-1+5}{2}"
               }
             ],
             "mark_type": "M",
@@ -2887,11 +3219,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "2"
+                "latex": "x=2"
               }
             ],
             "mark_type": "A",
@@ -2920,7 +3252,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l3-530",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2940,11 +3272,19 @@
         "prompt": [
           {
             "type": "text",
-            "text": "How many distinct x-intercepts does "
+            "text": "How many distinct "
           },
           {
             "type": "inline_math",
-            "latex": "y=(x-3)^{2}-4"
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": "-intercepts does "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=(x-1)^{2}"
           },
           {
             "type": "text",
@@ -2957,8 +3297,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "2",
-          "canonical_latex": "2",
+          "canonical_answer": "1",
+          "canonical_latex": "1",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2970,7 +3310,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Locate the axis using standard form, the midpoint of the roots, or the factorised form."
+                "text": "Set "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=0"
+              },
+              {
+                "type": "text",
+                "text": " and solve for "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -2979,15 +3335,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute the axis input for the turning value, and solve "
+                "text": "How many values of "
               },
               {
                 "type": "inline_math",
-                "latex": "y=0"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": " when counting x-intercepts."
+                "text": " make "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x-1)^2=0"
+              },
+              {
+                "type": "text",
+                "text": "?"
               }
             ]
           }
@@ -2998,11 +3362,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "Set "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=0"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "(x-3)^2=4=(2)^2\\Rightarrow x=1\\text{ or }x=5,\\text{ so there are 2 distinct intercepts.}"
+                "latex": "(x-1)^2=0\\Rightarrow x=1"
+              },
+              {
+                "type": "text",
+                "text": " The two roots coincide, so the graph just touches the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "-axis."
               }
             ],
             "mark_type": "M",
@@ -3013,11 +3397,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "There is "
               },
               {
                 "type": "display_math",
-                "latex": "2"
+                "latex": "1"
+              },
+              {
+                "type": "text",
+                "text": " distinct "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "-intercept."
               }
             ],
             "mark_type": "A",
@@ -3046,7 +3442,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l3-531",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3096,7 +3492,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Locate the axis using standard form, the midpoint of the roots, or the factorised form."
+                "text": "Points with the same "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-value are mirror images in the axis of symmetry."
               }
             ]
           },
@@ -3105,15 +3509,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute the axis input for the turning value, and solve "
+                "text": "Set "
               },
               {
                 "type": "inline_math",
-                "latex": "y=0"
+                "latex": "y=23"
               },
               {
                 "type": "text",
-                "text": " when counting x-intercepts."
+                "text": " and factorise to find two points with that "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-value. Their midpoint gives the axis."
               }
             ]
           }
@@ -3124,11 +3536,59 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "Set "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=23"
+              },
+              {
+                "type": "text",
+                "text": ": "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2x^2+12x=0"
+              },
+              {
+                "type": "text",
+                "text": " gives "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2x(x+6)=0"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=0"
+              },
+              {
+                "type": "text",
+                "text": " or "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=-6"
+              },
+              {
+                "type": "text",
+                "text": ". The axis is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=-3"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "x=-\\frac{12}{2(2)}=-3,\\quad y(-3)=5."
+                "latex": "y(-3)=2(9)-36+23"
               }
             ],
             "mark_type": "M",
@@ -3139,7 +3599,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-coordinate of the turning point is "
               },
               {
                 "type": "display_math",
@@ -3172,7 +3640,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l4-515",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3196,129 +3664,35 @@
           },
           {
             "type": "inline_math",
-            "latex": "y=-3(x+6)(x-2)"
+            "latex": "y=-2(x+6)(x-2)"
           },
           {
             "type": "text",
-            "text": " has roots -6 and 2. Find its maximum y-value."
-          }
-        ],
-        "marks": 4,
-        "primary_outcome": "6.7",
-        "secondary_outcomes": [],
-        "response": {
-          "type": "numeric",
-          "comparison_mode": "exact_numeric",
-          "canonical_answer": "48",
-          "canonical_latex": "48",
-          "accepted_answers": [],
-          "absolute_tolerance": null,
-          "rounding_precision": null,
-          "unit": null
-        },
-        "hints": [
-          {
-            "stage": 1,
-            "content": [
-              {
-                "type": "text",
-                "text": "Use the vertex, the midpoint of roots, or completion of the square to locate the turning input."
-              }
-            ]
-          },
-          {
-            "stage": 2,
-            "content": [
-              {
-                "type": "text",
-                "text": "Substitute the turning input into the function; the sign of the leading coefficient confirms maximum or minimum."
-              }
-            ]
-          }
-        ],
-        "solution": [
-          {
-            "position": 1,
-            "content": [
-              {
-                "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
-              },
-              {
-                "type": "display_math",
-                "latex": "x=\\frac{-6+(2)}{2}=-2,\\quad y(-2)=-3(4)(-4)=48."
-              }
-            ],
-            "mark_type": "M",
-            "mark_value": 3
-          },
-          {
-            "position": 2,
-            "content": [
-              {
-                "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
-              },
-              {
-                "type": "display_math",
-                "latex": "48"
-              }
-            ],
-            "mark_type": "A",
-            "mark_value": 1
-          }
-        ]
-      }
-    ],
-    "total_marks": 4,
-    "assets": [],
-    "provenance": {
-      "authoring_method": "original_generated",
-      "style_references": [
-        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
-        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
-        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
-        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
-        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
-      ],
-      "created_at": "2026-10-15T11:00:00+08:00",
-      "authored_by": "OpenAI Codex",
-      "reviewed_at": null,
-      "reviewed_by": null,
-      "review_notes": "Awaiting Mathematics and editorial review."
-    }
-  },
-  {
-    "schema_version": "1.0.0",
-    "revision": 3,
-    "stable_key": "n6-l4-516",
-    "bank_key": "g3-sec2-n6-v1",
-    "curriculum_version": "g3_math_v1_draft",
-    "school_level": "secondary_2",
-    "topic_code": "N6",
-    "primary_outcome": "6.7",
-    "title": "Complete the square to find the extreme value",
-    "difficulty": 4,
-    "calculator_allowed": true,
-    "question_type": "structured",
-    "status": "draft",
-    "stem": [],
-    "parts": [
-      {
-        "position": 1,
-        "label": null,
-        "prompt": [
-          {
-            "type": "text",
-            "text": "For "
+            "text": " has roots "
           },
           {
             "type": "inline_math",
-            "latex": "y=x^{2}+2x-1"
+            "latex": "-6"
           },
           {
             "type": "text",
-            "text": ", find the minimum or maximum y-value."
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "2"
+          },
+          {
+            "type": "text",
+            "text": ". Find its maximum "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": "-value."
           }
         ],
         "marks": 4,
@@ -3327,8 +3701,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "-2",
-          "canonical_latex": "-2",
+          "canonical_answer": "32",
+          "canonical_latex": "32",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3360,11 +3734,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the supplied function information into the relevant equation or graph feature."
+                "text": "The axis is halfway between the roots, "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=-2"
+              },
+              {
+                "type": "text",
+                "text": ". Substitute. "
               },
               {
                 "type": "display_math",
-                "latex": "y=(x+1)^2-2,\\text{ so the turning value is }-2."
+                "latex": "y(-2)=-2(-2+6)(-2-2)=-2(4)(-4)"
               }
             ],
             "mark_type": "M",
@@ -3375,11 +3757,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "The maximum "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-value is "
               },
               {
                 "type": "display_math",
-                "latex": "-2"
+                "latex": "32"
               }
             ],
             "mark_type": "A",
@@ -3409,6 +3799,316 @@
   {
     "schema_version": "1.0.0",
     "revision": 4,
+    "stable_key": "n6-l4-516",
+    "bank_key": "g3-sec2-n6-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "N6",
+    "primary_outcome": "6.7",
+    "title": "Turning value and whether it is a maximum or minimum",
+    "difficulty": 4,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "For "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=x^{2}+2x-1"
+          },
+          {
+            "type": "text",
+            "text": ", find the "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": "-coordinate of the turning point."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "6.7",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "-2",
+          "canonical_latex": "-2",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Points with the same "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-value are mirror images in the axis of symmetry."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Set "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=-1"
+              },
+              {
+                "type": "text",
+                "text": " and factorise to find two points with that "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-value. Their midpoint gives the axis."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Set "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=-1"
+              },
+              {
+                "type": "text",
+                "text": ": "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x^2+2x=0"
+              },
+              {
+                "type": "text",
+                "text": " gives "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x(x+2)=0"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=0"
+              },
+              {
+                "type": "text",
+                "text": " or "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=-2"
+              },
+              {
+                "type": "text",
+                "text": ". The axis is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=-1"
+              },
+              {
+                "type": "text",
+                "text": ". "
+              },
+              {
+                "type": "display_math",
+                "latex": "y(-1)=1-2-1"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "So the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-coordinate of the turning point is "
+              },
+              {
+                "type": "display_math",
+                "latex": "-2"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      },
+      {
+        "position": 2,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Is this turning point a minimum or a maximum? Enter "
+          },
+          {
+            "type": "inline_math",
+            "latex": "1"
+          },
+          {
+            "type": "text",
+            "text": " for a minimum or "
+          },
+          {
+            "type": "inline_math",
+            "latex": "2"
+          },
+          {
+            "type": "text",
+            "text": " for a maximum."
+          }
+        ],
+        "marks": 1,
+        "primary_outcome": "6.7",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "1",
+          "canonical_latex": "1",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Look at the coefficient of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x^2"
+              },
+              {
+                "type": "text",
+                "text": "."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "A positive coefficient of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x^2"
+              },
+              {
+                "type": "text",
+                "text": " means the parabola opens upward."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "The coefficient of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x^2"
+              },
+              {
+                "type": "text",
+                "text": " is positive, so the parabola opens upward and the turning point is a minimum. Enter "
+              },
+              {
+                "type": "inline_math",
+                "latex": "1"
+              },
+              {
+                "type": "text",
+                "text": "."
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 4,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-15T11:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 5,
     "stable_key": "n6-l5-505",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3495,11 +4195,59 @@
             "content": [
               {
                 "type": "text",
-                "text": "The graph gives roots -3 and 3. Use the extra point to determine the scale factor, then evaluate at the axis of symmetry."
+                "text": "The graph gives roots "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-3"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=p(x+3)(x-3)"
+              },
+              {
+                "type": "text",
+                "text": ". Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(4,14)"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "y=p(x+3)(x-3);\\ 14=p(7)(1)\\Rightarrow p=2.\\ x_{min}=0,\\ y_{min}=2(3)(-3)=-18."
+                "latex": "14=p(7)(1)\\Rightarrow p=2"
+              },
+              {
+                "type": "text",
+                "text": " The axis is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=0"
+              },
+              {
+                "type": "text",
+                "text": " (the midpoint of the roots). "
+              },
+              {
+                "type": "display_math",
+                "latex": "y(0)=2(3)(-3)"
               }
             ],
             "mark_type": "M",
@@ -3510,7 +4258,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested exact value and check it against the original function or symmetry condition."
+                "text": "So the minimum "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-value is "
               },
               {
                 "type": "display_math",
@@ -3529,7 +4285,7 @@
         "asset_key": "n6-l5-505-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/n6-l5-505-diagram-r4.svg",
+        "path": "assets/n6-l5-505-diagram-r5.svg",
         "alt_text": "Parabola crossing the x-axis at -3 and 3.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",

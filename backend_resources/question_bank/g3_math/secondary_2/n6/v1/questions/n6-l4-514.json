@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l4-514",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -82,11 +82,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=5"
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "inline_math",
+              "latex": "f(x)=16"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "16=k(5-1)(5-4)=4k\\Rightarrow k=4."
+              "latex": "16=k(5-1)(5-4)=4k"
             }
           ],
           "mark_type": "M",
@@ -97,11 +113,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "4"
+              "latex": "k=4"
             }
           ],
           "mark_type": "A",
