@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-lesson-07",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-s1",
@@ -30,7 +30,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A truncated vertical axis is not automatically invalid, but it can exaggerate small differences if the break is unclear. Time points must be spaced according to their actual intervals. Labels, units and a consistent scale allow the reader to judge what is shown."
+          "text": "The diagram shows a truncated vertical axis: it starts at 94 instead of 0. Such an axis is not automatically invalid, but it can exaggerate small differences if the break is unclear. Time points must be spaced according to their actual intervals. Labels, units and a consistent scale allow the reader to judge what is shown."
         },
         {
           "type": "asset_ref",
@@ -66,11 +66,11 @@
       "stable_key": "s1-07-example-1",
       "position": 4,
       "type": "worked_example",
-      "title": "Quantify a truncated axis",
+      "title": "Worked example: quantify a truncated axis",
       "prompt": [
         {
           "type": "text",
-          "text": "Values 96 and 100 are drawn from a baseline of 92. Compare their visible heights."
+          "text": "In the diagram, sales of 98 and 102 thousand are drawn from a baseline of 94. Compare their visible heights with the actual change."
         }
       ],
       "steps": [
@@ -79,7 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Visible heights are 96-92=4 and 100-92=8."
+              "text": "Visible heights are measured from the baseline."
+            },
+            {
+              "type": "display_math",
+              "latex": "98-94=4,\\qquad 102-94=8"
             }
           ]
         },
@@ -88,7 +92,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The second bar looks twice the first height."
+              "text": "The second bar looks twice as tall as the first."
             }
           ]
         },
@@ -97,22 +101,26 @@
           "content": [
             {
               "type": "text",
-              "text": "The actual increase is only 4/96≈4.2%."
+              "text": "The actual increase is 4 thousand out of 98 thousand."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{4}{98}\\times100\\%\\approx4.1\\%"
             }
           ]
         }
       ],
-      "verification_note": "The calculation explains why the visual impression is exaggerated."
+      "verification_note": "Drawn from 0, the bars would be 98 and 102 units tall, almost the same height, which matches the small 4.1% increase."
     },
     {
       "stable_key": "s1-07-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Correct an unequal-width histogram",
+      "title": "Worked example: correct an unequal-width histogram",
       "prompt": [
         {
           "type": "text",
-          "text": "Classes of widths 5 and 10 have frequencies 20 and 20."
+          "text": "Classes of widths 5 and 10 both have frequency 20. Find the heights to draw."
         }
       ],
       "steps": [
@@ -121,7 +129,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Compute density 20/5=4 for the first class."
+              "text": "Height is frequency density = frequency ÷ class width."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{20}{5}=4,\\qquad\\frac{20}{10}=2"
             }
           ]
         },
@@ -130,21 +142,12 @@
           "content": [
             {
               "type": "text",
-              "text": "Compute density 20/10=2 for the second class."
-            }
-          ]
-        },
-        {
-          "position": 3,
-          "content": [
-            {
-              "type": "text",
-              "text": "Use these densities as heights so both bar areas equal 20."
+              "text": "Draw the first bar 4 units high and the second 2 units high."
             }
           ]
         }
       ],
-      "verification_note": "Equal frequencies produce equal areas, not equal heights."
+      "verification_note": "Both bars then have area 5 × 4 = 10 × 2 = 20, so equal frequencies get equal areas, not equal heights."
     },
     {
       "stable_key": "s1-07-recall",
@@ -154,14 +157,14 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A chart places years 2020, 2021 and 2025 at equal intervals. Enter 1 if this can mislead or 0 if it is fair."
+          "text": "On a bar chart whose vertical axis starts at 45, two bars show the values 50 and 55. How many times as tall as the first bar does the second bar look?"
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -170,7 +173,7 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Equal drawn spacing should not represent unequal time intervals."
+          "text": "Visible heights are 50 − 45 = 5 and 55 − 45 = 10, so the second bar looks 2 times as tall, although 55 is only 10% more than 50."
         }
       ]
     },
@@ -182,11 +185,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Read the scale, key, class boundaries and units before calculating or interpreting."
+          "text": "Check where the vertical axis starts, whether time points are evenly spaced for equal intervals, whether histogram bars use frequency density, and whether pictures change in area as well as height."
         },
         {
           "type": "text",
-          "text": "Show the statistical definition or formula, calculate carefully, then explain what the result means for the displayed data."
+          "text": "Quantify the distortion, for example by comparing visible heights with the actual percentage change, and describe a fair redesign."
         }
       ]
     }
@@ -196,15 +199,127 @@
       "asset_key": "s1-lesson-07-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-lesson-07-misleading-axis.svg",
-      "alt_text": "Two bar charts of the same values showing how a truncated baseline exaggerates their difference.",
+      "path": "assets/s1-lesson-07-misleading-axis-r2.svg",
+      "alt_text": "Bar chart of sales in thousands: Year 1 is 98 and Year 2 is 102. The vertical axis starts at 94, not 0, with ticks every 2 up to 104.",
       "generation_spec": {
-        "renderer": "nextscholar-statistics-svg-v1",
-        "diagram_kind": "misleading_axis",
-        "lesson_key": "s1-lesson-07"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "bar_chart",
+        "lesson_key": "s1-lesson-07",
+        "template": "bar_chart",
+        "inputs": {
+          "categories": [
+            "Year 1",
+            "Year 2"
+          ],
+          "values": [
+            98,
+            102
+          ],
+          "y_min": 94,
+          "y_max": 104,
+          "tick_step": 2,
+          "y_label": "Sales (thousands)",
+          "title": "A bar chart that starts at 94",
+          "alt_text": "Bar chart of sales in thousands: Year 1 is 98 and Year 2 is 102. The vertical axis starts at 94, not 0, with ticks every 2 up to 104."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bar-0",
+            "kind": "bar",
+            "value": "98",
+            "tag": "rect",
+            "geometry": {
+              "x": "149",
+              "y": "273",
+              "width": "177",
+              "height": "112"
+            }
+          },
+          {
+            "key": "bar-1",
+            "kind": "bar",
+            "value": "102",
+            "tag": "rect",
+            "geometry": {
+              "x": "444",
+              "y": "161",
+              "width": "177",
+              "height": "224"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:94",
+            "axis": "y",
+            "value": "94",
+            "position": "385",
+            "label": "94"
+          },
+          {
+            "key": "y:96",
+            "axis": "y",
+            "value": "96",
+            "position": "329",
+            "label": "96"
+          },
+          {
+            "key": "y:98",
+            "axis": "y",
+            "value": "98",
+            "position": "273",
+            "label": "98"
+          },
+          {
+            "key": "y:100",
+            "axis": "y",
+            "value": "100",
+            "position": "217",
+            "label": "100"
+          },
+          {
+            "key": "y:102",
+            "axis": "y",
+            "value": "102",
+            "position": "161",
+            "label": "102"
+          },
+          {
+            "key": "y:104",
+            "axis": "y",
+            "value": "104",
+            "position": "105",
+            "label": "104"
+          },
+          {
+            "key": "x:Year 1",
+            "axis": "x",
+            "value": "Year 1",
+            "position": "237.5",
+            "label": "Year 1"
+          },
+          {
+            "key": "x:Year 2",
+            "axis": "x",
+            "value": "Year 2",
+            "position": "532.5",
+            "label": "Year 2"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 94.0,
+          "y_max": 104.0,
+          "tick_step": 2.0
+        }
       },
-      "sha256": "66c0fe5b246d6e04c614f9f3d00ff8b5bf64835c976f825b9aae548b4fd29925",
-      "width": 960,
+      "sha256": "bcba082dc76788bb9981bdab2faf31b3d2f9dfa6d0b735ac0e34478bbe4df583",
+      "width": 720,
       "height": 480
     }
   ],
@@ -214,6 +329,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
