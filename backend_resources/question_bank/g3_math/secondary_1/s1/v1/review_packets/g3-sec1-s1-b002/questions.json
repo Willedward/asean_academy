@@ -392,14 +392,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-010",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "S1",
     "primary_outcome": "1.1",
-    "title": "Relative-frequency numerator",
+    "title": "Frequency from a relative frequency",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -412,7 +412,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A category has relative frequency 0.35 in a sample of 80. Find its frequency. Enter the numerical value only."
+            "text": "A category has relative frequency 0.35 in a sample of 80. (Relative frequency is the frequency of a category divided by the total sample size.) Find the frequency of the category. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -461,12 +461,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "0.35(80)=28"
+                "type": "text",
+                "text": "Frequency = relative frequency × sample size."
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "0.35\\times80=28"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -1380,7 +1391,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l3-012",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1458,12 +1469,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{6}{6+4}(100\\%)=60\\%"
+                "type": "inline_math",
+                "latex": "\\frac{6}{6+4}=0.6"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "0.6\\times100\\%=60\\%"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -1474,7 +1496,7 @@
         "asset_key": "s1-l3-012-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l3-012-diagram-r3.svg",
+        "path": "assets/s1-l3-012-diagram-r4.svg",
         "alt_text": "Pictogram where each ● represents 8; X has 6 symbols; Y has 4 symbols.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -1630,7 +1652,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l4-006",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1650,7 +1672,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A table states that 40% of 250 visitors arrived before noon. A bar chart shows 38 before-noon visitors on Monday and 27 on Tuesday. The rest arrived on Wednesday. Find Wednesday's before-noon count. Enter the numerical value only."
+            "text": "A table states that 40% of 250 visitors arrived before noon. A bar chart shows 38 before-noon visitors on Monday and 27 on Tuesday. The remaining before-noon visitors arrived on Wednesday. Find Wednesday's before-noon count. Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -1732,7 +1754,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l1-010",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1774,7 +1796,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Ask whether the five expenses together make up one whole."
               }
             ]
           },
@@ -1793,8 +1815,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "A pie chart shows how the one fixed budget is shared out among the five expenses. A bar graph could compare the expenses, but it does not show the shares of the whole so directly."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=5"
+                "latex": "\\text{Code}=5"
               }
             ],
             "mark_type": "B",
@@ -1823,7 +1849,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l2-012",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1865,7 +1891,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Ask whether the six meals form a sequence in time or a set of separate groups."
               }
             ]
           },
@@ -1884,8 +1910,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Bars show the numbers sold for each separate meal against one scale. A line graph would join the meals as if one led on to the next, which they do not."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=2"
+                "latex": "\\text{Code}=2"
               }
             ],
             "mark_type": "B",
@@ -1914,7 +1944,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l2-013",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1956,7 +1986,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Decide whether readers need one exact value at a time or an overall picture."
               }
             ]
           },
@@ -1975,8 +2005,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "A table gives every exact result for each pairing of material and temperature. A bar graph would need readers to estimate values from bar heights."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=1"
+                "latex": "\\text{Code}=1"
               }
             ],
             "mark_type": "B",
@@ -2005,7 +2039,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-013",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2025,7 +2059,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. Seven sports have counts ranging from 3 to 240, and readers must compare their magnitudes accurately. Enter the most suitable code only."
+            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. Seven sports have counts ranging from 3 to 240, and readers must compare their sizes accurately. For the reason code, use 1 if a pictogram cannot show seven sports, 2 if counts from 3 to 240 would need many icons or part-icons and would be slow to compare, or 3 if pictograms can show only whole numbers. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
           }
         ],
         "marks": 3,
@@ -2034,8 +2068,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "2",
-          "canonical_latex": "2",
+          "canonical_answer": "22",
+          "canonical_latex": "22",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2047,7 +2081,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Decide whether readers need a picture for fun or a scale for accurate comparison."
               }
             ]
           },
@@ -2056,7 +2090,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The seven sports are separate categories, and readers must compare how big each count is. Ask which display lets them compare sizes against a common scale."
+                "text": "The seven sports are separate categories, and readers must compare how big each count is. Choose the display that compares sizes against a common scale, then think about what a pictogram would need for a count as small as 3 and as large as 240."
               }
             ]
           }
@@ -2066,8 +2100,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "A bar graph compares the seven counts against one scale, even with such a wide range. A pictogram would need many icons or part-icons for counts from 3 to 240 and would be slow to compare, so the reason code is 2."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=2"
+                "latex": "\\text{Code}=22"
               }
             ],
             "mark_type": "B",
@@ -2096,14 +2134,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-014",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "S1",
     "primary_outcome": "1.3",
-    "title": "Communicate a simple whole",
+    "title": "Share of a town's land",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2116,7 +2154,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. Four funding sources sum to exactly 100%, and a presentation needs their relative contributions at a glance. Enter the most suitable code only."
+            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A town plan divides all of its land into housing, parks, roads and shops, and the percentages add up to exactly 100%. A presentation needs the relative share of each use at a glance. For the reason code, use 1 if a bar graph cannot show percentages, 2 if a bar graph cannot show four categories, or 3 if a bar graph compares the uses but does not show them as parts of one whole. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
           }
         ],
         "marks": 3,
@@ -2125,8 +2163,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "5",
-          "canonical_latex": "5",
+          "canonical_answer": "53",
+          "canonical_latex": "53",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2138,7 +2176,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Ask whether the four land uses together make up one whole."
               }
             ]
           },
@@ -2147,7 +2185,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The four funding sources add up to 100%, and the audience must see at a glance how large each share is. Ask which display shows shares of one whole."
+                "text": "The four percentages add up to 100%, and the audience must see at a glance how large each share is. Choose the display that shows shares of one whole, then think about what a bar graph does not show."
               }
             ]
           }
@@ -2157,8 +2195,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "A pie chart shows the four land uses as parts of one whole at a glance. A bar graph can compare the uses, but it does not show them as parts of one whole, so the reason code is 3."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=5"
+                "latex": "\\text{Code}=53"
               }
             ],
             "mark_type": "B",
@@ -2187,7 +2229,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l4-007",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2207,7 +2249,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. Two products have weekly sales across a year. The display must expose turning points and allow their trajectories to be compared. Enter the most suitable code only."
+            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. Two products have weekly sales across a year. The display must expose turning points and allow the two sets of sales to be compared. For the reason code, use 1 if bar graphs cannot show two products, 2 if bar graphs cannot show weekly data, or 3 if 104 separate bars would be crowded and would hide the shape of each product's movement. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
           }
         ],
         "marks": 4,
@@ -2216,8 +2258,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "4",
-          "canonical_latex": "4",
+          "canonical_answer": "43",
+          "canonical_latex": "43",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2229,7 +2271,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Decide what the reader needs to see as the weeks go by for each product."
               }
             ]
           },
@@ -2238,7 +2280,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "There are two products, each with a long run of weekly values. Ask which display lets readers follow each product through the year and spot where it changes direction."
+                "text": "There are two products, each with a long run of weekly values. Choose the display that lets readers follow each product through the year and spot where it changes direction, then think about 104 separate bars."
               }
             ]
           }
@@ -2248,8 +2290,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Two lines on one graph let readers follow each product through the year and see its turning points. Using 104 separate bars would be crowded and would hide the shape of each product's movement, so the reason code is 3."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=4"
+                "latex": "\\text{Code}=43"
               }
             ],
             "mark_type": "B",
@@ -2278,7 +2324,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l5-002",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2298,7 +2344,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A report must first show exact quarterly revenue for 12 regions, then show each region's revenue trend over eight quarters. Enter a two-digit code: the first digit is the best exact-value display and the second is the best trend display."
+            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A report must first show exact quarterly revenue for 12 regions, then show each region's revenue trend over eight quarters. For the reason code, use 1 if a pie chart cannot show numbers, 2 if a pie chart shows shares of one whole and does not show how a region changes from quarter to quarter, or 3 if pie charts cannot show 12 regions. Enter a three-digit number: the first digit is the best exact-value display, the second is the best trend display, and the third is the reason code."
           }
         ],
         "marks": 5,
@@ -2307,8 +2353,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "14",
-          "canonical_latex": "14",
+          "canonical_answer": "142",
+          "canonical_latex": "142",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2320,7 +2366,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "There are two jobs here: looking up exact figures, and following change over time."
               }
             ]
           },
@@ -2329,7 +2375,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Choose one representation for lookup and another for change over time."
+                "text": "Choose one display for lookup and another for change over time, then think about what a pie chart cannot show about a region's trend."
               }
             ]
           }
@@ -2339,8 +2385,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Exact figures for 12 regions are best looked up in a table, and each region's trend over eight quarters is best followed on a line graph. A pie chart shows shares of one whole and does not show how a region changes from quarter to quarter, so the reason code is 2."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=14"
+                "latex": "\\text{Code}=142"
               }
             ],
             "mark_type": "B",
@@ -2369,7 +2419,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l1-011",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2439,6 +2489,10 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "The labels are drawn at equal distances, but the gaps between them are not all the same number of years. Nothing here starts an axis above 0 or leaves off a unit, so the issue is the unequal intervals."
+              },
+              {
                 "type": "display_math",
                 "latex": "\\text{unequal scale intervals}\\Rightarrow 2"
               }
@@ -2455,7 +2509,7 @@
         "asset_key": "s1-l1-011-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l1-011-diagram-r2.svg",
+        "path": "assets/s1-l1-011-diagram-r3.svg",
         "alt_text": "Horizontal time axis of a line graph with the years 2019, 2020, 2023 and 2024 at equal distances.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -2535,7 +2589,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-014",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2555,7 +2609,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "On a line graph, the horizontal distance from 2020 to 2021 is 3 cm and the distance from 2021 to 2024 is also 3 cm. How many actual years are represented by the second interval? Enter the numerical value only."
+            "text": "On a line graph, the horizontal distance from 2016 to 2017 is 3 cm and the distance from 2017 to 2021 is also 3 cm. How many times too short is the second interval, if the scale of the first interval is correct? Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -2564,8 +2618,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "3",
-          "canonical_latex": "3",
+          "canonical_answer": "4",
+          "canonical_latex": "4",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2577,7 +2631,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Read the stated endpoint years."
+                "text": "Find how many years each 3 cm interval actually covers."
               }
             ]
           },
@@ -2586,7 +2640,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract 2021 from 2024."
+                "text": "The second interval should be as long as one year's distance multiplied by the number of years it covers. Compare that length with the 3 cm drawn."
               }
             ]
           }
@@ -2596,12 +2650,47 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2024-2021=3"
+                "type": "text",
+                "text": "The first interval shows 1 year in 3 cm, and the second covers "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2021-2017=4"
+              },
+              {
+                "type": "text",
+                "text": " years."
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "The second interval should be "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4\\times3=12"
+              },
+              {
+                "type": "text",
+                "text": " cm, so it is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "12\\div3=4"
+              },
+              {
+                "type": "text",
+                "text": " times too short."
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -2717,7 +2806,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-015",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2787,12 +2876,39 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{5(8)}{2(8)}=2.5"
+                "type": "text",
+                "text": "Area of the wide bar is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "5\\times8=40"
+              },
+              {
+                "type": "text",
+                "text": " and area of the narrow bar is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2\\times8=16"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
-            "mark_type": "B",
-            "mark_value": 3
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "\\frac{40}{16}=2.5"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
           }
         ]
       }
@@ -2803,7 +2919,7 @@
         "asset_key": "s1-l3-015-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l3-015-diagram-r2.svg",
+        "path": "assets/s1-l3-015-diagram-r3.svg",
         "alt_text": "Two bars of equal height 8 units, with widths 2 cm and 5 cm.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -2989,7 +3105,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l4-008",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3058,12 +3174,39 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\left(\\frac{30}{12}\\right)^2(16)=100"
+                "type": "text",
+                "text": "The side-length scale factor is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{30}{12}=\\frac{5}{2}"
+              },
+              {
+                "type": "text",
+                "text": ", so the area scale factor is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\left(\\frac{5}{2}\\right)^2=\\frac{25}{4}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
-            "mark_type": "B",
-            "mark_value": 4
+            "mark_type": "M",
+            "mark_value": 3
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "\\frac{25}{4}\\times16=100"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
           }
         ]
       }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l5-002",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A report must first show exact quarterly revenue for 12 regions, then show each region's revenue trend over eight quarters. Enter a two-digit code: the first digit is the best exact-value display and the second is the best trend display."
+          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A report must first show exact quarterly revenue for 12 regions, then show each region's revenue trend over eight quarters. For the reason code, use 1 if a pie chart cannot show numbers, 2 if a pie chart shows shares of one whole and does not show how a region changes from quarter to quarter, or 3 if pie charts cannot show 12 regions. Enter a three-digit number: the first digit is the best exact-value display, the second is the best trend display, and the third is the reason code."
         }
       ],
       "marks": 5,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "14",
-        "canonical_latex": "14",
+        "canonical_answer": "142",
+        "canonical_latex": "142",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Match the information need to the main strength of each representation."
+              "text": "There are two jobs here: looking up exact figures, and following change over time."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Choose one representation for lookup and another for change over time."
+              "text": "Choose one display for lookup and another for change over time, then think about what a pie chart cannot show about a region's trend."
             }
           ]
         }
@@ -61,8 +61,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Exact figures for 12 regions are best looked up in a table, and each region's trend over eight quarters is best followed on a line graph. A pie chart shows shares of one whole and does not show how a region changes from quarter to quarter, so the reason code is 2."
+            },
+            {
               "type": "display_math",
-              "latex": "\\text{Best choice code}=14"
+              "latex": "\\text{Code}=142"
             }
           ],
           "mark_type": "B",

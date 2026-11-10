@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-010",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "S1",
   "primary_outcome": "1.1",
-  "title": "Relative-frequency numerator",
+  "title": "Frequency from a relative frequency",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A category has relative frequency 0.35 in a sample of 80. Find its frequency. Enter the numerical value only."
+          "text": "A category has relative frequency 0.35 in a sample of 80. (Relative frequency is the frequency of a category divided by the total sample size.) Find the frequency of the category. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -69,12 +69,23 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "0.35(80)=28"
+              "type": "text",
+              "text": "Frequency = relative frequency × sample size."
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "0.35\\times80=28"
             }
           ],
           "mark_type": "A",
-          "mark_value": 3
+          "mark_value": 1
         }
       ]
     }
