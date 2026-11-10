@@ -69,7 +69,7 @@ export function EnglishDiagnosticCard() {
 
   if (error) {
     return (
-      <Callout tone="amber" icon={RefreshCw}>
+      <Callout role="status" tone="amber" icon={RefreshCw}>
         <strong>English diagnostic unavailable</strong>
         <span>{error}</span>
         <Button onClick={() => setReload((value) => value + 1)}>

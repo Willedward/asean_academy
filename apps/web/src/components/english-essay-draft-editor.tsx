@@ -289,7 +289,7 @@ export function EnglishEssayDraftEditor({
         </Callout>
       ) : null}
       {saveState === "conflict" ? (
-        <Callout tone="amber" icon={AlertTriangle}>
+        <Callout role="status" tone="amber" icon={AlertTriangle}>
           <strong>Your text has not been overwritten.</strong>
           <span>
             A newer remote revision exists. Copy your current text if needed,
@@ -428,7 +428,7 @@ export function EnglishEssayDraftEditor({
             </Muted>
           ) : null}
           {submissionError ? (
-            <Callout tone="amber" icon={AlertTriangle}>
+            <Callout role="status" tone="amber" icon={AlertTriangle}>
               <strong>Submission was not completed.</strong>
               <span>{submissionError}</span>
             </Callout>
@@ -513,7 +513,7 @@ export function EnglishEssayDraftEditor({
           ) : null}
           {submission ? (
             <>
-              <Callout tone="success" icon={CheckCircle2}>
+              <Callout role="status" tone="success" icon={CheckCircle2}>
                 <strong>
                   Submission revision {submission.submission_revision} is saved
                   permanently.

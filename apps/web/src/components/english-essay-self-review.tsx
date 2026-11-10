@@ -64,7 +64,7 @@ function completedReview(
       role="region"
       aria-label="Completed self-review"
     >
-      <Callout tone="success" icon={CheckCircle2}>
+      <Callout role="status" tone="success" icon={CheckCircle2}>
         <strong>Your self-review is saved permanently.</strong>
         <span>
           Completed{" "}
@@ -188,7 +188,7 @@ export function EnglishEssaySelfReview({
   }
   if (!workspace || error) {
     return (
-      <Callout tone="amber" icon={AlertTriangle}>
+      <Callout role="status" tone="amber" icon={AlertTriangle}>
         <strong>Self-review is temporarily unavailable.</strong>
         <span>{error}</span>
       </Callout>
@@ -379,7 +379,7 @@ export function EnglishEssaySelfReview({
               <span>{workspace.learner_disclaimer}</span>
             </label>
             {error ? (
-              <Callout tone="danger" icon={AlertTriangle}>
+              <Callout role="status" tone="danger" icon={AlertTriangle}>
                 <strong>Self-review was not completed.</strong>
                 <span>{error}</span>
               </Callout>

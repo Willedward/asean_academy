@@ -92,7 +92,7 @@ export function LiveLessonView({
       ) : null}
 
       {progressWarning ? (
-        <Callout tone="amber" icon={AlertTriangle}>
+        <Callout role="status" tone="amber" icon={AlertTriangle}>
           <strong>Progress could not be recorded</strong>
           <span>{progressWarning} You can continue reading this lesson.</span>
         </Callout>

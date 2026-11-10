@@ -173,6 +173,28 @@ describe("TutorDock", () => {
     await act(async () => pending.resolve(reply()));
   });
 
+  it("announces only the conversation log, not starters or the thinking status", async () => {
+    const pending = deferred<TutorReplyResponse>();
+    sendTutorMessage.mockReturnValue(pending.promise);
+    render(<TutorDock {...props} />);
+    await openTutor();
+    await waitFor(() => expect(createTutorSession).toHaveBeenCalled());
+    const dialog = screen.getByRole("dialog", { name: "Hornbill" });
+    expect(within(dialog).queryByRole("log")).toBeNull();
+    expect(dialog.querySelector("[aria-live]")).toBeNull();
+
+    await typeAndSend("first");
+    const log = await within(dialog).findByRole("log", { name: "Conversation" });
+    expect(log).toHaveAttribute("aria-live", "polite");
+    const thinking = within(dialog).getByRole("status");
+    expect(thinking).toHaveTextContent("Thinking about your answer");
+    expect(log.contains(thinking)).toBe(false);
+
+    await act(async () => pending.resolve(reply()));
+    expect(within(log).getByText("For a perfect square every power is even.")).toBeInTheDocument();
+    expect(dialog.querySelectorAll("[aria-live]")).toHaveLength(1);
+  });
+
   it("5. restores the server conversation after a refresh", async () => {
     window.sessionStorage.setItem(`ns-tutor:${PRACTICE}:n1-l1-02:1`, SESSION);
     getTutorSession.mockResolvedValue(

@@ -200,28 +200,34 @@ export function TutorView({
         </div>
       </div>
 
-      <div ref={listRef} aria-live="polite" className="flex min-h-0 grow flex-col gap-3.5 overflow-y-auto p-4 lg:p-5">
+      <div ref={listRef} className="flex min-h-0 grow flex-col gap-3.5 overflow-y-auto p-4 lg:p-5">
         {!hasAsked ? (
           <>
             <AiNotice />
             <Greeting name={studentName} />
           </>
         ) : null}
-        {messages.map((message) =>
-          message.role === "student" ? (
-            <StudentMessage key={message.id} message={message} />
-          ) : (
-            <AssistantMessage
-              key={message.id}
-              message={message}
-              report={
-                message.id === lastAssistant?.id && (onReport || reportHref) ? (
-                  <ReportLink onClick={onReport ? () => onReport(message.id) : undefined} href={reportHref} />
-                ) : undefined
-              }
-            />
-          ),
-        )}
+        {/* Only the conversation is a live region. Starter buttons, "Thinking" (its own
+            status) and notices stay outside it, so nothing is announced twice. */}
+        {messages.length ? (
+          <div role="log" aria-live="polite" aria-label="Conversation" className="flex flex-col gap-3.5">
+            {messages.map((message) =>
+              message.role === "student" ? (
+                <StudentMessage key={message.id} message={message} />
+              ) : (
+                <AssistantMessage
+                  key={message.id}
+                  message={message}
+                  report={
+                    message.id === lastAssistant?.id && (onReport || reportHref) ? (
+                      <ReportLink onClick={onReport ? () => onReport(message.id) : undefined} href={reportHref} />
+                    ) : undefined
+                  }
+                />
+              ),
+            )}
+          </div>
+        ) : null}
         {!hasAsked && !blocked ? <StarterQuestions onPick={send} disabled={sending} /> : null}
         {sending ? <Thinking /> : null}
         {noticeInChat ? <NoticeView notice={notice} onRetry={onRetry} now={now} timeZone={timeZone} /> : null}

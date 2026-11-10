@@ -63,7 +63,7 @@ export function EnglishDiagnosticResult({ sessionId }: { sessionId: string }) {
 
   if (error) {
     return (
-      <Callout tone="amber" icon={AlertTriangle}>
+      <Callout role="status" tone="amber" icon={AlertTriangle}>
         <strong>Result unavailable</strong>
         <span>{error}</span>
         <Button

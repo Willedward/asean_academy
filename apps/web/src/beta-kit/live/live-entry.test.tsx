@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import {
@@ -93,5 +93,22 @@ describe("live entry screens", () => {
     expect(headings).toHaveLength(1);
     expect(headings[0]).toHaveTextContent("Activate student access");
     expect(screen.getByText("Welcome to the beta.").tagName).toBe("P");
+  });
+
+  it("keeps static callouts out of live regions and does not nest them in the alert", () => {
+    render(
+      <LiveSignInScreen
+        configured
+        error="This Google account has no invitation."
+        googleAction={vi.fn()}
+        next="/onboarding"
+      />,
+    );
+
+    const alert = screen.getByRole("alert");
+    expect(alert).toHaveTextContent("This Google account has no invitation.");
+    expect(within(alert).queryByRole("status")).not.toBeInTheDocument();
+    expect(screen.queryAllByRole("status")).toHaveLength(0);
+    expect(screen.getByText("Invitation-bound access")).toBeInTheDocument();
   });
 });

@@ -463,10 +463,17 @@ export function Callout({
   children,
   tone = "amber",
   icon: Icon = Lightbulb,
+  role,
 }: {
   children: ReactNode;
   tone?: Tone;
   icon?: IconType;
+  /**
+   * Opt in to a live region only for feedback that appears after an action
+   * (results, errors, saves). Static notices stay plain so they are not
+   * announced, and never nest one inside another live region.
+   */
+  role?: "status" | "alert";
 }) {
   const bg = {
     amber: "bg-ns-amber-soft text-ns-amber-text",
@@ -477,7 +484,7 @@ export function Callout({
   }[tone];
   return (
     <div
-      role="status"
+      role={role}
       className={cn("flex items-start gap-3 rounded-xl p-4", bg)}
     >
       <span className="flex pt-0.5">

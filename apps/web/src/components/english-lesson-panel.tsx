@@ -114,7 +114,7 @@ export function EnglishLessonPanel({ lesson }: { lesson: EnglishLessonResponse }
           Answers are marked immediately without a paid AI call.
         </p>
         {error ? (
-          <Callout tone="amber" icon={AlertTriangle}>
+          <Callout role="status" tone="amber" icon={AlertTriangle}>
             <span>{error}</span>
           </Callout>
         ) : null}

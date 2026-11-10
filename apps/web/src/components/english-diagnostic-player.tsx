@@ -315,7 +315,7 @@ export function EnglishDiagnosticPlayer({
         </Callout>
       ) : null}
       {error ? (
-        <Callout tone="amber" icon={AlertTriangle}>
+        <Callout role="status" tone="amber" icon={AlertTriangle}>
           <span>{error}</span>
         </Callout>
       ) : null}

@@ -196,7 +196,7 @@ export function EnglishEssayMarking({
 
   if (job && PENDING.has(job.status)) {
     return (
-      <Callout tone="amber" icon={Clock3}>
+      <Callout role="status" tone="amber" icon={Clock3}>
         <strong>Fixture feedback is being prepared.</strong>
         <span>
           Attempt {job.attempt_count} of {job.max_attempts}. This page checks
@@ -209,7 +209,7 @@ export function EnglishEssayMarking({
 
   if (job?.status === "permanent_failed") {
     return (
-      <Callout tone="danger" icon={AlertTriangle}>
+      <Callout role="status" tone="danger" icon={AlertTriangle}>
         <strong>
           The fixture worker stopped after {job.max_attempts} attempts.
         </strong>
@@ -243,7 +243,7 @@ export function EnglishEssayMarking({
         </div>
       </div>
       {error ? (
-        <Callout tone="danger" icon={AlertTriangle}>
+        <Callout role="status" tone="danger" icon={AlertTriangle}>
           <strong>Fixture feedback is unavailable.</strong>
           <span>{error}</span>
         </Callout>

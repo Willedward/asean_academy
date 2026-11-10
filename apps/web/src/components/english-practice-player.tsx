@@ -369,7 +369,12 @@ export function EnglishPracticePlayer({
     const target = document.getElementById(
       `passage-${question?.stable_key}-paragraph-${paragraph}`,
     );
-    target?.scrollIntoView?.({ behavior: "smooth", block: "center" });
+    const reduceMotion =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+    target?.scrollIntoView?.({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "center",
+    });
     target?.focus({ preventScroll: true });
   }
 
@@ -767,7 +772,7 @@ export function EnglishPracticePlayer({
             ) : null}
             {hint ? (
               <div data-hint-feedback tabIndex={-1} className={focusRing}>
-                <Callout tone="amber" icon={Lightbulb}>
+                <Callout role="status" tone="amber" icon={Lightbulb}>
                   <strong>Gap hints</strong>
                   <ol className="m-0 space-y-1 pl-5">
                     {hint.parts.map((partHint, index) => (
@@ -786,7 +791,7 @@ export function EnglishPracticePlayer({
               >
                 {attempt.parts.map((result) => (
                   <li className="list-none" key={result.position}>
-                    <Callout
+                    <Callout role="status"
                       tone={result.correct ? "success" : "amber"}
                       icon={result.correct ? CheckCircle2 : AlertTriangle}
                     >
@@ -878,7 +883,7 @@ export function EnglishPracticePlayer({
                   )}
                   {hint?.parts[part.position - 1] ? (
                     <div data-hint-feedback tabIndex={-1} className={focusRing}>
-                      <Callout tone="amber" icon={Lightbulb}>
+                      <Callout role="status" tone="amber" icon={Lightbulb}>
                         <span>{hint.parts[part.position - 1]}</span>
                       </Callout>
                     </div>
@@ -889,7 +894,7 @@ export function EnglishPracticePlayer({
                       tabIndex={-1}
                       className={focusRing}
                     >
-                      <Callout
+                      <Callout role="status"
                         tone={result.correct ? "success" : "amber"}
                         icon={result.correct ? CheckCircle2 : AlertTriangle}
                       >
@@ -957,7 +962,7 @@ export function EnglishPracticePlayer({
             </Button>
           )}
           {attempt.retry_queued ? (
-            <Callout tone="amber" icon={RotateCcw}>
+            <Callout role="status" tone="amber" icon={RotateCcw}>
               <strong>Exit ticket queued</strong>
               <span>This question will appear in retry review.</span>
             </Callout>
@@ -967,7 +972,7 @@ export function EnglishPracticePlayer({
 
       {error ? (
         <div ref={errorRef} tabIndex={-1} className={focusRing}>
-          <Callout tone="amber" icon={AlertTriangle}>
+          <Callout role="status" tone="amber" icon={AlertTriangle}>
             <span>{error}</span>
           </Callout>
         </div>

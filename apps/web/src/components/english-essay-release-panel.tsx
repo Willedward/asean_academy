@@ -192,7 +192,7 @@ function PrivacyForm({ api, evidence, busy, run }: { api: EssayReleaseApi; evide
         void run(() => api.privacy(body), "Privacy review recorded.");
       }}>
         <input type="hidden" name="gate_id" value={gateId} />
-        {Object.keys(checks).map((key) => <label className="flex gap-2 text-sm" key={key}><input type="checkbox" checked={checks[key as keyof typeof checks]} onChange={(event) => setChecks({ ...checks, [key]: event.target.checked })} />{label(key)}</label>)}
+        {Object.keys(checks).map((key) => <label className="flex items-start gap-2 text-sm leading-5" key={key}><input type="checkbox" className="size-5 shrink-0" checked={checks[key as keyof typeof checks]} onChange={(event) => setChecks({ ...checks, [key]: event.target.checked })} />{label(key)}</label>)}
         <Text name="consent_policy_version" label="Consent policy version" value="english-essay-consent-v1" />
         <Text name="retention_policy_version" label="Retention policy version" value="english-essay-retention-v1" />
         <Text name="retention_days" label="Application retention days" value="90" type="number" />
