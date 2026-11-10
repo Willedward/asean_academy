@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-031",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.4",
-  "title": "Two ribbon lengths",
+  "title": "Three ribbon lengths",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A red ribbon is 1.5 m longer than a blue ribbon. Their combined length is 8.7 m. Let "
+          "text": "A red ribbon is twice as long as a blue ribbon, and a green ribbon is 1.2 m longer than the blue ribbon. Their combined length is 9.2 m. Let "
         },
         {
           "type": "inline_math",
@@ -45,11 +45,9 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "18/5",
-        "canonical_latex": "\\frac{18}{5}",
-        "accepted_answers": [
-          "3.6"
-        ],
+        "canonical_answer": "2",
+        "canonical_latex": "2",
+        "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
         "unit": null
@@ -60,11 +58,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The red ribbon is "
+              "text": "Write the red and green lengths in terms of "
             },
             {
               "type": "inline_math",
-              "latex": "x+1.5"
+              "latex": "x"
             },
             {
               "type": "text",
@@ -77,15 +75,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
-            },
-            {
-              "type": "inline_math",
-              "latex": "x+(x+1.5)=8.7"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Add all three lengths and set the total equal to 9.2."
             }
           ]
         }
@@ -95,8 +85,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "2x+1.5=8.7"
+              "type": "inline_math",
+              "latex": "x+2x+(x+1.2)=9.2"
             }
           ],
           "mark_type": "M",
@@ -106,8 +96,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "2x=7.2"
+              "type": "inline_math",
+              "latex": "4x+1.2=9.2"
             }
           ],
           "mark_type": "M",
@@ -117,8 +107,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=3.6"
+              "type": "inline_math",
+              "latex": "x=2"
             }
           ],
           "mark_type": "A",

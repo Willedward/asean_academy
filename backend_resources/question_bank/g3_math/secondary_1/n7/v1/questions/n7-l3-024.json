@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-024",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.1",
-  "title": "Scaling both sides of an equation",
+  "title": "Which equation is not equivalent",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,27 +20,43 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The left side of the first equation is doubled to obtain "
+          "text": "Three of the equations below have the same solution as "
         },
         {
           "type": "inline_math",
-          "latex": "6x-4"
+          "latex": "3x-2=13"
         },
         {
           "type": "text",
-          "text": ". The right side must also be doubled."
-        },
-        {
-          "type": "display_math",
-          "latex": "3x-2=13\\quad\\Longrightarrow\\quad6x-4=k"
-        },
-        {
-          "type": "text",
-          "text": "Find "
+          "text": ". Enter the code of the one that does not. Enter 1 for "
         },
         {
           "type": "inline_math",
-          "latex": "k"
+          "latex": "6x-4=26"
+        },
+        {
+          "type": "text",
+          "text": ", 2 for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3x=15"
+        },
+        {
+          "type": "text",
+          "text": ", 3 for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3x-2+5=13"
+        },
+        {
+          "type": "text",
+          "text": " and 4 for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x-\\frac{2}{3}=\\frac{13}{3}"
         },
         {
           "type": "text",
@@ -53,8 +69,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "26",
-        "canonical_latex": "26",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -66,7 +82,7 @@
           "content": [
             {
               "type": "text",
-              "text": "An equivalent equation requires the same multiplication on both sides."
+              "text": "An equivalent equation is made by doing the same thing to both sides."
             }
           ]
         },
@@ -75,7 +91,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Double 13."
+              "text": "For each choice, decide what was done to each side of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3x-2=13"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -85,8 +109,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "2(3x-2)=2(13)"
+              "type": "text",
+              "text": "Choices 1, 2 and 4 come from multiplying both sides by 2, adding 2 to both sides, and dividing both sides by 3."
             }
           ],
           "mark_type": "M",
@@ -96,8 +120,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "6x-4=26"
+              "type": "text",
+              "text": "Choice 3 adds 5 to the left-hand side only."
             }
           ],
           "mark_type": "M",
@@ -107,8 +131,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k=26"
+              "type": "text",
+              "text": "The code is 3."
             }
           ],
           "mark_type": "A",

@@ -108,14 +108,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l2-024",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.1",
-    "title": "Recognising an equivalent rearrangement",
+    "title": "Equation or expression",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -128,7 +128,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Adding "
+            "text": "Use code 1 for "
+          },
+          {
+            "type": "inline_math",
+            "latex": "2x+5"
+          },
+          {
+            "type": "text",
+            "text": ", code 2 for "
+          },
+          {
+            "type": "inline_math",
+            "latex": "2x+5=11"
+          },
+          {
+            "type": "text",
+            "text": ", code 3 for 5 and code 4 for "
           },
           {
             "type": "inline_math",
@@ -136,31 +152,7 @@
           },
           {
             "type": "text",
-            "text": " to both sides produces an equation of the form "
-          },
-          {
-            "type": "inline_math",
-            "latex": "7=3+kx"
-          },
-          {
-            "type": "text",
-            "text": "."
-          },
-          {
-            "type": "display_math",
-            "latex": "7-x=3"
-          },
-          {
-            "type": "text",
-            "text": "Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "k"
-          },
-          {
-            "type": "text",
-            "text": "."
+            "text": ". Enter the code of the one that is an equation."
           }
         ],
         "marks": 2,
@@ -169,8 +161,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "1",
-          "canonical_latex": "1",
+          "canonical_answer": "2",
+          "canonical_latex": "2",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -182,15 +174,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add one copy of "
-              },
-              {
-                "type": "inline_math",
-                "latex": "x"
-              },
-              {
-                "type": "text",
-                "text": " to each side."
+                "text": "An equation states that two expressions are equal."
               }
             ]
           },
@@ -199,23 +183,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add "
-              },
-              {
-                "type": "inline_math",
-                "latex": "x"
-              },
-              {
-                "type": "text",
-                "text": " to both sides, then compare the right-hand side with "
-              },
-              {
-                "type": "inline_math",
-                "latex": "3+kx"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Look for the only choice that contains an equals sign."
               }
             ]
           }
@@ -225,8 +193,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "7=3+x"
+                "type": "text",
+                "text": "An equation has an equals sign."
               }
             ],
             "mark_type": "M",
@@ -236,8 +204,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "k=1"
+                "type": "text",
+                "text": "The code is 2."
               }
             ],
             "mark_type": "A",
@@ -266,14 +234,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l2-025",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.1",
-    "title": "Naming the removed constant",
+    "title": "Value of an expression from a solution",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -286,39 +254,27 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The equation is changed to the equivalent equation "
+            "text": "Find the value of "
           },
           {
             "type": "inline_math",
-            "latex": "3x=15"
+            "latex": "2x+3"
           },
           {
             "type": "text",
-            "text": " by subtracting "
+            "text": " when "
           },
           {
             "type": "inline_math",
-            "latex": "k"
+            "latex": "x"
           },
           {
             "type": "text",
-            "text": " from both sides."
+            "text": " is the solution of the equation."
           },
           {
             "type": "display_math",
             "latex": "3x+4=19"
-          },
-          {
-            "type": "text",
-            "text": "Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "k"
-          },
-          {
-            "type": "text",
-            "text": "."
           }
         ],
         "marks": 2,
@@ -327,8 +283,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "4",
-          "canonical_latex": "4",
+          "canonical_answer": "13",
+          "canonical_latex": "13",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -340,11 +296,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Identify the constant added to "
+                "text": "First solve the equation for "
               },
               {
                 "type": "inline_math",
-                "latex": "3x"
+                "latex": "x"
               },
               {
                 "type": "text",
@@ -357,15 +313,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Which constant is added to "
+                "text": "Substitute your value of "
               },
               {
                 "type": "inline_math",
-                "latex": "3x"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": "? Subtract that number from both sides."
+                "text": " into "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2x+3"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -375,8 +339,16 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "3x+4-4=19-4"
+                "type": "inline_math",
+                "latex": "3x=15"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=5"
               }
             ],
             "mark_type": "M",
@@ -386,8 +358,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "k=4"
+                "type": "inline_math",
+                "latex": "2x+3=2(5)+3=13"
               }
             ],
             "mark_type": "A",
@@ -416,14 +388,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l3-024",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.1",
-    "title": "Scaling both sides of an equation",
+    "title": "Which equation is not equivalent",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -436,27 +408,43 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The left side of the first equation is doubled to obtain "
+            "text": "Three of the equations below have the same solution as "
           },
           {
             "type": "inline_math",
-            "latex": "6x-4"
+            "latex": "3x-2=13"
           },
           {
             "type": "text",
-            "text": ". The right side must also be doubled."
-          },
-          {
-            "type": "display_math",
-            "latex": "3x-2=13\\quad\\Longrightarrow\\quad6x-4=k"
-          },
-          {
-            "type": "text",
-            "text": "Find "
+            "text": ". Enter the code of the one that does not. Enter 1 for "
           },
           {
             "type": "inline_math",
-            "latex": "k"
+            "latex": "6x-4=26"
+          },
+          {
+            "type": "text",
+            "text": ", 2 for "
+          },
+          {
+            "type": "inline_math",
+            "latex": "3x=15"
+          },
+          {
+            "type": "text",
+            "text": ", 3 for "
+          },
+          {
+            "type": "inline_math",
+            "latex": "3x-2+5=13"
+          },
+          {
+            "type": "text",
+            "text": " and 4 for "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x-\\frac{2}{3}=\\frac{13}{3}"
           },
           {
             "type": "text",
@@ -469,8 +457,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "26",
-          "canonical_latex": "26",
+          "canonical_answer": "3",
+          "canonical_latex": "3",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -482,7 +470,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "An equivalent equation requires the same multiplication on both sides."
+                "text": "An equivalent equation is made by doing the same thing to both sides."
               }
             ]
           },
@@ -491,7 +479,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Double 13."
+                "text": "For each choice, decide what was done to each side of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3x-2=13"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -501,8 +497,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2(3x-2)=2(13)"
+                "type": "text",
+                "text": "Choices 1, 2 and 4 come from multiplying both sides by 2, adding 2 to both sides, and dividing both sides by 3."
               }
             ],
             "mark_type": "M",
@@ -512,8 +508,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "6x-4=26"
+                "type": "text",
+                "text": "Choice 3 adds 5 to the left-hand side only."
               }
             ],
             "mark_type": "M",
@@ -523,8 +519,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "k=26"
+                "type": "text",
+                "text": "The code is 3."
               }
             ],
             "mark_type": "A",
@@ -714,7 +710,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l4-013",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -807,8 +803,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "a=3"
+                "type": "inline_math",
+                "latex": "ax+2a=3x+6"
               }
             ],
             "mark_type": "M",
@@ -818,8 +814,32 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
+                "type": "text",
+                "text": "Matching terms gives "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a=3"
+              },
+              {
+                "type": "text",
+                "text": " for the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "-terms and "
+              },
+              {
+                "type": "inline_math",
                 "latex": "2a=6"
+              },
+              {
+                "type": "text",
+                "text": " for the constants."
               }
             ],
             "mark_type": "M",
@@ -829,7 +849,7 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "a=3"
               }
             ],
@@ -1355,14 +1375,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l3-027",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.2",
-    "title": "Fractional coefficient in a linear equation",
+    "title": "Bracket with terms on both sides",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1375,14 +1395,6 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use multiplication to remove the denominator."
-          },
-          {
-            "type": "display_math",
-            "latex": "\\frac{3x}{4}+5=17"
-          },
-          {
-            "type": "text",
             "text": "Find the value of "
           },
           {
@@ -1392,6 +1404,10 @@
           {
             "type": "text",
             "text": "."
+          },
+          {
+            "type": "display_math",
+            "latex": "3(x+2)+5=2x+17"
           }
         ],
         "marks": 3,
@@ -1400,8 +1416,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "16",
-          "canonical_latex": "16",
+          "canonical_answer": "6",
+          "canonical_latex": "6",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1413,15 +1429,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract 5 to obtain "
-              },
-              {
-                "type": "inline_math",
-                "latex": "\\frac{3x}{4}=12"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Expand the bracket, then collect the terms on the left."
               }
             ]
           },
@@ -1430,7 +1438,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply by 4, then divide by 3."
+                "text": "Bring the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "-terms to one side and the numbers to the other."
               }
             ]
           }
@@ -1440,8 +1456,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{3x}{4}=12"
+                "type": "inline_math",
+                "latex": "3x+11=2x+17"
               }
             ],
             "mark_type": "M",
@@ -1451,8 +1467,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "3x=48"
+                "type": "inline_math",
+                "latex": "x+11=17"
               }
             ],
             "mark_type": "M",
@@ -1462,8 +1478,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=16"
+                "type": "inline_math",
+                "latex": "x=6"
               }
             ],
             "mark_type": "A",
@@ -1492,7 +1508,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l4-014",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1512,14 +1528,6 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Distribute -2 accurately before solving."
-          },
-          {
-            "type": "display_math",
-            "latex": "7-2(3x-4)=5x-7"
-          },
-          {
-            "type": "text",
             "text": "Find the value of "
           },
           {
@@ -1529,6 +1537,10 @@
           {
             "type": "text",
             "text": "."
+          },
+          {
+            "type": "display_math",
+            "latex": "7-2(3x-4)=5x-7"
           }
         ],
         "marks": 3,
@@ -1550,11 +1562,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "The left side becomes "
+                "text": "Expand the bracket, taking care with the signs when distributing the "
               },
               {
                 "type": "inline_math",
-                "latex": "15-6x"
+                "latex": "-2"
               },
               {
                 "type": "text",
@@ -1567,23 +1579,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add "
+                "text": "Collect the "
               },
               {
                 "type": "inline_math",
-                "latex": "6x"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": " and 7 to form "
-              },
-              {
-                "type": "inline_math",
-                "latex": "22=11x"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "-terms on one side and the constants on the other."
               }
             ]
           }
@@ -1593,8 +1597,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "22=11x"
+                "type": "inline_math",
+                "latex": "7-6x+8=5x-7"
               }
             ],
             "mark_type": "M",
@@ -1604,8 +1608,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "11x=22"
+                "type": "inline_math",
+                "latex": "22=11x"
               }
             ],
             "mark_type": "M",
@@ -1615,7 +1619,7 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "x=2"
               }
             ],
@@ -2715,7 +2719,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l2-030",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2735,23 +2739,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A jacket is sold for S$64 after a 20% discount. Let "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": " dollars be its original price. Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": "."
+            "text": "A jacket is sold for S$64 after a 20% discount. Let the original price be S$x. Find x. Enter only the number."
           }
         ],
         "marks": 2,
@@ -3120,14 +3108,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l3-031",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.4",
-    "title": "Two ribbon lengths",
+    "title": "Three ribbon lengths",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3140,7 +3128,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A red ribbon is 1.5 m longer than a blue ribbon. Their combined length is 8.7 m. Let "
+            "text": "A red ribbon is twice as long as a blue ribbon, and a green ribbon is 1.2 m longer than the blue ribbon. Their combined length is 9.2 m. Let "
           },
           {
             "type": "inline_math",
@@ -3165,11 +3153,9 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "18/5",
-          "canonical_latex": "\\frac{18}{5}",
-          "accepted_answers": [
-            "3.6"
-          ],
+          "canonical_answer": "2",
+          "canonical_latex": "2",
+          "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
           "unit": null
@@ -3180,11 +3166,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "The red ribbon is "
+                "text": "Write the red and green lengths in terms of "
               },
               {
                 "type": "inline_math",
-                "latex": "x+1.5"
+                "latex": "x"
               },
               {
                 "type": "text",
@@ -3197,15 +3183,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
-              },
-              {
-                "type": "inline_math",
-                "latex": "x+(x+1.5)=8.7"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Add all three lengths and set the total equal to 9.2."
               }
             ]
           }
@@ -3215,8 +3193,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2x+1.5=8.7"
+                "type": "inline_math",
+                "latex": "x+2x+(x+1.2)=9.2"
               }
             ],
             "mark_type": "M",
@@ -3226,8 +3204,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2x=7.2"
+                "type": "inline_math",
+                "latex": "4x+1.2=9.2"
               }
             ],
             "mark_type": "M",
@@ -3237,8 +3215,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=3.6"
+                "type": "inline_math",
+                "latex": "x=2"
               }
             ],
             "mark_type": "A",
@@ -3267,7 +3245,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l4-016",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3303,7 +3281,7 @@
           },
           {
             "type": "text",
-            "text": ". The number is 4 times the sum of its digits plus 9. Find "
+            "text": ". The number is 9 more than 4 times the sum of its digits. Find "
           },
           {
             "type": "inline_math",
@@ -3420,14 +3398,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l5-005",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.4",
-    "title": "Multi-stage charity collection",
+    "title": "Multi-stage class fund",
     "difficulty": 5,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3440,23 +3418,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A class collects "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": " dollars. It spends S$48 on materials, then donates one third of the remaining amount. After receiving an additional S$20, it has S$100 left. Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": "."
+            "text": "A class collects S$x. It donates one third of the money, then spends S$48 on materials. After receiving another S$20, the class has S$100. Find x. Enter only the number."
           }
         ],
         "marks": 3,
@@ -3465,8 +3427,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "168",
-          "canonical_latex": "168",
+          "canonical_answer": "192",
+          "canonical_latex": "192",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3478,15 +3440,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "After spending, "
+                "text": "After the donation, two thirds of "
               },
               {
                 "type": "inline_math",
-                "latex": "x-48"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": " remains; donating one third leaves two thirds."
+                "text": " remains."
               }
             ]
           },
@@ -3495,7 +3457,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "After the donation, add S$20 and equate the result to S$100."
+                "text": "Write the amount after spending S$48, add S$20, and set it equal to S$100."
               }
             ]
           }
@@ -3505,8 +3467,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{2}{3}(x-48)=80"
+                "type": "inline_math",
+                "latex": "\\frac{2}{3}x-48+20=100"
               }
             ],
             "mark_type": "M",
@@ -3516,8 +3478,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x-48=120"
+                "type": "inline_math",
+                "latex": "\\frac{2}{3}x=128"
               }
             ],
             "mark_type": "M",
@@ -3527,8 +3489,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=168"
+                "type": "inline_math",
+                "latex": "x=192"
               }
             ],
             "mark_type": "A",

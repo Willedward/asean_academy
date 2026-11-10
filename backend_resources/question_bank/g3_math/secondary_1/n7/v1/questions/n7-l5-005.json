@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l5-005",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.4",
-  "title": "Multi-stage charity collection",
+  "title": "Multi-stage class fund",
   "difficulty": 5,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,23 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A class collects "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": " dollars. It spends S$48 on materials, then donates one third of the remaining amount. After receiving an additional S$20, it has S$100 left. Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "text": "A class collects S$x. It donates one third of the money, then spends S$48 on materials. After receiving another S$20, the class has S$100. Find x. Enter only the number."
         }
       ],
       "marks": 3,
@@ -45,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "168",
-        "canonical_latex": "168",
+        "canonical_answer": "192",
+        "canonical_latex": "192",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,15 +42,15 @@
           "content": [
             {
               "type": "text",
-              "text": "After spending, "
+              "text": "After the donation, two thirds of "
             },
             {
               "type": "inline_math",
-              "latex": "x-48"
+              "latex": "x"
             },
             {
               "type": "text",
-              "text": " remains; donating one third leaves two thirds."
+              "text": " remains."
             }
           ]
         },
@@ -75,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "After the donation, add S$20 and equate the result to S$100."
+              "text": "Write the amount after spending S$48, add S$20, and set it equal to S$100."
             }
           ]
         }
@@ -85,8 +69,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{2}{3}(x-48)=80"
+              "type": "inline_math",
+              "latex": "\\frac{2}{3}x-48+20=100"
             }
           ],
           "mark_type": "M",
@@ -96,8 +80,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x-48=120"
+              "type": "inline_math",
+              "latex": "\\frac{2}{3}x=128"
             }
           ],
           "mark_type": "M",
@@ -107,8 +91,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=168"
+              "type": "inline_math",
+              "latex": "x=192"
             }
           ],
           "mark_type": "A",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l4-014",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,14 +20,6 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Distribute -2 accurately before solving."
-        },
-        {
-          "type": "display_math",
-          "latex": "7-2(3x-4)=5x-7"
-        },
-        {
-          "type": "text",
           "text": "Find the value of "
         },
         {
@@ -37,6 +29,10 @@
         {
           "type": "text",
           "text": "."
+        },
+        {
+          "type": "display_math",
+          "latex": "7-2(3x-4)=5x-7"
         }
       ],
       "marks": 3,
@@ -58,11 +54,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The left side becomes "
+              "text": "Expand the bracket, taking care with the signs when distributing the "
             },
             {
               "type": "inline_math",
-              "latex": "15-6x"
+              "latex": "-2"
             },
             {
               "type": "text",
@@ -75,23 +71,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Add "
+              "text": "Collect the "
             },
             {
               "type": "inline_math",
-              "latex": "6x"
+              "latex": "x"
             },
             {
               "type": "text",
-              "text": " and 7 to form "
-            },
-            {
-              "type": "inline_math",
-              "latex": "22=11x"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "-terms on one side and the constants on the other."
             }
           ]
         }
@@ -101,8 +89,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "22=11x"
+              "type": "inline_math",
+              "latex": "7-6x+8=5x-7"
             }
           ],
           "mark_type": "M",
@@ -112,8 +100,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "11x=22"
+              "type": "inline_math",
+              "latex": "22=11x"
             }
           ],
           "mark_type": "M",
@@ -123,7 +111,7 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "x=2"
             }
           ],
