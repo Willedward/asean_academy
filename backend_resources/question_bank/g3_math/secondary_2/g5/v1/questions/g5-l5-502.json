@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l5-502",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Field researchers considered a narrow installation area while preparing a replacement design for the solar farm equipment cover. Cable trays run beneath the protective equipment cover. A later inspection will compare the finished dimensions with this record. Four solid spheres of radius 3 cm are melted and recast into identical cones of radius 2 cm and height 9 cm, with no material lost. How many complete cones are made?"
+          "text": "A foundry recycles metal with no material lost. Four solid spheres of radius 3 cm are melted and recast into identical cones of radius 2 cm and height 9 cm, where 9 cm is the perpendicular height. How many complete cones are made?"
         }
       ],
       "marks": 5,
@@ -71,22 +71,67 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Volume of one sphere:"
             },
             {
               "type": "display_math",
-              "latex": "n=\\frac{4(\\frac43\\pi(3)^3)}{\\frac13\\pi(2)^2(9)}=12"
+              "latex": "\\frac43\\pi(3)^3=36\\pi"
             }
           ],
           "mark_type": "M",
-          "mark_value": 4
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Volume of the four spheres:"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{12}"
+              "latex": "4\\times36\\pi=144\\pi"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Volume of one cone:"
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac13\\pi(2)^2(9)=12\\pi"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide the total volume by the volume of one cone."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{144\\pi}{12\\pi}=12"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 5,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "12\\text{ cones}"
             }
           ],
           "mark_type": "A",
@@ -101,7 +146,7 @@
       "asset_key": "g5-l5-502-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-502-diagram-r2.svg",
+      "path": "assets/g5-l5-502-diagram-r3.svg",
       "alt_text": "Four separate solid spheres, each of radius 3 cm, are melted and recast into identical separate cones of radius 2 cm and perpendicular height 9 cm. One sphere and one cone are drawn. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -381,6 +426,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

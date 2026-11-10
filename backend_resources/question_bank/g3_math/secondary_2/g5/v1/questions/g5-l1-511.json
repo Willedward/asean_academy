@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l1-511",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,15 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Community planners considered a strict material budget while preparing a replacement design for the volcanology field model. Field samples are packed separately from the measuring model. The first sketch was checked against an equipment inventory. A sphere has radius 9 cm. Its surface area is "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k\\pi"
-        },
-        {
-          "type": "text",
-          "text": " cm². Find k."
+          "text": "A festival display uses a large round ornament in the shape of a sphere. The sphere has radius 9 cm. Its surface area is kπ cm². Find k."
         }
       ],
       "marks": 1,
@@ -76,15 +68,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate "
+              "text": "Substitute the radius into "
             },
             {
               "type": "inline_math",
-              "latex": "4\\times 9^{2}"
+              "latex": "4\\pi r^{2}"
             },
             {
               "type": "text",
-              "text": "; π is already shown in "
+              "text": " and compare the result with "
             },
             {
               "type": "inline_math",
@@ -104,9 +96,13 @@
             {
               "type": "display_math",
               "latex": "S=4\\pi(9)^2=324\\pi"
+            },
+            {
+              "type": "text",
+              "text": "so k = 324."
             }
           ],
-          "mark_type": "B",
+          "mark_type": "A",
           "mark_value": 1
         }
       ]
@@ -118,7 +114,7 @@
       "asset_key": "g5-l1-511-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l1-511-diagram-r3.svg",
+      "path": "assets/g5-l1-511-diagram-r4.svg",
       "alt_text": "Sphere with radius r = 9 cm drawn from the centre to the surface. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -236,6 +232,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }
