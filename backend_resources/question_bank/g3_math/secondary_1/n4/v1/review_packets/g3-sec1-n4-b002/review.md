@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l1-010 — Converting kilometres per hour
+## n4-l1-010 — Tap filling rate
 
 [Open this question in the HTML preview](index.html#n4-l1-010)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l2-014 — Distance along a travelator
+## n4-l2-014 — Distance along a moving walkway
 
 [Open this question in the HTML preview](index.html#n4-l2-014)
 
