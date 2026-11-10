@@ -180,8 +180,8 @@ def _legs_figure(
     task: str,
     vertical: Quantity,
     horizontal: Quantity,
-    vertical_label: str,
-    horizontal_label: str,
+    vertical_label: str | None,
+    horizontal_label: str | None,
     hypotenuse_label: str | None,
     unknown: tuple[str, str] | None,
     angle: tuple[float, str] | None,
@@ -208,8 +208,10 @@ def _legs_figure(
         radius = arc_radius(degrees)
         canvas.angle_arc("angle-C", "C", "A", "B", radius, round(degrees, 2))
         canvas.angle_label(label, "C", "A", "B", radius)
-    canvas.segment_label(vertical_label, "A", "B", away_from=inside)
-    canvas.segment_label(horizontal_label, "A", "C", away_from=inside)
+    if vertical_label:
+        canvas.segment_label(vertical_label, "A", "B", away_from=inside)
+    if horizontal_label:
+        canvas.segment_label(horizontal_label, "A", "C", away_from=inside)
     if hypotenuse_label:
         canvas.segment_label(hypotenuse_label, "B", "C", away_from=inside)
     if not clamped:
@@ -402,6 +404,107 @@ def find_angle(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
         dimensions={"opposite": opposite.as_spec(), "adjacent": adjacent.as_spec()},
         clamp=False,
     )
+
+
+# ------------------------------------------------------------ sine and cosine: hypotenuse given
+def _hypotenuse_side(inputs: dict[str, Any], answers: Sequence[str], *, ratio: str) -> Diagram:
+    """Given an acute angle and the hypotenuse, find the side opposite (sine) or adjacent (cosine).
+
+    Only the hypotenuse, the angle and the unknown are labelled: the third side is neither given
+    nor asked, so labelling it would add a value the question does not state.
+    """
+    degrees = float(inputs["angle"])
+    hypotenuse = q(inputs["hypotenuse"])
+    if not 0 < degrees < 90:
+        raise UnsupportedDiagram("The marked angle must be acute.")
+    label = str(inputs.get("label", "x"))
+    radians = math.radians(degrees)
+    opposite = hypotenuse.value * math.sin(radians)
+    adjacent = hypotenuse.value * math.cos(radians)
+    wanted, side_name = (opposite, "opposite") if ratio == "sine" else (adjacent, "adjacent")
+    template = "sine_opposite" if ratio == "sine" else "cosine_adjacent"
+    return _legs_figure(
+        template=template,
+        inputs=inputs,
+        task="find_side_trigonometry",
+        vertical=Quantity(opposite, hypotenuse.unit),
+        horizontal=Quantity(adjacent, hypotenuse.unit),
+        vertical_label=label if ratio == "sine" else None,
+        horizontal_label=label if ratio == "cosine" else None,
+        hypotenuse_label=hypotenuse.text,
+        unknown=("segment:AB", label) if ratio == "sine" else ("segment:AC", label),
+        angle=(degrees, _degree(degrees)),
+        answers=answers,
+        derived=[wanted, opposite, adjacent],
+        alt_text=(
+            f"Right-angled triangle with hypotenuse {hypotenuse.text} and a marked acute angle of "
+            f"{_degree(degrees)}. The side {side_name} that angle is labelled {label}. "
+            "Not drawn to scale."
+        ),
+        title="Right-angled triangle",
+        findings=_check_answer(wanted, answers, int(inputs.get("places", 2))),
+        dimensions={"angle_degrees": degrees, "hypotenuse": hypotenuse.as_spec()},
+        clamp=False,
+    )
+
+
+def sine_opposite(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """Hypotenuse and an acute angle given; the side opposite the angle is the unknown."""
+    return _hypotenuse_side(inputs, answers, ratio="sine")
+
+
+def cosine_adjacent(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """Hypotenuse and an acute angle given; the side adjacent to the angle is the unknown."""
+    return _hypotenuse_side(inputs, answers, ratio="cosine")
+
+
+def _hypotenuse_angle(inputs: dict[str, Any], answers: Sequence[str], *, ratio: str) -> Diagram:
+    """Given the hypotenuse and the side opposite (sine) or adjacent (cosine), find θ."""
+    hypotenuse = q(inputs["hypotenuse"])
+    side = q(inputs["opposite" if ratio == "sine" else "adjacent"])
+    if not 0 < side.value < hypotenuse.value:
+        raise UnsupportedDiagram("A shorter side must be shorter than the hypotenuse.")
+    other = math.sqrt(hypotenuse.value**2 - side.value**2)
+    if ratio == "sine":
+        degrees = math.degrees(math.asin(side.value / hypotenuse.value))
+        vertical, horizontal = side, Quantity(other, hypotenuse.unit)
+    else:
+        degrees = math.degrees(math.acos(side.value / hypotenuse.value))
+        vertical, horizontal = Quantity(other, hypotenuse.unit), side
+    side_name = "opposite" if ratio == "sine" else "adjacent"
+    template = "sine_angle" if ratio == "sine" else "cosine_angle"
+    return _legs_figure(
+        template=template,
+        inputs=inputs,
+        task="find_angle",
+        vertical=vertical,
+        horizontal=horizontal,
+        vertical_label=side.text if ratio == "sine" else None,
+        horizontal_label=side.text if ratio == "cosine" else None,
+        hypotenuse_label=hypotenuse.text,
+        unknown=("angle:C", "θ"),
+        angle=(degrees, "θ"),
+        answers=answers,
+        derived=[degrees, other],
+        alt_text=(
+            f"Right-angled triangle with the acute angle θ marked. The hypotenuse is "
+            f"{hypotenuse.text} and the side {side_name} θ is {side.text}. Not drawn to scale."
+        ),
+        title="Right-angled triangle",
+        findings=_check_answer(degrees, answers, 1),
+        dimensions={"hypotenuse": hypotenuse.as_spec(), side_name: side.as_spec()},
+        clamp=False,
+    )
+
+
+def sine_angle(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """Hypotenuse and the side opposite θ given; θ is the unknown."""
+    return _hypotenuse_angle(inputs, answers, ratio="sine")
+
+
+def cosine_angle(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """Hypotenuse and the side adjacent to θ given; θ is the unknown."""
+    return _hypotenuse_angle(inputs, answers, ratio="cosine")
 
 
 # ------------------------------------------------------------------- general triangles
@@ -1024,6 +1127,10 @@ TEMPLATES: dict[str, Callable[..., Diagram]] = {
     "tangent_adjacent": tangent_adjacent,
     "tangent_opposite": tangent_opposite,
     "find_angle": find_angle,
+    "sine_opposite": sine_opposite,
+    "cosine_adjacent": cosine_adjacent,
+    "sine_angle": sine_angle,
+    "cosine_angle": cosine_angle,
     "converse_test": converse_test,
     "perimeter_verify": perimeter_verify,
     "rectangle_diagonal": rectangle_diagonal,
