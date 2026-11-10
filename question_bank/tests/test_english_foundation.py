@@ -23,7 +23,11 @@ from question_bank.english_models import (
     ShortTextResponse,
     TextNormalisation,
 )
-from question_bank.english_quality import BASELINE_PATH, english_quality_findings
+from question_bank.english_quality import (
+    BASELINE_PATH,
+    english_quality_findings,
+    passage_word_count,
+)
 from question_bank.english_repository import english_question_content_hash
 from question_bank.english_validation import validate_english_foundation
 
@@ -2887,6 +2891,54 @@ def test_quality_rules_flag_a_target_word_missing_from_its_sentence(english_root
     # Without passages, passage-based parts cannot be checked and are skipped.
     assert "target_word_missing_from_context" not in {
         finding.code for finding in english_quality_findings([reading], [], [])
+    }
+
+
+def test_every_diagnostic_passage_meets_the_length_range(english_root):
+    foundation = validate_english_foundation(english_root)
+    forms = [form for form in foundation.forms if form.form_type in {"baseline", "endline", "endline_reserve"}]
+    by_key = {question.stable_key: question for question in foundation.questions}
+    by_revision = {(p.stable_key, p.revision): p for p in foundation.passages}
+    counts = {}
+    for form in forms:
+        for key in form.question_keys:
+            ref = by_key[key].passage_ref
+            if ref is not None:
+                counts[(by_key[key].question_type, ref.stable_key)] = passage_word_count(
+                    by_revision[(ref.stable_key, ref.revision)]
+                )
+
+    reading = [words for (kind, _), words in counts.items() if kind == "reading_comprehension"]
+    cloze = [words for (kind, _), words in counts.items() if kind != "reading_comprehension"]
+    assert len(reading) == 6 and all(300 <= words <= 450 for words in reading)
+    assert len(cloze) == 6 and all(150 <= words <= 250 for words in cloze)
+    assert not [
+        finding
+        for finding in english_quality_findings(
+            foundation.questions, [], foundation.forms, foundation.passages
+        )
+        if finding.code == "diagnostic_passage_length"
+    ]
+
+
+def test_quality_rules_flag_a_diagnostic_passage_outside_the_length_range(english_root):
+    foundation = validate_english_foundation(english_root)
+    reading = next(q for q in foundation.questions if q.stable_key == "er-l5-202")
+    ref = reading.passage_ref
+    passages = [
+        passage.model_copy(update={"paragraphs": passage.paragraphs[:2]})
+        if passage.stable_key == ref.stable_key
+        else passage
+        for passage in foundation.passages
+    ]
+    findings = english_quality_findings(foundation.questions, [], foundation.forms, passages)
+    assert {
+        finding.location for finding in findings if finding.code == "diagnostic_passage_length"
+    } == {ref.stable_key}
+    # Without passages the rule cannot count words and is skipped.
+    assert "diagnostic_passage_length" not in {
+        finding.code
+        for finding in english_quality_findings(foundation.questions, [], foundation.forms)
     }
 
 
