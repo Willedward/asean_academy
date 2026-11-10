@@ -1727,8 +1727,114 @@ def balance_scale(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagra
     )
 
 
+def _signed_tick(value: int) -> str:
+    return f"−{abs(value)}" if value < 0 else str(value)
+
+
+def coordinate_points(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """Labelled points on a numbered coordinate grid, with no graph drawn.
+
+    Every grid line is drawn across the whole window, both axes are numbered (every whole number,
+    or every second one when the unit is small), negative numbers included, and a point may not
+    sit on the edge of the window. Each point's label is placed by the author with ``dx``/``dy``.
+    """
+    from ..svg_metrics import text_box
+
+    x_min, x_max = int(inputs["x_min"]), int(inputs["x_max"])
+    y_min, y_max = int(inputs["y_min"]), int(inputs["y_max"])
+    if not (x_min < 0 < x_max and y_min < 0 < y_max):
+        raise ValueError("coordinate_points axes must have positive ranges that include the origin")
+    points = list(inputs["points"])
+    if not points:
+        raise ValueError("coordinate_points needs at least one point")
+    title = str(inputs.get("title", "Points on a coordinate grid"))
+    description = str(inputs["alt_text"])
+    builder = _Builder(title, description)
+    unit = min(600 / (x_max - x_min), 380 / (y_max - y_min))
+    step = 1 if unit >= 34 else 2
+    left = (WIDTH - unit * (x_max - x_min)) / 2
+    right = left + unit * (x_max - x_min)
+    top = 46.0
+    bottom = top + unit * (y_max - y_min)
+    builder.height = int(math.ceil(bottom + 56))
+
+    def sx(value: float) -> float:
+        return left + (value - x_min) * unit
+
+    def sy(value: float) -> float:
+        return bottom - (value - y_min) * unit
+
+    for tick in range(x_min, x_max + 1):
+        builder.line(sx(tick), top, sx(tick), bottom, stroke=GRID, width=1)
+        builder.tick("x", tick, sx(tick))
+    for tick in range(y_min, y_max + 1):
+        builder.line(left, sy(tick), right, sy(tick), stroke=GRID, width=1)
+        builder.tick("y", tick, sy(tick))
+    builder.line(left, sy(0), right, sy(0), width=3)
+    builder.line(sx(0), top, sx(0), bottom, width=3)
+    # Axis numbers sit just below the x-axis and just left of the y-axis, on a white plate so the
+    # grid lines do not run through them.
+    plates: list[tuple[str, float, float, str]] = []
+    for tick in range(x_min, x_max + 1):
+        if tick != 0 and tick % step == 0:
+            plates.append((_signed_tick(tick), sx(tick), sy(0) + 27, "middle"))
+    for tick in range(y_min, y_max + 1):
+        if tick != 0 and tick % step == 0:
+            plates.append((_signed_tick(tick), sx(0) - 9, sy(tick) + 9, "end"))
+    for text, x, y, anchor in plates:
+        box = text_box(x, y, text, FONT, anchor)
+        builder.figure.append(
+            "<rect"
+            + _attrs(
+                {
+                    "data-role": "number-plate",
+                    "x": _fmt(box.x0 - 2),
+                    "y": _fmt(box.y0 - 1),
+                    "width": _fmt(box.x1 - box.x0 + 4),
+                    "height": _fmt(box.y1 - box.y0 + 2),
+                    "fill": BACKGROUND,
+                }
+            )
+            + "/>"
+        )
+        builder.text(text, x, y, size=FONT, anchor=anchor, weight=500)
+    builder.text("x", right + 18, sy(0) + 8, size=FONT, anchor="start")
+    builder.text("y", sx(0) + 12, top - 10, size=FONT, anchor="start")
+    for index, point in enumerate(points):
+        px, py = float(point["x"]), float(point["y"])
+        if not (x_min < px < x_max and y_min < py < y_max):
+            raise ValueError("Each point must lie inside the grid, not on its edge")
+        builder.mark(
+            f"point-{index}",
+            "point",
+            f"{_fmt(px)},{_fmt(py)}",
+            "circle",
+            {"cx": sx(px), "cy": sy(py), "r": 8},
+            style={"fill": ACCENT, "stroke": BACKGROUND, "stroke-width": 3},
+        )
+        if point.get("label"):
+            builder.text(
+                str(point["label"]),
+                sx(px) + float(point.get("dx", 14)),
+                sy(py) + float(point.get("dy", -14)),
+                size=FONT,
+                anchor=str(point.get("anchor", "start")),
+            )
+    return _finish(
+        builder,
+        template="coordinate_points",
+        diagram_kind="coordinate_points",
+        inputs=inputs,
+        extras={
+            "axis": {"x_min": x_min, "x_max": x_max, "y_min": y_min, "y_max": y_max},
+            "unit_px": _fmt(unit),
+        },
+    )
+
+
 TEMPLATES: dict[str, Callable[..., Diagram]] = {
     "balance_scale": balance_scale,
+    "coordinate_points": coordinate_points,
     "scaled_icons": scaled_icons,
     "bar_chart": bar_chart,
     "line_chart": line_chart,

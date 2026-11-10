@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-lesson-01",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n6",
@@ -246,16 +246,235 @@
       "asset_key": "n6-lesson-01-coordinate-plane",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n6-lesson-01-coordinate-plane-r3.svg",
-      "alt_text": "Coordinate plane showing A at (-4, 3) and its reflection A-prime at (4, 3), equally spaced from the y-axis.",
+      "path": "assets/n6-lesson-01-coordinate-plane-r4.svg",
+      "alt_text": "Coordinate grid numbered from −6 to 6 on the x-axis and from −4 to 4 on the y-axis. Point A is at (−4, 3) and its reflection A′ is at (4, 3), the same distance from the y-axis.",
       "generation_spec": {
-        "renderer": "nextscholar-coordinate-svg-v1",
-        "diagram_kind": "coordinate_graph",
-        "lesson_key": "n6-lesson-01"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "coordinate_points",
+        "lesson_key": "n6-lesson-01",
+        "template": "coordinate_points",
+        "inputs": {
+          "x_min": -6,
+          "x_max": 6,
+          "y_min": -4,
+          "y_max": 4,
+          "points": [
+            {
+              "x": -4,
+              "y": 3,
+              "label": "A(−4, 3)",
+              "dx": -14,
+              "dy": -16,
+              "anchor": "end"
+            },
+            {
+              "x": 4,
+              "y": 3,
+              "label": "A′(4, 3)",
+              "dx": 14,
+              "dy": -16
+            }
+          ],
+          "title": "Reflection of a point in the y-axis",
+          "alt_text": "Coordinate grid numbered from −6 to 6 on the x-axis and from −4 to 4 on the y-axis. Point A is at (−4, 3) and its reflection A′ is at (4, 3), the same distance from the y-axis."
+        },
+        "viewbox": [
+          720,
+          482
+        ],
+        "chart_marks": [
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "-4,3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "170",
+              "cy": "93.5",
+              "r": "8"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "4,3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "550",
+              "cy": "93.5",
+              "r": "8"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:-6",
+            "axis": "x",
+            "value": "-6",
+            "position": "75",
+            "label": "-6"
+          },
+          {
+            "key": "x:-5",
+            "axis": "x",
+            "value": "-5",
+            "position": "122.5",
+            "label": "-5"
+          },
+          {
+            "key": "x:-4",
+            "axis": "x",
+            "value": "-4",
+            "position": "170",
+            "label": "-4"
+          },
+          {
+            "key": "x:-3",
+            "axis": "x",
+            "value": "-3",
+            "position": "217.5",
+            "label": "-3"
+          },
+          {
+            "key": "x:-2",
+            "axis": "x",
+            "value": "-2",
+            "position": "265",
+            "label": "-2"
+          },
+          {
+            "key": "x:-1",
+            "axis": "x",
+            "value": "-1",
+            "position": "312.5",
+            "label": "-1"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "360",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "407.5",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "455",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "502.5",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "550",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "597.5",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "645",
+            "label": "6"
+          },
+          {
+            "key": "y:-4",
+            "axis": "y",
+            "value": "-4",
+            "position": "426",
+            "label": "-4"
+          },
+          {
+            "key": "y:-3",
+            "axis": "y",
+            "value": "-3",
+            "position": "378.5",
+            "label": "-3"
+          },
+          {
+            "key": "y:-2",
+            "axis": "y",
+            "value": "-2",
+            "position": "331",
+            "label": "-2"
+          },
+          {
+            "key": "y:-1",
+            "axis": "y",
+            "value": "-1",
+            "position": "283.5",
+            "label": "-1"
+          },
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "236",
+            "label": "0"
+          },
+          {
+            "key": "y:1",
+            "axis": "y",
+            "value": "1",
+            "position": "188.5",
+            "label": "1"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "141",
+            "label": "2"
+          },
+          {
+            "key": "y:3",
+            "axis": "y",
+            "value": "3",
+            "position": "93.5",
+            "label": "3"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "46",
+            "label": "4"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": -6,
+          "x_max": 6,
+          "y_min": -4,
+          "y_max": 4
+        },
+        "unit_px": "47.5"
       },
-      "sha256": "a4ca97a514479fc42d5a9e9b1ced7cdc8e79a3a88a2d4e6ab643910fe4b11b03",
-      "width": 940,
-      "height": 500
+      "sha256": "496568f7eb39178b4d092e0a2f39a2cba4db78ed010b114198d5ca1a45e81f46",
+      "width": 720,
+      "height": 482
     }
   ],
   "provenance": {
@@ -264,6 +483,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded with visual explanations and a second worked example; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

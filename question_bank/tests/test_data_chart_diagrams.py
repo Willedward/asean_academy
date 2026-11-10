@@ -15,6 +15,17 @@ from question_bank.validation import validate_bank
 
 SAMPLES = {
     "balance_scale": {"left": "2x + 3", "right": "11", "balanced": True},
+    "coordinate_points": {
+        "x_min": -6,
+        "x_max": 6,
+        "y_min": -4,
+        "y_max": 4,
+        "points": [
+            {"x": -4, "y": 3, "label": "A(−4, 3)", "dx": -14, "dy": -16, "anchor": "end"},
+            {"x": 4, "y": 3, "label": "A′(4, 3)", "dx": 14, "dy": -16},
+        ],
+        "alt_text": "Coordinate grid with A at (−4, 3) and A′ at (4, 3).",
+    },
     "bar_chart": {
         "categories": ["Mon", "Tue", "Wed"],
         "values": [6, 9, 7],
@@ -445,3 +456,17 @@ def test_sec1_s1_diagram_audit_records_one_decision_per_question(repository_root
         else:
             assert item["decision"] == "text_sufficient"
         assert item["reason"]
+
+
+def test_coordinate_points_numbers_both_axes_and_keeps_points_off_the_edge():
+    inputs = SAMPLES["coordinate_points"]
+    diagram = charts.coordinate_points(inputs)
+    texts = [node.text for node in ET.fromstring(diagram.svg).iter() if node.tag.endswith("text")]
+
+    for value in ("−6", "−1", "1", "6", "−4", "4"):
+        assert value in texts
+    ticks = {(tick["axis"], tick["value"]) for tick in diagram.generation_spec["chart_ticks"]}
+    assert ("x", "-6") in ticks and ("y", "4") in ticks
+    assert [mark["value"] for mark in diagram.generation_spec["chart_marks"]] == ["-4,3", "4,3"]
+    with pytest.raises(ValueError, match="edge"):
+        charts.coordinate_points({**inputs, "points": [{"x": 6, "y": 3}]})
