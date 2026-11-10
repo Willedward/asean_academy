@@ -50,6 +50,7 @@ CASES = {
     "diagonals_perpendicular_one_bisected": ({}, ["5"]),
     "kite_symmetry": ({}, ["1"]),
     "kite_angles": ({"angle_a": 70, "angle_c": 110}, ["90"]),
+    "regular_polygon_exterior": ({"sides": 6}, ["60"]),
     "perpendicular_bisector_midpoint": ({"segment": cm(8)}, ["4"]),
     "safe_radius": ({"segment": cm(10)}, ["6"]),
     "equilateral_on_ray": ({}, ["60"]),

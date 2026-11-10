@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-lesson-03",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g1",
@@ -30,7 +30,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "For parallel lines, corresponding angles are equal, alternate interior angles are equal, and co-interior angles on the same side of a transversal total 180°."
+          "text": "For parallel lines, corresponding angles are equal, alternate interior angles are equal, and co-interior angles (also called same-side interior angles) on the same side of a transversal total 180°."
         },
         {
           "type": "display_math",
@@ -46,7 +46,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A transversal crossing parallel lines creates matching angle positions. Corresponding angles are equal, alternate angles are equal, and co-interior angles on the same side total 180°. The arrow markings on the lines, rather than their appearance, establish that the lines are parallel."
+          "text": "The diagram shows two parallel lines, marked with arrows, cut by a transversal. The 68° angle at the upper line and the angle x at the lower line are in the same position at each crossing, so they are corresponding angles. The arrow marks, not the appearance of the lines, tell you that the lines are parallel."
         },
         {
           "type": "asset_ref",
@@ -70,11 +70,11 @@
       "stable_key": "g1-13-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: corresponding angles",
       "prompt": [
         {
           "type": "text",
-          "text": "A co-interior angle is 117°. Find its partner."
+          "text": "In the diagram, two parallel lines are cut by a transversal. Find x."
         }
       ],
       "steps": [
@@ -82,23 +82,36 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The 68° angle and x are in the same position at the two crossings, above each line and to the right of the transversal. They form an F shape, so they are corresponding angles."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The lines are parallel, so corresponding angles are equal."
+            },
+            {
               "type": "display_math",
-              "latex": "180^\\circ-117^\\circ=63^\\circ"
+              "latex": "x=68^\\circ"
             }
           ]
         }
       ],
-      "verification_note": "The result follows the stated property and satisfies the original geometric conditions."
+      "verification_note": "Check with a second fact: the angle just below 68° on the upper line is 180° − 68° = 112°, and it is co-interior with x, so 112° + 68° should be 180°. It is."
     },
     {
       "stable_key": "g1-lesson-03-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Worked example: apply the method",
+      "title": "Worked example: co-interior expressions",
       "prompt": [
         {
           "type": "text",
-          "text": "Two parallel lines are cut by a transversal. A co-interior pair is (3x+12)° and (5x−8)°. Find x and both angles."
+          "text": "Two parallel lines are cut by a transversal. A co-interior pair is (3x + 12)° and (5x − 8)°. Find x and both angles."
         }
       ],
       "steps": [
@@ -108,6 +121,10 @@
             {
               "type": "text",
               "text": "Co-interior angles between parallel lines are supplementary."
+            },
+            {
+              "type": "display_math",
+              "latex": "(3x+12)+(5x-8)=180"
             }
           ]
         },
@@ -115,8 +132,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "Write (3x+12)+(5x−8)=180, giving 8x+4=180 and x=22."
+              "type": "display_math",
+              "latex": "8x+4=180\\quad\\Rightarrow\\quad x=22"
             }
           ]
         },
@@ -125,7 +142,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The angles are 78° and 102°."
+              "text": "The angles are 3(22) + 12 = 78° and 5(22) − 8 = 102°."
             }
           ]
         }
@@ -152,14 +169,14 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A corresponding angle is 68°. Find its matching angle."
+          "text": "Two parallel lines are cut by a transversal. One angle of a co-interior pair is 117°. Find the other angle, in degrees."
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "68",
-        "canonical_latex": "68",
+        "canonical_answer": "63",
+        "canonical_latex": "63",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -168,7 +185,7 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Corresponding angles are equal when the lines are parallel."
+          "text": "Co-interior angles between parallel lines total 180°, so 180 − 117 = 63."
         }
       ]
     },
@@ -180,11 +197,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Name the relevant property, write the complete angle or construction relationship, calculate carefully, and check that every angle and length is geometrically possible."
+          "text": "With parallel lines: corresponding angles (F) are equal, alternate angles (Z) are equal, and co-interior angles (C) total 180°."
         },
         {
           "type": "text",
-          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
+          "text": "Use these facts only when the lines are marked or stated as parallel, and keep track of which transversal makes each angle."
         }
       ]
     }
@@ -194,16 +211,198 @@
       "asset_key": "g1-lesson-03-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-lesson-03-parallel.svg",
-      "alt_text": "Two parallel horizontal lines crossed by a transversal, with corresponding, alternate and co-interior angle positions highlighted.",
+      "path": "assets/g1-lesson-03-parallel-r3.svg",
+      "alt_text": "Two parallel horizontal lines, shown with arrow marks, cut by one transversal. At the upper line, the angle above the line and to the right of the transversal is marked 68°. At the lower line, the angle in the same position is marked x. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "parallel",
-        "lesson_key": "g1-lesson-03"
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "parallel_lines",
+        "lesson_key": "g1-lesson-03",
+        "template": "parallel_corresponding",
+        "inputs": {
+          "given": 68
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "angles": {
+            "given": 68
+          }
+        },
+        "forbidden_visible_labels": [],
+        "forbidden_label_exemptions": [
+          {
+            "value": "68",
+            "reason": "equals a stated value shown on the diagram"
+          }
+        ],
+        "unknowns": [
+          {
+            "target": "angle:angle-x",
+            "label": "x"
+          }
+        ],
+        "parallel_marks": [
+          {
+            "segments": [
+              "L1L2",
+              "M1M2"
+            ]
+          }
+        ],
+        "viewbox": [
+          600.0,
+          369.0
+        ],
+        "points": {
+          "L1": [
+            65.0,
+            81.79
+          ],
+          "L2": [
+            535.0,
+            81.79
+          ],
+          "M1": [
+            65.0,
+            243.63
+          ],
+          "M2": [
+            535.0,
+            243.63
+          ],
+          "D": [
+            251.12,
+            243.63
+          ],
+          "U": [
+            316.51,
+            81.79
+          ],
+          "T1": [
+            230.2,
+            295.42
+          ],
+          "T2": [
+            337.43,
+            30.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "L1L2",
+            "from": "L1",
+            "to": "L2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "M1M2",
+            "from": "M1",
+            "to": "M2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T1T2",
+            "from": "T1",
+            "to": "T2",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "angles": [
+          {
+            "vertex": "U",
+            "arms": [
+              "L2",
+              "T2"
+            ],
+            "marker_key": "angle-given",
+            "drawn_degrees": 68.0,
+            "degrees": 68.0
+          },
+          {
+            "vertex": "D",
+            "arms": [
+              "M2",
+              "U"
+            ],
+            "marker_key": "angle-x",
+            "drawn_degrees": 68.0,
+            "degrees": 68.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-given",
+            "center": [
+              316.51,
+              81.79
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              535.0,
+              81.79
+            ],
+            "end_ray_point": [
+              337.43,
+              30.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-x",
+            "center": [
+              251.12,
+              243.63
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              535.0,
+              243.63
+            ],
+            "end_ray_point": [
+              316.51,
+              81.79
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "68°",
+            "target": "angle:angle-given"
+          },
+          {
+            "text": "x",
+            "target": "angle:angle-x"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "T1",
+              "D",
+              "U",
+              "T2"
+            ]
+          },
+          {
+            "type": "corresponding_angles",
+            "angles": [
+              "angle-given",
+              "angle-x"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "96babc5c4a2eebc7c84cb9445867947fd190c86eda58308187d52e906b41c941",
-      "width": 940,
-      "height": 390
+      "sha256": "22b16a25e2c40116224c2e4930c14303bd71ecbf4ea5e52a1beeda88379d7ffb",
+      "width": 600,
+      "height": 369
     }
   ],
   "provenance": {
@@ -212,6 +411,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n3-l3-004",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A bicycle costs S$240. Its price is increased by 12% and then reduced by 5%. Find the final price in dollars."
+          "text": "A bicycle costs S$250. Its price is increased by 8% and then reduced by 10%. Find the final price in dollars. Enter only the number."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "255.36",
-        "canonical_latex": "255.36",
+        "canonical_answer": "243",
+        "canonical_latex": "243",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the multipliers 1.12 and 0.95 in that order."
+              "text": "Use the multipliers 1.08 and 0.90 in that order."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "240\\times1.12=268.80"
+              "type": "inline_math",
+              "latex": "250\\times1.08=270"
             }
           ],
           "mark_type": "M",
@@ -72,8 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "268.80\\times0.95=255.36"
+              "type": "inline_math",
+              "latex": "270\\times0.90=243"
             }
           ],
           "mark_type": "A",

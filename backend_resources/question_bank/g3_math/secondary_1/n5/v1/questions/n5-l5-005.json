@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-l5-005",
   "bank_key": "g3-sec1-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N5",
   "primary_outcome": "5.8",
-  "title": "Factorise a four-term expression",
+  "title": "Factorise with higher powers",
   "difficulty": 5,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Factorise 12ax - 8ay - 9bx + 6by completely."
+          "text": "Factorise "
+        },
+        {
+          "type": "inline_math",
+          "latex": "24x^{3}y^{2}-36x^{2}y^{3}+60x^{2}y^{2}"
+        },
+        {
+          "type": "text",
+          "text": " completely."
         }
       ],
       "marks": 3,
@@ -29,11 +37,9 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "(4a-3b)(3x-2y)",
-        "canonical_latex": "(4a-3b)(3x-2y)",
+        "canonical_expression": "12*x^2*y^2*(2*x-3*y+5)",
+        "canonical_latex": "12x^2y^2(2x-3y+5)",
         "variables": [
-          "a",
-          "b",
           "x",
           "y"
         ],
@@ -49,7 +55,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Look for a factor shared by every term, or expand each bracket term by term."
+              "text": "Find the highest common factor of all the terms."
             }
           ]
         },
@@ -58,7 +64,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Check a factorisation by multiplying the bracket back out."
+              "text": "Start by writing: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\operatorname{HCF}=12x^{2}y^{2}"
             }
           ]
         }
@@ -68,8 +78,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "4a(3x-2y)-3b(3x-2y)"
+              "type": "inline_math",
+              "latex": "\\operatorname{HCF}=12x^{2}y^{2}"
             }
           ],
           "mark_type": "M",
@@ -79,8 +89,40 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "(4a-3b)(3x-2y)"
+              "type": "text",
+              "text": "Divide each term by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "12x^{2}y^{2}"
+            },
+            {
+              "type": "text",
+              "text": ": "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x"
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3y"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "5"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -90,8 +132,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "(4a-3b)(3x-2y)"
+              "type": "inline_math",
+              "latex": "12x^{2}y^{2}(2x-3y+5)"
             }
           ],
           "mark_type": "A",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g1",
@@ -46,7 +46,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "At an intersection, vertically opposite angles are the non-adjacent pair across the vertex and are equal. Adjacent angles on a straight line total 180°. All angles around the point total 360°. Mark one known angle first, then propagate only relationships that share the same vertex."
+          "text": "The diagram shows two straight lines crossing, with each obtuse angle marked 124° and the acute angles marked a and b. Vertically opposite angles are the pair across the vertex from each other, and they are equal. Adjacent angles on a straight line total 180°, and all four angles around the point total 360°."
         },
         {
           "type": "asset_ref",
@@ -70,35 +70,11 @@
       "stable_key": "g1-12-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: angles at an intersection",
       "prompt": [
         {
           "type": "text",
-          "text": "Two intersecting lines make an obtuse angle of 124°. Find either acute angle."
-        }
-      ],
-      "steps": [
-        {
-          "position": 1,
-          "content": [
-            {
-              "type": "display_math",
-              "latex": "180^\\circ-124^\\circ=56^\\circ"
-            }
-          ]
-        }
-      ],
-      "verification_note": "The result follows the stated property and satisfies the original geometric conditions."
-    },
-    {
-      "stable_key": "g1-lesson-02-example-2",
-      "position": 5,
-      "type": "worked_example",
-      "title": "Worked example: apply the method",
-      "prompt": [
-        {
-          "type": "text",
-          "text": "Vertically opposite angles are (5x+7)° and (8x−38)°. Find every angle at the intersection."
+          "text": "In the diagram, two straight lines cross and each obtuse angle is 124°. Find the acute angles a and b."
         }
       ],
       "steps": [
@@ -107,7 +83,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Vertically opposite angles are equal, so 5x+7=8x−38."
+              "text": "Angle a and a 124° angle are adjacent on a straight line, so they total 180°."
+            },
+            {
+              "type": "display_math",
+              "latex": "a=180^\\circ-124^\\circ=56^\\circ"
             }
           ]
         },
@@ -116,7 +96,52 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve 45=3x to obtain x=15. Each of that opposite pair is 82°."
+              "text": "Angle b is vertically opposite angle a, so they are equal."
+            },
+            {
+              "type": "display_math",
+              "latex": "b=56^\\circ"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Going round the point: 124° + 56° + 124° + 56° = 360°."
+    },
+    {
+      "stable_key": "g1-lesson-02-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: vertically opposite expressions",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Vertically opposite angles are (5x + 7)° and (8x − 38)°. Find every angle at the intersection."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Vertically opposite angles are equal."
+            },
+            {
+              "type": "display_math",
+              "latex": "5x+7=8x-38"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "45=3x\\quad\\Rightarrow\\quad x=15"
+            },
+            {
+              "type": "text",
+              "text": "Each angle of that pair is 5(15) + 7 = 82°."
             }
           ]
         },
@@ -125,12 +150,12 @@
           "content": [
             {
               "type": "text",
-              "text": "Each adjacent angle is 180°−82°=98°, so the four angles alternate 82°, 98°, 82°, 98°."
+              "text": "Each adjacent angle is 180° − 82° = 98°, so the four angles are 82°, 98°, 82° and 98°."
             }
           ]
         }
       ],
-      "verification_note": "Opposite angles match and 82+98+82+98=360."
+      "verification_note": "Both expressions give 82° when x = 15, and 82 + 98 + 82 + 98 = 360."
     },
     {
       "stable_key": "g1-lesson-02-pitfalls",
@@ -180,11 +205,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Name the relevant property, write the complete angle or construction relationship, calculate carefully, and check that every angle and length is geometrically possible."
+          "text": "Vertically opposite angles are equal; angles on a straight line total 180°; angles around a point total 360°."
         },
         {
           "type": "text",
-          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
+          "text": "Name the fact before writing the equation, and check that the four angles at a crossing total 360°."
         }
       ]
     }
@@ -194,16 +219,244 @@
       "asset_key": "g1-lesson-02-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-lesson-02-intersection.svg",
-      "alt_text": "Two intersecting straight lines with the four angles around the intersection labelled a, b, a and b.",
+      "path": "assets/g1-lesson-02-intersection-r3.svg",
+      "alt_text": "Two straight lines crossing at a point. Each of the two obtuse angles is marked 124°. The two acute angles are marked a and b. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "intersection",
-        "lesson_key": "g1-lesson-02"
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "intersecting_lines",
+        "lesson_key": "g1-lesson-02",
+        "template": "intersection_obtuse",
+        "inputs": {
+          "obtuse": 124
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "angles": {
+            "obtuse": 124
+          }
+        },
+        "forbidden_visible_labels": [
+          "56",
+          "112"
+        ],
+        "unknowns": [
+          {
+            "target": "angle:angle-a",
+            "label": "a"
+          },
+          {
+            "target": "angle:angle-b",
+            "label": "b"
+          }
+        ],
+        "viewbox": [
+          600.0,
+          412.0
+        ],
+        "points": {
+          "W": [
+            125.1,
+            193.0
+          ],
+          "E": [
+            474.9,
+            193.0
+          ],
+          "O": [
+            300.0,
+            193.0
+          ],
+          "P": [
+            397.8,
+            48.0
+          ],
+          "Q": [
+            202.2,
+            338.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "WE",
+            "from": "W",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "QP",
+            "from": "Q",
+            "to": "P",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "angles": [
+          {
+            "vertex": "O",
+            "arms": [
+              "E",
+              "P"
+            ],
+            "marker_key": "angle-a",
+            "drawn_degrees": 56.0,
+            "degrees": 56.0
+          },
+          {
+            "vertex": "O",
+            "arms": [
+              "P",
+              "W"
+            ],
+            "marker_key": "angle-1",
+            "drawn_degrees": 124.0,
+            "degrees": 124.0
+          },
+          {
+            "vertex": "O",
+            "arms": [
+              "W",
+              "Q"
+            ],
+            "marker_key": "angle-b",
+            "drawn_degrees": 56.0,
+            "degrees": 56.0
+          },
+          {
+            "vertex": "O",
+            "arms": [
+              "Q",
+              "E"
+            ],
+            "marker_key": "angle-2",
+            "drawn_degrees": 124.0,
+            "degrees": 124.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-a",
+            "center": [
+              300.0,
+              193.0
+            ],
+            "radius": 52.0,
+            "start_ray_point": [
+              474.9,
+              193.0
+            ],
+            "end_ray_point": [
+              397.8,
+              48.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-1",
+            "center": [
+              300.0,
+              193.0
+            ],
+            "radius": 36.0,
+            "start_ray_point": [
+              397.8,
+              48.0
+            ],
+            "end_ray_point": [
+              125.1,
+              193.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-b",
+            "center": [
+              300.0,
+              193.0
+            ],
+            "radius": 52.0,
+            "start_ray_point": [
+              125.1,
+              193.0
+            ],
+            "end_ray_point": [
+              202.2,
+              338.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-2",
+            "center": [
+              300.0,
+              193.0
+            ],
+            "radius": 36.0,
+            "start_ray_point": [
+              202.2,
+              338.0
+            ],
+            "end_ray_point": [
+              474.9,
+              193.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "a",
+            "target": "angle:angle-a"
+          },
+          {
+            "text": "124°",
+            "target": "angle:angle-1"
+          },
+          {
+            "text": "b",
+            "target": "angle:angle-b"
+          },
+          {
+            "text": "124°",
+            "target": "angle:angle-2"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "W",
+              "O",
+              "E"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "Q",
+              "O",
+              "P"
+            ]
+          },
+          {
+            "type": "angle_sum",
+            "angles": [
+              "angle-a",
+              "angle-1"
+            ],
+            "value": 180
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "0d8fa1d90e799663542bc6466758259b38b9278637cc89d9de75cbb33aca58ee",
-      "width": 940,
-      "height": 390
+      "sha256": "7a85aceb3c5e9c6d49e71bb6020f4dd0cd3c5219feda3d747acfebc2369ce878",
+      "width": 600,
+      "height": 412
     }
   ],
   "provenance": {
@@ -212,6 +465,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

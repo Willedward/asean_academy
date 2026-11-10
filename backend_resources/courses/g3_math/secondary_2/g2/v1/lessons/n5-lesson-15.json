@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n5",
   "status": "draft",
@@ -46,7 +46,15 @@
         },
         {
           "type": "text",
-          "text": "Terms joined by addition or subtraction cannot be cancelled separately. For example, x/(x+2) cannot be simplified because x is not a factor of the complete denominator. Writing brackets around factored expressions makes valid cancellation visible."
+          "text": "Terms joined by addition or subtraction cannot be cancelled separately. For example, "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{x}{x+2}"
+        },
+        {
+          "type": "text",
+          "text": " cannot be simplified because x is not a factor of the complete denominator. Writing brackets around factored expressions makes valid cancellation visible."
         }
       ]
     },
@@ -66,7 +74,23 @@
         },
         {
           "type": "text",
-          "text": "Use index laws on repeated variables: a^m/a^n=a^{m-n} when a≠0. Keep factors in a readable order and place any factor with a negative remaining power in the denominator."
+          "text": "Use index laws on repeated variables: "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{a^m}{a^n}=a^{m-n}"
+        },
+        {
+          "type": "text",
+          "text": " when "
+        },
+        {
+          "type": "inline_math",
+          "latex": "a\\ne0"
+        },
+        {
+          "type": "text",
+          "text": ". Keep factors in a readable order and place any factor with a negative remaining power in the denominator."
         }
       ]
     },
@@ -129,7 +153,7 @@
           ]
         }
       ],
-      "verification_note": "Multiplying 5b/(6a) by the cancelled ratio 6a²b/(6a²b) reconstructs the unsimplified product."
+      "verification_note": "The unsimplified product is 30ab²/(36a²b) = (5b × 6ab)/(6a × 6ab), so the cancelled factor is 6ab, and multiplying 5b/(6a) by 6ab/(6ab) rebuilds the product."
     },
     {
       "stable_key": "n5-15-example-2",
@@ -170,7 +194,7 @@
           ]
         }
       ],
-      "verification_note": "Substituting x=3 and y=2 gives 1.25 in both the original expression and 3y/(4x)."
+      "verification_note": "Substituting x = 3 and y = 2 gives 1/2 in both: the original is (15/12) ÷ (90/36) = 1.25 ÷ 2.5 = 0.5, and 3y/(4x) = 6/12 = 0.5."
     },
     {
       "stable_key": "n5-15-recall",
@@ -194,7 +218,9 @@
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
-        "checker_config": {}
+        "checker_config": {
+          "form": "simplified_fraction"
+        }
       },
       "feedback": [
         {

@@ -945,6 +945,63 @@ def kite_angles(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
     )
 
 
+# ------------------------------------------------------------------------- regular polygons
+POLYGON_NAMES = {
+    4: ("square", "four"),
+    5: ("pentagon", "five"),
+    6: ("hexagon", "six"),
+    7: ("heptagon", "seven"),
+    8: ("octagon", "eight"),
+    9: ("nonagon", "nine"),
+    10: ("decagon", "ten"),
+}
+NUMBER_WORDS = {2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight"}
+
+
+def regular_polygon_exterior(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """A regular polygon split into triangles from one vertex, with one exterior angle marked e."""
+    sides = int(inputs["sides"])
+    _require(4 <= sides <= 10, "Draw a regular polygon with 4 to 10 sides.")
+    exterior = 360 / sides
+    names = [f"P{index + 1}" for index in range(sides)]
+    points = {
+        name: _polar(-90 - exterior / 2 + index * exterior) for index, name in enumerate(names)
+    }
+    first, second = points[names[0]], points[names[1]]
+    points["E"] = add(second, scale(sub(second, first), 0.75))
+    figure = _Figure(points, max_width=400, max_height=290)
+    figure.canvas.polygon(tuple(names), role="polygon")
+    edges = [
+        figure.line(names[index], names[(index + 1) % sides]) for index in range(sides)
+    ]
+    for index in range(2, sides - 1):
+        figure.line(names[0], names[index], thin=True)
+    figure.line(names[1], "E", thin=True)
+    figure.equal(*edges)
+    figure.relate("polygon_sides", points=names, count=sides)
+    figure.relate("collinear", points=[names[0], names[1], "E"])
+    figure.angle("angle-exterior", names[1], "E", names[2], "e", degrees=exterior, radius=34)
+    shape, count = POLYGON_NAMES[sides]
+    triangles = NUMBER_WORDS[sides - 2]
+    return figure.diagram(
+        template="regular_polygon_exterior",
+        inputs=inputs,
+        kind="polygon",
+        dimensions={"sides": sides, "regular": True},
+        title=f"A regular {shape} with one exterior angle",
+        alt_text=(
+            f"A regular polygon, a {shape}, with all {count} sides marked equal by tick marks. "
+            f"Lines from one vertex divide it into {triangles} triangles. One side is extended "
+            "beyond a vertex, and the exterior angle between the extension and the next side is "
+            "marked e."
+        ),
+        answers=answers,
+        derived=[exterior, 180 - exterior, (sides - 2) * 180],
+        unknowns=[("angle:angle-exterior", "e")],
+        findings=_key_findings(exterior, answers),
+    )
+
+
 # --------------------------------------------------------------------------- constructions
 def perpendicular_bisector_midpoint(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
     side = q(inputs["segment"])
@@ -1195,6 +1252,7 @@ TEMPLATES: dict[str, Callable[..., Diagram]] = {
         diagonals_equal_bisect,
         diagonals_perpendicular_one_bisected,
         kite_symmetry,
+        regular_polygon_exterior,
         kite_angles,
         perpendicular_bisector_midpoint,
         safe_radius,

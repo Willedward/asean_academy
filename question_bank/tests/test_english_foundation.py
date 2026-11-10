@@ -1761,7 +1761,7 @@ def test_e5_two_passage_group_integrates_reading_skills_and_exact_marking(englis
 
 def test_e5_checkpoint_pairs_mark_reference_context_and_comparison_exactly(english_root):
     expected = {
-        "er-l5-008": ["A", "A", "B", "A", "A"],
+        "er-l5-008": ["A", "C", "B", "C", "A"],
         "er-l5-009": ["B", "A", "C", "A", "A"],
     }
 
@@ -2814,6 +2814,91 @@ def test_quality_rules_flag_a_key_much_longer_than_every_other_option(english_ro
         for finding in english_quality_findings([question], [], [])
         if finding.code == "key_uniquely_longest"
     }
+
+
+def _bank_in_gap_order(question):
+    """Rebuild a banked cloze so gap 1 uses bank word A, gap 2 uses B and so on."""
+
+    payload = question.model_dump(mode="json")
+    bank = {option["key"]: option["text"] for option in payload["parts"][0]["response"]["options"]}
+    keyed = [part["response"]["correct_key"] for part in payload["parts"]]
+    order = keyed + [key for key in bank if key not in keyed]
+    new_key = {old: chr(ord("A") + index) for index, old in enumerate(order)}
+    for part in payload["parts"]:
+        response = part["response"]
+        response["options"] = [{"key": new_key[old], "text": bank[old]} for old in order]
+        response["correct_key"] = new_key[response["correct_key"]]
+        response["choice_rationales"] = {
+            new_key[old]: text for old, text in response["choice_rationales"].items()
+        }
+    return EnglishObjectiveQuestion.model_validate(payload)
+
+
+def test_quality_rules_flag_banked_cloze_keys_in_bank_order(english_root):
+    for key in ("eb-l1-003", "eb-l5-201", "eb-l2-002"):
+        question = _quality_question(english_root, key)
+        codes = {finding.code for finding in english_quality_findings([question], [], [])}
+        assert "banked_cloze_keys_follow_bank_order" not in codes
+        ordered = _bank_in_gap_order(question)
+        assert "".join(part.response.correct_key for part in ordered.parts).startswith("ABC")
+        assert key in {
+            finding.location
+            for finding in english_quality_findings([ordered], [], [])
+            if finding.code == "banked_cloze_keys_follow_bank_order"
+        }
+
+
+def test_every_banked_cloze_bank_hides_the_gap_order(english_root):
+    questions = [
+        _quality_question(english_root, path.stem)
+        for path in sorted((english_root / "questions").glob("eb-*.json"))
+    ]
+    assert len(questions) == 33
+    assert not [
+        finding
+        for finding in english_quality_findings(questions, [], [])
+        if finding.code == "banked_cloze_keys_follow_bank_order"
+    ]
+
+
+def test_quality_rules_flag_a_target_word_missing_from_its_sentence(english_root):
+    question = _quality_question(english_root, "ev-l5-201").model_copy(deep=True)
+    assert not english_quality_findings([question], [], [])
+    question.parts[0].prompt = (
+        "Before spending the entire grant, the committee kept a reserve for unexpected "
+        "repairs. What does “prudent” most nearly mean?"
+    )
+    assert {
+        finding.location
+        for finding in english_quality_findings([question], [], [])
+        if finding.code == "target_word_missing_from_context"
+    } == {"ev-l5-201#1"}
+
+    passages = validate_english_foundation(english_root).passages
+    reading = _quality_question(english_root, "er-l5-005").model_copy(deep=True)
+    part = next(part for part in reading.parts if "What does" in part.prompt)
+    assert "target_word_missing_from_context" not in {
+        finding.code for finding in english_quality_findings([reading], [], [], passages)
+    }
+    part.prompt = "What does “judicious” mean in paragraph 2?"
+    assert "target_word_missing_from_context" in {
+        finding.code for finding in english_quality_findings([reading], [], [], passages)
+    }
+    # Without passages, passage-based parts cannot be checked and are skipped.
+    assert "target_word_missing_from_context" not in {
+        finding.code for finding in english_quality_findings([reading], [], [])
+    }
+
+
+def test_every_vocabulary_target_appears_in_its_context(english_root):
+    foundation = validate_english_foundation(english_root)
+    assert not [
+        finding
+        for finding in english_quality_findings(
+            foundation.questions, [], [], foundation.passages
+        )
+        if finding.code == "target_word_missing_from_context"
+    ]
 
 
 def test_quality_baseline_rejects_new_findings_and_stale_entries(english_root, tmp_path):

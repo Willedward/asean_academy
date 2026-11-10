@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n3-l4-002",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Hana's monthly allowance is 25% more than Mei's monthly allowance. By what percentage is Mei's allowance less than Hana's allowance?"
+          "text": "Hana's monthly allowance is 60% more than Mei's monthly allowance. By what percentage is Mei's allowance less than Hana's allowance?"
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "20",
-        "canonical_latex": "20\\%",
+        "canonical_answer": "37.5",
+        "canonical_latex": "37.5\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Difference}=125-100=25"
+              "type": "inline_math",
+              "latex": "\\text{Difference}=160-100=60"
             }
           ],
           "mark_type": "M",
@@ -72,8 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{25}{125}\\times100\\%=20\\%"
+              "type": "inline_math",
+              "latex": "\\frac{60}{160}\\times100\\%=37.5\\%"
             }
           ],
           "mark_type": "M",
@@ -83,8 +83,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Mei's allowance is }20\\%\\text{ less than Hana's.}"
+              "type": "inline_math",
+              "latex": "\\text{Mei's allowance is }37.5\\%\\text{ less than Hana's.}"
             }
           ],
           "mark_type": "A",
