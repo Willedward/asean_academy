@@ -1044,7 +1044,7 @@ def test_e8_precise_vocabulary_aligns_wording_with_meaning_and_evidence(english_
         (english_root / "questions/ex-l1-003.json").read_text()
     )
 
-    assert question.question_type == "editing"
+    assert question.question_type == "composition_planning"
     assert question.outcome_code == "EW8.1"
     assert question.difficulty == 4
     assert question.feedback_timing == "after_group"
@@ -1075,7 +1075,7 @@ def test_e8_sentence_variety_preserves_boundaries_agreement_and_reference(englis
         (english_root / "questions/ex-l2-003.json").read_text()
     )
 
-    assert question.question_type == "editing"
+    assert question.question_type == "composition_planning"
     assert question.outcome_code == "EW8.2"
     assert question.difficulty == 4
     assert question.feedback_timing == "after_group"
@@ -1106,7 +1106,7 @@ def test_e8_relationships_match_connectors_to_evidence_and_scope(english_root):
         (english_root / "questions/ex-l3-003.json").read_text()
     )
 
-    assert question.question_type == "editing"
+    assert question.question_type == "composition_planning"
     assert question.outcome_code == "EW8.3"
     assert question.difficulty == 4
     assert question.feedback_timing == "after_group"
@@ -1137,7 +1137,7 @@ def test_e8_editing_priority_protects_task_before_surface_corrections(english_ro
         (english_root / "questions/ex-l4-003.json").read_text()
     )
 
-    assert question.question_type == "editing"
+    assert question.question_type == "composition_planning"
     assert question.outcome_code == "EW8.4"
     assert question.difficulty == 4
     assert question.feedback_timing == "after_group"
@@ -1168,7 +1168,7 @@ def test_e8_personal_error_log_selects_recurring_actionable_patterns(english_roo
         (english_root / "questions/ex-l5-003.json").read_text()
     )
 
-    assert question.question_type == "editing"
+    assert question.question_type == "composition_planning"
     assert question.outcome_code == "EW8.5"
     assert question.difficulty == 4
     assert question.feedback_timing == "after_group"
@@ -1904,11 +1904,11 @@ def test_e2_grammar_pilot_covers_boundaries_and_agreement_exactly(english_root):
     ]
     assert [question.question_type for question in questions] == [
         "grammar_usage",
-        "editing",
-        "editing",
         "grammar_usage",
         "grammar_usage",
-        "editing",
+        "grammar_usage",
+        "grammar_usage",
+        "grammar_usage",
     ]
     assert check_english_answer(questions[0].parts[0].response, "B")["correct"]
     assert check_english_answer(questions[4].parts[0].response, ["B", "A"])["correct"]
@@ -2612,11 +2612,11 @@ def test_precise_vocabulary_reviewer_export_contains_notes_and_evidence_limits(
     page = (output / "index.html").read_text()
 
     assert result["question_count"] == 1
-    assert "returned books were sometimes left unsorted" in page
+    assert "families waited in one long queue at a single table" in page
     assert page.count("<strong>Answer:</strong>") == 6
     assert "<strong>Answer:</strong> A, C, E" in page
-    assert "Controlled repetition supports cohesion" in page
-    assert "the intended register and the evidence available" in page
+    assert "holds the meaning steady" in page
+    assert "suits a school composition and stays within the evidence" in page
 
 
 def test_sentence_variety_reviewer_export_contains_control_checks(
@@ -2629,11 +2629,11 @@ def test_sentence_variety_reviewer_export_contains_control_checks(
     page = (output / "index.html").read_text()
 
     assert result["question_count"] == 1
-    assert "the front room faced a bus stop" in page
+    assert "so no part of the path was cleaned twice" in page
     assert page.count("<strong>Answer:</strong>") == 6
     assert "<strong>Answer:</strong> A, D, F" in page
     assert "subject–verb agreement" in page
-    assert "sentence structures change because the relationships" in page
+    assert "the structure changes because the link or the emphasis changes" in page
 
 
 def test_show_relationships_reviewer_export_contains_evidence_limits(
@@ -2646,11 +2646,11 @@ def test_show_relationships_reviewer_export_contains_evidence_limits(
     page = (output / "index.html").read_text()
 
     assert result["question_count"] == 1
-    assert "the longest queues formed during the first ten minutes" in page
+    assert "borrowed fewer books than any other year group" in page
     assert page.count("<strong>Answer:</strong>") == 6
     assert "<strong>Answer:</strong> A, B, C" in page
-    assert "population, setting and period" in page
-    assert "connectors must serve the evidence" in page
+    assert "exact group, period or source" in page
+    assert "linking words must serve the evidence" in page
 
 
 def test_edit_by_priority_reviewer_export_contains_the_full_editing_ladder(
@@ -2663,11 +2663,11 @@ def test_edit_by_priority_reviewer_export_contains_the_full_editing_ladder(
     page = (output / "index.html").read_text()
 
     assert result["question_count"] == 1
-    assert "eight basil seedlings in identical pots were wilting" in page
+    assert "contour lines close together show a steep slope" in page
     assert page.count("<strong>Answer:</strong>") == 6
     assert "<strong>Answer:</strong> C, D" in page
-    assert "task, organisation and evidence-scope repairs come earlier" in page
-    assert "task, organisation, development, sentence control and conventions" in page
+    assert "the task, the order and accurate content come first" in page
+    assert "task, order, content, then sentences" in page
 
 
 def test_personal_error_log_reviewer_export_contains_patterns_and_retest_plan(
@@ -2684,7 +2684,7 @@ def test_personal_error_log_reviewer_export_contains_patterns_and_retest_plan(
     assert page.count("<strong>Answer:</strong>") == 6
     assert "<strong>Answer:</strong> A, C, E" in page
     assert "complete clauses with only a comma" in page
-    assert "requires successful transfer before retirement" in page
+    assert "needs success on new work before a pattern is dropped" in page
 
 
 def test_reflective_writing_reviewer_export_contains_complete_transfer_chain(
@@ -2813,6 +2813,22 @@ def test_quality_rules_flag_a_key_much_longer_than_every_other_option(english_ro
         finding.location
         for finding in english_quality_findings([question], [], [])
         if finding.code == "key_uniquely_longest"
+    }
+
+
+def test_quality_rules_flag_task_types_the_paper_does_not_use(english_root):
+    question = _quality_question(english_root, "eg-l1-002").model_copy(deep=True)
+    assert not english_quality_findings([question], [], [])
+
+    question.question_type = "editing"
+    assert {finding.code for finding in english_quality_findings([question], [], [])} == {
+        "excluded_task_type"
+    }
+
+    question.question_type = "grammar_usage"
+    question.parts[0].prompt = "Explain in your own words why Rina handed it over."
+    assert {finding.code for finding in english_quality_findings([question], [], [])} == {
+        "own_words_question"
     }
 
 
