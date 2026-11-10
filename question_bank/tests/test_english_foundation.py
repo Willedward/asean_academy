@@ -2901,6 +2901,71 @@ def test_every_vocabulary_target_appears_in_its_context(english_root):
     ]
 
 
+def _with_keys(question, keys):
+    """Reorder each part's options so its key sits at the given letter."""
+
+    payload = question.model_dump(mode="json")
+    for part, target in zip(payload["parts"], keys, strict=True):
+        response = part["response"]
+        letters = [option["key"] for option in response["options"]]
+        texts = {option["key"]: option["text"] for option in response["options"]}
+        order = letters.copy()
+        i, j = letters.index(response["correct_key"]), letters.index(target)
+        order[i], order[j] = order[j], order[i]
+        new_key = {old: letters[index] for index, old in enumerate(order)}
+        response["options"] = [{"key": new_key[old], "text": texts[old]} for old in order]
+        response["correct_key"] = target
+        response["choice_rationales"] = {
+            new_key[old]: text for old, text in response["choice_rationales"].items()
+        }
+    return EnglishObjectiveQuestion.model_validate(payload)
+
+
+def test_quality_rules_flag_keys_that_follow_option_order(english_root):
+    reading = _quality_question(english_root, "er-l5-201")
+    codes = {finding.code for finding in english_quality_findings([reading], [], [])}
+    assert "single_choice_keys_follow_option_order" not in codes
+    ordered = _with_keys(reading, "ABCDAB")
+    assert "".join(part.response.correct_key for part in ordered.parts) == "ABCDAB"
+    assert "er-l5-201" in {
+        finding.location
+        for finding in english_quality_findings([ordered], [], [])
+        if finding.code == "single_choice_keys_follow_option_order"
+    }
+
+
+def test_quality_rules_flag_diagnostic_forms_that_share_a_key_sequence(english_root):
+    baseline = _quality_question(english_root, "ev-l5-201")
+    endline = _quality_question(english_root, "ev-l5-202")
+    assert "diagnostic_key_sequence_repeated" not in {
+        finding.code for finding in english_quality_findings([baseline, endline], [], [])
+    }
+    copied = _with_keys(endline, "".join(part.response.correct_key for part in baseline.parts))
+    assert {
+        finding.location
+        for finding in english_quality_findings([baseline, copied], [], [])
+        if finding.code == "diagnostic_key_sequence_repeated"
+    } == {"ev-l5-202"}
+
+
+def test_quality_rules_flag_a_diagnostic_form_where_the_longest_option_wins(english_root):
+    foundation = validate_english_foundation(english_root)
+    form = next(item for item in foundation.forms if item.form_key == "english-baseline-sec3-id-v1")
+    questions = [item for item in foundation.questions if item.stable_key in form.question_keys]
+    assert "diagnostic_key_often_longest" not in {
+        finding.code for finding in english_quality_findings(questions, [], [form])
+    }
+    for question in questions:
+        for part in question.parts:
+            response = part.response
+            if response.type == "single_choice" and question.question_type != "banked_cloze":
+                key = next(o for o in response.options if o.key == response.correct_key)
+                key.text = key.text + " " + "x" * 200
+    assert "diagnostic_key_often_longest" in {
+        finding.code for finding in english_quality_findings(questions, [], [form])
+    }
+
+
 def test_quality_baseline_rejects_new_findings_and_stale_entries(english_root, tmp_path):
     copy = tmp_path / "english"
     shutil.copytree(english_root, copy)
