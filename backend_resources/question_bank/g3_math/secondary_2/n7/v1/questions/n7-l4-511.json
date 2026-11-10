@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l4-511",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.5",
-  "title": "Two equations sharing a solution",
+  "title": "Collect terms after expanding",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,35 +20,11 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The equations "
+          "text": "Solve "
         },
         {
           "type": "inline_math",
-          "latex": "4x+4=24"
-        },
-        {
-          "type": "text",
-          "text": " and "
-        },
-        {
-          "type": "inline_math",
-          "latex": "kx=25"
-        },
-        {
-          "type": "text",
-          "text": " are both solved by the same value of "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": ". Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k"
+          "latex": "3(2x-1)-2(x+4)=x-5"
         },
         {
           "type": "text",
@@ -61,8 +37,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "5",
-        "canonical_latex": "5",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -74,7 +50,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve the fully known equation first, then use its solution in the second equation."
+              "text": "Expand both brackets first, taking care with the sign in front of the second bracket."
             }
           ]
         },
@@ -83,15 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
-            },
-            {
-              "type": "inline_math",
-              "latex": "4x+4=24"
-            },
-            {
-              "type": "text",
-              "text": " for "
+              "text": "Collect the "
             },
             {
               "type": "inline_math",
@@ -99,23 +67,7 @@
             },
             {
               "type": "text",
-              "text": ", then substitute your value into "
-            },
-            {
-              "type": "inline_math",
-              "latex": "kx=25"
-            },
-            {
-              "type": "text",
-              "text": " and solve for "
-            },
-            {
-              "type": "inline_math",
-              "latex": "k"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": " terms on one side and the numbers on the other."
             }
           ]
         }
@@ -126,11 +78,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Expand and collect terms. "
             },
             {
               "type": "display_math",
-              "latex": "4x=20\\Rightarrow x=5;\\quad 5k=25\\Rightarrow k=5"
+              "latex": "6x-3-2x-8=x-5\\Rightarrow4x-11=x-5\\Rightarrow3x=6"
             }
           ],
           "mark_type": "M",
@@ -141,11 +93,31 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "5"
+              "latex": "x=2"
+            },
+            {
+              "type": "text",
+              "text": " Check: left side "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=9-12=-3"
+            },
+            {
+              "type": "text",
+              "text": ", right side "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=2-5=-3"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",

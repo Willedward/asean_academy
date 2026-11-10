@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-510 — Courier parcels of two sizes
+## n7-l4-510 — Ages of two friends
 
 [Open this question in the HTML preview](index.html#n7-l4-510)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-511 — Two equations sharing a solution
+## n7-l4-511 — Collect terms after expanding
 
 [Open this question in the HTML preview](index.html#n7-l4-511)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-514 — Where two lines cross, given y
+## n7-l1-514 — Intersection of two lines
 
 [Open this question in the HTML preview](index.html#n7-l1-514)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l5-503 — Difference between two roots
+## n7-l5-503 — Roots that differ by two
 
 [Open this question in the HTML preview](index.html#n7-l5-503)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-513 — Line through a point and its x-intercept
+## n7-l4-513 — Find a value on a line from a point
 
 [Open this question in the HTML preview](index.html#n7-l4-513)
 
