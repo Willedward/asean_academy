@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g2-l4-509",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.1",
-  "title": "Completing a SAS condition",
+  "title": "Corresponding angles written in x",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Triangles ABC and PQR have AB = PQ and AC = PR. Which extra equality guarantees congruence by SAS? Use code 1 for ∠A = ∠P, 2 for ∠B = ∠Q, 3 for BC = QR, and 4 for ∠C = ∠R. Enter the numerical value only."
+          "text": "Triangles ABC and PQR are congruent, with A, B and C corresponding to P, Q and R. Angle A = (2x + 10)°, angle P = (3x − 15)° and angle Q = 2x°. Find angle C in degrees. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1",
+        "canonical_answer": "70",
+        "canonical_latex": "70",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "SAS needs the angle included between the two known sides."
+              "text": "Corresponding angles of congruent triangles are equal. Which two of the given angles correspond?"
             }
           ]
         },
@@ -60,7 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "SAS needs the angle between the two known sides. Which vertex is between AB and AC?"
+              "text": "Angle A corresponds to angle P, so solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x+10=3x-15"
+            },
+            {
+              "type": "text",
+              "text": ". Angle B equals angle Q."
             }
           ]
         }
@@ -70,8 +78,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Angle A corresponds to angle P."
+            },
+            {
               "type": "display_math",
-              "latex": "\\angle A=\\angle P"
+              "latex": "2x+10=3x-15\\ \\Rightarrow\\ x=25"
             }
           ],
           "mark_type": "M",
@@ -81,8 +93,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "So angle A = 60° and angle B = angle Q = 50°."
+            },
+            {
               "type": "display_math",
-              "latex": "\\text{code}=1"
+              "latex": "\\angle C=180^\\circ-60^\\circ-50^\\circ=70^\\circ"
             }
           ],
           "mark_type": "A",
@@ -97,30 +113,41 @@
       "asset_key": "g2-l4-509-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l4-509-diagram-r3.svg",
-      "alt_text": "Two triangles ABC and PQR. AB and PQ have one tick, and AC and PR have two ticks. No angle is marked as equal. Not drawn to scale.",
+      "path": "assets/g2-l4-509-diagram-r4.svg",
+      "alt_text": "Two triangles ABC and PQR, with PQR turned upside down. Angles A and P each have one arc, and angles B and Q each have two arcs. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-similarity-svg-v1",
         "diagram_kind": "congruent_triangles",
         "question_key": "g2-l4-509",
         "outcome": "2.1",
-        "template": "sas_condition",
-        "inputs": {},
+        "template": "congruent_angle_expressions",
+        "inputs": {
+          "a": {
+            "coefficient": 2,
+            "constant": 10
+          },
+          "p": {
+            "coefficient": 3,
+            "constant": -15
+          },
+          "q": {
+            "coefficient": 2,
+            "constant": 0
+          }
+        },
         "not_to_scale": true,
         "dimensions": {
-          "sides": "AB = PQ and AC = PR"
+          "A": "(2x + 10)°",
+          "P": "(3x − 15)°",
+          "Q": "2x°"
         },
         "forbidden_visible_labels": [
-          "1",
-          "SSS",
-          "SAS",
-          "ASA",
-          "RHS",
-          "included",
-          "∠A = ∠P"
+          "70",
+          "25",
+          "60",
+          "50"
         ],
         "unknowns": [],
-        "answer_kind": "classification_code",
         "forbid_right_angle_marker": true,
         "figures": {
           "ABC": [
@@ -136,66 +163,50 @@
         },
         "omitted_givens": [
           {
-            "value": "1",
-            "reason": "A response code in the question, not a measurement of the figure."
+            "value": "2",
+            "reason": "An angle expression stated in the question; the arcs show which angles correspond."
           },
           {
-            "value": "2",
-            "reason": "A response code in the question, not a measurement of the figure."
+            "value": "10",
+            "reason": "An angle expression stated in the question; the arcs show which angles correspond."
           },
           {
             "value": "3",
-            "reason": "A response code in the question, not a measurement of the figure."
+            "reason": "An angle expression stated in the question; the arcs show which angles correspond."
           },
           {
-            "value": "4",
-            "reason": "A response code in the question, not a measurement of the figure."
-          }
-        ],
-        "equal_marks": [
-          {
-            "segments": [
-              "AB",
-              "PQ"
-            ],
-            "ticks": 1
-          },
-          {
-            "segments": [
-              "CA",
-              "RP"
-            ],
-            "ticks": 2
+            "value": "15",
+            "reason": "An angle expression stated in the question; the arcs show which angles correspond."
           }
         ],
         "viewbox": [
           600.0,
-          304.0
+          302.0
         ],
         "points": {
           "A": [
-            55.0,
-            194.19
+            50.0,
+            192.08
           ],
           "B": [
-            257.48,
-            194.19
+            254.08,
+            192.08
           ],
           "C": [
-            175.38,
-            85.8
+            133.18,
+            48.0
           ],
           "P": [
-            342.52,
-            194.19
+            550.0,
+            48.0
           ],
           "Q": [
-            545.0,
-            194.19
+            345.92,
+            48.0
           ],
           "R": [
-            403.2,
-            44.0
+            466.82,
+            192.08
           ]
         },
         "segments": [
@@ -243,6 +254,178 @@
           }
         ],
         "right_angles": [],
+        "angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_key": "angle-A",
+            "drawn_degrees": 60.0,
+            "degrees": 60.0
+          },
+          {
+            "vertex": "P",
+            "arms": [
+              "Q",
+              "R"
+            ],
+            "marker_key": "angle-P",
+            "drawn_degrees": 60.0,
+            "degrees": 60.0
+          },
+          {
+            "vertex": "B",
+            "arms": [
+              "C",
+              "A"
+            ],
+            "marker_key": "angle-B",
+            "drawn_degrees": 50.0,
+            "degrees": 50.0
+          },
+          {
+            "vertex": "B",
+            "arms": [
+              "C",
+              "A"
+            ],
+            "marker_key": "angle-B2",
+            "drawn_degrees": 50.0,
+            "degrees": 50.0
+          },
+          {
+            "vertex": "Q",
+            "arms": [
+              "R",
+              "P"
+            ],
+            "marker_key": "angle-Q",
+            "drawn_degrees": 50.0,
+            "degrees": 50.0
+          },
+          {
+            "vertex": "Q",
+            "arms": [
+              "R",
+              "P"
+            ],
+            "marker_key": "angle-Q2",
+            "drawn_degrees": 50.0,
+            "degrees": 50.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-A",
+            "center": [
+              50.0,
+              192.08
+            ],
+            "radius": 34.0,
+            "start_ray_point": [
+              254.08,
+              192.08
+            ],
+            "end_ray_point": [
+              133.18,
+              48.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-P",
+            "center": [
+              550.0,
+              48.0
+            ],
+            "radius": 34.0,
+            "start_ray_point": [
+              345.92,
+              48.0
+            ],
+            "end_ray_point": [
+              466.82,
+              192.08
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-B",
+            "center": [
+              254.08,
+              192.08
+            ],
+            "radius": 30.0,
+            "start_ray_point": [
+              133.18,
+              48.0
+            ],
+            "end_ray_point": [
+              50.0,
+              192.08
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-B2",
+            "center": [
+              254.08,
+              192.08
+            ],
+            "radius": 38.0,
+            "start_ray_point": [
+              133.18,
+              48.0
+            ],
+            "end_ray_point": [
+              50.0,
+              192.08
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-Q",
+            "center": [
+              345.92,
+              48.0
+            ],
+            "radius": 30.0,
+            "start_ray_point": [
+              466.82,
+              192.08
+            ],
+            "end_ray_point": [
+              550.0,
+              48.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-Q2",
+            "center": [
+              345.92,
+              48.0
+            ],
+            "radius": 38.0,
+            "start_ray_point": [
+              466.82,
+              192.08
+            ],
+            "end_ray_point": [
+              550.0,
+              48.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
         "labels": [
           {
             "text": "A",
@@ -271,25 +454,40 @@
         ],
         "relationships": [
           {
-            "type": "correspondence",
+            "type": "congruent",
             "figures": [
               "ABC",
               "PQR"
             ]
           },
           {
-            "type": "unequal_segments",
-            "segments": [
-              "BC",
-              "QR"
+            "type": "matching_angles",
+            "angles": [
+              "angle-A",
+              "angle-P"
+            ],
+            "figures": [
+              "ABC",
+              "PQR"
+            ]
+          },
+          {
+            "type": "matching_angles",
+            "angles": [
+              "angle-B",
+              "angle-Q"
+            ],
+            "figures": [
+              "ABC",
+              "PQR"
             ]
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "b6c1c495f2feb0b5f914625c7caddd4303b60c8a9bc738bf435bd6c3bbd1fdbd",
+      "sha256": "e1bbcadcf11211357d3629d62d76a59fab1c6f3d0946398f134512c24868bef7",
       "width": 600,
-      "height": 304
+      "height": 302
     }
   ],
   "provenance": {
