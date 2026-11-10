@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l1-014",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G1",
   "primary_outcome": "1.4",
-  "title": "Lines of symmetry in a rectangle",
+  "title": "Lines of symmetry in an equilateral triangle",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "How many lines of symmetry does a non-square rectangle have?"
+          "text": "How many lines of symmetry does an equilateral triangle have?"
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "2",
-        "canonical_latex": "2",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Consider the horizontal and vertical midlines."
+              "text": "Think about a line from a vertex to the middle of the opposite side."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The diagonals are not symmetry lines for a non-square rectangle."
+              "text": "Test each vertex in turn: does a fold from that vertex land one half exactly on the other?"
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{lines of symmetry}=2"
+              "type": "inline_math",
+              "latex": "\\text{lines of symmetry}=3"
             }
           ],
           "mark_type": "A",

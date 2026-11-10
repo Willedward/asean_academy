@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l4-012",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G1",
   "primary_outcome": "1.7",
-  "title": "Locating a circumcentre",
+  "title": "Arcs needed for an SSS construction",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "What is the minimum number of perpendicular bisectors of different sides needed to locate the circumcentre of a non-degenerate triangle?"
+          "text": "Triangle ABC is to be constructed with ruler and compasses given AB = 6 cm, BC = 5 cm and CA = 4 cm. After AB is drawn, how many compass arcs are needed to locate C?"
         }
       ],
       "marks": 1,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The circumcentre is their common intersection."
+              "text": "C must be the right distance from A and also the right distance from B."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Two non-parallel perpendicular bisectors determine one point; the third verifies it."
+              "text": "Ask how many arcs it takes to mark points at a given distance from each end of AB."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{minimum}=2"
+              "type": "text",
+              "text": "One arc centred at A and one centred at B locate C, so 2 arcs are needed."
             }
           ],
           "mark_type": "A",
