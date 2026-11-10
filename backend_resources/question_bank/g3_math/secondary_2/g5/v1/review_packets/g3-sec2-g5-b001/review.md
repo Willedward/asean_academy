@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l1-506 — Choose the cone volume factor
+## g5-l1-506 — Curved area of a hemisphere
 
 [Open this question in the HTML preview](index.html#g5-l1-506)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l3-502 — Cone and hemisphere capacity
+## g5-l3-502 — Volume of a cone joined to a hemisphere
 
 [Open this question in the HTML preview](index.html#g5-l3-502)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l3-506 — Cone and hemisphere capacity
+## g5-l3-506 — Volume of a cone joined to a hemisphere
 
 [Open this question in the HTML preview](index.html#g5-l3-506)
 

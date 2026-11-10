@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l4-504",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Survey crew considered a strict material budget while preparing a replacement design for the robotics club prototype. A cone of height 12 cm is filled to one eighth of its full volume. The liquid forms a smaller similar cone at the tip. Find the liquid depth in cm."
+          "text": "A conical container is held with its vertex pointing down. The cone of height 12 cm is filled to one eighth of its full volume, and the liquid forms a smaller similar cone at the tip. Find the depth of the liquid in cm."
         }
       ],
       "marks": 4,
@@ -87,22 +87,48 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "The liquid forms a cone similar to the container, so the volume ratio is the cube of the height ratio."
             },
             {
               "type": "display_math",
-              "latex": "\\left(\\frac{h}{12}\\right)^3=\\frac18\\Rightarrow h=6"
+              "latex": "\\left(\\frac{h}{12}\\right)^3=\\frac{1}{8}"
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Take the cube root of both sides."
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{6}"
+              "latex": "\\frac{h}{12}=\\frac{1}{2}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "h=12\\times\\frac{1}{2}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "h=6\\text{ cm}"
             }
           ],
           "mark_type": "A",
@@ -117,7 +143,7 @@
       "asset_key": "g5-l4-504-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-504-diagram-r3.svg",
+      "path": "assets/g5-l4-504-diagram-r4.svg",
       "alt_text": "Conical container held with its vertex pointing down, height h = 12 cm. Liquid fills one eighth of the volume and forms a smaller cone at the tip; its depth is marked but not given. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -367,6 +393,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }
