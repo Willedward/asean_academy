@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n3-l3-029",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N3",
   "primary_outcome": "3.5",
-  "title": "Item price before GST and delivery",
+  "title": "Price before a decrease and an increase",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A customer pays S$236 for an item. This includes a S$18 delivery charge and 9% GST charged on the item price. Find the item price before GST, in dollars."
+          "text": "A price is decreased by 20%, and the new price is then increased by 15%. The final price is S$184. Find the original price, in dollars. Enter only the number."
         }
       ],
       "marks": 3,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Remove the fixed delivery charge before reversing GST."
+              "text": "Reverse both percentage changes, or use their combined multiplier."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 18 from 236, then divide by 1.09."
+              "text": "Multiply the two multipliers together, then divide 184 by the result."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "236-18=218"
+              "type": "inline_math",
+              "latex": "0.80\\times1.15=0.92"
             }
           ],
           "mark_type": "M",
@@ -72,8 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Pre-GST price}=218\\div1.09"
+              "type": "inline_math",
+              "latex": "\\text{Original price}=184\\div0.92"
             }
           ],
           "mark_type": "M",
@@ -83,8 +83,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Pre-GST price}=200"
+              "type": "inline_math",
+              "latex": "\\text{Original price}=200"
             }
           ],
           "mark_type": "A",

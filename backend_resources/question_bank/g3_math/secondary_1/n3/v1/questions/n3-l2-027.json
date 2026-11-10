@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n3-l2-027",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Container A holds 55 litres and Container B holds 50 litres. By what percentage is the capacity of Container A greater than that of Container B?"
+          "text": "Container A holds 65 litres and Container B holds 50 litres. By what percentage is the capacity of Container A greater than that of Container B?"
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "10",
-        "canonical_latex": "10\\%",
+        "canonical_answer": "30",
+        "canonical_latex": "30",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the 5-litre difference and divide by 50 litres."
+              "text": "Find the difference in litres and divide by 50 litres."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "55-50=5"
+              "type": "inline_math",
+              "latex": "65-50=15"
             }
           ],
           "mark_type": "M",
@@ -72,8 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{5}{50}\\times100\\%=10\\%"
+              "type": "inline_math",
+              "latex": "\\frac{15}{50}\\times100\\%=30\\%"
             }
           ],
           "mark_type": "A",

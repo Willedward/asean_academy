@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n3-l4-014 — A part compared with its new whole
+## n3-l4-014 — Percentage of a subgroup
 
 [Open this question in the HTML preview](index.html#n3-l4-014)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n3-l4-015 — Original quantity before a reduction
+## n3-l4-015 — Comparing with a reduced quantity
 
 [Open this question in the HTML preview](index.html#n3-l4-015)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n3-l3-029 — Item price before GST and delivery
+## n3-l3-029 — Price before a decrease and an increase
 
 [Open this question in the HTML preview](index.html#n3-l3-029)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n3-l1-021 — Percentage of a quantity
+## n3-l1-021 — Students walking to school
 
 [Open this question in the HTML preview](index.html#n3-l1-021)
 
