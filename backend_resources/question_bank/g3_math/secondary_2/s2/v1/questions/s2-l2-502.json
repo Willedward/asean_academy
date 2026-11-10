@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s2-l2-502",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The probability that a light bulb is defective is 0.08. Find the probability that it is not defective."
+          "text": "The probability that a light bulb is defective is 0.08. Find the probability that it is not defective. Give your answer as a decimal."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "23/25",
-        "canonical_latex": "\\frac{23}{25}",
+        "canonical_answer": "0.92",
+        "canonical_latex": "0.92",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -70,7 +70,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "1-\\frac{8}{100}=\\frac{23}{25}"
+              "latex": "1-0.08=0.92"
             }
           ],
           "mark_type": "M",
@@ -81,7 +81,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{\\frac{23}{25}}"
+              "latex": "\\boxed{0.92}"
             }
           ],
           "mark_type": "A",

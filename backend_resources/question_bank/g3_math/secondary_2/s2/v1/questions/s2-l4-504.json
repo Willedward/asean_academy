@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s2-l4-504",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -44,7 +44,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the complement that neither result is prime."
+              "text": "Draw a 6 by 6 possibility table, or count the outcomes where neither result is prime."
             }
           ]
         },
@@ -53,15 +53,7 @@
           "content": [
             {
               "type": "text",
-              "text": "There are three non-primes, so the complement probability is "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\left(\\frac{3}{6}\\right)^{2}"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "The non-primes are 1, 4 and 6. Count the cells of the table where both results are non-prime."
             }
           ]
         }
@@ -71,8 +63,28 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "In the 36-cell possibility table, both results are non-prime in "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3\\times3=9"
+            },
+            {
+              "type": "text",
+              "text": " cells (each from 1, 4, 6). So "
+            },
+            {
+              "type": "inline_math",
+              "latex": "36-9=27"
+            },
+            {
+              "type": "text",
+              "text": " cells have at least one prime. "
+            },
+            {
               "type": "display_math",
-              "latex": "P=1-\\left(\\frac36\\right)^2=1-\\frac14=\\frac34"
+              "latex": "P=\\frac{27}{36}"
             }
           ],
           "mark_type": "M",
