@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l5-501",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Student designers considered a strict material budget while preparing a replacement design for the evacuation centre supply bin. A cone and a sphere both have radius 3 cm. The cone has the same volume as the sphere. Find the cone’s perpendicular height in cm."
+          "text": "A jeweller melts a solid metal ball and recasts all of it, with no metal lost, as a solid cone. The cone and a sphere both have radius 3 cm. The cone has the same volume as the sphere. Find the cone’s perpendicular height in cm."
         }
       ],
       "marks": 5,
@@ -87,22 +87,63 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Volume of the sphere:"
             },
             {
               "type": "display_math",
-              "latex": "\\frac13\\pi(3)^2h=\\frac43\\pi(3)^3\\Rightarrow h=12"
+              "latex": "\\frac43\\pi(3)^3=36\\pi"
             }
           ],
           "mark_type": "M",
-          "mark_value": 4
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Volume of the cone with height h:"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{12}"
+              "latex": "\\frac13\\pi(3)^2h=3\\pih"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "No metal is lost, so the volumes are equal."
+            },
+            {
+              "type": "display_math",
+              "latex": "3\\pih=36\\pi"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "h=\\frac{36}{3}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 5,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "h=12\\text{ cm}"
             }
           ],
           "mark_type": "A",
@@ -117,7 +158,7 @@
       "asset_key": "g5-l5-501-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-501-diagram-r3.svg",
+      "path": "assets/g5-l5-501-diagram-r4.svg",
       "alt_text": "A sphere and a separate cone side by side, each with radius 3 cm. The cone has the same volume as the sphere; its perpendicular height h is marked but not given. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -367,6 +408,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

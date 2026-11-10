@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l1-501",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Survey crew considered limited storage space while preparing a replacement design for the harbour rain gauge. A pyramid has base area 12 cm² and perpendicular height 6 cm. Find its volume in cm³. Enter the numerical value only."
+          "text": "A glass paperweight is shaped like a pyramid. The pyramid has base area 12 cm² and perpendicular height 6 cm. Find its volume in cm³."
         }
       ],
       "marks": 1,
@@ -60,11 +60,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
+              "text": "Use "
             },
             {
               "type": "inline_math",
-              "latex": "(12\\times 6)\\div 3"
+              "latex": "V=\\frac{1}{3}\\times\\text{base area}\\times\\text{height}"
             },
             {
               "type": "text",
@@ -78,11 +78,15 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Use the pyramid volume formula."
+            },
+            {
               "type": "display_math",
-              "latex": "V=\\frac13(12)(6)=24"
+              "latex": "V=\\frac13\\times12\\times6=24"
             }
           ],
-          "mark_type": "B",
+          "mark_type": "A",
           "mark_value": 1
         }
       ]
@@ -94,7 +98,7 @@
       "asset_key": "g5-l1-501-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l1-501-diagram-r3.svg",
+      "path": "assets/g5-l1-501-diagram-r4.svg",
       "alt_text": "Pyramid with base area 12 cm² and perpendicular height h = 6 cm from the apex to the centre of the base, right angle marked. Hidden edges are dashed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -347,6 +351,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

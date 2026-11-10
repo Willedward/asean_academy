@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l2-503",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Survey crew considered heavy seasonal rainfall while preparing a replacement design for the sports hall roof model. A right pyramid has a rectangular base 5 cm by 9 cm and perpendicular height 15 cm. Find its volume in cm³."
+          "text": "The roof of a model sports hall is a solid right pyramid. The pyramid has a rectangular base 5 cm by 9 cm and perpendicular height 15 cm. Find the volume of the roof in cm³."
         }
       ],
       "marks": 2,
@@ -64,7 +64,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "V=\\frac{1}{3}\\times (5\\times 9)\\times 15"
+              "latex": "V=\\frac{1}{3}\\times\\text{base area}\\times\\text{height}"
             },
             {
               "type": "text",
@@ -79,11 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Find the base area, then use the pyramid volume formula."
             },
             {
               "type": "display_math",
-              "latex": "V=\\frac13(5)(9)(15)=225"
+              "latex": "V=\\frac13\\times(5\\times9)\\times15=\\frac13\\times45\\times15"
             }
           ],
           "mark_type": "M",
@@ -94,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{225}"
+              "latex": "V=225\\text{ cm}^3"
             }
           ],
           "mark_type": "A",
@@ -109,7 +109,7 @@
       "asset_key": "g5-l2-503-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l2-503-diagram-r3.svg",
+      "path": "assets/g5-l2-503-diagram-r4.svg",
       "alt_text": "Right pyramid on a rectangular base 5 cm by 9 cm. The perpendicular height h = 15 cm runs from the apex to the centre of the base, with the right angle marked. Hidden edges are dashed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -379,6 +379,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }
