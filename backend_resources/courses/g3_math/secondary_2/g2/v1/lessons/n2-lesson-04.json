@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n2-lesson-04",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n2",
@@ -28,11 +28,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A map is a reduced representation of a real place. A representative fraction such as 1 : 50 000 means that 1 unit on the map represents 50 000 of the same unit in reality. It may mean 1 cm represents 50 000 cm, or 1 mm represents 50 000 mm. The ratio itself has no unit because both quantities use the same unit."
+          "text": "A map is a reduced representation of a real place. A representative fraction such as 1 : 50 000 means that 1 unit on the map represents 50 000 of the same unit in reality. It may mean 1 cm represents 50 000 cm, or 1 mm represents 50 000 mm. The ratio itself has no unit because both quantities use the same unit. Since 50 000 cm = 500 m, 1 cm on the map represents 500 m in reality; the map length and the real length are not equal, so write “represents” rather than “=”."
         },
         {
           "type": "display_math",
-          "latex": "1:50\\,000=1\\text{ cm}:50\\,000\\text{ cm}=1\\text{ cm}:500\\text{ m}"
+          "latex": "1:50\\,000=1\\text{ cm}:50\\,000\\text{ cm}"
         },
         {
           "type": "text",
@@ -80,7 +80,7 @@
         },
         {
           "type": "text",
-          "text": "A safer alternative for rectangles and other simple shapes is to convert each map dimension to its real length first, then calculate the real area. Both methods agree. When changing square units, square the unit conversion too: 1 m² = 10 000 cm² and 1 km² = 1 000 000 m²."
+          "text": "A safer alternative for rectangles and other simple shapes is to convert each map dimension to its real length first, then calculate the real area. Both methods agree. When changing square units, square the unit conversion too: 1 m² = 10 000 cm² and 1 km² = 1 000 000 m². Land areas are also measured in hectares: 1 hectare (ha) = 10 000 m², so 1 km² = 100 ha. The diagram shows the area rule at scale 1 : 50 000: a 2 cm side represents 1 km, so a 4 cm² square on the map represents 1 km², not 4 × 50 000 cm²."
         }
       ]
     },
@@ -200,7 +200,7 @@
         },
         {
           "type": "text",
-          "text": "A curved road measured with string or a digital tool uses the same length-scale rule, but measurement precision matters. Give a sensible number of significant figures based on the map measurement. If the prompt asks for straight-line distance, do not substitute the longer road route; identify exactly what was measured."
+          "text": "A curved road measured with string or a digital tool uses the same length-scale rule, but measurement precision matters. If the question asks for rounding, give the accuracy it states; otherwise give the exact value. If the prompt asks for straight-line distance, do not substitute the longer road route; identify exactly what was measured."
         }
       ]
     },
@@ -264,15 +264,60 @@
       "asset_key": "n2-lesson-04-map-scales",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n2-lesson-04-map-scales.svg",
-      "alt_text": "Comparison for scale 1 to 50 000: one centimetre on a map represents five hundred metres, while a two-centimetre square represents a one-kilometre square and therefore one square kilometre.",
+      "path": "assets/n2-lesson-04-map-scales-r2.svg",
+      "alt_text": "At map scale 1 : 50 000, a square with 2 cm sides on the map, area 4 cm², represents a real square with 1 km sides, area 1 km². The side lengths are marked along the bottom edges and the areas inside the squares. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-scale-svg-v1",
-        "diagram_kind": "linear_and_area_scale",
-        "lesson_key": "n2-lesson-04"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "scale_squares",
+        "lesson_key": "n2-lesson-04",
+        "template": "scale_squares",
+        "inputs": {
+          "map_side": "2 cm",
+          "map_area": "4 cm²",
+          "map_caption": "on the map",
+          "real_side": "1 km",
+          "real_area": "1 km²",
+          "real_caption": "in reality",
+          "scale_label": "1 : 50 000",
+          "title": "A map square and the real square",
+          "alt_text": "At map scale 1 : 50 000, a square with 2 cm sides on the map, area 4 cm², represents a real square with 1 km sides, area 1 km². The side lengths are marked along the bottom edges and the areas inside the squares. Not drawn to scale."
+        },
+        "viewbox": [
+          720,
+          470
+        ],
+        "chart_marks": [
+          {
+            "key": "square-0",
+            "kind": "square",
+            "value": "2 cm",
+            "tag": "rect",
+            "geometry": {
+              "x": "90",
+              "y": "220",
+              "width": "110",
+              "height": "110"
+            }
+          },
+          {
+            "key": "square-1",
+            "kind": "square",
+            "value": "1 km",
+            "tag": "rect",
+            "geometry": {
+              "x": "380",
+              "y": "110",
+              "width": "220",
+              "height": "220"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
       },
-      "sha256": "4c4659d681bbf0a9579ad8e6b5e609fd4add01a994ef50d8839f9443a611821b",
-      "width": 940,
+      "sha256": "7b694ec127b0ee71f7681392ed5393fe5e41d30b605c1c84a2696e06da973e7f",
+      "width": 720,
       "height": 470
     }
   ],
@@ -282,6 +327,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

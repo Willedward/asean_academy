@@ -1406,6 +1406,123 @@ def line_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
         },
     )
 
+
+def proportion_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """y = kx (direct) or y = k/x (inverse) for positive x, with labelled points on the graph."""
+    kind = str(inputs["kind"])
+    if kind not in {"direct", "inverse"}:
+        raise ValueError("proportion_graph kind must be direct or inverse")
+    k = float(inputs["k"])
+    x_max, y_max = float(inputs["x_max"]), float(inputs["y_max"])
+    step = float(inputs.get("tick_step", 1))
+    if k <= 0 or x_max <= 0 or y_max <= 0:
+        raise ValueError("proportion_graph needs positive k and axis maxima")
+    title = str(inputs.get("title", "Direct proportion" if kind == "direct" else "Inverse proportion"))
+    builder = _Builder(title, str(inputs["alt_text"]))
+    builder.text(title, WIDTH / 2, 42, size=TITLE_FONT)
+    left, right, top, bottom = 110.0, 650.0, 80.0, 400.0
+
+    def sx(value: float) -> float:
+        return left + value / x_max * (right - left)
+
+    def sy(value: float) -> float:
+        return bottom - value / y_max * (bottom - top)
+
+    for tick in _ticks(0, x_max, step):
+        x = sx(tick)
+        builder.line(x, top, x, bottom, stroke=GRID, width=1)
+        if tick > 0:
+            builder.text(_fmt(tick), x, bottom + 32, size=FONT)
+        builder.tick("x", _fmt(tick), x)
+    for tick in _ticks(0, y_max, step):
+        y = sy(tick)
+        builder.line(left, y, right, y, stroke=GRID, width=1)
+        if tick > 0:
+            builder.text(_fmt(tick), left - 12, y + 9, anchor="end", size=FONT)
+        builder.tick("y", _fmt(tick), y)
+    builder.line(left, bottom, right + 14, bottom, width=3)
+    builder.line(left, bottom, left, top - 14, width=3)
+    builder.text(str(inputs.get("x_label", "x")), right + 24, bottom + 9, size=FONT, anchor="start")
+    builder.text(str(inputs.get("y_label", "y")), left, top - 24, size=FONT)
+    builder.text("O", left - 12, bottom + 32, size=FONT, anchor="end")
+    if kind == "direct":
+        end_x = min(x_max, y_max / k)
+        sample = [(0.0, 0.0), (end_x, k * end_x)]
+    else:
+        start_x = k / y_max
+        sample = [
+            (start_x + (x_max - start_x) * index / 80, k / (start_x + (x_max - start_x) * index / 80))
+            for index in range(81)
+        ]
+    d = "M" + " L".join(f"{_fmt(sx(x))} {_fmt(sy(y))}" for x, y in sample)
+    builder.mark(
+        "curve",
+        "proportion-curve",
+        f"{kind};{_fmt(k)}",
+        "path",
+        {"d": d},
+        style={"fill": "none", "stroke": ACCENT, "stroke-width": 4},
+    )
+    for index, point in enumerate(inputs.get("points", [])):
+        px = float(point["x"])
+        py = k * px if kind == "direct" else k / px
+        builder.mark(
+            f"point-{index}",
+            "point",
+            f"{_fmt(px)},{_fmt(py)}",
+            "circle",
+            {"cx": sx(px), "cy": sy(py), "r": 8},
+            style={"fill": INK, "stroke": BACKGROUND, "stroke-width": 2},
+        )
+        builder.text(
+            f"({_fmt(px)}, {_fmt(py)})",
+            sx(px) + float(point.get("dx", 16)),
+            sy(py) + float(point.get("dy", -14)),
+            size=FONT,
+            anchor=str(point.get("anchor", "start")),
+        )
+    return _finish(
+        builder,
+        template="proportion_graph",
+        diagram_kind="proportion_graph",
+        inputs=inputs,
+        extras={"axis": {"x_min": 0, "x_max": x_max, "y_min": 0, "y_max": y_max}},
+    )
+
+
+def scale_squares(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """A map square and the real square it represents, with side lengths on the sides."""
+    title = str(inputs.get("title", "Length scale and area scale"))
+    builder = _Builder(title, str(inputs["alt_text"]))
+    builder.height = 470
+    builder.text(title, WIDTH / 2, 42, size=TITLE_FONT)
+    small, large = 110.0, 220.0
+    base = 330.0
+    squares = (
+        (90.0, small, str(inputs["map_side"]), str(inputs["map_area"]), str(inputs["map_caption"])),
+        (380.0, large, str(inputs["real_side"]), str(inputs["real_area"]), str(inputs["real_caption"])),
+    )
+    for index, (x, size, side, area, caption) in enumerate(squares):
+        y = base - size
+        builder.mark(
+            f"square-{index}",
+            "square",
+            side,
+            "rect",
+            {"x": x, "y": y, "width": size, "height": size},
+            style={"fill": FILL, "stroke": INK, "stroke-width": 3},
+        )
+        builder.line(x, base + 18, x + size, base + 18, width=2)
+        builder.line(x, base + 10, x, base + 26, width=2)
+        builder.line(x + size, base + 10, x + size, base + 26, width=2)
+        builder.text(side, x + size / 2, base + 52, size=FONT)
+        builder.text(area, x + size / 2, y + size / 2 + 9, size=FONT)
+        builder.text(caption, x + size / 2, base + 92, size=FONT, fill=MUTED)
+    builder.text(str(inputs["scale_label"]), 275, 175, size=FONT)
+    builder.path("M 225 195 L 355 195 M 343 186 L 355 195 L 343 204", width=3)
+    builder.text("Not drawn to scale", WIDTH - 24, builder.height - 18, size=FONT, anchor="end", fill=MUTED)
+    return _finish(builder, template="scale_squares", diagram_kind="scale_squares", inputs=inputs)
+
 TEMPLATES: dict[str, Callable[..., Diagram]] = {
     "scaled_icons": scaled_icons,
     "bar_chart": bar_chart,
@@ -1423,6 +1540,8 @@ TEMPLATES: dict[str, Callable[..., Diagram]] = {
     "coordinate_line": coordinate_line,
     "quadratic_graph": quadratic_graph,
     "line_graph": line_graph,
+    "proportion_graph": proportion_graph,
+    "scale_squares": scale_squares,
 }
 
 
