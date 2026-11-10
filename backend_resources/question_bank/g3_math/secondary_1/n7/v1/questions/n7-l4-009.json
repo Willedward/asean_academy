@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l4-009",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.1",
-  "title": "Coefficient constrained by a solution",
+  "title": "Possible values of a coefficient",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,23 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The only solution of the equation is "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x=6"
-        },
-        {
-          "type": "text",
-          "text": "."
-        },
-        {
-          "type": "display_math",
-          "latex": "(k-1)x=24"
-        },
-        {
-          "type": "text",
-          "text": "Find "
+          "text": "In the equation below, "
         },
         {
           "type": "inline_math",
@@ -44,7 +28,35 @@
         },
         {
           "type": "text",
-          "text": "."
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " are positive integers and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x>3"
+        },
+        {
+          "type": "text",
+          "text": ". How many possible values of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": " are there?"
+        },
+        {
+          "type": "display_math",
+          "latex": "(k-1)x=24"
         }
       ],
       "marks": 3,
@@ -65,8 +77,12 @@
           "stage": 1,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "(k-1)"
+            },
+            {
               "type": "text",
-              "text": "Replace "
+              "text": " and "
             },
             {
               "type": "inline_math",
@@ -74,7 +90,7 @@
             },
             {
               "type": "text",
-              "text": " by 6."
+              "text": " must be a factor pair of 24."
             }
           ]
         },
@@ -83,11 +99,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
+              "text": "List the factors of 24 that are greater than 3, and check each gives a positive integer "
             },
             {
               "type": "inline_math",
-              "latex": "6(k-1)=24"
+              "latex": "k"
             },
             {
               "type": "text",
@@ -101,8 +117,12 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k-1=4"
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " can be 4, 6, 8, 12 or 24."
             }
           ],
           "mark_type": "M",
@@ -112,8 +132,24 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k=5"
+              "type": "text",
+              "text": "Each gives one positive integer "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k"
+            },
+            {
+              "type": "text",
+              "text": " with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k-1=24\\div x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -123,8 +159,16 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "(5-1)6=24"
+              "type": "text",
+              "text": "There are 5 possible values of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",

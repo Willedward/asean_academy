@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-023",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The length of a rectangle is 5 cm more than twice its width. Its perimeter is 58 cm. Let "
+          "text": "The length of a rectangle is 4 cm less than three times its width. Its perimeter is 64 cm. Let "
         },
         {
           "type": "inline_math",
@@ -45,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "8",
-        "canonical_latex": "8",
+        "canonical_answer": "9",
+        "canonical_latex": "9",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,11 +58,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the length as "
+              "text": "Write the length in terms of "
             },
             {
               "type": "inline_math",
-              "latex": "2x+5"
+              "latex": "x"
             },
             {
               "type": "text",
@@ -75,15 +75,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use "
-            },
-            {
-              "type": "inline_math",
-              "latex": "2[x+(2x+5)]=58"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Perimeter is twice the sum of the length and the width."
             }
           ]
         }
@@ -93,8 +85,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "2[x+(2x+5)]=58"
+              "type": "inline_math",
+              "latex": "2[x+(3x-4)]=64"
             }
           ],
           "mark_type": "M",
@@ -104,8 +96,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "6x+10=58"
+              "type": "inline_math",
+              "latex": "8x-8=64"
             }
           ],
           "mark_type": "M",
@@ -115,8 +107,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=8"
+              "type": "inline_math",
+              "latex": "x=9"
             }
           ],
           "mark_type": "A",

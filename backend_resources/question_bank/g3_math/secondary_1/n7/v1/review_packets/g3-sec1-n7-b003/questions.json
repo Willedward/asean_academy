@@ -666,14 +666,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l4-009",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.1",
-    "title": "Coefficient constrained by a solution",
+    "title": "Possible values of a coefficient",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -686,23 +686,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The only solution of the equation is "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=6"
-          },
-          {
-            "type": "text",
-            "text": "."
-          },
-          {
-            "type": "display_math",
-            "latex": "(k-1)x=24"
-          },
-          {
-            "type": "text",
-            "text": "Find "
+            "text": "In the equation below, "
           },
           {
             "type": "inline_math",
@@ -710,7 +694,35 @@
           },
           {
             "type": "text",
-            "text": "."
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": " are positive integers and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x>3"
+          },
+          {
+            "type": "text",
+            "text": ". How many possible values of "
+          },
+          {
+            "type": "inline_math",
+            "latex": "k"
+          },
+          {
+            "type": "text",
+            "text": " are there?"
+          },
+          {
+            "type": "display_math",
+            "latex": "(k-1)x=24"
           }
         ],
         "marks": 3,
@@ -731,8 +743,12 @@
             "stage": 1,
             "content": [
               {
+                "type": "inline_math",
+                "latex": "(k-1)"
+              },
+              {
                 "type": "text",
-                "text": "Replace "
+                "text": " and "
               },
               {
                 "type": "inline_math",
@@ -740,7 +756,7 @@
               },
               {
                 "type": "text",
-                "text": " by 6."
+                "text": " must be a factor pair of 24."
               }
             ]
           },
@@ -749,11 +765,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
+                "text": "List the factors of 24 that are greater than 3, and check each gives a positive integer "
               },
               {
                 "type": "inline_math",
-                "latex": "6(k-1)=24"
+                "latex": "k"
               },
               {
                 "type": "text",
@@ -767,8 +783,12 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "k-1=4"
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " can be 4, 6, 8, 12 or 24."
               }
             ],
             "mark_type": "M",
@@ -778,8 +798,24 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "k=5"
+                "type": "text",
+                "text": "Each gives one positive integer "
+              },
+              {
+                "type": "inline_math",
+                "latex": "k"
+              },
+              {
+                "type": "text",
+                "text": " with "
+              },
+              {
+                "type": "inline_math",
+                "latex": "k-1=24\\div x"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -789,8 +825,16 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "(5-1)6=24"
+                "type": "text",
+                "text": "There are 5 possible values of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "k"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "A",
@@ -934,14 +978,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l1-014",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.2",
-    "title": "Reversing division by eight",
+    "title": "Reversing a subtraction",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -962,23 +1006,11 @@
           },
           {
             "type": "text",
-            "text": " from the equation."
+            "text": "."
           },
           {
             "type": "display_math",
-            "latex": "\\frac{q}{8}=5"
-          },
-          {
-            "type": "text",
-            "text": "Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "q"
-          },
-          {
-            "type": "text",
-            "text": "."
+            "latex": "9-q=4"
           }
         ],
         "marks": 1,
@@ -987,8 +1019,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "40",
-          "canonical_latex": "40",
+          "canonical_answer": "5",
+          "canonical_latex": "5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1000,7 +1032,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply both sides by 8."
+                "text": "Add "
+              },
+              {
+                "type": "inline_math",
+                "latex": "q"
+              },
+              {
+                "type": "text",
+                "text": " to both sides."
               }
             ]
           },
@@ -1009,15 +1049,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write "
-              },
-              {
-                "type": "inline_math",
-                "latex": "q=5\\times 8"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Subtract 4 from both sides."
               }
             ]
           }
@@ -1027,8 +1059,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "q=5\\times8=40"
+                "type": "inline_math",
+                "latex": "q=9-4=5"
               }
             ],
             "mark_type": "A",
@@ -1599,7 +1631,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l4-010",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1619,14 +1651,6 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Remove both brackets and solve the resulting equation."
-          },
-          {
-            "type": "display_math",
-            "latex": "4(2x-3)-3(x+5)=2x"
-          },
-          {
-            "type": "text",
             "text": "Find the value of "
           },
           {
@@ -1636,6 +1660,10 @@
           {
             "type": "text",
             "text": "."
+          },
+          {
+            "type": "display_math",
+            "latex": "4(2x-3)-3(x+5)=2x"
           }
         ],
         "marks": 3,
@@ -1657,15 +1685,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Expand to "
-              },
-              {
-                "type": "inline_math",
-                "latex": "8x-12-3x-15=2x"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Expand both brackets, taking care with the signs."
               }
             ]
           },
@@ -1674,7 +1694,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Collect the x-terms and constants separately."
+                "text": "Collect the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "-terms on one side and the constants on the other."
               }
             ]
           }
@@ -2878,7 +2906,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l2-023",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2898,7 +2926,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A mobile plan costs S$9 monthly plus S$3 for each extra gigabyte. One bill is S$30. Let "
+            "text": "A mobile plan costs S$9 monthly plus S$3 for each extra gigabyte. One bill is S$27. Let "
           },
           {
             "type": "inline_math",
@@ -2923,8 +2951,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "7",
-          "canonical_latex": "7",
+          "canonical_answer": "6",
+          "canonical_latex": "6",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2957,7 +2985,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "9+3x=30"
+                "latex": "9+3x=27"
               },
               {
                 "type": "text",
@@ -2971,8 +2999,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "9+3x=30"
+                "type": "inline_math",
+                "latex": "9+3x=27"
               }
             ],
             "mark_type": "M",
@@ -2982,8 +3010,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=7"
+                "type": "inline_math",
+                "latex": "x=6"
               }
             ],
             "mark_type": "A",
@@ -3012,7 +3040,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l3-023",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3032,7 +3060,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The length of a rectangle is 5 cm more than twice its width. Its perimeter is 58 cm. Let "
+            "text": "The length of a rectangle is 4 cm less than three times its width. Its perimeter is 64 cm. Let "
           },
           {
             "type": "inline_math",
@@ -3057,8 +3085,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "8",
-          "canonical_latex": "8",
+          "canonical_answer": "9",
+          "canonical_latex": "9",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3070,11 +3098,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write the length as "
+                "text": "Write the length in terms of "
               },
               {
                 "type": "inline_math",
-                "latex": "2x+5"
+                "latex": "x"
               },
               {
                 "type": "text",
@@ -3087,15 +3115,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use "
-              },
-              {
-                "type": "inline_math",
-                "latex": "2[x+(2x+5)]=58"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Perimeter is twice the sum of the length and the width."
               }
             ]
           }
@@ -3105,8 +3125,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2[x+(2x+5)]=58"
+                "type": "inline_math",
+                "latex": "2[x+(3x-4)]=64"
               }
             ],
             "mark_type": "M",
@@ -3116,8 +3136,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "6x+10=58"
+                "type": "inline_math",
+                "latex": "8x-8=64"
               }
             ],
             "mark_type": "M",
@@ -3127,8 +3147,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=8"
+                "type": "inline_math",
+                "latex": "x=9"
               }
             ],
             "mark_type": "A",
@@ -3157,7 +3177,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l4-012",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3242,8 +3262,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x-18=60"
+                "type": "inline_math",
+                "latex": "\\frac{2}{3}(x-18)=40"
               }
             ],
             "mark_type": "M",
@@ -3253,8 +3273,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=78"
+                "type": "inline_math",
+                "latex": "x-18=60"
               }
             ],
             "mark_type": "M",
@@ -3264,8 +3284,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{2}{3}(60)=40"
+                "type": "inline_math",
+                "latex": "x=78"
               }
             ],
             "mark_type": "A",
