@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n2-l2-519",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use the data from an environmental field study. A rectangular plot measures 5 cm by 5 cm on a map with scale 1 : 10 000. Find its actual area in hectares. Enter the numerical value only."
+          "text": "A rectangular plot measures 5 cm by 5 cm on a map with scale 1 : 10 000. Find its actual area in hectares. (1 hectare "
+        },
+        {
+          "type": "inline_math",
+          "latex": "=10\\,000"
+        },
+        {
+          "type": "text",
+          "text": " m"
+        },
+        {
+          "type": "inline_math",
+          "latex": "^2"
+        },
+        {
+          "type": "text",
+          "text": ".) Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -62,7 +78,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "5\\text{ cm}=500\\text{ m},\\quad 5\\text{ cm}=500\\text{ m},\\quad \\frac{500\\times500}{10\\,000}=25\\text{ ha}"
+              "latex": "5\\text{ cm}\\mapsto 500\\text{ m},\\quad 5\\text{ cm}\\mapsto 500\\text{ m},\\quad \\frac{500\\times500}{10\\,000}=25\\text{ ha}"
             }
           ],
           "mark_type": "M",

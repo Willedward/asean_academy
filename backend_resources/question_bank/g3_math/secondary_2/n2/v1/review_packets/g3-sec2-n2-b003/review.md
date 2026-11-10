@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l1-514 — Statement scale as a ratio
+## n2-l1-514 — Kilometres represented by 1 cm
 
 [Open this question in the HTML preview](index.html#n2-l1-514)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l2-517 — Route distance in kilometres
+## n2-l2-517 — Map length of a trail
 
 [Open this question in the HTML preview](index.html#n2-l2-517)
 
