@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l4-505",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.8",
-  "title": "Parameter from a known intersection",
+  "title": "Find k from a meeting point",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The line "
+          "text": "The lines "
         },
         {
           "type": "inline_math",
@@ -28,7 +28,7 @@
         },
         {
           "type": "text",
-          "text": " intersects "
+          "text": " and "
         },
         {
           "type": "inline_math",
@@ -36,15 +36,15 @@
         },
         {
           "type": "text",
-          "text": " at "
+          "text": " meet at a point whose "
         },
         {
           "type": "inline_math",
-          "latex": "(3,4)"
+          "latex": "x"
         },
         {
           "type": "text",
-          "text": ". Find "
+          "text": "-coordinate is 3. Find "
         },
         {
           "type": "inline_math",
@@ -52,7 +52,7 @@
         },
         {
           "type": "text",
-          "text": ", then verify the point satisfies both equations."
+          "text": "."
         }
       ],
       "marks": 4,
@@ -74,12 +74,39 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the supplied intersection in the equation containing the unknown parameter."
+              "text": "Use the first equation with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=3"
+            },
+            {
+              "type": "text",
+              "text": " to find the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": "-coordinate of the meeting point."
             }
           ]
         },
         {
           "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Then substitute both coordinates into the second line."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
           "content": [
             {
               "type": "text",
@@ -91,38 +118,11 @@
             },
             {
               "type": "text",
-              "text": " and "
-            },
-            {
-              "type": "inline_math",
-              "latex": "y=4"
-            },
-            {
-              "type": "text",
-              "text": " into "
-            },
-            {
-              "type": "inline_math",
-              "latex": "2x-y=k"
-            },
-            {
-              "type": "text",
-              "text": "."
-            }
-          ]
-        }
-      ],
-      "solution": [
-        {
-          "position": 1,
-          "content": [
-            {
-              "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": " into the first line. "
             },
             {
               "type": "display_math",
-              "latex": "k=2(3)-4=2;\\quad 3(3)+2(4)=17"
+              "latex": "9+2y=17\\Rightarrow y=4"
             }
           ],
           "mark_type": "M",
@@ -133,11 +133,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "2"
+              "latex": "k=2(3)-4=2"
             }
           ],
           "mark_type": "A",

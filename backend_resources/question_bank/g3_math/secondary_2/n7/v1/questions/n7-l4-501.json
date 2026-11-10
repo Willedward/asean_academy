@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l4-501",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.10",
-  "title": "Small and large parcels on one delivery",
+  "title": "A two-digit number and its reversal",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,31 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A delivery has "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": " small parcels of 3 kg and "
-        },
-        {
-          "type": "inline_math",
-          "latex": "y"
-        },
-        {
-          "type": "text",
-          "text": " large parcels of 6 kg. There are 7 parcels with total mass 30 kg. Construct two equations, solve them, and give "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "text": "The tens digit of a two-digit number is 2 more than its units digit. The sum of the number and the number with its digits reversed is 110. Form simultaneous equations and find the two-digit number."
         }
       ],
       "marks": 4,
@@ -53,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "4",
-        "canonical_latex": "4",
+        "canonical_answer": "64",
+        "canonical_latex": "64",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -66,7 +42,31 @@
           "content": [
             {
               "type": "text",
-              "text": "The independent totals are parcel count and mass; model each before eliminating a variable."
+              "text": "If the tens digit is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " and the units digit is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": ", the number is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "10x+y"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -75,15 +75,23 @@
           "content": [
             {
               "type": "text",
-              "text": "One equation is "
+              "text": "The sum simplifies to "
             },
             {
               "type": "inline_math",
-              "latex": "x+y=7"
+              "latex": "11(x+y)=110"
             },
             {
               "type": "text",
-              "text": ". Write a second equation for the total mass, then solve the pair."
+              "text": ". Use this with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=y+2"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -94,11 +102,31 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Write the two equations and simplify. "
             },
             {
               "type": "display_math",
-              "latex": "x+y=7,\\ 3x+6y=30\\Rightarrow x=4"
+              "latex": "x=y+2,\\quad(10x+y)+(10y+x)=110\\Rightarrow11(x+y)=110\\Rightarrow x+y=10"
+            },
+            {
+              "type": "text",
+              "text": " So "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=4"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=6"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -109,11 +137,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "The number is "
             },
             {
               "type": "display_math",
-              "latex": "4"
+              "latex": "64"
             }
           ],
           "mark_type": "A",
