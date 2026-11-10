@@ -307,7 +307,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g5-l3-026",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -327,7 +327,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A trapezium has area 120 cm². A parallelogram of base 7 cm and height 6 cm is marked inside it. Find the remaining unmarked area in cm². Enter the numerical value only."
+            "text": "A trapezium has parallel sides 9 cm and 15 cm and height 10 cm. A parallelogram of base 7 cm and height 6 cm is marked inside it. Find the remaining unmarked area in cm². Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -349,7 +349,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract the parallelogram area from the trapezium area."
+                "text": "Find the area of the trapezium first."
               }
             ]
           },
@@ -358,7 +358,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The marked parallelogram has area 42 cm²."
+                "text": "Subtract the parallelogram area from the trapezium area."
               }
             ]
           }
@@ -368,12 +368,31 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "A=120-7(6)=120-42=78"
+                "type": "inline_math",
+                "latex": "A_T=\\frac12(9+15)(10)=120"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "A_P=7(6)=42"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "120-42=78"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -634,7 +653,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-025",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -704,11 +723,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "A=14^2-6(5)=196-30=166"
+                "latex": "A=14^2-6(5)=196-30"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "A=166"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -733,7 +763,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l2-026",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -812,11 +842,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "P=2(10+6)+2(4+3)-2(3)=40"
+                "latex": "P=2(10+6)+2(4+3)-2(3)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "P=40"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -827,7 +868,7 @@
         "asset_key": "g5-l2-026-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l2-026-diagram-r3.svg",
+        "path": "assets/g5-l2-026-diagram-r4.svg",
         "alt_text": "A rectangle 10 cm by 6 cm joined to a smaller rectangle 4 cm by 3 cm. The whole 3 cm edge of the smaller rectangle lies along a side of the larger one, and that shared edge is dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-sec1-mensuration-svg-v1",
@@ -1095,14 +1136,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-027",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G5",
     "primary_outcome": "5.2",
-    "title": "Walkway beside two regions",
+    "title": "Planting area in a park section",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -1115,7 +1156,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A park section contains a 12 m by 8 m rectangle and a non-overlapping trapezium with parallel sides 8 m and 14 m and height 6 m. If 18 m² is reserved for plants, find the remaining area in m². Enter the numerical value only."
+            "text": "A park section contains a 12 m by 8 m rectangle and a non-overlapping trapezium with parallel sides 10 m and 16 m and height 6 m. If 18 m² is reserved for plants, find the remaining area in m². Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -1124,8 +1165,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "144",
-          "canonical_latex": "144",
+          "canonical_answer": "156",
+          "canonical_latex": "156",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1156,12 +1197,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "A=12(8)+\\frac12(8+14)(6)-18=144"
+                "type": "inline_math",
+                "latex": "A=12(8)+\\frac12(10+16)(6)-18"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "=96+78-18=156"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -1649,7 +1701,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l2-027",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1744,11 +1796,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "S=10(6)+2(10)(4)+2(6)(4)=188"
+                "latex": "S=10(6)+2(10)(4)+2(6)(4)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "S=188"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -1759,7 +1822,7 @@
         "asset_key": "g5-l2-027-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l2-027-diagram-r3.svg",
+        "path": "assets/g5-l2-027-diagram-r4.svg",
         "alt_text": "A cuboid with an open top, 10 cm long, 6 cm wide and 4 cm high. The top is shaded darker to show that it is open, and hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-sec1-mensuration-svg-v1",
@@ -2031,7 +2094,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-028",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2109,11 +2172,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "h=\\frac{1848}{(22/7)(7^2)}=12"
+                "latex": "h=\\frac{1848}{(22/7)(7^2)}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "h=12"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -2240,14 +2314,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l4-015",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G5",
     "primary_outcome": "5.3",
-    "title": "Length from prism area and volume",
+    "title": "Volume from surface area",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2268,15 +2342,7 @@
           },
           {
             "type": "text",
-            "text": " cm. Its volume plus its total surface area is 420 when numerical values are added. Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": ". Enter the numerical value only."
+            "text": " cm. Its total surface area is 220 cm². Find its volume in cm³. Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -2285,8 +2351,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "10",
-          "canonical_latex": "10",
+          "canonical_answer": "200",
+          "canonical_latex": "200",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2298,7 +2364,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write volume and surface area in terms of "
+                "text": "Write the total surface area in terms of "
               },
               {
                 "type": "inline_math",
@@ -2315,23 +2381,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Volume is "
+                "text": "Solve for "
               },
               {
                 "type": "inline_math",
-                "latex": "20x"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": " and surface area is "
-              },
-              {
-                "type": "inline_math",
-                "latex": "40+18x"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": ", then find the volume."
               }
             ]
           }
@@ -2341,8 +2399,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "20x+(40+18x)=420"
+                "type": "inline_math",
+                "latex": "40+18x=220"
               }
             ],
             "mark_type": "M",
@@ -2352,8 +2410,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "38x=380"
+                "type": "inline_math",
+                "latex": "x=10"
               }
             ],
             "mark_type": "M",
@@ -2363,8 +2421,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=10"
+                "type": "inline_math",
+                "latex": "V=20(10)=200"
               }
             ],
             "mark_type": "A",
@@ -2484,7 +2542,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-029",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2561,12 +2619,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "8500\\text{ mm}^2=85\\text{ cm}^2"
+                "type": "inline_math",
+                "latex": "8500\\div100"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "=85\\text{ cm}^2"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -2591,7 +2660,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-030",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2656,12 +2725,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "64000\\text{ mm}^3=64\\text{ cm}^3"
+                "type": "inline_math",
+                "latex": "64000\\div1000"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "=64\\text{ cm}^3"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -2686,7 +2766,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-029",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2748,11 +2828,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "N=\\frac{12000}{1500}=8"
+                "latex": "N=\\frac{12000}{1500}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "N=8"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -2777,7 +2868,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g5-l4-016",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2839,11 +2930,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "A_{new}=2.88(1.25)=3.6\\text{ m}^2"
+                "latex": "A_{new}=2.88(1.25)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 3
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "A_{new}=3.6\\text{ m}^2"
               }
             ],
             "mark_type": "A",
-            "mark_value": 4
+            "mark_value": 1
           }
         ]
       }
@@ -3391,7 +3493,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l1-021",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3411,7 +3513,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A cylinder of volume 308 cm³ stands on a cuboid of volume 420 cm³. The solids do not overlap. Find the combined volume in cm³. Enter the numerical value only."
+            "text": "A cylinder of volume 308 cm³ stands on a 10 cm by 7 cm by 6 cm cuboid. The solids do not overlap. Find the combined volume in cm³. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -3433,7 +3535,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The total volume is the sum of both solids."
+                "text": "Find the volume of the cuboid, then add the volume of the cylinder."
               }
             ]
           },
@@ -3446,11 +3548,11 @@
               },
               {
                 "type": "inline_math",
-                "latex": "308+420"
+                "latex": "10\\times7\\times6"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": ", then add 308."
               }
             ]
           }
@@ -3460,8 +3562,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "V=308+420=728"
+                "type": "inline_math",
+                "latex": "V=308+10(7)(6)=728"
               }
             ],
             "mark_type": "A",
@@ -3490,7 +3592,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l2-031",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3569,11 +3671,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "V=432-36=396"
+                "latex": "V=432-36"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=396"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -3584,7 +3697,7 @@
         "asset_key": "g5-l2-031-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l2-031-diagram-r3.svg",
+        "path": "assets/g5-l2-031-diagram-r4.svg",
         "alt_text": "A cuboid with edges 9 cm, 8 cm and height 6 cm. A rectangular hole 3 cm by 2 cm opens on the top face and passes down through the 6 cm height, with its hidden edges dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-sec1-mensuration-svg-v1",
@@ -4040,7 +4153,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-030",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4102,11 +4215,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "V=48(15)-6(5)(4)=720-120=600"
+                "latex": "V=48(15)-6(5)(4)=720-120"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=600"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -4131,14 +4255,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g5-l3-031",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G5",
     "primary_outcome": "5.5",
-    "title": "Painting a joined solid",
+    "title": "Painting three joined cubes",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -4151,7 +4275,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two identical cubes of side 5 cm are joined face to face. Painting the exposed surface costs $0.40 per cm². Find the painting cost in dollars. Enter the numerical value only."
+            "text": "Three cubes of side 5 cm are joined face to face in an L-shape. Painting the exposed surface costs S$0.40 per cm². Find the painting cost in S$. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -4160,8 +4284,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "100",
-          "canonical_latex": "100",
+          "canonical_answer": "140",
+          "canonical_latex": "140",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -4173,7 +4297,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Remove the two hidden joining faces from the surface area of two cubes."
+                "text": "Each join hides two faces, so count the exposed faces."
               }
             ]
           },
@@ -4182,7 +4306,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The exposed area is 10 square faces, each 25 cm²."
+                "text": "Three cubes have 18 faces, and two joins hide four of them."
               }
             ]
           }
@@ -4192,8 +4316,24 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "S=10(5^2)=250"
+                "type": "text",
+                "text": "Exposed faces: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "18-4=14"
+              },
+              {
+                "type": "text",
+                "text": ", so the area is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "14(5^2)=350\\text{ cm}^2"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -4203,8 +4343,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{cost}=250(0.40)=100"
+                "type": "inline_math",
+                "latex": "\\text{cost}=350(0.40)=140"
               }
             ],
             "mark_type": "A",

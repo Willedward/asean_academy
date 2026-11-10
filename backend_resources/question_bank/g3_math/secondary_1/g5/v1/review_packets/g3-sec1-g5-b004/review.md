@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l3-027 — Walkway beside two regions
+## g5-l3-027 — Planting area in a park section
 
 [Open this question in the HTML preview](index.html#g5-l3-027)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l4-015 — Length from prism area and volume
+## g5-l4-015 — Volume from surface area
 
 [Open this question in the HTML preview](index.html#g5-l4-015)
 
@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l3-031 — Painting a joined solid
+## g5-l3-031 — Painting three joined cubes
 
 [Open this question in the HTML preview](index.html#g5-l3-031)
 
