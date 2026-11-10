@@ -2943,6 +2943,41 @@ def test_every_diagnostic_passage_meets_the_length_range(english_root):
     ]
 
 
+def test_every_mock_passage_meets_the_length_range(english_root):
+    foundation = validate_english_foundation(english_root)
+    by_key = {question.stable_key: question for question in foundation.questions}
+    by_revision = {(p.stable_key, p.revision): p for p in foundation.passages}
+    reading, cloze = [], []
+    for form in foundation.forms:
+        if form.form_type != "mock":
+            continue
+        for key in form.question_keys:
+            ref = by_key[key].passage_ref
+            if ref is None:
+                continue
+            words = passage_word_count(by_revision[(ref.stable_key, ref.revision)])
+            target = reading if by_key[key].question_type == "reading_comprehension" else cloze
+            target.append(words)
+    assert len(reading) == 4 and all(300 <= words <= 450 for words in reading)
+    assert len(cloze) == 4 and all(150 <= words <= 250 for words in cloze)
+
+
+def test_quality_rules_flag_a_mock_passage_outside_the_length_range(english_root):
+    foundation = validate_english_foundation(english_root)
+    reading = next(q for q in foundation.questions if q.stable_key == "er-l5-103")
+    ref = reading.passage_ref
+    passages = [
+        passage.model_copy(update={"paragraphs": passage.paragraphs[:2]})
+        if passage.stable_key == ref.stable_key
+        else passage
+        for passage in foundation.passages
+    ]
+    findings = english_quality_findings(foundation.questions, [], foundation.forms, passages)
+    assert ref.stable_key in {
+        finding.location for finding in findings if finding.code == "diagnostic_passage_length"
+    }
+
+
 def test_quality_rules_flag_a_diagnostic_passage_outside_the_length_range(english_root):
     foundation = validate_english_foundation(english_root)
     reading = next(q for q in foundation.questions if q.stable_key == "er-l5-202")
