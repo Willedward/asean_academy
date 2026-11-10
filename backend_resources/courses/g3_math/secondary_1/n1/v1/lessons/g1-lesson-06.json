@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g1-lesson-06",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g1",
@@ -30,7 +30,23 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Drawing diagonals from one vertex divides an n-sided convex polygon into n - 2 triangles, so its interior-angle sum is (n - 2)180°. One exterior angle at each vertex always totals 360°."
+          "text": "Drawing diagonals from one vertex divides an n-sided convex polygon into "
+        },
+        {
+          "type": "inline_math",
+          "latex": "n-2\\text{ triangles}"
+        },
+        {
+          "type": "text",
+          "text": ", so its interior-angle sum is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(n-2)\\times180^\\circ"
+        },
+        {
+          "type": "text",
+          "text": ". One exterior angle at each vertex always totals 360°."
         },
         {
           "type": "display_math",
@@ -62,7 +78,23 @@
       "blocks": [
         {
           "type": "text",
-          "text": "For a regular polygon, exterior angle=360°/n and interior angle=180°−exterior angle. To recover n, divide 360° by the exterior angle. If an interior angle is given, first subtract it from 180°. The resulting side count must be a whole number at least 3."
+          "text": "For a regular polygon, "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\text{exterior angle}=\\frac{360^\\circ}{n}"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\text{interior angle}=180^\\circ-\\text{exterior angle}"
+        },
+        {
+          "type": "text",
+          "text": ". To recover n, divide 360° by the exterior angle. If an interior angle is given, first subtract it from 180°. The resulting side count must be a whole number at least 3."
         }
       ]
     },
@@ -156,7 +188,15 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Do not divide 360° by an interior angle. Convert to the exterior angle first. The formula (n−2)×180° gives the total interior sum, not one interior angle unless you divide by n for a regular polygon."
+          "text": "Do not divide 360° by an interior angle. Convert to the exterior angle first. The formula "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(n-2)\\times180^\\circ"
+        },
+        {
+          "type": "text",
+          "text": " gives the total interior sum, not one interior angle unless you divide by n for a regular polygon."
         }
       ]
     },
@@ -196,7 +236,31 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Interior-angle sum of an n-sided polygon = (n − 2) × 180°. Exterior angles total 360°. For a regular polygon, exterior angle = 360° ÷ n and interior angle = 180° − exterior angle."
+          "text": "Interior-angle sum of an n-sided polygon = "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(n-2)\\times180^\\circ"
+        },
+        {
+          "type": "text",
+          "text": ". Exterior angles total 360°. For a regular polygon, "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\text{exterior angle}=360^\\circ\\div n"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\text{interior angle}=180^\\circ-\\text{exterior angle}"
+        },
+        {
+          "type": "text",
+          "text": "."
         },
         {
           "type": "text",
@@ -210,7 +274,7 @@
       "asset_key": "g1-lesson-06-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-lesson-06-exterior-r3.svg",
+      "path": "assets/g1-lesson-06-exterior-r4.svg",
       "alt_text": "A regular polygon, a hexagon, with all six sides marked equal by tick marks. Lines from one vertex divide it into four triangles. One side is extended beyond a vertex, and the exterior angle between the extension and the next side is marked e. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-plane-geometry-svg-v1",
