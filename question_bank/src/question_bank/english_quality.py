@@ -18,6 +18,11 @@ BASELINE_PATH = "authoring/quality_baseline.json"
 LONGEST_KEY_RATIO = 1.3
 MAX_KEY_POSITION_SHARE = 0.6
 MIN_FORM_PARTS_FOR_POSITION_CHECK = 5
+MIN_PARTS_FOR_ORDER_CHECK = 4
+MIN_PARTS_FOR_SEQUENCE_CHECK = 5
+MAX_DIAGNOSTIC_LONGEST_KEY_SHARE = 0.5
+DIAGNOSTIC_POOLS = {"baseline_diagnostic", "endline_diagnostic", "protected_reserve"}
+DIAGNOSTIC_FORM_TYPES = {"baseline", "endline", "endline_reserve"}
 LESSON_COPY_WORDS = 8
 PROTECTED_POOLS = {
     "baseline_diagnostic",
@@ -207,6 +212,95 @@ def _target_word_findings(question: EnglishObjectiveQuestion, passages) -> list[
     return findings
 
 
+def _choice_parts(question: EnglishObjectiveQuestion):
+    if question.question_type == "banked_cloze":
+        return []
+    parts = [part for part in question.parts if part.response.type == "single_choice"]
+    return parts if len(parts) == len(question.parts) else []
+
+
+def _option_order_findings(question: EnglishObjectiveQuestion) -> list[QualityFinding]:
+    """Flag grouped parts whose keys mostly step to the next option letter (A, B, C, D, A...)."""
+
+    parts = _choice_parts(question)
+    if len(parts) < MIN_PARTS_FOR_ORDER_CHECK:
+        return []
+    steps = 0
+    for earlier, later in zip(parts, parts[1:], strict=False):
+        letters = [option.key for option in earlier.response.options]
+        following = letters[(letters.index(earlier.response.correct_key) + 1) % len(letters)]
+        if later.response.correct_key == following:
+            steps += 1
+    if 2 * steps <= len(parts) - 1:
+        return []
+    keys = "".join(part.response.correct_key for part in parts)
+    return [
+        QualityFinding(
+            "single_choice_keys_follow_option_order",
+            question.stable_key,
+            f"The part keys {keys} mostly move to the next option letter. Reorder options.",
+        )
+    ]
+
+
+def _repeated_sequence_findings(questions) -> list[QualityFinding]:
+    """Flag diagnostic questions that share a key sequence, so one form's answers fit another."""
+
+    seen: dict[str, str] = {}
+    findings = []
+    for question in sorted(questions, key=lambda item: item.stable_key):
+        if question.exposure_pool not in DIAGNOSTIC_POOLS:
+            continue
+        parts = _choice_parts(question)
+        if len(parts) < MIN_PARTS_FOR_SEQUENCE_CHECK:
+            continue
+        keys = "".join(part.response.correct_key for part in parts)
+        if keys in seen:
+            findings.append(
+                QualityFinding(
+                    "diagnostic_key_sequence_repeated",
+                    question.stable_key,
+                    f"The keys {keys} repeat those of {seen[keys]}.",
+                )
+            )
+        else:
+            seen[keys] = question.stable_key
+    return findings
+
+
+def _uniquely_longest(response) -> bool:
+    lengths = {option.key: len(option.text) for option in response.options}
+    key_length = lengths[response.correct_key]
+    return all(length < key_length for key, length in lengths.items() if key != response.correct_key)
+
+
+def _diagnostic_longest_findings(forms, by_key) -> list[QualityFinding]:
+    """Flag diagnostic forms where choosing the longest option scores most parts."""
+
+    findings = []
+    for form in forms:
+        if form.form_type not in DIAGNOSTIC_FORM_TYPES:
+            continue
+        responses = [
+            part.response
+            for key in form.question_keys
+            if key in by_key
+            for part in _choice_parts(by_key[key])
+        ]
+        if not responses:
+            continue
+        longest = sum(1 for response in responses if _uniquely_longest(response))
+        if longest > MAX_DIAGNOSTIC_LONGEST_KEY_SHARE * len(responses):
+            findings.append(
+                QualityFinding(
+                    "diagnostic_key_often_longest",
+                    form.form_key,
+                    f"The key is the longest option in {longest} of {len(responses)} parts.",
+                )
+            )
+    return findings
+
+
 def _form_findings(forms, by_key) -> list[QualityFinding]:
     findings = []
     for form in forms:
@@ -324,7 +418,10 @@ def english_quality_findings(questions, lessons, forms, passages=None) -> list[Q
         findings.extend(_part_findings(question))
         findings.extend(_banked_cloze_order_findings(question))
         findings.extend(_target_word_findings(question, passages))
+        findings.extend(_option_order_findings(question))
+    findings.extend(_repeated_sequence_findings(questions))
     findings.extend(_form_findings(forms, by_key))
+    findings.extend(_diagnostic_longest_findings(forms, by_key))
     findings.extend(_protected_reuse_findings(questions, lessons))
     findings.extend(_lesson_copy_findings(questions, lessons))
     findings.extend(_banned_term_findings(questions, lessons))
