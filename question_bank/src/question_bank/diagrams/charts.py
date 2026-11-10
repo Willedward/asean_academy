@@ -958,6 +958,14 @@ def data_table(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
         builder.line(x0, y, x0 + (len(columns) + 1) * column_width, y, width=2)
     for index, column in enumerate(columns):
         builder.text(column, x0 + (index + 1.5) * column_width, y0 + row_height * 0.68, size=25)
+    # Optional: name the header row in the top-left cell (such as x for a table of values), and
+    # end the figure just below the table instead of at the fixed chart height.
+    if inputs.get("corner"):
+        builder.text(
+            str(inputs["corner"]), x0 + column_width * 0.5, y0 + row_height * 0.68, size=25
+        )
+    if inputs.get("compact"):
+        builder.height = int(math.ceil(y0 + (len(rows) + 1) * row_height + 40))
     for row_index, row_label in enumerate(rows):
         y = y0 + (row_index + 1.68) * row_height
         builder.text(row_label, x0 + column_width * 0.5, y, size=25)
@@ -1214,14 +1222,30 @@ def quadratic_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diag
         return bottom - (value - y_min) / (y_max - y_min) * (bottom - top)
 
     axis_y = sy(0)
+    zero_x = sx(0) if x_min <= 0 <= x_max else left
+    # With clear_labels, an axis number that the y-axis would run through moves beside it
+    # (the 0 under the origin, for example). Older assets keep their stored layout.
+    clear_labels = bool(inputs.get("clear_labels", False))
+    room = _Clearance(builder.width, builder.height)
+    room.stroke([(zero_x, top), (zero_x, bottom)], 1.5)
     for tick in range(math.ceil(x_min), math.floor(x_max) + 1):
         x = sx(tick)
         builder.line(x, top, x, bottom, stroke=GRID, width=1)
         builder.line(x, axis_y - 6, x, axis_y + 6, width=2)
-        builder.text(tick, x, min(bottom - 4, axis_y + 30), size=25, weight=500)
+        baseline = min(bottom - 4, axis_y + 30)
+        if clear_labels:
+            room.place(
+                builder,
+                tick,
+                [(x, baseline, "middle"), (x - 9, baseline, "end"), (x + 9, baseline, "start")],
+                size=25,
+                weight=500,
+                optional=True,
+            )
+        else:
+            builder.text(tick, x, baseline, size=25, weight=500)
         builder.tick("x", tick, x)
     builder.line(left, axis_y, right, axis_y, width=3)
-    zero_x = sx(0) if x_min <= 0 <= x_max else left
     builder.line(zero_x, top, zero_x, bottom, width=3)
     d = "M" + " L".join(f"{_fmt(sx(x))} {_fmt(sy(y))}" for x, y in zip(sample, values, strict=True))
     builder.mark(
@@ -1298,8 +1322,131 @@ def _clip_line(a: float, b: float, c: float, box: tuple[float, float, float, flo
     return tuple(sorted(best))
 
 
+class _Clearance:
+    """Place graph labels clear of plotted lines, points and each other.
+
+    Each label is given candidate positions in order of preference; the first whose text box
+    keeps clear of every registered stroke, dot and earlier label, and stays inside the
+    viewBox, is used. If none is clear the first candidate is used, so output stays defined.
+    """
+
+    def __init__(self, width: float, height: float) -> None:
+        self.width, self.height = width, height
+        self.strokes: list[tuple[list[tuple[float, float]], float]] = []
+        self.dots: list[tuple[float, float, float]] = []
+        self.boxes: list[Any] = []
+
+    def stroke(self, points: Sequence[tuple[float, float]], half_width: float) -> None:
+        self.strokes.append((list(points), half_width))
+
+    def dot(self, x: float, y: float, radius: float) -> None:
+        self.dots.append((x, y, radius))
+
+    def clear_of_labels(self, box: Any, gap: float = 4.0) -> bool:
+        from ..svg_metrics import Box
+
+        return box.inside(Box(4, 4, self.width - 4, self.height - 4)) and not any(
+            box.overlaps(other.expanded(2 * gap)) for other in self.boxes
+        )
+
+    def clear(self, box: Any, gap: float = 4.0) -> bool:
+        from ..svg_metrics import Box, segment_box_distance
+
+        if not box.inside(Box(4, 4, self.width - 4, self.height - 4)):
+            return False
+        if any(box.overlaps(other.expanded(2 * gap)) for other in self.boxes):
+            return False
+        for points, half in self.strokes:
+            for start, end in zip(points, points[1:], strict=False):
+                if segment_box_distance(start, end, box) < half + gap:
+                    return False
+        return all(
+            segment_box_distance((x, y), (x, y), box) >= radius + gap for x, y, radius in self.dots
+        )
+
+    def place(
+        self,
+        builder: _Builder,
+        text: Any,
+        candidates: Sequence[tuple[float, float, str]],
+        *,
+        size: float = FONT,
+        weight: int = 600,
+        fill: str = TEXT,
+        optional: bool = False,
+    ) -> bool:
+        """Draw the label at its first clear candidate. When none is clear, an ``optional`` label
+        (an axis number) is drawn on a background plate at its first candidate that is clear of
+        other labels, so a line passes under it rather than through it, or left out if there is
+        none; a required label falls back to its first candidate."""
+        from ..svg_metrics import text_box
+
+        chosen = None
+        for candidate in candidates:
+            x, y, anchor = candidate
+            if self.clear(text_box(x, y, str(text), size, anchor)):
+                chosen = candidate
+                break
+        plated = False
+        if chosen is None and optional:
+            # Accept a line under the number (it gets a plate), but never another label.
+            for candidate in candidates:
+                x, y, anchor = candidate
+                box = text_box(x, y, str(text), size, anchor)
+                if self.clear_of_labels(box):
+                    chosen, plated = candidate, True
+                    break
+            if chosen is None:
+                return False
+        if chosen is None:
+            chosen = candidates[0]
+        x, y, anchor = chosen
+        if plated:
+            box = text_box(x, y, str(text), size, anchor)
+            builder.labels.append(
+                "<rect"
+                + _attrs(
+                    {
+                        "data-role": "label-plate",
+                        "x": _fmt(box.x0 - 3),
+                        "y": _fmt(box.y0 - 2),
+                        "width": _fmt(box.x1 - box.x0 + 6),
+                        "height": _fmt(box.y1 - box.y0 + 4),
+                        "rx": 4,
+                        "fill": BACKGROUND,
+                    }
+                )
+                + "/>"
+            )
+        self.boxes.append(text_box(x, y, str(text), size, anchor))
+        builder.text(text, x, y, size=size, anchor=anchor, weight=weight, fill=fill)
+        return not plated
+
+
+def _around(x: float, y: float, preferred: tuple[float, float, str]) -> list[tuple[float, float, str]]:
+    """Candidate label positions around a point, starting with the author's choice."""
+    dx, dy, anchor = preferred
+    spots = [(x + dx, y + dy, anchor)]
+    for distance in (14, 22, 32):
+        spots += [
+            (x + distance, y - distance * 0.7, "start"),
+            (x - distance, y - distance * 0.7, "end"),
+            (x + distance, y + distance + 16, "start"),
+            (x - distance, y + distance + 16, "end"),
+            (x + distance + 4, y + 9, "start"),
+            (x - distance - 4, y + 9, "end"),
+            (x, y - distance - 4, "middle"),
+            (x, y + distance + 22, "middle"),
+        ]
+    return spots
+
+
 def line_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
-    """Straight lines ax + by = c on axes with equal unit scales, with optional labelled points."""
+    """Straight lines ax + by = c on axes with equal unit scales, with optional labelled points.
+
+    Line labels, point labels and axis numbers are placed clear of the plotted lines, the points
+    and one another: the author's position is tried first, then nearby positions.
+    """
     lines = list(inputs["lines"])
     if not 1 <= len(lines) <= 2:
         raise ValueError("line_graph draws one or two lines")
@@ -1318,6 +1465,8 @@ def line_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
     step = 1 if unit >= 34 else 2
     bottom = top + unit * (y_max - y_min)
     builder.height = int(math.ceil(bottom + 60))
+    room = _Clearance(builder.width, builder.height)
+    room.boxes.append(_title_box(title))
 
     def sx(value: float) -> float:
         return left + (value - x_min) * unit
@@ -1326,19 +1475,15 @@ def line_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
         return bottom - (value - y_min) * unit
 
     for tick in range(math.ceil(x_min), math.floor(x_max) + 1):
-        x = sx(tick)
-        builder.line(x, top, x, bottom, stroke=GRID, width=1)
-        if tick > 0 and tick % step == 0:
-            builder.text(tick, x, sy(0) + 30, size=FONT)
-        builder.tick("x", tick, x)
+        builder.line(sx(tick), top, sx(tick), bottom, stroke=GRID, width=1)
+        builder.tick("x", tick, sx(tick))
     for tick in range(math.ceil(y_min), math.floor(y_max) + 1):
-        y = sy(tick)
-        builder.line(left, y, right, y, stroke=GRID, width=1)
-        if tick > 0 and tick % step == 0:
-            builder.text(tick, sx(0) - 12, y + 9, anchor="end", size=FONT)
-        builder.tick("y", tick, y)
+        builder.line(left, sy(tick), right, sy(tick), stroke=GRID, width=1)
+        builder.tick("y", tick, sy(tick))
     builder.line(left, sy(0), right + 14, sy(0), width=3)
     builder.line(sx(0), bottom, sx(0), top - 14, width=3)
+    room.stroke([(left, sy(0)), (right + 16, sy(0))], 1.5)
+    room.stroke([(sx(0), bottom), (sx(0), top - 16)], 1.5)
     builder.path(
         f"M{_fmt(right + 4)} {_fmt(sy(0) - 7)} L{_fmt(right + 16)} {_fmt(sy(0))} "
         f"L{_fmt(right + 4)} {_fmt(sy(0) + 7)}",
@@ -1349,16 +1494,15 @@ def line_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
         f"L{_fmt(sx(0) + 7)} {_fmt(top - 4)}",
         width=3,
     )
-    builder.text("x", right + 30, sy(0) + 9, size=FONT, anchor="start")
-    builder.text("y", sx(0), top - 26, size=FONT)
-    builder.text("O", sx(0) - 12, sy(0) + 30, size=FONT, anchor="end")
     colours = (ACCENT, SECONDARY)
+    ends_by_line = []
     for index, item in enumerate(lines):
         a, b, c = float(item["a"]), float(item["b"]), float(item["c"])
         ends = _clip_line(a, b, c, (x_min, x_max, y_min, y_max))
         if ends is None:
             raise ValueError("each line must cross the plotting window")
         (x1, y1), (x2, y2) = ends
+        ends_by_line.append(ends)
         builder.mark(
             f"line-{index}",
             "line",
@@ -1367,16 +1511,9 @@ def line_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
             {"x1": sx(x1), "y1": sy(y1), "x2": sx(x2), "y2": sy(y2)},
             style={"stroke": colours[index], "stroke-width": 4},
         )
-        label = item.get("label")
-        if label:
-            builder.text(
-                str(label),
-                sx(float(item["label_x"])),
-                sy(float(item["label_y"])),
-                size=FONT,
-                anchor=str(item.get("label_anchor", "start")),
-                fill=colours[index] if index == 0 else INK,
-            )
+        room.stroke([(sx(x1), sy(y1)), (sx(x2), sy(y2))], 2.0)
+    for point in inputs.get("points", []):
+        room.dot(sx(float(point["x"])), sy(float(point["y"])), 8)
     for index, point in enumerate(inputs.get("points", [])):
         px, py = float(point["x"]), float(point["y"])
         builder.mark(
@@ -1388,13 +1525,35 @@ def line_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
             style={"fill": INK, "stroke": BACKGROUND, "stroke-width": 2},
         )
         if point.get("label"):
-            builder.text(
-                str(point["label"]),
-                sx(px) + float(point.get("dx", 16)),
-                sy(py) + float(point.get("dy", -14)),
-                size=FONT,
-                anchor=str(point.get("anchor", "start")),
+            preferred = (
+                float(point.get("dx", 16)),
+                float(point.get("dy", -14)),
+                str(point.get("anchor", "start")),
             )
+            room.place(builder, str(point["label"]), _around(sx(px), sy(py), preferred))
+    for index, item in enumerate(lines):
+        label = item.get("label")
+        if not label:
+            continue
+        lx, ly = sx(float(item["label_x"])), sy(float(item["label_y"]))
+        anchor = str(item.get("label_anchor", "start"))
+        spots = [(lx, ly, anchor)]
+        for shift in (14, 28, 42, 56, 72, 90):
+            spots += [(lx + shift, ly, anchor), (lx - shift, ly, anchor),
+                      (lx, ly - shift, anchor), (lx, ly + shift, anchor),
+                      (lx + shift, ly - shift, anchor), (lx - shift, ly + shift, anchor)]
+        room.place(builder, str(label), spots, fill=colours[index] if index == 0 else INK)
+    room.place(builder, "x", [(right + 30, sy(0) + 9, "start")])
+    room.place(builder, "y", [(sx(0), top - 26, "middle"), (sx(0) + 16, top - 18, "start")])
+    room.place(builder, "O", [(sx(0) - 12, sy(0) + 30, "end"), (sx(0) + 12, sy(0) + 30, "start")])
+    for tick in range(math.ceil(x_min), math.floor(x_max) + 1):
+        if tick > 0 and tick % step == 0:
+            x = sx(tick)
+            room.place(builder, tick, _x_tick_spots(x, sy(0)), optional=True)
+    for tick in range(math.ceil(y_min), math.floor(y_max) + 1):
+        if tick > 0 and tick % step == 0:
+            y = sy(tick)
+            room.place(builder, tick, _y_tick_spots(sx(0), y), optional=True)
     return _finish(
         builder,
         template="line_graph",
@@ -1405,6 +1564,30 @@ def line_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
             "unit_px": _fmt(unit),
         },
     )
+
+
+def _x_tick_spots(x: float, axis_y: float) -> list[tuple[float, float, str]]:
+    return [
+        (x, axis_y + 30, "middle"),
+        (x, axis_y - 12, "middle"),
+        (x + 8, axis_y + 30, "start"),
+        (x - 8, axis_y + 30, "end"),
+    ]
+
+
+def _y_tick_spots(axis_x: float, y: float) -> list[tuple[float, float, str]]:
+    return [
+        (axis_x - 12, y + 9, "end"),
+        (axis_x + 12, y + 9, "start"),
+        (axis_x - 12, y + 4, "end"),
+        (axis_x - 12, y + 14, "end"),
+    ]
+
+
+def _title_box(title: str) -> Any:
+    from ..svg_metrics import text_box
+
+    return text_box(WIDTH / 2, 42, title, TITLE_FONT, "middle")
 
 
 def proportion_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
@@ -1526,7 +1709,8 @@ def scale_squares(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagra
 
 def parabola_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
     """y = ax² + bx + c sampled from the rule, with numbered axes, plotted points and an optional
-    labelled axis of symmetry."""
+    labelled axis of symmetry. Labels and axis numbers are placed clear of the curve, the points,
+    the axis of symmetry and one another."""
     a, b, c = float(inputs["a"]), float(inputs.get("b", 0)), float(inputs.get("c", 0))
     if math.isclose(a, 0):
         raise ValueError("parabola_graph needs a non-zero a")
@@ -1545,6 +1729,8 @@ def parabola_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagr
     top = 95.0
     bottom = top + y_unit * (y_max - y_min)
     builder.height = int(math.ceil(bottom + 60))
+    room = _Clearance(builder.width, builder.height)
+    room.boxes.append(_title_box(title))
 
     def sx(value: float) -> float:
         return left + (value - x_min) * x_unit
@@ -1553,21 +1739,15 @@ def parabola_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagr
         return bottom - (value - y_min) * y_unit
 
     for tick in range(math.ceil(x_min), math.floor(x_max) + 1):
-        x = sx(tick)
-        builder.line(x, top, x, bottom, stroke=GRID, width=1)
-        if tick != 0 and tick % step == 0:
-            builder.text(tick, x, sy(0) + 30, size=FONT)
-        builder.tick("x", tick, x)
+        builder.line(sx(tick), top, sx(tick), bottom, stroke=GRID, width=1)
+        builder.tick("x", tick, sx(tick))
     for tick in range(math.ceil(y_min), math.floor(y_max) + 1):
-        y = sy(tick)
-        builder.line(left, y, right, y, stroke=GRID, width=1)
-        if tick != 0 and tick % step == 0:
-            builder.text(tick, sx(0) - 12, y + 9, anchor="end", size=FONT)
-        builder.tick("y", tick, y)
+        builder.line(left, sy(tick), right, sy(tick), stroke=GRID, width=1)
+        builder.tick("y", tick, sy(tick))
     builder.line(left, sy(0), right + 14, sy(0), width=3)
     builder.line(sx(0), bottom, sx(0), top - 14, width=3)
-    builder.text("x", right + 24, sy(0) + 9, size=FONT, anchor="start")
-    builder.text("y", sx(0), top - 24, size=FONT)
+    room.stroke([(left, sy(0)), (right + 14, sy(0))], 1.5)
+    room.stroke([(sx(0), bottom), (sx(0), top - 14)], 1.5)
     sample = []
     for index in range(161):
         x = x_min + (x_max - x_min) * index / 160
@@ -1585,16 +1765,19 @@ def parabola_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagr
         {"d": d},
         style={"fill": "none", "stroke": ACCENT, "stroke-width": 4},
     )
+    room.stroke([(sx(x), sy(y)) for x, y in sample], 2.0)
+    h = -b / (2 * a)
     if inputs.get("axis_label"):
-        h = -b / (2 * a)
         builder.line(
             sx(h), top, sx(h), bottom, stroke=SECONDARY, width=2, dash="8 7",
             attrs={"data-role": "axis-of-symmetry", "data-value": _fmt(h)},
         )
-        builder.text(str(inputs["axis_label"]), sx(h) + 10, bottom - 14, size=FONT, anchor="start")
+        room.stroke([(sx(h), top), (sx(h), bottom)], 1.0)
+    points = []
     for index, point in enumerate(inputs.get("points", [])):
         px = float(point["x"])
         py = a * px * px + b * px + c
+        points.append((point, px, py))
         builder.mark(
             f"point-{index}",
             "point",
@@ -1603,14 +1786,31 @@ def parabola_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagr
             {"cx": sx(px), "cy": sy(py), "r": 7},
             style={"fill": INK, "stroke": BACKGROUND, "stroke-width": 2},
         )
+        room.dot(sx(px), sy(py), 7)
+    for point, px, py in points:
         if point.get("label"):
-            builder.text(
-                f"({_fmt(px)}, {_fmt(py)})",
-                sx(px) + float(point.get("dx", 14)),
-                sy(py) + float(point.get("dy", -12)),
-                size=FONT,
-                anchor=str(point.get("anchor", "start")),
+            preferred = (
+                float(point.get("dx", 14)),
+                float(point.get("dy", -12)),
+                str(point.get("anchor", "start")),
             )
+            room.place(builder, f"({_fmt(px)}, {_fmt(py)})", _around(sx(px), sy(py), preferred))
+    if inputs.get("axis_label"):
+        label = str(inputs["axis_label"])
+        room.place(
+            builder,
+            label,
+            [(sx(h) + 10, bottom - 14 - lift, "start") for lift in (0, 30, 60, 90, 120)]
+            + [(sx(h) - 10, bottom - 14 - lift, "end") for lift in (0, 30, 60, 90, 120)],
+        )
+    room.place(builder, "x", [(right + 24, sy(0) + 9, "start")])
+    room.place(builder, "y", [(sx(0), top - 24, "middle"), (sx(0) + 16, top - 18, "start")])
+    for tick in range(math.ceil(x_min), math.floor(x_max) + 1):
+        if tick != 0 and tick % step == 0:
+            room.place(builder, tick, _x_tick_spots(sx(tick), sy(0)), optional=True)
+    for tick in range(math.ceil(y_min), math.floor(y_max) + 1):
+        if tick != 0 and tick % step == 0:
+            room.place(builder, tick, _y_tick_spots(sx(0), sy(tick)), optional=True)
     return _finish(
         builder,
         template="parabola_graph",
