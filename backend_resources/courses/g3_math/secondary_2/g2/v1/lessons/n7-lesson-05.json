@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n7",
   "status": "draft",
@@ -65,14 +65,26 @@
       ]
     },
     {
-      "stable_key": "n7-05-example-1",
+      "stable_key": "n7-05-errors",
       "position": 4,
+      "type": "explanation",
+      "title": "Common errors",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not stop after testing one side: evaluate both sides and compare them. A boundary value satisfies ≤ or ≥ but not < or >. An equation such as 2x + 1 = 2x + 3 has no solution, while 2(x + 1) = 2x + 2 is true for every x; neither is a mistake."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-05-example-1",
+      "position": 5,
       "type": "worked_example",
-      "title": "Check a candidate",
+      "title": "Worked example: check a candidate",
       "prompt": [
         {
           "type": "text",
-          "text": "Does x=4 satisfy 3x-2=10?"
+          "text": "Does x = 4 satisfy 3x − 2 = 10?"
         }
       ],
       "steps": [
@@ -81,7 +93,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute x=4 into the left side."
+              "text": "Substitute x = 4 into the left side and evaluate it."
+            },
+            {
+              "type": "display_math",
+              "latex": "3(4)-2=12-2=10"
             }
           ]
         },
@@ -90,7 +106,44 @@
           "content": [
             {
               "type": "text",
-              "text": "3(4)-2=12-2=10."
+              "text": "The left side equals the right side, 10, so x = 4 is a solution."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The original equation becomes 10 = 10, a true statement."
+    },
+    {
+      "stable_key": "n7-05-example-inequality",
+      "position": 6,
+      "type": "worked_example",
+      "title": "Worked example: test values in an inequality",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Which of x = 1, 2 and 3 are in the solution set of 2x + 3 < 9?"
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute each value into the left side."
+            },
+            {
+              "type": "display_math",
+              "latex": "2(1)+3=5,\\qquad 2(2)+3=7,\\qquad 2(3)+3=9"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "5 < 9 and 7 < 9 are true, but 9 < 9 is false, because 9 is equal to 9, not less than it."
             }
           ]
         },
@@ -99,22 +152,22 @@
           "content": [
             {
               "type": "text",
-              "text": "The two sides match, so x=4 is a solution."
+              "text": "So x = 1 and x = 2 are in the solution set, and x = 3 is not."
             }
           ]
         }
       ],
-      "verification_note": "The original equation becomes 10=10."
+      "verification_note": "Solving gives 2x < 6, so x < 3, which agrees: 1 and 2 are less than 3, and 3 is not."
     },
     {
       "stable_key": "n7-05-example-2",
-      "position": 5,
+      "position": 7,
       "type": "worked_example",
-      "title": "Identify an identity",
+      "title": "Worked example: make an identity",
       "prompt": [
         {
           "type": "text",
-          "text": "Choose k so that (k-1)x+5=3x+5 for every x."
+          "text": "Find k so that (2k + 1)x − 4 = 7x − 4 is true for every value of x."
         }
       ],
       "steps": [
@@ -123,7 +176,7 @@
           "content": [
             {
               "type": "text",
-              "text": "An identity needs matching x-coefficients."
+              "text": "An identity needs the same coefficient of x and the same constant on both sides. The constants are already −4 on both sides."
             }
           ]
         },
@@ -131,39 +184,30 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "Set k-1=3."
-            }
-          ]
-        },
-        {
-          "position": 3,
-          "content": [
-            {
-              "type": "text",
-              "text": "Therefore k=4."
+              "type": "display_math",
+              "latex": "2k+1=7\\quad\\Rightarrow\\quad k=3"
             }
           ]
         }
       ],
-      "verification_note": "With k=4, both sides simplify to 3x+5."
+      "verification_note": "With k = 3, both sides are 7x − 4, so every value of x makes the statement true."
     },
     {
       "stable_key": "n7-05-recall",
-      "position": 6,
+      "position": 8,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "Does x=2 satisfy 4x+1=9? Enter 1 for yes or 0 for no."
+          "text": "Which whole number x satisfies both 3x − 2 > 4 and x < 4?"
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -172,23 +216,23 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Substitution gives 4(2)+1=9, so the statement is true."
+          "text": "3x − 2 > 4 gives 3x > 6, so x > 2. The only whole number greater than 2 and less than 4 is 3."
         }
       ]
     },
     {
       "stable_key": "n7-05-summary",
-      "position": 7,
+      "position": 9,
       "type": "summary",
       "title": "Lesson checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Name the mathematical relationship, choose a method that preserves it, and show each transformation clearly."
+          "text": "An equation is true for particular values; an inequality is usually true for a range of values. The solution set is every value that makes the original statement true."
         },
         {
           "type": "text",
-          "text": "Check the result in every original condition and interpret endpoints, coordinates, roots or quantities in the form requested."
+          "text": "Test a value by substituting it into both sides and comparing. Keep a statement equivalent by doing the same to both sides, and reverse an inequality sign when multiplying or dividing by a negative number."
         }
       ]
     }

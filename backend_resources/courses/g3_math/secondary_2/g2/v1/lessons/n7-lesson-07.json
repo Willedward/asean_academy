@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n7",
   "status": "draft",
@@ -11,7 +11,7 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   },
   "stable_key": "n7-lesson-07",
   "position": 3,
@@ -38,7 +38,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A linear equation ax+by=c links two variables. Every ordered pair (x,y) that satisfies it is a point on one straight line. A table of values supplies points, but each row must be checked in the original equation before plotting."
+          "text": "A linear equation ax+by=c links two variables. Every ordered pair (x,y) that satisfies it is a point on one straight line. A table of values supplies points, but each row must be checked in the original equation before plotting. The diagram shows 2x + y = 6 drawn through its intercepts (0, 6) and (3, 0), with equal scales on both axes so that the steepness is shown truly."
         },
         {
           "type": "asset_ref",
@@ -71,14 +71,26 @@
       ]
     },
     {
-      "stable_key": "n7-07-example-1",
+      "stable_key": "n7-07-errors",
       "position": 4,
+      "type": "explanation",
+      "title": "Common errors",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not swap the coordinates: the x-intercept is the point where y = 0, written (3, 0), not (0, 3). Draw the line through and beyond the plotted points, not just between them, and use the same scale on both axes when the steepness matters. A point that lies near the drawn line is on the line only if it satisfies the equation exactly."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-07-example-1",
+      "position": 5,
       "type": "worked_example",
-      "title": "Plot from intercepts",
+      "title": "Worked example: plot from intercepts",
       "prompt": [
         {
           "type": "text",
-          "text": "Find the intercepts of 2x+y=6."
+          "text": "Find the intercepts of 2x + y = 6 and use them to draw the line."
         }
       ],
       "steps": [
@@ -87,7 +99,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set y=0 to obtain 2x=6, so x=3."
+              "text": "At the x-intercept, y = 0."
+            },
+            {
+              "type": "display_math",
+              "latex": "2x=6\\quad\\Rightarrow\\quad x=3"
             }
           ]
         },
@@ -96,7 +112,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set x=0 to obtain y=6."
+              "text": "At the y-intercept, x = 0."
+            },
+            {
+              "type": "display_math",
+              "latex": "y=6"
             }
           ]
         },
@@ -105,22 +125,22 @@
           "content": [
             {
               "type": "text",
-              "text": "Plot (3,0) and (0,6), then join them with a straight line."
+              "text": "Plot (3, 0) and (0, 6) and draw a straight line through them, extending it beyond both points, as in the diagram."
             }
           ]
         }
       ],
-      "verification_note": "Both points give 6 when substituted into 2x+y."
+      "verification_note": "Both points satisfy the equation: 2(3) + 0 = 6 and 2(0) + 6 = 6. A third point, (1, 4), gives 2 + 4 = 6 and lies on the same line."
     },
     {
       "stable_key": "n7-07-example-2",
-      "position": 5,
+      "position": 6,
       "type": "worked_example",
-      "title": "Find a missing coordinate",
+      "title": "Worked example: find a missing coordinate",
       "prompt": [
         {
           "type": "text",
-          "text": "The point (4,k) lies on 3x+2y=20. Find k."
+          "text": "The point (4, k) lies on 3x + 2y = 20. Find k."
         }
       ],
       "steps": [
@@ -129,7 +149,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute x=4 and y=k."
+              "text": "Substitute x = 4 and y = k."
+            },
+            {
+              "type": "display_math",
+              "latex": "3(4)+2k=20"
             }
           ]
         },
@@ -137,26 +161,17 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "12+2k=20, so 2k=8."
-            }
-          ]
-        },
-        {
-          "position": 3,
-          "content": [
-            {
-              "type": "text",
-              "text": "Hence k=4."
+              "type": "display_math",
+              "latex": "12+2k=20\\quad\\Rightarrow\\quad 2k=8\\quad\\Rightarrow\\quad k=4"
             }
           ]
         }
       ],
-      "verification_note": "The point (4,4) gives 12+8=20."
+      "verification_note": "The point (4, 4) gives 12 + 8 = 20."
     },
     {
       "stable_key": "n7-07-recall",
-      "position": 6,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -184,17 +199,17 @@
     },
     {
       "stable_key": "n7-07-summary",
-      "position": 7,
+      "position": 8,
       "type": "summary",
       "title": "Lesson checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Name the mathematical relationship, choose a method that preserves it, and show each transformation clearly."
+          "text": "Every point (x, y) that satisfies ax + by = c lies on one straight line. Find the x-intercept by setting y = 0 and the y-intercept by setting x = 0."
         },
         {
           "type": "text",
-          "text": "Check the result in every original condition and interpret endpoints, coordinates, roots or quantities in the form requested."
+          "text": "Plot at least two checked points, draw a straight line through and beyond them, and confirm any point exactly by substitution."
         }
       ]
     }
@@ -204,16 +219,212 @@
       "asset_key": "n7-lesson-07-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-lesson-07-linear-graph.svg",
-      "alt_text": "A coordinate graph of two x plus y equals six using the intercepts zero comma six and three comma zero.",
+      "path": "assets/n7-lesson-07-linear-graph-r2.svg",
+      "alt_text": "Graph of the straight line 2x + y = 6 on axes from −1 to 5 for x and −1 to 7 for y, with equal unit scales. The line passes through the marked points (0, 6) and (3, 0) and continues beyond them.",
       "generation_spec": {
-        "renderer": "nextscholar-chart-svg-v1",
-        "diagram_kind": "linear_intercept_graph",
-        "lesson_key": "n7-lesson-07"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "line_graph",
+        "lesson_key": "n7-lesson-07",
+        "template": "line_graph",
+        "inputs": {
+          "lines": [
+            {
+              "a": 2,
+              "b": 1,
+              "c": 6,
+              "label": "2x + y = 6",
+              "label_x": 1.6,
+              "label_y": 4.2
+            }
+          ],
+          "x_min": -1,
+          "x_max": 5,
+          "y_min": -1,
+          "y_max": 7,
+          "points": [
+            {
+              "x": 0,
+              "y": 6,
+              "label": "(0, 6)"
+            },
+            {
+              "x": 3,
+              "y": 0,
+              "label": "(3, 0)",
+              "dx": 14,
+              "dy": -14
+            }
+          ],
+          "title": "The graph of 2x + y = 6",
+          "alt_text": "Graph of the straight line 2x + y = 6 on axes from −1 to 5 for x and −1 to 7 for y, with equal unit scales. The line passes through the marked points (0, 6) and (3, 0) and continues beyond them."
+        },
+        "viewbox": [
+          720,
+          535
+        ],
+        "chart_marks": [
+          {
+            "key": "line-0",
+            "kind": "line",
+            "value": "2,1,6",
+            "tag": "line",
+            "geometry": {
+              "x1": "251.25",
+              "y1": "95",
+              "x2": "441.25",
+              "y2": "475"
+            }
+          },
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "0,6",
+            "tag": "circle",
+            "geometry": {
+              "cx": "275",
+              "cy": "142.5",
+              "r": "8"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "3,0",
+            "tag": "circle",
+            "geometry": {
+              "cx": "417.5",
+              "cy": "427.5",
+              "r": "8"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:-1",
+            "axis": "x",
+            "value": "-1",
+            "position": "227.5",
+            "label": "-1"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "275",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "322.5",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "370",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "417.5",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "465",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "512.5",
+            "label": "5"
+          },
+          {
+            "key": "y:-1",
+            "axis": "y",
+            "value": "-1",
+            "position": "475",
+            "label": "-1"
+          },
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "427.5",
+            "label": "0"
+          },
+          {
+            "key": "y:1",
+            "axis": "y",
+            "value": "1",
+            "position": "380",
+            "label": "1"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "332.5",
+            "label": "2"
+          },
+          {
+            "key": "y:3",
+            "axis": "y",
+            "value": "3",
+            "position": "285",
+            "label": "3"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "237.5",
+            "label": "4"
+          },
+          {
+            "key": "y:5",
+            "axis": "y",
+            "value": "5",
+            "position": "190",
+            "label": "5"
+          },
+          {
+            "key": "y:6",
+            "axis": "y",
+            "value": "6",
+            "position": "142.5",
+            "label": "6"
+          },
+          {
+            "key": "y:7",
+            "axis": "y",
+            "value": "7",
+            "position": "95",
+            "label": "7"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": -1.0,
+          "x_max": 5.0,
+          "y_min": -1.0,
+          "y_max": 7.0
+        },
+        "unit_px": "47.5"
       },
-      "sha256": "912e99e4a6fe66e965731f683fe2998045d8b9e1f2946438ef28502d409e0a79",
-      "width": 960,
-      "height": 460
+      "sha256": "60aa42a6b8795f8db54827c4c38d3452a60d8c7a6ca7a7cdbd3148567abeec5e",
+      "width": 720,
+      "height": 535
     }
   ]
 }

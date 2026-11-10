@@ -1271,6 +1271,141 @@ def quadratic_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diag
     )
 
 
+
+def _clip_line(a: float, b: float, c: float, box: tuple[float, float, float, float]):
+    """The two ends of the visible part of ax + by = c inside the window, or None."""
+    x_min, x_max, y_min, y_max = box
+    found: list[tuple[float, float]] = []
+    if not math.isclose(b, 0):
+        for x in (x_min, x_max):
+            y = (c - a * x) / b
+            if y_min - 1e-9 <= y <= y_max + 1e-9:
+                found.append((x, y))
+    if not math.isclose(a, 0):
+        for y in (y_min, y_max):
+            x = (c - b * y) / a
+            if x_min - 1e-9 <= x <= x_max + 1e-9:
+                found.append((x, y))
+    unique: list[tuple[float, float]] = []
+    for point in found:
+        if all(math.dist(point, other) > 1e-6 for other in unique):
+            unique.append(point)
+    if len(unique) < 2:
+        return None
+    best = max(
+        ((p, q) for p in unique for q in unique if p is not q), key=lambda pair: math.dist(*pair)
+    )
+    return tuple(sorted(best))
+
+
+def line_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """Straight lines ax + by = c on axes with equal unit scales, with optional labelled points."""
+    lines = list(inputs["lines"])
+    if not 1 <= len(lines) <= 2:
+        raise ValueError("line_graph draws one or two lines")
+    x_min, x_max = float(inputs["x_min"]), float(inputs["x_max"])
+    y_min, y_max = float(inputs["y_min"]), float(inputs["y_max"])
+    if x_max <= x_min or y_max <= y_min or not (x_min <= 0 <= x_max and y_min <= 0 <= y_max):
+        raise ValueError("line_graph axes must have positive ranges that include the origin")
+    title = str(inputs.get("title", "Straight-line graph"))
+    description = str(inputs["alt_text"])
+    builder = _Builder(title, description)
+    builder.text(title, WIDTH / 2, 42, size=TITLE_FONT)
+    unit = min(560 / (x_max - x_min), 380 / (y_max - y_min))
+    left = (WIDTH - unit * (x_max - x_min)) / 2 + 10
+    right = left + unit * (x_max - x_min)
+    top = 95.0
+    step = 1 if unit >= 34 else 2
+    bottom = top + unit * (y_max - y_min)
+    builder.height = int(math.ceil(bottom + 60))
+
+    def sx(value: float) -> float:
+        return left + (value - x_min) * unit
+
+    def sy(value: float) -> float:
+        return bottom - (value - y_min) * unit
+
+    for tick in range(math.ceil(x_min), math.floor(x_max) + 1):
+        x = sx(tick)
+        builder.line(x, top, x, bottom, stroke=GRID, width=1)
+        if tick > 0 and tick % step == 0:
+            builder.text(tick, x, sy(0) + 30, size=FONT)
+        builder.tick("x", tick, x)
+    for tick in range(math.ceil(y_min), math.floor(y_max) + 1):
+        y = sy(tick)
+        builder.line(left, y, right, y, stroke=GRID, width=1)
+        if tick > 0 and tick % step == 0:
+            builder.text(tick, sx(0) - 12, y + 9, anchor="end", size=FONT)
+        builder.tick("y", tick, y)
+    builder.line(left, sy(0), right + 14, sy(0), width=3)
+    builder.line(sx(0), bottom, sx(0), top - 14, width=3)
+    builder.path(
+        f"M{_fmt(right + 4)} {_fmt(sy(0) - 7)} L{_fmt(right + 16)} {_fmt(sy(0))} "
+        f"L{_fmt(right + 4)} {_fmt(sy(0) + 7)}",
+        width=3,
+    )
+    builder.path(
+        f"M{_fmt(sx(0) - 7)} {_fmt(top - 4)} L{_fmt(sx(0))} {_fmt(top - 16)} "
+        f"L{_fmt(sx(0) + 7)} {_fmt(top - 4)}",
+        width=3,
+    )
+    builder.text("x", right + 30, sy(0) + 9, size=FONT, anchor="start")
+    builder.text("y", sx(0), top - 26, size=FONT)
+    builder.text("O", sx(0) - 12, sy(0) + 30, size=FONT, anchor="end")
+    colours = (ACCENT, SECONDARY)
+    for index, item in enumerate(lines):
+        a, b, c = float(item["a"]), float(item["b"]), float(item["c"])
+        ends = _clip_line(a, b, c, (x_min, x_max, y_min, y_max))
+        if ends is None:
+            raise ValueError("each line must cross the plotting window")
+        (x1, y1), (x2, y2) = ends
+        builder.mark(
+            f"line-{index}",
+            "line",
+            f"{_fmt(a)},{_fmt(b)},{_fmt(c)}",
+            "line",
+            {"x1": sx(x1), "y1": sy(y1), "x2": sx(x2), "y2": sy(y2)},
+            style={"stroke": colours[index], "stroke-width": 4},
+        )
+        label = item.get("label")
+        if label:
+            builder.text(
+                str(label),
+                sx(float(item["label_x"])),
+                sy(float(item["label_y"])),
+                size=FONT,
+                anchor=str(item.get("label_anchor", "start")),
+                fill=colours[index] if index == 0 else INK,
+            )
+    for index, point in enumerate(inputs.get("points", [])):
+        px, py = float(point["x"]), float(point["y"])
+        builder.mark(
+            f"point-{index}",
+            "point",
+            f"{_fmt(px)},{_fmt(py)}",
+            "circle",
+            {"cx": sx(px), "cy": sy(py), "r": 8},
+            style={"fill": INK, "stroke": BACKGROUND, "stroke-width": 2},
+        )
+        if point.get("label"):
+            builder.text(
+                str(point["label"]),
+                sx(px) + float(point.get("dx", 16)),
+                sy(py) + float(point.get("dy", -14)),
+                size=FONT,
+                anchor=str(point.get("anchor", "start")),
+            )
+    return _finish(
+        builder,
+        template="line_graph",
+        diagram_kind="line_graph",
+        inputs=inputs,
+        extras={
+            "axis": {"x_min": x_min, "x_max": x_max, "y_min": y_min, "y_max": y_max},
+            "unit_px": _fmt(unit),
+        },
+    )
+
 TEMPLATES: dict[str, Callable[..., Diagram]] = {
     "scaled_icons": scaled_icons,
     "bar_chart": bar_chart,
@@ -1287,6 +1422,7 @@ TEMPLATES: dict[str, Callable[..., Diagram]] = {
     "number_line": number_line,
     "coordinate_line": coordinate_line,
     "quadratic_graph": quadratic_graph,
+    "line_graph": line_graph,
 }
 
 
