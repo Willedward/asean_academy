@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-lesson-05",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g1",
@@ -30,11 +30,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A square is both a rectangle and a rhombus. Rectangles and rhombi are parallelograms. A kite has two pairs of adjacent equal sides, while a trapezium has one pair of parallel sides in this course classification."
+          "text": "A square is both a rectangle and a rhombus. Rectangles and rhombi are parallelograms. A kite has two pairs of adjacent equal sides. A trapezium has exactly one pair of parallel sides (in American English it is called a trapezoid)."
         },
         {
           "type": "display_math",
-          "latex": "\\text{square}\\subset\\text{rectangle}\\cap\\text{rhombus}\\subset\\text{parallelogram}"
+          "latex": "\\text{square}=\\text{rectangle}\\cap\\text{rhombus},\\qquad\\text{rectangle},\\ \\text{rhombus}\\subset\\text{parallelogram}"
         }
       ]
     },
@@ -46,7 +46,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Quadrilaterals form a hierarchy. Every square is also a rectangle, rhombus and parallelogram. Every rectangle and every rhombus is a parallelogram. A kite has two pairs of adjacent equal sides, while a trapezium has one pair of parallel sides under the syllabus convention used here."
+          "text": "Quadrilaterals form a hierarchy: every square is also a rectangle, a rhombus and a parallelogram, and every rectangle and every rhombus is a parallelogram. The diagram shows a kite, which is not in this family: its single and double tick marks show two pairs of adjacent equal sides. In a parallelogram the equal sides are opposite each other instead, and in a rhombus all four sides are equal."
         },
         {
           "type": "asset_ref",
@@ -70,11 +70,11 @@
       "stable_key": "g1-15-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: classify from the diagonals",
       "prompt": [
         {
           "type": "text",
-          "text": "A parallelogram has equal diagonals. Classify it."
+          "text": "A parallelogram has equal diagonals that are not perpendicular. Classify it as specifically as possible."
         }
       ],
       "steps": [
@@ -82,19 +82,32 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The diagonals of every parallelogram bisect each other. A parallelogram whose diagonals are also equal is a rectangle."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The diagonals are not perpendicular, so it is not a rhombus, and therefore not a square."
+            },
+            {
               "type": "display_math",
               "latex": "\\text{parallelogram}+\\text{equal diagonals}=\\text{rectangle}"
             }
           ]
         }
       ],
-      "verification_note": "The result follows the stated property and satisfies the original geometric conditions."
+      "verification_note": "A rectangle that is not a square fits every condition: its diagonals bisect each other and are equal, but they do not meet at 90°."
     },
     {
       "stable_key": "g1-lesson-05-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Worked example: apply the method",
+      "title": "Worked example: combine two properties",
       "prompt": [
         {
           "type": "text",
@@ -116,7 +129,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Perpendicular diagonals in a parallelogram also make it a rhombus."
+              "text": "Perpendicular diagonals in a parallelogram make it a rhombus."
             }
           ]
         },
@@ -130,7 +143,7 @@
           ]
         }
       ],
-      "verification_note": "A square satisfies every stated property: opposite sides parallel, four right angles and perpendicular bisecting diagonals."
+      "verification_note": "A square satisfies every stated property: opposite sides parallel, four right angles and perpendicular diagonals that bisect each other."
     },
     {
       "stable_key": "g1-lesson-05-pitfalls",
@@ -152,7 +165,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "How many lines of symmetry does a non-square rectangle have?"
+          "text": "A parallelogram has perpendicular diagonals but no right angle. Which shape must it be? Enter 1 for rectangle, 2 for rhombus, 3 for square or 4 for kite."
         }
       ],
       "response": {
@@ -168,7 +181,7 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Its two midlines are symmetry axes; its diagonals are not."
+          "text": "Perpendicular diagonals make a parallelogram a rhombus. With no right angle it cannot be a rectangle or a square, so the answer is 2 (rhombus)."
         }
       ]
     },
@@ -180,11 +193,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Name the relevant property, write the complete angle or construction relationship, calculate carefully, and check that every angle and length is geometrically possible."
+          "text": "Square = rectangle and rhombus; rectangles and rhombi are parallelograms. A kite has two pairs of adjacent equal sides, and a trapezium has exactly one pair of parallel sides."
         },
         {
           "type": "text",
-          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
+          "text": "Classify with every given property, using sides and angles first and diagonals second, and give the most specific name that is guaranteed."
         }
       ]
     }
@@ -194,16 +207,105 @@
       "asset_key": "g1-lesson-05-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-lesson-05-quadrilateral.svg",
-      "alt_text": "A hierarchy diagram linking parallelogram, rectangle, rhombus and square, with kite and trapezium shown separately.",
+      "path": "assets/g1-lesson-05-quadrilateral-r3.svg",
+      "alt_text": "A kite with its upper pair of adjacent equal sides marked with a single tick and its lower pair of adjacent equal sides marked with double ticks. No diagonals are drawn. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "quadrilateral",
-        "lesson_key": "g1-lesson-05"
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "kite",
+        "lesson_key": "g1-lesson-05",
+        "template": "kite_symmetry",
+        "inputs": null,
+        "not_to_scale": true,
+        "dimensions": {
+          "sides": "two distinct pairs of adjacent equal sides"
+        },
+        "forbidden_visible_labels": [],
+        "unknowns": [],
+        "forbid_right_angle_marker": true,
+        "equal_marks": [
+          {
+            "segments": [
+              "AB",
+              "AD"
+            ],
+            "ticks": 1
+          },
+          {
+            "segments": [
+              "CB",
+              "CD"
+            ],
+            "ticks": 2
+          }
+        ],
+        "viewbox": [
+          600.0,
+          432.0
+        ],
+        "points": {
+          "A": [
+            300.0,
+            48.0
+          ],
+          "B": [
+            160.69,
+            270.95
+          ],
+          "C": [
+            300.0,
+            358.0
+          ],
+          "D": [
+            439.31,
+            270.95
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AD",
+            "from": "A",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CB",
+            "from": "C",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CD",
+            "from": "C",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [],
+        "relationships": [
+          {
+            "type": "unequal_segments",
+            "segments": [
+              "AB",
+              "CB"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "ec315b31d231ee223a6204b299a90f503728013bf416a35ab70a224548c47af0",
-      "width": 940,
-      "height": 390
+      "sha256": "54f1c271f0435c1e7b89963bb03f3d287f18808cb9e239ab918d82f7c46be40a",
+      "width": 600,
+      "height": 432
     }
   ],
   "provenance": {
@@ -212,6 +314,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

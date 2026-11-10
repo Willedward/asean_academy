@@ -54,6 +54,7 @@ PLANE_FIGURE_WORDS = {
     "diagonals": "segments",
     "kite": "kite",
     "construction": "arc",
+    "polygon": "polygon",
     **similarity_checks.FIGURE_WORDS,
 }
 _ARC_D = re.compile(

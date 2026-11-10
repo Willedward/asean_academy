@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s2-l2-523",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A card numbered 1 to 12 is selected. Find the probability that the number is a multiple of 2 or a multiple of 3. Give your answer as a fraction in simplest form."
+          "text": "A card numbered 1 to 20 is selected at random. Find the probability that the number is a multiple of 2 or a multiple of 3. Give your answer as a fraction in simplest form."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "2/3",
-        "canonical_latex": "\\frac{2}{3}",
+        "canonical_expression": "13/20",
+        "canonical_latex": "\\frac{13}{20}",
         "variables": [],
         "domain_constraints": [],
         "accepted_equivalents": [],
@@ -44,7 +44,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use a systematic list and avoid double-counting multiples of 6."
+              "text": "Count the multiples of 2 and of 3, then take away the multiples of 6 counted twice."
             }
           ]
         },
@@ -53,7 +53,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The favourable numbers are 2, 3, 4, 6, 8, 9, 10 and 12."
+              "text": "There are 10 multiples of 2, 6 multiples of 3 and 3 multiples of 6 up to 20."
             }
           ]
         }
@@ -64,7 +64,11 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "P=\\frac{8}{12}=\\frac{2}{3}"
+              "latex": "10+6-3=13"
+            },
+            {
+              "type": "text",
+              "text": " numbers qualify."
             }
           ],
           "mark_type": "M",
@@ -75,7 +79,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{\\frac{2}{3}}"
+              "latex": "P=\\boxed{\\frac{13}{20}}"
             }
           ],
           "mark_type": "A",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-g5",
   "status": "draft",
@@ -11,7 +11,7 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
   },
   "stable_key": "g5-lesson-06",
   "position": 1,
@@ -106,8 +106,49 @@
       "verification_note": "The volume is one third of the 1,200 cm³ matching prism, and the surface area includes exactly one base plus four triangular faces."
     },
     {
-      "stable_key": "g5-56-cone",
+      "stable_key": "g5-56-pyramid-reverse-example",
       "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: find a height from the volume",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A pyramid has a rectangular base 8 cm by 6 cm and volume 224 cm³. Find its perpendicular height."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The base area is 8 × 6 = 48 cm². Substitute into the volume formula."
+            },
+            {
+              "type": "display_math",
+              "latex": "224=\\frac13(48)h"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Simplify, then divide by 16."
+            },
+            {
+              "type": "display_math",
+              "latex": "224=16h\\quad\\Rightarrow\\quad h=14\\text{ cm}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substitution gives ⅓ × 48 × 14 = 224 cm³. Without the one-third, the height would come out three times too small."
+    },
+    {
+      "stable_key": "g5-56-cone",
+      "position": 5,
       "type": "explanation",
       "title": "Cones: keep vertical and slant height separate",
       "blocks": [
@@ -127,13 +168,13 @@
     },
     {
       "stable_key": "g5-56-cone-example",
-      "position": 5,
+      "position": 6,
       "type": "worked_example",
       "title": "Worked example: find a cone’s slant height first",
       "prompt": [
         {
           "type": "text",
-          "text": "A closed cone has radius 5 cm and perpendicular height 12 cm. Find its volume and total surface area, giving answers to 1 decimal place."
+          "text": "A closed cone has radius 4 cm and perpendicular height 7.5 cm. Find its volume and total surface area, giving answers to 1 decimal place."
         }
       ],
       "steps": [
@@ -146,7 +187,7 @@
             },
             {
               "type": "display_math",
-              "latex": "l=\\sqrt{5^2+12^2}=13\\text{ cm}"
+              "latex": "l=\\sqrt{4^2+7.5^2}=\\sqrt{72.25}=8.5\\text{ cm}"
             }
           ]
         },
@@ -155,7 +196,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "V=\\frac13\\pi(5)^2(12)=100\\pi\\approx314.2\\text{ cm}^3"
+              "latex": "V=\\frac13\\pi(4)^2(7.5)=40\\pi\\approx125.7\\text{ cm}^3"
             }
           ]
         },
@@ -164,20 +205,20 @@
           "content": [
             {
               "type": "text",
-              "text": "The cone is closed, so include curved area and its base."
+              "text": "The cone is closed, so include the curved area and its base."
             },
             {
               "type": "display_math",
-              "latex": "S=\\pi(5)(13)+\\pi(5)^2=90\\pi\\approx282.7\\text{ cm}^2"
+              "latex": "S=\\pi(4)(8.5)+\\pi(4)^2=34\\pi+16\\pi=50\\pi\\approx157.1\\text{ cm}^2"
             }
           ]
         }
       ],
-      "verification_note": "The slant height 13 cm is longer than both perpendicular sides, and the total area exceeds the curved area 65π cm²."
+      "verification_note": "The slant height 8.5 cm is longer than both perpendicular sides, and the total area exceeds the curved area 34π cm²."
     },
     {
       "stable_key": "g5-56-sphere",
-      "position": 6,
+      "position": 7,
       "type": "explanation",
       "title": "Spheres and hemispheres",
       "blocks": [
@@ -197,7 +238,7 @@
     },
     {
       "stable_key": "g5-56-sphere-example",
-      "position": 7,
+      "position": 8,
       "type": "worked_example",
       "title": "Worked example: hemisphere container",
       "prompt": [
@@ -238,7 +279,7 @@
     },
     {
       "stable_key": "g5-56-composite",
-      "position": 8,
+      "position": 9,
       "type": "explanation",
       "title": "Composite solids and exposed surfaces",
       "blocks": [
@@ -253,8 +294,118 @@
       ]
     },
     {
+      "stable_key": "g5-56-composite-example",
+      "position": 10,
+      "type": "worked_example",
+      "title": "Worked example: cone on a hemisphere",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A solid is made by joining a cone of radius 4 cm and perpendicular height 3 cm to a hemisphere of radius 4 cm, flat face to flat face. Find its volume and its exposed surface area in terms of π."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Volume: add the two parts."
+            },
+            {
+              "type": "display_math",
+              "latex": "V=\\frac13\\pi(4)^2(3)+\\frac23\\pi(4)^3=16\\pi+\\frac{128}{3}\\pi=\\frac{176}{3}\\pi\\text{ cm}^3"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Surface: the circular join is inside the solid, so only the two curved surfaces are exposed. The cone’s slant height is √(4² + 3²) = 5 cm."
+            },
+            {
+              "type": "display_math",
+              "latex": "S=\\pi(4)(5)+2\\pi(4)^2=20\\pi+32\\pi=52\\pi\\text{ cm}^2"
+            }
+          ]
+        }
+      ],
+      "verification_note": "As decimals, V ≈ 184.3 cm³ and S ≈ 163.4 cm². Neither flat circle is counted, because both lie on the join."
+    },
+    {
+      "stable_key": "g5-56-similar-solids",
+      "position": 11,
+      "type": "explanation",
+      "title": "Similar solids: area and volume scale factors",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Two solids are similar when one is an enlargement of the other: every length is multiplied by the same scale factor k. An area is found by multiplying two lengths, so every area, including surface area, is multiplied by k². A volume is found by multiplying three lengths, so the volume is multiplied by k³."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{length}\\times k,\\qquad\\text{area}\\times k^2,\\qquad\\text{volume}\\times k^3"
+        },
+        {
+          "type": "text",
+          "text": "Liquid in a cone held vertex down forms a smaller cone that is similar to the container, because its sloping sides lie along the container’s sides. If you know what fraction of the volume is filled, take the cube root to find the length scale factor. In the same way, if the radius of a sphere increases by 10%, then k = 1.1 and the volume is multiplied by 1.1³ = 1.331, an increase of 33.1%."
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-56-similar-example",
+      "position": 12,
+      "type": "worked_example",
+      "title": "Worked example: depth of liquid in a cone",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A cone-shaped container of height 24 cm is held vertex down. Water fills 27/64 of its volume and forms a smaller cone at the tip. Find the depth of the water."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The water cone is similar to the container, so its volume is k³ times the full volume, where k is the ratio of the depths."
+            },
+            {
+              "type": "display_math",
+              "latex": "k^3=\\frac{27}{64}\\quad\\Rightarrow\\quad k=\\sqrt[3]{\\frac{27}{64}}=\\frac34"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{depth}=\\frac34\\times24=18\\text{ cm}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Check: (18 ÷ 24)³ = (3/4)³ = 27/64. The water is three quarters of the way up, although less than half the volume is filled, because the cone is narrow at the tip."
+    },
+    {
+      "stable_key": "g5-56-errors",
+      "position": 13,
+      "type": "explanation",
+      "title": "Common errors to check",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Before giving an answer, check for these errors: using the diameter as r; using the slant height l in a volume formula, or the vertical height h in πrl; adding a circular base to an open cone or bowl; forgetting the one-third in a pyramid or cone volume; and multiplying a volume by k instead of k³."
+        }
+      ]
+    },
+    {
       "stable_key": "g5-56-recall",
-      "position": 9,
+      "position": 14,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -282,7 +433,7 @@
     },
     {
       "stable_key": "g5-lesson-06-summary",
-      "position": 10,
+      "position": 15,
       "type": "summary",
       "title": "Mensuration checklist",
       "blocks": [
@@ -293,6 +444,10 @@
         {
           "type": "text",
           "text": "Use cubic units for volume and square units for area. Retain π and full calculator precision until the final line, round only as requested, and check that a one-third or one-half factor has not been missed."
+        },
+        {
+          "type": "text",
+          "text": "For similar solids with length scale factor k, multiply areas by k² and volumes by k³; to go from a volume ratio back to a length ratio, take the cube root."
         }
       ]
     }
@@ -302,46 +457,547 @@
       "asset_key": "g5-lesson-06-pyramid",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-lesson-06-pyramid.svg",
-      "alt_text": "A square-based pyramid showing its base side, perpendicular vertical height, and formulas for volume and surface area.",
+      "path": "assets/g5-lesson-06-pyramid-r2.svg",
+      "alt_text": "Square-based pyramid with base side a. The perpendicular height h runs from the apex to the centre of the base with the right angle marked, and the slant height l runs down a triangular face to the midpoint of a base edge. Hidden edges are dashed. V = ⅓ × base area × h.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
+        "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "pyramid",
-        "lesson_key": "g5-lesson-06"
+        "lesson_key": "g5-lesson-06",
+        "template": "lesson_pyramid",
+        "inputs": {},
+        "not_to_scale": true,
+        "dimensions": {
+          "base_side": "a",
+          "height": "h",
+          "slant_height": "l"
+        },
+        "forbidden_visible_labels": [],
+        "unknowns": [],
+        "solids": [
+          {
+            "type": "pyramid",
+            "base": "square",
+            "points": {
+              "P1": "P1",
+              "P2": "P2",
+              "P3": "P3",
+              "P4": "P4",
+              "O": "O",
+              "V": "V",
+              "S": "S",
+              "X": "X"
+            }
+          }
+        ],
+        "viewbox": [
+          600.0,
+          548.0
+        ],
+        "points": {
+          "P1": [
+            80.04,
+            389.72
+          ],
+          "P2": [
+            380.04,
+            389.72
+          ],
+          "P3": [
+            519.96,
+            302.28
+          ],
+          "P4": [
+            219.96,
+            302.28
+          ],
+          "O": [
+            300.0,
+            346.0
+          ],
+          "V": [
+            300.0,
+            46.0
+          ],
+          "X": [
+            330.0,
+            346.0
+          ],
+          "S": [
+            230.04,
+            389.72
+          ]
+        },
+        "segments": [
+          {
+            "key": "P1P4",
+            "from": "P1",
+            "to": "P4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "P4P3",
+            "from": "P4",
+            "to": "P3",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "VP4",
+            "from": "V",
+            "to": "P4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "P1P2",
+            "from": "P1",
+            "to": "P2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "P2P3",
+            "from": "P2",
+            "to": "P3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VP1",
+            "from": "V",
+            "to": "P1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VP2",
+            "from": "V",
+            "to": "P2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VP3",
+            "from": "V",
+            "to": "P3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VO",
+            "from": "V",
+            "to": "O",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "VS",
+            "from": "V",
+            "to": "S",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "O",
+            "arms": [
+              "V",
+              "X"
+            ],
+            "marker_size": 16
+          }
+        ],
+        "leaders": [
+          {
+            "target": "segment:VS",
+            "from": [
+              265.02,
+              217.86
+            ],
+            "to": [
+              212.26,
+              241.61
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "a",
+            "target": "segment:P1P2"
+          },
+          {
+            "text": "a",
+            "target": "segment:P2P3"
+          },
+          {
+            "text": "h",
+            "target": "segment:VO"
+          },
+          {
+            "text": "l",
+            "target": "segment:VS"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "polygon_sides",
+            "points": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ],
+            "count": 4
+          },
+          {
+            "type": "parallelogram",
+            "points": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ]
+          },
+          {
+            "type": "centroid",
+            "point": "O",
+            "of": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "V",
+              "O"
+            ]
+          },
+          {
+            "type": "inside_polygon",
+            "point": "O",
+            "polygon": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ]
+          },
+          {
+            "type": "hidden_segment",
+            "segment": "VO"
+          },
+          {
+            "type": "midpoint",
+            "point": "S",
+            "of": [
+              "P1",
+              "P2"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "40b886fef75cafcfbe8f6c84b36618015810c7e7ed00fe30d942eaa92c63b5fc",
-      "width": 940,
-      "height": 500
+      "sha256": "ba8a79876c09acbb9b1abe400c512e03e5f3f58e0c57e7e11bfc0a1a6dfbdfca",
+      "width": 600,
+      "height": 548
     },
     {
       "asset_key": "g5-lesson-06-cone",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-lesson-06-cone.svg",
-      "alt_text": "A cone showing radius, perpendicular height and slant height, with its volume, curved surface area and total surface area formulas.",
+      "path": "assets/g5-lesson-06-cone-r2.svg",
+      "alt_text": "Cone with base radius r, perpendicular height h from the vertex to the centre of the base with the right angle marked, and slant height l along the sloping surface, with l² = r² + h². The hidden half of the base is dashed.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
+        "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "cone",
-        "lesson_key": "g5-lesson-06"
+        "lesson_key": "g5-lesson-06",
+        "template": "lesson_cone",
+        "inputs": {},
+        "not_to_scale": true,
+        "dimensions": {
+          "radius": "r",
+          "height": "h",
+          "slant_height": "l"
+        },
+        "forbidden_visible_labels": [],
+        "unknowns": [],
+        "solids": [
+          {
+            "type": "cone",
+            "orientation": "vertex_up",
+            "points": {
+              "O": "O",
+              "V": "V",
+              "L": "L",
+              "R": "R"
+            }
+          }
+        ],
+        "viewbox": [
+          600.0,
+          538.0
+        ],
+        "points": {
+          "O": [
+            280.0,
+            340.0
+          ],
+          "V": [
+            280.0,
+            50.0
+          ],
+          "L": [
+            110.0,
+            340.0
+          ],
+          "R": [
+            450.0,
+            340.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "VL",
+            "from": "V",
+            "to": "L",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VR",
+            "from": "V",
+            "to": "R",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VO",
+            "from": "V",
+            "to": "O",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "OR",
+            "from": "O",
+            "to": "R",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "ellipses": {
+          "base": {
+            "center": "O",
+            "rx": 170.0,
+            "ry": 57.8
+          }
+        },
+        "right_angles": [
+          {
+            "vertex": "O",
+            "arms": [
+              "V",
+              "R"
+            ],
+            "marker_size": 16
+          }
+        ],
+        "labels": [
+          {
+            "text": "r",
+            "target": "segment:OR"
+          },
+          {
+            "text": "h",
+            "target": "segment:VO"
+          },
+          {
+            "text": "l",
+            "target": "segment:VR"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "vertical",
+            "points": [
+              "V",
+              "O"
+            ]
+          },
+          {
+            "type": "ellipse_centre",
+            "ellipse": "base",
+            "point": "O"
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "base",
+            "points": [
+              "L",
+              "R"
+            ]
+          },
+          {
+            "type": "midpoint",
+            "point": "O",
+            "of": [
+              "L",
+              "R"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "24ac5ae905422bce4b81ffa2af1be8309a2ec7d03d2d8f2f4b8dc807ffd3a5be",
-      "width": 940,
-      "height": 500
+      "sha256": "1cde41607f8e1ce5b33e51b1d21171499f1f9304fe702b45d908b2ced33aaebd",
+      "width": 600,
+      "height": 538
     },
     {
       "asset_key": "g5-lesson-06-sphere",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-lesson-06-sphere.svg",
-      "alt_text": "A sphere with its radius and formulas for sphere volume and surface area, plus curved and total surface area of a hemisphere.",
+      "path": "assets/g5-lesson-06-sphere-r2.svg",
+      "alt_text": "A sphere with radius r from its centre to the surface, and a solid hemisphere with radius r from the centre of its flat circular face to the edge.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
+        "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "sphere",
-        "lesson_key": "g5-lesson-06"
+        "lesson_key": "g5-lesson-06",
+        "template": "lesson_sphere",
+        "inputs": {},
+        "not_to_scale": true,
+        "dimensions": {
+          "radius": "r"
+        },
+        "forbidden_visible_labels": [],
+        "unknowns": [],
+        "solids": [
+          {
+            "type": "sphere",
+            "points": {
+              "O": "sO",
+              "E": "sE",
+              "D1": "sD1",
+              "D2": "sD2"
+            }
+          },
+          {
+            "type": "hemisphere",
+            "open": false,
+            "points": {
+              "O": "hO",
+              "L": "hL",
+              "R": "hR"
+            }
+          }
+        ],
+        "viewbox": [
+          600.0,
+          420.0
+        ],
+        "points": {
+          "sO": [
+            160.0,
+            170.0
+          ],
+          "sE": [
+            258.3,
+            101.17
+          ],
+          "hO": [
+            440.0,
+            160.0
+          ],
+          "hL": [
+            320.0,
+            160.0
+          ],
+          "hR": [
+            560.0,
+            160.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "sOsE",
+            "from": "sO",
+            "to": "sE",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "hOhR",
+            "from": "hO",
+            "to": "hR",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "circles": {
+          "ssphere": {
+            "center": "sO",
+            "radius": 120.0,
+            "hidden": false
+          }
+        },
+        "ellipses": {
+          "sequator": {
+            "center": "sO",
+            "rx": 120.0,
+            "ry": 36.0
+          },
+          "hrim": {
+            "center": "hO",
+            "rx": 120.0,
+            "ry": 40.8
+          }
+        },
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "r",
+            "target": "segment:sOsE"
+          },
+          {
+            "text": "r",
+            "target": "segment:hOhR"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "circle_centre",
+            "circle": "ssphere",
+            "point": "sO"
+          },
+          {
+            "type": "on_circle",
+            "circle": "ssphere",
+            "points": [
+              "sE"
+            ]
+          },
+          {
+            "type": "ellipse_centre",
+            "ellipse": "hrim",
+            "point": "hO"
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "hrim",
+            "points": [
+              "hR"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "38665364244eaff652ae6dcb16b3e30badf0c022689bea78d55b7fd821e0a060",
-      "width": 940,
-      "height": 500
+      "sha256": "b14495fd36cac851f811de438a0bff6e0156dc5a34241c9e5ea91f34a29811c1",
+      "width": 600,
+      "height": 420
     }
   ]
 }

@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l1-518",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -21,7 +21,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a regional logistics study. A real straight-line distance is 3200 m. On a map with scale 1 : 40,000, find its length in centimetres. Enter the numerical value only."
+            "text": "A runner's training loop is 3200 m long. Drawn on a 1 : 40 000 map, how many centimetres long is it? Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -52,7 +52,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Divide the real distance in centimetres by 40,000."
+                "text": "Divide the real distance in centimetres by 40 000."
               }
             ]
           }
@@ -63,7 +63,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "3200\\text{ m}=320000\\text{ cm},\\quad 320000\\div 40{,}000=8\\text{ cm}"
+                "latex": "3200\\text{ m}=320\\,000\\text{ cm},\\quad 320\\,000\\div 40\\,000=8\\text{ cm}"
               }
             ],
             "mark_type": "A",
@@ -92,7 +92,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l1-519",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -112,7 +112,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a regional logistics study. A map states that 1 cm represents 5 km. Write the missing denominator in the scale 1 : ____. Enter the numerical value only."
+            "text": "In a road atlas, every centimetre stands for 5 km. Write the scale in the form "
+          },
+          {
+            "type": "inline_math",
+            "latex": "1:n"
+          },
+          {
+            "type": "text",
+            "text": " and give "
+          },
+          {
+            "type": "inline_math",
+            "latex": "n"
+          },
+          {
+            "type": "text",
+            "text": ". Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -162,7 +178,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "5\\text{ km}=5\\times100\\,000\\text{ cm}=500000\\text{ cm}"
+                "latex": "5\\text{ km}=5\\times100\\,000\\text{ cm}=500\\,000\\text{ cm}"
               }
             ],
             "mark_type": "A",
@@ -191,7 +207,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n2-l2-524",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -211,7 +227,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a regional logistics study. A map uses the statement scale 1 cm represents 500 m. A canal measures 8 cm. Find its real length in kilometres. Enter the numerical value only."
+            "text": "A map uses the statement scale 1 cm represents 500 m. A canal measures 8 cm. Find its real length in kilometres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -293,14 +309,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l2-525",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N2",
     "primary_outcome": "2.4",
-    "title": "Route distance in kilometres",
+    "title": "Statement scale with a decimal answer",
     "difficulty": 2,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -313,7 +329,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a regional logistics study. On a map with scale 1 : 125,000, a heritage walk measures 10 cm. Find the real distance in kilometres. Enter the numerical value only."
+            "text": "On a map, 2 cm represents 750 m. A road is 6 cm long on the map. Find the real length of the road in kilometres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -322,8 +338,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "12.5",
-          "canonical_latex": "12.5",
+          "canonical_answer": "2.25",
+          "canonical_latex": "2.25",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -335,7 +351,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use the scale to find the real distance in centimetres."
+                "text": "Find how many metres 1 cm represents, or compare 6 cm with 2 cm."
               }
             ]
           },
@@ -344,7 +360,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "After multiplying, divide by 100 000 to convert centimetres to kilometres."
+                "text": "6 cm is 3 times as long as 2 cm."
               }
             ]
           }
@@ -355,7 +371,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "10\\times 125{,}000=1{,}250{,}000\\text{ cm}=12.5\\text{ km}"
+                "latex": "6\\text{ cm}\\mapsto3\\times750=2250\\text{ m}"
               }
             ],
             "mark_type": "M",
@@ -366,7 +382,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{12.5}"
+                "latex": "2250\\text{ m}=2.25\\text{ km}"
               }
             ],
             "mark_type": "A",
@@ -395,7 +411,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l2-526",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -415,7 +431,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a regional logistics study. Two landmarks are 0.7 km apart. A map has scale 1 : 10,000. Find their separation on the map in millimetres. Enter the numerical value only."
+            "text": "Two gates of a park are 0.7 km apart. On a park plan drawn at 1 : 5 000, how far apart are they in millimetres? Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -424,8 +440,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "70",
-          "canonical_latex": "70",
+          "canonical_answer": "140",
+          "canonical_latex": "140",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -446,7 +462,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The quotient gives map centimetres; multiply it by 10 for millimetres."
+                "text": "Convert 0.7 km to centimetres, divide by the scale denominator, then convert to millimetres."
               }
             ]
           }
@@ -457,7 +473,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "0.7\\text{ km}=70{,}000\\text{ cm},\\quad \\frac{70{,}000}{10{,}000}\\times10=70\\text{ mm}"
+                "latex": "0.7\\text{ km}=70\\,000\\text{ cm},\\quad\\frac{70\\,000}{5\\,000}=14\\text{ cm}=140\\text{ mm}"
               }
             ],
             "mark_type": "M",
@@ -468,7 +484,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{70}"
+                "latex": "\\boxed{140}"
               }
             ],
             "mark_type": "A",
@@ -497,14 +513,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n2-l2-527",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N2",
     "primary_outcome": "2.4",
-    "title": "Rectangular land area",
+    "title": "Area of a playing field in hectares",
     "difficulty": 2,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -517,7 +533,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a regional logistics study. A rectangular plot measures 3 cm by 3 cm on a map with scale 1 : 10 000. Find its actual area in hectares. Enter the numerical value only."
+            "text": "On a 1 : 10 000 map, a school's square playing field has sides of 3 cm. Find the real area of the playing field in hectares. (1 hectare "
+          },
+          {
+            "type": "inline_math",
+            "latex": "=10\\,000"
+          },
+          {
+            "type": "text",
+            "text": " m"
+          },
+          {
+            "type": "inline_math",
+            "latex": "^2"
+          },
+          {
+            "type": "text",
+            "text": ".) Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -559,7 +591,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "3\\text{ cm}=300\\text{ m},\\quad 3\\text{ cm}=300\\text{ m},\\quad \\frac{300\\times300}{10\\,000}=9\\text{ ha}"
+                "latex": "3\\text{ cm}\\mapsto 300\\text{ m},\\quad 3\\text{ cm}\\mapsto 300\\text{ m},\\quad \\frac{300\\times300}{10\\,000}=9\\text{ ha}"
               }
             ],
             "mark_type": "M",
@@ -599,7 +631,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l3-524",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -619,7 +651,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A square distribution yard covers 1,000,000 m². On a plan drawn at scale 1 : 50,000, what area does the yard occupy in square centimetres? Enter the numerical value only."
+            "text": "A square distribution yard covers 1 000 000 m². On a plan drawn at scale 1 : 50 000, what area does the yard occupy in square centimetres? Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -661,7 +693,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\sqrt{1000000}=1000\\text{ m},\\quad \\frac{100000}{50{,}000}=2\\text{ cm},\\quad A=2^2=4\\text{ cm}^2"
+                "latex": "\\sqrt{1000000}=1000\\text{ m},\\quad \\frac{100000}{50\\,000}=2\\text{ cm},\\quad A=2^2=4\\text{ cm}^2"
               }
             ],
             "mark_type": "M",
@@ -701,7 +733,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l3-525",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -721,7 +753,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Three consecutive legs of a mapped supply route measure 3 cm each. The map scale is 1 : 50,000. Calculate the entire route length in kilometres. Enter the numerical value only."
+            "text": "Three consecutive legs of a mapped supply route measure 3 cm each. The map scale is 1 : 50 000. Calculate the entire route length in kilometres. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -752,7 +784,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply 9 cm by 50,000, then convert centimetres to kilometres."
+                "text": "Multiply 9 cm by 50 000, then convert centimetres to kilometres."
               }
             ]
           }
@@ -763,7 +795,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "(3+3+3)\\times 50{,}000=450{,}000\\text{ cm}=4.5\\text{ km}"
+                "latex": "(3+3+3)\\times 50\\,000=450\\,000\\text{ cm}=4.5\\text{ km}"
               }
             ],
             "mark_type": "M",
@@ -803,7 +835,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n2-l3-526",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -823,7 +855,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a regional logistics study. On an unlabelled map, 4 cm represents 1000 m. Another route measures 8 cm. Find its real length in metres. Enter the numerical value only."
+            "text": "On a hand-drawn map, a 1400 m stretch of river is 4 cm long. A road on the same drawing is 9 cm long. What is the real length of the road in metres? Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -832,8 +864,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "2000",
-          "canonical_latex": "2000",
+          "canonical_answer": "3150",
+          "canonical_latex": "3150",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -854,7 +886,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Divide 1000 by 4, then multiply by 8."
+                "text": "Find how many metres 1 cm represents first."
               }
             ]
           }
@@ -865,7 +897,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "1\\text{ cm}=1000\\div4=250\\text{ m},\\quad 8\\times250=2000\\text{ m}"
+                "latex": "1\\text{ cm}\\mapsto 1400\\div4=350\\text{ m},\\quad 9\\times350=3150\\text{ m}"
               }
             ],
             "mark_type": "M",
@@ -876,7 +908,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{2000}"
+                "latex": "\\boxed{3150}"
               }
             ],
             "mark_type": "A",
@@ -905,7 +937,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l3-527",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -925,7 +957,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a regional logistics study. A rectangular wetland is 5 cm by 5 cm on a map with scale 1 : 50,000. Find its actual area in square kilometres. Enter the numerical value only."
+            "text": "A square island is drawn with sides of 5 cm on a 1 : 50 000 chart. Find the real area of the island in square kilometres. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -1007,7 +1039,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l4-513",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1027,7 +1059,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "On a 1 : 50,000 emergency map, a rescue point lies 3 cm east and 4 cm north of the command post. Find their straight-line ground separation in kilometres. Enter the numerical value only."
+            "text": "On a 1 : 50 000 emergency map, a rescue point lies 3 cm east and 4 cm north of the command post. Find their straight-line ground separation in kilometres. Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -1066,7 +1098,7 @@
               },
               {
                 "type": "text",
-                "text": " cm; multiply it by 50,000."
+                "text": " cm; multiply it by 50 000."
               }
             ]
           }
@@ -1117,7 +1149,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l4-514",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1137,7 +1169,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A transport corridor appears 6 cm long on a 1 : 100,000 regional plan. A second plan of the same corridor uses scale 1 : 80,000. Determine its length on the second plan in centimetres. Enter the numerical value only."
+            "text": "A transport corridor appears 10 cm long on a 1 : 25 000 regional plan. A second plan of the same corridor uses scale 1 : 100 000. Determine its length on the second plan in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -1146,8 +1178,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "7.5",
-          "canonical_latex": "7.5",
+          "canonical_answer": "2.5",
+          "canonical_latex": "2.5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1168,7 +1200,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find the actual distance using Map A, then divide by Map B's denominator."
+                "text": "Find the real length in centimetres from the first plan, then divide by the second denominator."
               }
             ]
           }
@@ -1179,7 +1211,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "d=6(100{,}000)=600{,}000\\text{ cm},\\quad \\text{Map B}=\\frac{600{,}000}{80{,}000}=7.5\\text{ cm}"
+                "latex": "d=10(25\\,000)=250\\,000\\text{ cm},\\quad\\text{second plan}=\\frac{250\\,000}{100\\,000}=2.5\\text{ cm}"
               }
             ],
             "mark_type": "M",
@@ -1190,7 +1222,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{7.5}"
+                "latex": "\\boxed{2.5}"
               }
             ],
             "mark_type": "A",
@@ -1219,7 +1251,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n2-l5-504",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1239,7 +1271,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A protected site is represented by a 9 cm by 7 cm rectangle on a 1 : 50,000 map. An internal facility occupies a 5 cm by 3 cm rectangle. Find the actual protected area outside the facility in square kilometres. Enter the numerical value only."
+            "text": "A protected site is represented by a 9 cm by 7 cm rectangle on a 1 : 50 000 map. An internal facility occupies a 5 cm by 3 cm rectangle. Find the actual protected area outside the facility in square kilometres. Enter the numerical value only."
           }
         ],
         "marks": 5,
@@ -1321,7 +1353,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l1-520",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1341,55 +1373,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a regional logistics study. "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": " is directly proportional to "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": " and "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y=25"
-          },
-          {
-            "type": "text",
-            "text": " when "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=5"
-          },
-          {
-            "type": "text",
-            "text": ". Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": " when "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=9"
-          },
-          {
-            "type": "text",
-            "text": ". Enter the numerical value only."
+            "text": "The pay for a holiday job is directly proportional to the number of hours worked. Five hours of work earn S$25. How much is earned for 9 hours, in dollars? Type the number only."
           }
         ],
         "marks": 1,
@@ -1484,7 +1468,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l1-521",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1504,55 +1488,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a regional logistics study. "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": " is inversely proportional to "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": ". When "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=6"
-          },
-          {
-            "type": "text",
-            "text": ", "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y=9"
-          },
-          {
-            "type": "text",
-            "text": ". Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": " when "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=10"
-          },
-          {
-            "type": "text",
-            "text": ". Enter the exact numerical value only."
+            "text": "The time a journey takes is inversely proportional to the speed. At 6 m/s the journey takes 9 minutes. How many minutes does it take at 10 m/s? Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -1843,7 +1779,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l2-530",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1863,7 +1799,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a regional logistics study. A divisible task takes 4 equally productive workers 7 days. Assuming inverse proportion, how many days would 5 workers take? Enter the exact numerical value only."
+            "text": "Four cleaners take 7 days to clean a building. How many days would 5 cleaners take, working at the same rate? Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -1953,7 +1889,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l2-531",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1972,8 +1908,12 @@
         "label": null,
         "prompt": [
           {
+            "type": "inline_math",
+            "latex": "q"
+          },
+          {
             "type": "text",
-            "text": "Use the data from a regional logistics study. The variables "
+            "text": " is directly proportional to "
           },
           {
             "type": "inline_math",
@@ -1981,27 +1921,19 @@
           },
           {
             "type": "text",
-            "text": " and "
+            "text": ", and the ratio "
           },
           {
             "type": "inline_math",
-            "latex": "q"
+            "latex": "q:p"
           },
           {
             "type": "text",
-            "text": " are directly proportional. When "
+            "text": " is "
           },
           {
             "type": "inline_math",
-            "latex": "p=4"
-          },
-          {
-            "type": "text",
-            "text": ", "
-          },
-          {
-            "type": "inline_math",
-            "latex": "q=20"
+            "latex": "20:4"
           },
           {
             "type": "text",
@@ -2247,14 +2179,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l3-529",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N2",
     "primary_outcome": "2.5",
-    "title": "Scale a direct proportion",
+    "title": "Mass of floor tiles",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2267,7 +2199,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Five identical shipping tiles have a combined mass of 9 kg. Determine the mass, in kilograms, of 15 such tiles. Enter the exact numerical value only."
+            "text": "Five identical floor tiles have a combined mass of 9 kg. Determine the mass, in kilograms, of 15 such tiles. Enter the exact numerical value only."
           }
         ],
         "marks": 3,
@@ -2357,7 +2289,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n2-l3-530",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2437,7 +2369,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "7(15)=13t\\Rightarrow t=\\frac{105}{13}=\\frac{105}{13}"
+                "latex": "7(15)=13t\\Rightarrow t=\\frac{105}{13}"
               }
             ],
             "mark_type": "M",
@@ -2477,7 +2409,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n2-l3-531",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2497,23 +2429,39 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A direct-proportion data table contains "
+            "text": "The pairs "
           },
           {
             "type": "inline_math",
-            "latex": "x=7"
+            "latex": "(7,12)"
           },
           {
             "type": "text",
-            "text": " paired with "
+            "text": ", "
           },
           {
             "type": "inline_math",
-            "latex": "y=12"
+            "latex": "(14,24)"
           },
           {
             "type": "text",
-            "text": ". Calculate the value of "
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(21,36)"
+          },
+          {
+            "type": "text",
+            "text": " are values of "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(x,y)"
+          },
+          {
+            "type": "text",
+            "text": " from a direct proportion. Use them to find "
           },
           {
             "type": "inline_math",
@@ -2521,7 +2469,7 @@
           },
           {
             "type": "text",
-            "text": " that corresponds to "
+            "text": " when "
           },
           {
             "type": "inline_math",

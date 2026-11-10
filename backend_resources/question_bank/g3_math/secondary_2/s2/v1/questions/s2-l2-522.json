@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s2-l2-522",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A fair die is rolled. Find the probability that the result is below 4 or even. Give your answer as a fraction in simplest form."
+          "text": "A fair die is rolled. Find the probability that the result is below 3 or odd. Give your answer as a fraction in simplest form."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "5/6",
-        "canonical_latex": "\\frac{5}{6}",
+        "canonical_expression": "2/3",
+        "canonical_latex": "\\frac{2}{3}",
         "variables": [],
         "domain_constraints": [],
         "accepted_equivalents": [],
@@ -44,7 +44,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Form the union of {1, 2, 3} and {2, 4, 6}."
+              "text": "Form the union of the two lists of results."
             }
           ]
         },
@@ -53,7 +53,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Count the overlapping result 2 only once."
+              "text": "Below 3 gives 1 and 2; odd gives 1, 3 and 5. Count 1 only once."
             }
           ]
         }
@@ -63,8 +63,20 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The union is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\{1,2,3,5\\}"
+            },
+            {
+              "type": "text",
+              "text": ". "
+            },
+            {
               "type": "display_math",
-              "latex": "P=\\frac{5}{6}=\\frac{5}{6}"
+              "latex": "P=\\frac{4}{6}"
             }
           ],
           "mark_type": "M",
@@ -75,7 +87,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{\\frac{5}{6}}"
+              "latex": "\\boxed{\\frac{2}{3}}"
             }
           ],
           "mark_type": "A",

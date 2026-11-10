@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n2-l2-511",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N2",
   "primary_outcome": "2.4",
-  "title": "Rectangular land area",
+  "title": "Area of an orchard in hectares",
   "difficulty": 2,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use the data from a community planning study. A rectangular plot measures 2 cm by 3 cm on a map with scale 1 : 10 000. Find its actual area in hectares. Enter the numerical value only."
+          "text": "A rectangular orchard measures 2 cm by 3 cm on a plan drawn at 1 : 10 000. How many hectares does the orchard cover? (1 hectare "
+        },
+        {
+          "type": "inline_math",
+          "latex": "=10\\,000"
+        },
+        {
+          "type": "text",
+          "text": " m"
+        },
+        {
+          "type": "inline_math",
+          "latex": "^2"
+        },
+        {
+          "type": "text",
+          "text": ".) Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -62,7 +78,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "2\\text{ cm}=200\\text{ m},\\quad 3\\text{ cm}=300\\text{ m},\\quad \\frac{200\\times300}{10\\,000}=6\\text{ ha}"
+              "latex": "2\\text{ cm}\\mapsto 200\\text{ m},\\quad 3\\text{ cm}\\mapsto 300\\text{ m},\\quad \\frac{200\\times300}{10\\,000}=6\\text{ ha}"
             }
           ],
           "mark_type": "M",

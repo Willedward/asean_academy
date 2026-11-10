@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s2-l2-503 — Missed target complement
+## s2-l2-503 — Compare two probabilities
 
 [Open this question in the HTML preview](index.html#s2-l2-503)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s2-l3-503 — Expected unsuccessful seeds
+## s2-l3-503 — Expected number from the missing probability
 
 [Open this question in the HTML preview](index.html#s2-l3-503)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s2-l3-505 — Exactly one head
+## s2-l3-505 — Coin and three-section spinner
 
 [Open this question in the HTML preview](index.html#s2-l3-505)
 

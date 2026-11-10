@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l2-014",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G5",
   "primary_outcome": "5.5",
-  "title": "Tank with raised section",
+  "title": "Capacity of a tank in litres",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A tank consists of a 10 cm by 8 cm by 4 cm cuboid and a 6 cm by 5 cm by 3 cm cuboid joined without overlap. Find its capacity in cm\u00b3. Enter the numerical value only."
+          "text": "A tank consists of a 10 cm by 8 cm by 4 cm cuboid and a 6 cm by 5 cm by 3 cm cuboid joined without overlap. Find its capacity in litres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "410",
-        "canonical_latex": "410",
+        "canonical_answer": "0.41",
+        "canonical_latex": "0.41",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the capacities of the two cuboids."
+              "text": "Add the volumes of the two cuboids."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The volumes are 320 cm\u00b3 and 90 cm\u00b3."
+              "text": "Use 1 litre = 1000 cm³ to convert the total."
             }
           ]
         }
@@ -61,12 +61,27 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "V=10(8)(4)+6(5)(3)=410"
+              "type": "inline_math",
+              "latex": "V=10(8)(4)+6(5)(3)=410\\text{ cm}^3"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "410\\div1000=0.41"
+            },
+            {
+              "type": "text",
+              "text": " litres"
             }
           ],
           "mark_type": "A",
-          "mark_value": 2
+          "mark_value": 1
         }
       ]
     }

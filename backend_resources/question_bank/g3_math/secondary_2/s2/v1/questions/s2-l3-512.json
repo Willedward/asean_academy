@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s2-l3-512",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S2",
   "primary_outcome": "2.1",
-  "title": "How many seeds were planted",
+  "title": "Use an estimated probability to predict",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A seed germinates with probability 0.65. The expected number that germinate is 156. Find the number of seeds planted."
+          "text": "A coin is tossed 200 times and lands heads 128 times. Use these results to estimate the probability of heads, then predict the number of heads in 50 further tosses."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "240",
-        "canonical_latex": "240",
+        "canonical_answer": "32",
+        "canonical_latex": "32",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,15 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Let the number of trials be "
-            },
-            {
-              "type": "inline_math",
-              "latex": "n"
-            },
-            {
-              "type": "text",
-              "text": " and use expected frequency = np."
+              "text": "Estimate the probability as heads divided by tosses."
             }
           ]
         },
@@ -59,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide the expected frequency by the event probability."
+              "text": "Multiply your estimate by 50."
             }
           ]
         }
@@ -70,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "n=\\frac{156}{65/100}=240"
+              "latex": "P(\\text{heads})\\approx\\frac{128}{200}=0.64"
             }
           ],
           "mark_type": "M",
@@ -81,7 +73,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{240}"
+              "latex": "50\\times0.64=\\boxed{32}"
             }
           ],
           "mark_type": "A",

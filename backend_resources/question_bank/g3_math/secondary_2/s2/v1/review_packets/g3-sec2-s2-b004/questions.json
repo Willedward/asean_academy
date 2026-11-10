@@ -1,14 +1,14 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s2-l1-518",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S2",
     "primary_outcome": "2.1",
-    "title": "Recorded successes",
+    "title": "Probability of not landing on S",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -21,7 +21,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Seven of ten equally likely positions on a wheel are labelled S. Write the probability of landing on S as a fraction in simplest form."
+            "text": "Seven of ten equally likely positions on a wheel are labelled S. Write the probability of not landing on S as a fraction in simplest form."
           }
         ],
         "marks": 1,
@@ -30,8 +30,8 @@
         "response": {
           "type": "algebraic_expression",
           "comparison_mode": "symbolic_equivalence",
-          "canonical_expression": "7/10",
-          "canonical_latex": "\\frac{7}{10}",
+          "canonical_expression": "3/10",
+          "canonical_latex": "\\frac{3}{10}",
           "variables": [],
           "domain_constraints": [],
           "accepted_equivalents": [],
@@ -45,7 +45,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use favourable positions over all positions."
+                "text": "Not landing on S is the complement of landing on S."
               }
             ]
           },
@@ -54,7 +54,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Count the positions labelled S, then count all the positions on the wheel."
+                "text": "Subtract the probability of S from 1."
               }
             ]
           }
@@ -65,7 +65,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "P(S)=\\frac{7}{10}"
+                "latex": "P(\\text{not }S)=1-\\frac{7}{10}=\\frac{3}{10}"
               }
             ],
             "mark_type": "A",
@@ -523,14 +523,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s2-l2-527",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S2",
     "primary_outcome": "2.1",
-    "title": "Expected sunny mornings",
+    "title": "Compare probabilities written in different forms",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -543,7 +543,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The probability of a sunny morning is 0.45. Over 20 mornings, find the expected number of sunny mornings."
+            "text": "Event A has probability 0.45 and event B has probability "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{9}{20}"
+          },
+          {
+            "type": "text",
+            "text": ". Find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "P(A)-P(B)"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 2,
@@ -552,8 +568,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "9",
-          "canonical_latex": "9",
+          "canonical_answer": "0",
+          "canonical_latex": "0",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -565,7 +581,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply the number of mornings by the probability."
+                "text": "Write both probabilities as decimals."
               }
             ]
           },
@@ -574,7 +590,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 20 times 0.45."
+                "text": "Convert "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{9}{20}"
+              },
+              {
+                "type": "text",
+                "text": " by dividing 9 by 20."
               }
             ]
           }
@@ -585,7 +609,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "20\\times\\frac{45}{100}=9"
+                "latex": "\\frac{9}{20}=0.45"
               }
             ],
             "mark_type": "M",
@@ -595,8 +619,16 @@
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "So "
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{9}"
+                "latex": "P(A)-P(B)=\\boxed{0}"
+              },
+              {
+                "type": "text",
+                "text": ": the events are equally likely."
               }
             ],
             "mark_type": "A",
@@ -829,7 +861,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s2-l3-526",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -849,7 +881,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The probabilities that a sensor reports green and amber are 0.46 and 0.31 respectively. The only other report is red. Find the probability of red."
+            "text": "The probabilities that a sensor reports green and amber are 0.46 and 0.31 respectively. The only other report is red. Find the probability of red as a decimal."
           }
         ],
         "marks": 3,
@@ -858,8 +890,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "23/100",
-          "canonical_latex": "\\frac{23}{100}",
+          "canonical_answer": "0.23",
+          "canonical_latex": "0.23",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -891,7 +923,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "P(\\text{remaining})=1-23/50-31/100=\\frac{23}{100}"
+                "latex": "P(\\text{red})=1-0.46-0.31"
               }
             ],
             "mark_type": "M",
@@ -902,7 +934,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{\\frac{23}{100}}"
+                "latex": "\\boxed{0.23}"
               }
             ],
             "mark_type": "A",
@@ -1423,7 +1455,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s2-l1-520",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1467,7 +1499,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Count the favourable outcomes and the total equally likely outcomes."
+                "text": "Count how many outcomes are favourable and how many outcomes are possible."
               }
             ]
           },
@@ -1487,7 +1519,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "P=\\frac{1}{5}=\\frac{1}{5}"
+                "latex": "P=\\frac{1}{5}"
               }
             ],
             "mark_type": "A",
@@ -1516,7 +1548,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s2-l1-521",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1560,7 +1592,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Count the favourable outcomes and the total equally likely outcomes."
+                "text": "Count how many outcomes are favourable and how many outcomes are possible."
               }
             ]
           },
@@ -1580,7 +1612,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "P=\\frac{3}{10}=\\frac{3}{10}"
+                "latex": "P=\\frac{3}{10}"
               }
             ],
             "mark_type": "A",
@@ -1609,14 +1641,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l2-528",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S2",
     "primary_outcome": "2.2",
-    "title": "Two-colour sample space",
+    "title": "Spinner with a repeated label",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1673,7 +1705,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "P=\\frac{3}{4}=\\frac{3}{4}"
+                "latex": "P=\\frac{3}{4}"
               }
             ],
             "mark_type": "M",
@@ -1817,7 +1849,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l2-530",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1881,7 +1913,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "P=\\frac{3}{10}=\\frac{3}{10}"
+                "latex": "P=\\frac{3}{10}"
               }
             ],
             "mark_type": "M",
@@ -2025,7 +2057,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l3-528",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2088,8 +2120,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "The 9 pairs are (1,4), (1,5), (1,6), (2,4), (2,5), (2,6), (3,4), (3,5), (3,6). Same parity: (1,5), (3,5) odd-odd and (2,4), (2,6) even-even. "
+              },
+              {
                 "type": "display_math",
-                "latex": "P=\\frac{4}{9}=\\frac{4}{9}"
+                "latex": "P=\\frac{4}{9}"
               }
             ],
             "mark_type": "M",
@@ -2129,7 +2165,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l3-529",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2192,8 +2228,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Prime sums: 2 from (1,1); 3 from (1,2), (2,1); 5 from (1,4), (2,3), (3,2), (4,1); 7 from (3,4), (4,3). That is 9 of 16 pairs. "
+              },
+              {
                 "type": "display_math",
-                "latex": "P=\\frac{9}{16}=\\frac{9}{16}"
+                "latex": "P=\\frac{9}{16}"
               }
             ],
             "mark_type": "M",
@@ -2233,7 +2273,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l3-530",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2296,8 +2336,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Products above 10: (3,4), (3,5), (4,3), (4,4), (4,5), (5,3), (5,4), (5,5). That is 8 of 25 pairs. "
+              },
+              {
                 "type": "display_math",
-                "latex": "P=\\frac{8}{25}=\\frac{8}{25}"
+                "latex": "P=\\frac{8}{25}"
               }
             ],
             "mark_type": "M",
@@ -2337,7 +2381,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l3-531",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2357,7 +2401,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A bag contains 2 red, 2 blue and 1 green counter. Two counters are selected without replacement. Find the probability that their colours are different. Give your answer as a fraction in simplest form."
+            "text": "A bag contains 2 red, 2 blue and 1 green counter. Two counters are selected at random without replacement. Find the probability that their colours are different. Give your answer as a fraction in simplest form."
           }
         ],
         "marks": 3,
@@ -2441,7 +2485,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s2-l4-515",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2461,7 +2505,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Three tiles are selected without replacement from A, E, I, B and C. Find the probability that exactly one selected tile is a vowel. Give your answer as a fraction in simplest form."
+            "text": "Three tiles are selected at random without replacement from A, E, I, B and C. Find the probability that exactly one selected tile is a vowel. Give your answer as a fraction in simplest form."
           }
         ],
         "marks": 4,
@@ -2485,7 +2529,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Choose one of the three vowels and both consonants."
+                "text": "List every group of three tiles that can be chosen."
               }
             ]
           },
@@ -2494,15 +2538,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Compare 3 favourable unordered selections with all "
-              },
-              {
-                "type": "inline_math",
-                "latex": "C(5,3)"
-              },
-              {
-                "type": "text",
-                "text": " selections."
+                "text": "There are 10 groups in all. A group with exactly one vowel must contain both B and C."
               }
             ]
           }
@@ -2512,8 +2548,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "The 10 groups are AEI, AEB, AEC, AIB, AIC, ABC, EIB, EIC, EBC, IBC. Exactly one vowel: ABC, EBC, IBC. "
+              },
+              {
                 "type": "display_math",
-                "latex": "P=\\frac{\\binom31\\binom22}{\\binom53}=\\frac{3}{10}"
+                "latex": "P=\\frac{3}{10}"
               }
             ],
             "mark_type": "M",
@@ -2657,7 +2697,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l5-505",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2701,7 +2741,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use the complement where all three results are different."
+                "text": "Use a tree diagram with 3 branches at each spin."
               }
             ]
           },
@@ -2710,7 +2750,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "All-different outcomes are the six permutations of 1, 2 and 3 among 27 outcomes."
+                "text": "The tree has 27 end points. List the outcomes where all three results are different."
               }
             ]
           }
@@ -2720,8 +2760,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "The tree gives 27 outcomes. All different: 123, 132, 213, 231, 312, 321, which is 6 outcomes. "
+              },
+              {
                 "type": "display_math",
-                "latex": "P=1-\\frac{3!}{3^3}=1-\\frac{6}{27}=\\frac79"
+                "latex": "P=1-\\frac{6}{27}=\\frac{21}{27}"
               }
             ],
             "mark_type": "M",

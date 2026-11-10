@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g5",
@@ -46,7 +46,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A composite plane figure can be partitioned into non-overlapping familiar shapes or enclosed in a large shape with cut-outs subtracted. Area counts internal coverage. Perimeter follows only the outside boundary, so shared internal edges are excluded."
+          "text": "The diagram shows the L-shape in the second worked example: a 15 m by 9 m rectangle with a 5 m by 3 m corner removed. Its area can be found by subtracting the corner from the whole rectangle, or by splitting the L-shape into two rectangles that do not overlap. Its perimeter is the length of the outside boundary only; a line drawn inside the shape to split it is not part of the perimeter."
         },
         {
           "type": "asset_ref",
@@ -70,7 +70,7 @@
       "stable_key": "g5-52-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: subtract a cut-out",
       "prompt": [
         {
           "type": "text",
@@ -82,8 +82,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Find the area of the whole rectangle and of the removed corner."
+            },
+            {
               "type": "display_math",
-              "latex": "A=12(8)-4(3)"
+              "latex": "12\\times8=96\\text{ cm}^2,\\qquad4\\times3=12\\text{ cm}^2"
             }
           ]
         },
@@ -91,23 +95,27 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Subtract the corner, because it is no longer part of the shape."
+            },
+            {
               "type": "display_math",
-              "latex": "A=84\\text{ cm}^2"
+              "latex": "A=96-12=84\\text{ cm}^2"
             }
           ]
         }
       ],
-      "verification_note": "The result uses compatible units and agrees with the dimensions and component structure."
+      "verification_note": "Check by splitting instead: a 12 cm by 5 cm strip and an 8 cm by 3 cm strip give 60 + 24 = 84 cm²."
     },
     {
       "stable_key": "g5-lesson-02-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Worked example: apply the method",
+      "title": "Worked example: area and outside perimeter",
       "prompt": [
         {
           "type": "text",
-          "text": "A 14 m by 10 m rectangle has a 6 m by 4 m corner removed. Find both the remaining area and the outside perimeter."
+          "text": "A 15 m by 9 m rectangle has a 5 m by 3 m corner removed, as in the diagram. Find the remaining area and the outside perimeter."
         }
       ],
       "steps": [
@@ -116,7 +124,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Area=14×10−6×4=116 m²."
+              "text": "Area: subtract the removed corner from the whole rectangle."
+            },
+            {
+              "type": "display_math",
+              "latex": "A=15\\times9-5\\times3=135-15=120\\text{ m}^2"
             }
           ]
         },
@@ -125,7 +137,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Removing a corner replaces two outer lengths by two equal inner lengths, so the total perimeter remains 2(14+10)."
+              "text": "Perimeter: trace the outside edges once. The top edge is 15 − 5 = 10 m and the right edge is 9 − 3 = 6 m."
+            },
+            {
+              "type": "display_math",
+              "latex": "P=15+9+10+3+5+6=48\\text{ m}"
             }
           ]
         },
@@ -134,12 +150,12 @@
           "content": [
             {
               "type": "text",
-              "text": "The outside perimeter is 48 m."
+              "text": "The two edges of the cut, 5 m and 3 m, replace equal lengths of the original top and right sides, so the perimeter is the same as the full rectangle's: 2(15 + 9) = 48 m."
             }
           ]
         }
       ],
-      "verification_note": "The remaining area is smaller than 140 m², and the boundary trace closes without counting internal edges."
+      "verification_note": "The area 120 m² is less than the full rectangle's 135 m², and the boundary trace uses each of the six outside edges once."
     },
     {
       "stable_key": "g5-lesson-02-pitfalls",
@@ -189,11 +205,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Sketch or decompose the figure, label compatible units, select the correct area or volume relationship, calculate in clear stages, and check that the final unit is squared or cubed as required."
+          "text": "Area of a composite figure: add the areas of parts that do not overlap, or subtract cut-outs from a larger shape."
         },
         {
           "type": "text",
-          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
+          "text": "Perimeter: trace the outside boundary once, find a missing edge by subtracting along a full width or height, and never count an internal dividing line. Area is in square units; perimeter is in length units."
         }
       ]
     }
@@ -203,16 +219,216 @@
       "asset_key": "g5-lesson-02-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-lesson-02-composite_plane.svg",
-      "alt_text": "An L-shaped region shown as a large rectangle with a smaller rectangular corner removed.",
+      "path": "assets/g5-lesson-02-composite_plane-r3.svg",
+      "alt_text": "An L-shape. The full bottom edge is 15 m and the full left edge is 9 m. The removed top-right corner has edges 5 m and 3 m. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "composite_plane",
-        "lesson_key": "g5-lesson-02"
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "rectilinear",
+        "lesson_key": "g5-lesson-02",
+        "template": "corner_removed",
+        "inputs": {
+          "width": {
+            "value": 15,
+            "unit": "m"
+          },
+          "height": {
+            "value": 9,
+            "unit": "m"
+          },
+          "cut_width": {
+            "value": 5,
+            "unit": "m"
+          },
+          "cut_height": {
+            "value": 3,
+            "unit": "m"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "width": {
+            "value": 15,
+            "unit": "m"
+          },
+          "height": {
+            "value": 9,
+            "unit": "m"
+          },
+          "cut_width": {
+            "value": 5,
+            "unit": "m"
+          },
+          "cut_height": {
+            "value": 3,
+            "unit": "m"
+          }
+        },
+        "forbidden_visible_labels": [
+          "120",
+          "135",
+          "10",
+          "6",
+          "48"
+        ],
+        "forbidden_label_exemptions": [
+          {
+            "value": "15",
+            "reason": "equals a stated value shown on the diagram"
+          }
+        ],
+        "unknowns": [],
+        "drawn_scale": 28.0,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "l_shape",
+            "points": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ],
+            "segments": [
+              "AB",
+              "BC",
+              "CD",
+              "DE",
+              "EF",
+              "FA"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "AB",
+            "label": "15 m",
+            "factor": 1.0,
+            "value": 15.0
+          },
+          {
+            "segment": "FA",
+            "label": "9 m",
+            "factor": 1.0,
+            "value": 9.0
+          },
+          {
+            "segment": "CD",
+            "label": "5 m",
+            "factor": 1.0,
+            "value": 5.0
+          },
+          {
+            "segment": "DE",
+            "label": "3 m",
+            "factor": 1.0,
+            "value": 3.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "l-shape"
+        ],
+        "viewbox": [
+          600.0,
+          380.0
+        ],
+        "points": {
+          "A": [
+            90.0,
+            292.0
+          ],
+          "B": [
+            510.0,
+            292.0
+          ],
+          "C": [
+            510.0,
+            124.0
+          ],
+          "D": [
+            370.0,
+            124.0
+          ],
+          "E": [
+            370.0,
+            40.0
+          ],
+          "F": [
+            90.0,
+            40.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CD",
+            "from": "C",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DE",
+            "from": "D",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "EF",
+            "from": "E",
+            "to": "F",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "FA",
+            "from": "F",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "15 m",
+            "target": "segment:AB"
+          },
+          {
+            "text": "9 m",
+            "target": "segment:FA"
+          },
+          {
+            "text": "5 m",
+            "target": "segment:CD"
+          },
+          {
+            "text": "3 m",
+            "target": "segment:DE"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "4c860a94646e884caef27d38adce8f497d3f99c20c43fb591f75fbfb1d2c1da4",
-      "width": 940,
-      "height": 390
+      "sha256": "5f51ec45074e959339f3f113480d4d996430c6ada4c04bebf0b2c6126c1d5a1a",
+      "width": 600,
+      "height": 380
     }
   ],
   "provenance": {
@@ -221,6 +437,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }

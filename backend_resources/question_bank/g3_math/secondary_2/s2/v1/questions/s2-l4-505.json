@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s2-l4-505",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S2",
   "primary_outcome": "2.1",
-  "title": "Expected dry afternoons",
+  "title": "Change in expected dry afternoons",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The probability of rain on an afternoon is 0.18. Over 250 afternoons, find the expected number of afternoons without rain."
+          "text": "The probability of rain on an afternoon is 0.18. After a forecast update, the probability of rain becomes 0.24. Over 250 afternoons, by how much does the expected number of afternoons without rain fall?"
         }
       ],
       "marks": 4,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "205",
-        "canonical_latex": "205",
+        "canonical_answer": "15",
+        "canonical_latex": "15",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the complement of the rain probability."
+              "text": "Find the expected number of dry afternoons for each probability of rain."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply 250 by "
+              "text": "Use "
             },
             {
               "type": "inline_math",
@@ -59,7 +59,15 @@
             },
             {
               "type": "text",
-              "text": "."
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "1-0.24"
+            },
+            {
+              "type": "text",
+              "text": ", multiply each by 250, then subtract."
             }
           ]
         }
@@ -70,7 +78,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "250(1-0.18)=250(0.82)=205"
+              "latex": "250(0.82)=205,\\quad250(0.76)=190"
             }
           ],
           "mark_type": "M",
@@ -80,8 +88,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "The expected number falls by "
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{205}"
+              "latex": "205-190=\\boxed{15}"
             }
           ],
           "mark_type": "A",

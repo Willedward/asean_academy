@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s2-l4-515",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Three tiles are selected without replacement from A, E, I, B and C. Find the probability that exactly one selected tile is a vowel. Give your answer as a fraction in simplest form."
+          "text": "Three tiles are selected at random without replacement from A, E, I, B and C. Find the probability that exactly one selected tile is a vowel. Give your answer as a fraction in simplest form."
         }
       ],
       "marks": 4,
@@ -44,7 +44,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Choose one of the three vowels and both consonants."
+              "text": "List every group of three tiles that can be chosen."
             }
           ]
         },
@@ -53,15 +53,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare 3 favourable unordered selections with all "
-            },
-            {
-              "type": "inline_math",
-              "latex": "C(5,3)"
-            },
-            {
-              "type": "text",
-              "text": " selections."
+              "text": "There are 10 groups in all. A group with exactly one vowel must contain both B and C."
             }
           ]
         }
@@ -71,8 +63,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The 10 groups are AEI, AEB, AEC, AIB, AIC, ABC, EIB, EIC, EBC, IBC. Exactly one vowel: ABC, EBC, IBC. "
+            },
+            {
               "type": "display_math",
-              "latex": "P=\\frac{\\binom31\\binom22}{\\binom53}=\\frac{3}{10}"
+              "latex": "P=\\frac{3}{10}"
             }
           ],
           "mark_type": "M",

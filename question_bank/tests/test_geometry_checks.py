@@ -337,6 +337,14 @@ def test_apply_writes_revisioned_assets_and_is_idempotent(g4_bank_copy):
 def test_lesson_diagrams_regenerate_with_revisioned_names(tmp_path, repository_root):
     course = tmp_path / "course"
     shutil.copytree(repository_root / "backend_resources/courses/g3_math/secondary_2/g2/v1", course)
+    # Put the copy back on its hand-drawn revision 1 assets so the regeneration has work to do.
+    lesson_path = course / "lessons/g5-lesson-06.json"
+    original = json.loads(lesson_path.read_text())
+    original["revision"] = 1
+    for asset in original["assets"]:
+        asset["path"] = asset["path"].replace("-r2.svg", ".svg")
+        asset["generation_spec"] = {"renderer": "nextscholar-geometry-svg-v1"}
+    lesson_path.write_text(json.dumps(original, indent=2, ensure_ascii=False) + "\n")
 
     report = regenerate_lessons(course, ["g5-lesson-06"], apply=True)
 

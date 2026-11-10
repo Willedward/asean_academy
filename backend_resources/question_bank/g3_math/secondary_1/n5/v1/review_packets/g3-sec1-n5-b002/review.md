@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-015 — Expand and simplify
+## n5-l3-015 — Factorise two terms
 
 [Open this question in the HTML preview](index.html#n5-l3-015)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l4-009 — Factorise a grouped expression
+## n5-l4-009 — Factorise three terms with two letters
 
 [Open this question in the HTML preview](index.html#n5-l4-009)
 

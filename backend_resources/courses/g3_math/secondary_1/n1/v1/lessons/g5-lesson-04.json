@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-lesson-04",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g5",
@@ -34,7 +34,7 @@
         },
         {
           "type": "display_math",
-          "latex": "1\\text{ m}^2=10000\\text{ cm}^2,\\qquad1\\text{ m}^3=1000000\\text{ cm}^3"
+          "latex": "1\\text{ m}^2=10\\,000\\text{ cm}^2,\\qquad1\\text{ m}^3=1\\,000\\,000\\text{ cm}^3"
         }
       ]
     },
@@ -46,11 +46,15 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A linear conversion factor is applied once, a square-unit factor twice and a cubic-unit factor three times. Since 1 m=100 cm, 1 m²=100²=10,000 cm² and 1 m³=100³=1,000,000 cm³."
+          "text": "The diagram shows a cube with edges of 1 m, written as 100 cm. For lengths, apply the factor once: 1 m = 100 cm. For areas, apply it twice (square it): one face is 100 cm by 100 cm, so 1 m² = 100² = 10 000 cm². For volumes, apply it three times (cube it): the cube holds 100 × 100 × 100 = 1 000 000 cm³, so 1 m³ = 1 000 000 cm³."
         },
         {
           "type": "asset_ref",
           "asset_key": "g5-lesson-04-diagram"
+        },
+        {
+          "type": "text",
+          "text": "The same idea works for millimetres. Since 1 cm = 10 mm, 1 cm² = 10² = 100 mm² and 1 cm³ = 10³ = 1 000 mm³. For capacity, 1 litre = 1 000 cm³ and 1 millilitre = 1 cm³."
         }
       ]
     },
@@ -70,7 +74,7 @@
       "stable_key": "g5-54-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: square metres to square centimetres",
       "prompt": [
         {
           "type": "text",
@@ -82,8 +86,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Square the length factor: 1 m² = 100² cm² = 10 000 cm²."
+            },
+            {
               "type": "display_math",
-              "latex": "2.5(10000)=25000"
+              "latex": "2.5\\times10\\,000=25\\,000"
             }
           ]
         },
@@ -92,18 +100,18 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "2.5\\text{ m}^2=25000\\text{ cm}^2"
+              "latex": "2.5\\text{ m}^2=25\\,000\\text{ cm}^2"
             }
           ]
         }
       ],
-      "verification_note": "The result uses compatible units and agrees with the dimensions and component structure."
+      "verification_note": "Changing to a smaller unit gives a larger number. Using the length factor 100 alone would give 250, which is 100 times too small."
     },
     {
       "stable_key": "g5-lesson-04-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Worked example: apply the method",
+      "title": "Worked example: cubic metres to litres",
       "prompt": [
         {
           "type": "text",
@@ -116,7 +124,11 @@
           "content": [
             {
               "type": "text",
-              "text": "0.024 m³=0.024×1,000,000=24,000 cm³."
+              "text": "Cube the length factor: 1 m³ = 1 000 000 cm³."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.024\\times1\\,000\\,000=24\\,000\\text{ cm}^3"
             }
           ]
         },
@@ -125,21 +137,16 @@
           "content": [
             {
               "type": "text",
-              "text": "Since 1 litre=1,000 cm³, divide by 1,000."
-            }
-          ]
-        },
-        {
-          "position": 3,
-          "content": [
+              "text": "Since 1 litre = 1 000 cm³, divide by 1 000."
+            },
             {
-              "type": "text",
-              "text": "The volume is 24 litres."
+              "type": "display_math",
+              "latex": "24\\,000\\div1\\,000=24\\text{ litres}"
             }
           ]
         }
       ],
-      "verification_note": "0.024 m³ is 24 dm³, and each dm³ is one litre."
+      "verification_note": "0.024 m³ is 24 dm³, and each dm³ (a 10 cm cube) is one litre."
     },
     {
       "stable_key": "g5-lesson-04-pitfalls",
@@ -182,18 +189,46 @@
       ]
     },
     {
-      "stable_key": "g5-lesson-04-summary",
+      "stable_key": "g5-54-recall-mm",
       "position": 8,
+      "type": "active_recall",
+      "title": "Check your understanding: millimetres",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Convert 350 mm² to cm²."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "3.5",
+        "canonical_latex": "3.5",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "1 cm² = 10² mm² = 100 mm², so divide by 100: 350 mm² = 3.5 cm²."
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-lesson-04-summary",
+      "position": 9,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Sketch or decompose the figure, label compatible units, select the correct area or volume relationship, calculate in clear stages, and check that the final unit is squared or cubed as required."
+          "text": "Length: × 100 for m to cm. Area: × 100² = 10 000. Volume: × 100³ = 1 000 000. For cm to mm, use 10, 10² = 100 and 10³ = 1 000."
         },
         {
           "type": "text",
-          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
+          "text": "Multiply when changing to a smaller unit and divide when changing to a larger one, then check that the direction makes sense. 1 litre = 1 000 cm³."
         }
       ]
     }
@@ -203,16 +238,249 @@
       "asset_key": "g5-lesson-04-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-lesson-04-conversion.svg",
-      "alt_text": "A metre square divided into centimetre squares and a metre cube indicating squared and cubed conversion factors.",
+      "path": "assets/g5-lesson-04-conversion-r3.svg",
+      "alt_text": "A cuboid with edges 100 cm, 100 cm and 100 cm. Hidden edges are dashed. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "conversion",
-        "lesson_key": "g5-lesson-04"
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "cuboid",
+        "lesson_key": "g5-lesson-04",
+        "template": "cuboid_volume",
+        "inputs": {
+          "length": {
+            "value": 100,
+            "unit": "cm"
+          },
+          "depth": {
+            "value": 100,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 100,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "length": {
+            "value": 100,
+            "unit": "cm"
+          },
+          "depth": {
+            "value": 100,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 100,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "1000000"
+        ],
+        "unknowns": [],
+        "drawn_scale": 2.0982,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "cuboid",
+            "vertices": {
+              "F1": "F1",
+              "F2": "F2",
+              "F3": "F3",
+              "F4": "F4",
+              "B1": "B1",
+              "B2": "B2",
+              "B3": "B3",
+              "B4": "B4"
+            },
+            "hidden_vertex": "B1",
+            "segments": [
+              "B1B2",
+              "B1B4",
+              "F1B1",
+              "F1F2",
+              "F2F3",
+              "F3F4",
+              "F4F1",
+              "F2B2",
+              "B2B3",
+              "F3B3",
+              "B3B4",
+              "F4B4"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "F1F2",
+            "label": "100 cm",
+            "factor": 1.0,
+            "value": 100.0
+          },
+          {
+            "segment": "F4F1",
+            "label": "100 cm",
+            "factor": 1.0,
+            "value": 100.0
+          },
+          {
+            "segment": "F2B2",
+            "label": "100 cm",
+            "factor": 0.5,
+            "value": 100.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "right-face",
+          "top-face",
+          "front-face"
+        ],
+        "viewbox": [
+          600.0,
+          398.0
+        ],
+        "points": {
+          "F1": [
+            152.12,
+            310.0
+          ],
+          "F2": [
+            361.94,
+            310.0
+          ],
+          "F3": [
+            361.94,
+            100.18
+          ],
+          "F4": [
+            152.12,
+            100.18
+          ],
+          "B2": [
+            447.88,
+            249.82
+          ],
+          "B3": [
+            447.88,
+            40.0
+          ],
+          "B4": [
+            238.06,
+            40.0
+          ],
+          "B1": [
+            238.06,
+            249.82
+          ]
+        },
+        "segments": [
+          {
+            "key": "B1B2",
+            "from": "B1",
+            "to": "B2",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "B1B4",
+            "from": "B1",
+            "to": "B4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "F1B1",
+            "from": "F1",
+            "to": "B1",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "F1F2",
+            "from": "F1",
+            "to": "F2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F2F3",
+            "from": "F2",
+            "to": "F3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F3F4",
+            "from": "F3",
+            "to": "F4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F4F1",
+            "from": "F4",
+            "to": "F1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F2B2",
+            "from": "F2",
+            "to": "B2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B2B3",
+            "from": "B2",
+            "to": "B3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F3B3",
+            "from": "F3",
+            "to": "B3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B3B4",
+            "from": "B3",
+            "to": "B4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F4B4",
+            "from": "F4",
+            "to": "B4",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "100 cm",
+            "target": "segment:F1F2"
+          },
+          {
+            "text": "100 cm",
+            "target": "segment:F4F1"
+          },
+          {
+            "text": "100 cm",
+            "target": "segment:F2B2"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "b10213af60bcc925692ec3343958a0dc62cbab75215d85de404f43bcc1ee8ce3",
-      "width": 940,
-      "height": 390
+      "sha256": "fda9720565236a72cc7d0ea4a482555f99b019fd34b8cd925e2ff236ba587673",
+      "width": 600,
+      "height": 398
     }
   ],
   "provenance": {
@@ -221,6 +489,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }
