@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l4-013",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "S1",
   "primary_outcome": "1.1",
-  "title": "Stratified response count",
+  "title": "Response totals across four levels",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A school samples 30 students from each of four levels. Response rates are 90%, 80%, 70% and 60% respectively. After removing 6 incomplete responses, how many complete responses remain? Enter the numerical value only."
+          "text": "A school samples 30 students from each of four levels. Response rates are 90%, 80%, 70% and 60% respectively. After 6 incomplete responses are removed from those received, what percentage of the students sampled gave a complete response? Enter the percentage without the % sign."
         }
       ],
       "marks": 4,
@@ -29,12 +29,20 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "84",
-        "canonical_latex": "84",
+        "canonical_answer": "70",
+        "canonical_latex": "70",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
-        "unit": null
+        "unit": {
+          "canonical": "%",
+          "accepted": [
+            "%",
+            "percent",
+            "per cent"
+          ],
+          "required": false
+        }
       },
       "hints": [
         {
@@ -42,7 +50,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate responses from each level."
+              "text": "Find the number of responses from each level, then the total."
             }
           ]
         },
@@ -51,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the four response counts, then remove six."
+              "text": "Remove the 6 incomplete responses, then compare the number that remain with the 120 students sampled."
             }
           ]
         }
@@ -61,8 +69,24 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
+              "type": "text",
+              "text": "Responses received: "
+            },
+            {
+              "type": "inline_math",
               "latex": "30(0.9+0.8+0.7+0.6)=90"
+            },
+            {
+              "type": "text",
+              "text": ". Complete responses: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "90-6=84"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -72,8 +96,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "90-6=84"
+              "type": "inline_math",
+              "latex": "\\frac{84}{120}\\times100=70"
             }
           ],
           "mark_type": "A",

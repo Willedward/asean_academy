@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l2-029",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G1",
   "primary_outcome": "1.5",
-  "title": "Rotational order of a non-square rectangle",
+  "title": "Parallelogram with four equal sides",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the order of rotational symmetry of a non-square rectangle."
+          "text": "Use this code: square = 1, non-square rectangle = 2, non-square rhombus = 3, other parallelogram = 4, kite = 5, trapezium = 6 (exactly one pair of parallel sides). A parallelogram has four equal sides but no right angles. Enter its code."
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "2",
-        "canonical_latex": "2",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Turn the rectangle about its centre."
+              "text": "Decide what having four equal sides makes a parallelogram."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "It matches after 180\u00b0 and again after 360\u00b0."
+              "text": "Then use the fact that it has no right angles to rule out one listed shape."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{order}=2"
+              "type": "text",
+              "text": "Four equal sides with no right angles give a non-square rhombus, so the code is 3."
             }
           ],
           "mark_type": "A",

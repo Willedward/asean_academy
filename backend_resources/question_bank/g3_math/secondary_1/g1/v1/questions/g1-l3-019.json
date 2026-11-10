@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l3-019",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G1",
   "primary_outcome": "1.4",
-  "title": "Rhombus diagonal angle",
+  "title": "Angle in a rhombus from its diagonals",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The diagonals of a rhombus intersect. Find the angle between them in degrees."
+          "text": "The diagonals of rhombus ABCD meet at O. Angle OAD = 27°. Find angle ODA in degrees."
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "90",
-        "canonical_latex": "90",
+        "canonical_answer": "63",
+        "canonical_latex": "63",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Perpendicular lines make four equal angles at their crossing point. Think about how those four angles share one complete turn."
+              "text": "The diagonals of a rhombus cross at right angles, so triangle AOD has a right angle at O."
             }
           ]
         }
@@ -61,8 +61,16 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=90^\\circ"
+              "type": "inline_math",
+              "latex": "\\angle AOD=90^\\circ"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\angle ODA=180^\\circ-90^\\circ-27^\\circ=63^\\circ"
             }
           ],
           "mark_type": "A",

@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l2-027 — Obtuse alternate angle
+## g1-l2-027 — Acute interior angle at the other line
 
 [Open this question in the HTML preview](index.html#g1-l2-027)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l2-029 — Rotational order of a non-square rectangle
+## g1-l2-029 — Parallelogram with four equal sides
 
 [Open this question in the HTML preview](index.html#g1-l2-029)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l3-030 — Regular polygon with a 24-degree exterior angle
+## g1-l3-030 — Regular polygon with a 40-degree exterior angle
 
 [Open this question in the HTML preview](index.html#g1-l3-030)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l2-031 — Bisecting a 126-degree angle
+## g1-l2-031 — Original angle from its bisected half
 
 [Open this question in the HTML preview](index.html#g1-l2-031)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l4-016 — Combining two constructed angles
+## g1-l4-016 — Repeated bisection of a constructed angle
 
 [Open this question in the HTML preview](index.html#g1-l4-016)
 

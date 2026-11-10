@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l4-016",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G1",
   "primary_outcome": "1.7",
-  "title": "Combining two constructed angles",
+  "title": "Repeated bisection of a constructed angle",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A 60° angle and a 45° angle are constructed adjacent to form one larger angle. Find the larger angle in degrees."
+          "text": "A 120° angle is constructed. It is bisected, and then one half is bisected again. Find the size of the smallest angle formed, in degrees."
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "105",
-        "canonical_latex": "105",
+        "canonical_answer": "30",
+        "canonical_latex": "30",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Keep the two angles adjacent and non-overlapping."
+              "text": "Each bisection halves the angle being bisected."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the two constructed measures."
+              "text": "Halve 120°, then halve the result."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "60^\\circ+45^\\circ=105^\\circ"
+              "type": "inline_math",
+              "latex": "120^\\circ\\div2\\div2=30^\\circ"
             }
           ],
           "mark_type": "A",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l5-004",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A school has 480 students. A pie chart shows 37.5% join sports clubs. A bar chart of these members shows football 54, badminton 46 and swimming x. A pictogram shows that 20% of swimming members compete for the school. If 16 swimmers compete, find x. Enter the numerical value only."
+          "text": "A school has 480 students. In a pie chart, sports clubs have a sector of 135°. A bar chart of these members shows football 54, badminton 46 and swimming x. A pictogram of the swimming members who compete has 4 icons, and each icon represents 4 students. What percentage of the swimming members compete? Enter the percentage without the % sign."
         }
       ],
       "marks": 5,
@@ -29,12 +29,20 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "80",
-        "canonical_latex": "80",
+        "canonical_answer": "20",
+        "canonical_latex": "20",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
-        "unit": null
+        "unit": {
+          "canonical": "%",
+          "accepted": [
+            "%",
+            "percent",
+            "per cent"
+          ],
+          "required": false
+        }
       },
       "hints": [
         {
@@ -42,7 +50,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the pictogram statement to recover the swimming membership."
+              "text": "First find the number of sports club members, then the value of x."
             }
           ]
         },
@@ -51,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Check that all sports bars sum to the pie-chart subtotal."
+              "text": "Use the bar-chart total to find x, then express the competing swimmers as a percentage of x."
             }
           ]
         }
@@ -61,8 +69,24 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "0.20x=16\\Rightarrow x=80"
+              "type": "text",
+              "text": "Sports club members: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{135}{360}\\times480=180"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=180-54-46=80"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -72,8 +96,16 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "0.375(480)=180"
+              "type": "text",
+              "text": "Competing swimmers: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4\\times4=16"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -83,8 +115,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "54+46+80=180"
+              "type": "inline_math",
+              "latex": "\\frac{16}{80}\\times100=20"
             }
           ],
           "mark_type": "A",

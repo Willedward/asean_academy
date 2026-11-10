@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-013 — Stratified response count
+## s1-l4-013 — Response totals across four levels
 
 [Open this question in the HTML preview](index.html#s1-l4-013)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-027 — Interpret a changing scale
+## s1-l3-027 — Count scale intervals
 
 [Open this question in the HTML preview](index.html#s1-l3-027)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-029 — Exact bus timetable counts
+## s1-l2-029 — Stop counts on a pie chart
 
 [Open this question in the HTML preview](index.html#s1-l2-029)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-028 — Show continuous sensor behaviour
+## s1-l3-028 — Reading a pressure sensor
 
 [Open this question in the HTML preview](index.html#s1-l3-028)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-015 — Composition with few categories
+## s1-l4-015 — Electricity mix for a school
 
 [Open this question in the HTML preview](index.html#s1-l4-015)
 
