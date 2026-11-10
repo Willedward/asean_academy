@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-lesson-08",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n5",
@@ -34,11 +34,11 @@
         },
         {
           "type": "display_math",
-          "latex": "8m^2+12m=4m(2m+3)"
+          "latex": "6k^2+9k=3k(2k+3)"
         },
         {
           "type": "text",
-          "text": "The greatest common factor gives a complete single-factor extraction. For the numerical part, use the greatest common divisor of the coefficients. For each variable, use the lowest exponent that appears in every term. A variable missing from one term is not common to all terms."
+          "text": "The highest common factor (HCF, also called the greatest common factor) gives a complete single-factor extraction. For the numerical part, use the HCF of the coefficients. For each variable, use the lowest exponent that appears in every term. A variable missing from one term is not common to all terms."
         }
       ]
     },
@@ -50,7 +50,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Factorise 14ab + 21a completely."
+          "text": "Factorise 15pq + 25p completely."
         }
       ],
       "steps": [
@@ -59,11 +59,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The greatest common numerical factor is 7 and both terms contain a."
+              "text": "The highest common numerical factor of 15 and 25 is 5, and both terms contain p."
             },
             {
               "type": "display_math",
-              "latex": "\\operatorname{GCF}=7a"
+              "latex": "\\operatorname{HCF}=5p"
             }
           ]
         },
@@ -72,11 +72,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide each term by 7a."
+              "text": "Divide each term by 5p."
             },
             {
               "type": "display_math",
-              "latex": "14ab\\div7a=2b,\\qquad 21a\\div7a=3"
+              "latex": "15pq\\div5p=3q,\\qquad 25p\\div5p=5"
             }
           ]
         },
@@ -85,16 +85,16 @@
           "content": [
             {
               "type": "text",
-              "text": "Place the common factor outside the bracket."
+              "text": "Write the HCF outside the bracket."
             },
             {
               "type": "display_math",
-              "latex": "14ab+21a=7a(2b+3)"
+              "latex": "15pq+25p=5p(3q+5)"
             }
           ]
         }
       ],
-      "verification_note": "Expanding 7a(2b + 3) gives 14ab + 21a, and 2b and 3 have no further common factor."
+      "verification_note": "Expanding 5p(3q + 5) gives 15pq + 25p, and 3q and 5 have no further common factor."
     },
     {
       "stable_key": "greatest-variable-factor",
@@ -104,11 +104,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Consider coefficients and variables separately. For 18x³y and 24x²y², the greatest numerical factor is 6. The lowest shared power of x is x² and the lowest shared power of y is y. Therefore the greatest common factor is 6x²y."
+          "text": "Consider coefficients and variables separately. For 18x³y and 24x²y², the highest common numerical factor is 6. The lowest shared power of x is x² and the lowest shared power of y is y. Therefore the HCF is 6x²y."
         },
         {
           "type": "display_math",
-          "latex": "\\gcd(18,24)=6,\\qquad \\min(x^3,x^2)=x^2,\\qquad \\min(y,y^2)=y"
+          "latex": "\\operatorname{HCF}(18,24)=6,\\qquad \\min(x^3,x^2)=x^2,\\qquad \\min(y,y^2)=y"
         },
         {
           "type": "text",
@@ -186,7 +186,7 @@
         },
         {
           "type": "text",
-          "text": "Then inspect the bracket for any factor common to every term. If one remains, the original extraction was not greatest. Factorisation is especially useful for revealing a shared structure, solving later equations and rewriting area expressions as products of possible side lengths."
+          "text": "Then inspect the bracket for any factor common to every term. If one remains, the factor you took out was not the highest common factor. Factorisation is especially useful for revealing a shared structure, solving later equations and rewriting area expressions as products of possible side lengths."
         }
       ]
     },
@@ -211,12 +211,14 @@
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
-        "checker_config": {}
+        "checker_config": {
+          "form": "factorised_completely"
+        }
       },
       "feedback": [
         {
           "type": "text",
-          "text": "The greatest common factor is 5, so divide both terms by 5 inside the bracket."
+          "text": "The highest common factor is 5, so divide both terms by 5 inside the bracket."
         }
       ]
     },
@@ -228,7 +230,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "For expansion, multiply the outside factor by every term. For factorisation, find the greatest common divisor of the coefficients and the lowest shared power of each variable, divide every term, and place the common factor outside. Re-expand to verify all signs and confirm that no common factor remains inside."
+          "text": "For expansion, multiply the outside factor by every term. For factorisation, find the HCF of the coefficients and the lowest shared power of each variable, divide every term, and place the common factor outside. Re-expand to verify all signs and confirm that no common factor remains inside."
         }
       ]
     }
