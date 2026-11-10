@@ -400,7 +400,7 @@ export function LivePracticeView({
 
       <div ref={feedbackRef} tabIndex={-1} className={focusRing}>
         {attempt?.format_error ? (
-          <Callout tone="amber" icon={AlertTriangle}>
+          <Callout role="status" tone="amber" icon={AlertTriangle}>
             <strong>Check your answer</strong>
             <span>
               An answer could not be read, so this check was not counted. Fix the
@@ -408,7 +408,7 @@ export function LivePracticeView({
             </span>
           </Callout>
         ) : attempt ? (
-          <Callout
+          <Callout role="status"
             tone={attempt.correct ? "success" : "danger"}
             icon={attempt.correct ? CheckCircle2 : AlertTriangle}
           >
@@ -474,7 +474,7 @@ export function LivePracticeView({
 
       {error ? (
         <div ref={errorRef} tabIndex={-1} className={focusRing}>
-          <Callout tone="danger" icon={AlertTriangle}>
+          <Callout role="status" tone="danger" icon={AlertTriangle}>
             <span>{error}</span>
           </Callout>
         </div>

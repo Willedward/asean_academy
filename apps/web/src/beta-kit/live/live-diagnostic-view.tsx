@@ -406,7 +406,7 @@ export function LiveDiagnosticPlayer({
       </div>
 
       {error ? (
-        <Callout tone="danger" icon={AlertTriangle}>
+        <Callout role="status" tone="danger" icon={AlertTriangle}>
           <strong>Your latest change was not saved.</strong>
           <span>{error}</span>
         </Callout>

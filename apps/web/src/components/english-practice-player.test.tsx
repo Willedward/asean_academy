@@ -657,7 +657,29 @@ describe("EnglishPracticePlayer", () => {
     expect(screen.getByRole("region", { name: "Paragraph 2" })).toBeVisible();
     expect(screen.getByRole("region", { name: "Paragraph 3" })).toBeVisible();
 
-    fireEvent.click(screen.getByRole("button", { name: "Go to paragraph 2" }));
+    const scrollIntoView = vi.fn();
+    Object.defineProperty(HTMLElement.prototype, "scrollIntoView", {
+      configurable: true,
+      value: scrollIntoView,
+    });
+    vi.stubGlobal(
+      "matchMedia",
+      vi.fn((query: string) => ({
+        matches: query === "(prefers-reduced-motion: reduce)",
+      })),
+    );
+    try {
+      fireEvent.click(screen.getByRole("button", { name: "Go to paragraph 2" }));
+    } finally {
+      vi.unstubAllGlobals();
+      delete (HTMLElement.prototype as { scrollIntoView?: unknown })
+        .scrollIntoView;
+    }
+    // Reduced motion: jump straight to the paragraph instead of smooth scrolling.
+    expect(scrollIntoView).toHaveBeenCalledWith({
+      behavior: "auto",
+      block: "center",
+    });
 
     expect(
       screen.getByRole("button", { name: "Go to paragraph 2" }),

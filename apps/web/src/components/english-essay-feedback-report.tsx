@@ -185,7 +185,7 @@ export function EnglishEssayFeedbackReport({
       </div>
 
       {error ? (
-        <Callout tone="amber" icon={AlertTriangle}>
+        <Callout role="status" tone="amber" icon={AlertTriangle}>
           <strong>Some feedback information is unavailable.</strong>
           <span>{error}</span>
         </Callout>
@@ -431,7 +431,7 @@ export function EnglishEssayFeedbackReport({
                     </Callout>
 
                     {report.usefulness_response ? (
-                      <Callout tone="success" icon={CheckCircle2}>
+                      <Callout role="status" tone="success" icon={CheckCircle2}>
                         <strong>Your response is saved permanently.</strong>
                         <span>
                           You rated this report “
