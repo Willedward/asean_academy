@@ -1,14 +1,14 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n7-l1-007",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.1",
-    "title": "Identifying a coefficient",
+    "title": "Equation or expression",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -21,15 +21,11 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Consider the equation shown."
+            "text": "Use code 1 for an equation and code 2 for an expression. Enter the code for the following."
           },
           {
             "type": "display_math",
-            "latex": "5p=35"
-          },
-          {
-            "type": "text",
-            "text": "State the coefficient of p."
+            "latex": "5p-3"
           }
         ],
         "marks": 1,
@@ -38,8 +34,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "5",
-          "canonical_latex": "5",
+          "canonical_answer": "2",
+          "canonical_latex": "2",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -51,7 +47,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The coefficient is the numerical factor multiplying p."
+                "text": "An equation has an equals sign."
               }
             ]
           },
@@ -60,7 +56,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Read the number immediately before p."
+                "text": "Look for an equals sign in what is shown."
               }
             ]
           }
@@ -70,8 +66,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{coefficient of }p=5"
+                "type": "text",
+                "text": "There is no equals sign, so it is an expression."
               }
             ],
             "mark_type": "A",
@@ -100,14 +96,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l1-008",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.1",
-    "title": "Reading the right-hand constant",
+    "title": "Checking a solution by substitution",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -120,15 +116,19 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Read the equation carefully."
+            "text": "Is "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=6"
+          },
+          {
+            "type": "text",
+            "text": " a solution of the equation? Enter 1 for yes and 0 for no."
           },
           {
             "type": "display_math",
             "latex": "4y-9=19"
-          },
-          {
-            "type": "text",
-            "text": "State the constant on the right-hand side."
           }
         ],
         "marks": 1,
@@ -137,8 +137,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "19",
-          "canonical_latex": "19",
+          "canonical_answer": "0",
+          "canonical_latex": "0",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -150,7 +150,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Look only at the side to the right of the equals sign."
+                "text": "Replace "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": " by 6 on the left-hand side."
               }
             ]
           },
@@ -159,7 +167,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find the equals sign and read the number to the right of it."
+                "text": "Work out "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4(6)-9"
+              },
+              {
+                "type": "text",
+                "text": " and compare it with 19."
               }
             ]
           }
@@ -169,8 +185,12 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{right-hand constant}=19"
+                "type": "inline_math",
+                "latex": "4(6)-9=15"
+              },
+              {
+                "type": "text",
+                "text": ", which is not 19, so the answer is 0."
               }
             ],
             "mark_type": "A",
@@ -317,14 +337,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l3-009",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.1",
-    "title": "Matching an expanded equation",
+    "title": "Testing candidate solutions",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -337,31 +357,19 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Expanding the bracket gives an equation of the form "
+            "text": "Exactly one of the values "
           },
           {
             "type": "inline_math",
-            "latex": "5x-k=30"
+            "latex": "x=7"
           },
           {
             "type": "text",
-            "text": "."
+            "text": ", 8, 9 and 10 satisfies the equation. Find that value by testing."
           },
           {
             "type": "display_math",
-            "latex": "5(x-1)=30"
-          },
-          {
-            "type": "text",
-            "text": "Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "k"
-          },
-          {
-            "type": "text",
-            "text": "."
+            "latex": "4(x-2)=28"
           }
         ],
         "marks": 3,
@@ -370,8 +378,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "5",
-          "canonical_latex": "5",
+          "canonical_answer": "9",
+          "canonical_latex": "9",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -383,7 +391,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Distribute 5 to both terms in the bracket."
+                "text": "A solution makes both sides equal."
               }
             ]
           },
@@ -392,7 +400,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply each term inside the bracket by 5."
+                "text": "Substitute each value in turn and work out the left-hand side."
               }
             ]
           }
@@ -402,8 +410,20 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "5(x-1)=5x-5"
+                "type": "text",
+                "text": "For "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=9"
+              },
+              {
+                "type": "text",
+                "text": ": "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4(9-2)"
               }
             ],
             "mark_type": "M",
@@ -413,8 +433,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "5x-5=30"
+                "type": "inline_math",
+                "latex": "=4(7)=28"
               }
             ],
             "mark_type": "M",
@@ -424,8 +444,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "k=5"
+                "type": "inline_math",
+                "latex": "x=9"
               }
             ],
             "mark_type": "A",
@@ -623,7 +643,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l4-005",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -724,8 +744,20 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "16=11+k"
+                "type": "text",
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=11"
+              },
+              {
+                "type": "text",
+                "text": ": "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2(11-3)=11+k"
               }
             ],
             "mark_type": "M",
@@ -735,8 +767,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "k=5"
+                "type": "inline_math",
+                "latex": "16=11+k"
               }
             ],
             "mark_type": "M",
@@ -746,8 +778,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{check: }16=16"
+                "type": "inline_math",
+                "latex": "k=5"
               }
             ],
             "mark_type": "A",
@@ -776,14 +808,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l5-001",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.1",
-    "title": "Parameter producing infinitely many solutions",
+    "title": "Parameter giving no solution",
     "difficulty": 5,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -796,7 +828,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Choose "
+            "text": "Find the value of "
           },
           {
             "type": "inline_math",
@@ -804,31 +836,11 @@
           },
           {
             "type": "text",
-            "text": " so that the equation is an identity, true for every real "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": "."
+            "text": " for which the equation has no solution."
           },
           {
             "type": "display_math",
-            "latex": "(k-2)x+6=4x+6"
-          },
-          {
-            "type": "text",
-            "text": "Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "k"
-          },
-          {
-            "type": "text",
-            "text": "."
+            "latex": "(k-2)x+5=4x+9"
           }
         ],
         "marks": 3,
@@ -850,7 +862,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "For an identity, corresponding coefficients and constants must match."
+                "text": "No solution means the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "-terms cancel and a false statement remains."
               }
             ]
           },
@@ -859,7 +879,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "In an identity, the x-coefficients on both sides must match."
+                "text": "Make the coefficients of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " on both sides equal, then check that the constants differ."
               }
             ]
           }
@@ -869,7 +897,7 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "k-2=4"
               }
             ],
@@ -880,8 +908,24 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "k=6"
+                "type": "text",
+                "text": "Then the left-hand side and the right-hand side differ by 4 for every value of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": ", so no value of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " works."
               }
             ],
             "mark_type": "M",
@@ -891,8 +935,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "(6-2)x+6=4x+6"
+                "type": "inline_math",
+                "latex": "k=6"
               }
             ],
             "mark_type": "A",
@@ -1280,7 +1324,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l3-011",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1355,15 +1399,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add 11 to both sides to obtain "
+                "text": "Add 11 to both sides and collect the "
               },
               {
                 "type": "inline_math",
-                "latex": "16=4x"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": "-terms on the right."
               }
             ]
           }
@@ -1373,8 +1417,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "16=4x"
+                "type": "inline_math",
+                "latex": "5+11=7x-3x"
               }
             ],
             "mark_type": "M",
@@ -1384,8 +1428,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "4x=16"
+                "type": "inline_math",
+                "latex": "16=4x"
               }
             ],
             "mark_type": "M",
@@ -1395,7 +1439,7 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "x=4"
               }
             ],
@@ -1425,7 +1469,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n7-l3-012",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1494,7 +1538,7 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "0.6x=8.4"
               }
             ],
@@ -1505,8 +1549,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=14"
+                "type": "inline_math",
+                "latex": "x=8.4\\div0.6"
               }
             ],
             "mark_type": "M",
@@ -1516,8 +1560,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "0.6(14)-2.4=6"
+                "type": "inline_math",
+                "latex": "x=14"
               }
             ],
             "mark_type": "A",
@@ -1546,7 +1590,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l4-006",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1566,14 +1610,6 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Expand the decimal multiplier, then collect x-terms."
-          },
-          {
-            "type": "display_math",
-            "latex": "0.5(6x-4)+3=2x+9"
-          },
-          {
-            "type": "text",
             "text": "Find the value of "
           },
           {
@@ -1583,6 +1619,10 @@
           {
             "type": "text",
             "text": "."
+          },
+          {
+            "type": "display_math",
+            "latex": "0.5(6x-4)+3=2x+9"
           }
         ],
         "marks": 3,
@@ -1604,15 +1644,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The left side simplifies to "
-              },
-              {
-                "type": "inline_math",
-                "latex": "3x+1"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Expand the bracket first, then collect the constants on the left."
               }
             ]
           },
@@ -1621,15 +1653,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract "
+                "text": "Bring the "
               },
               {
                 "type": "inline_math",
-                "latex": "2x"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": " and then subtract 1."
+                "text": "-terms to one side and the numbers to the other."
               }
             ]
           }
@@ -2863,7 +2895,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l2-015",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2883,7 +2915,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A liquid begins at 18°C and warms by 4°C each minute. It reaches 46°C after "
+            "text": "A liquid begins at 18°C and warms by 3°C each minute. It reaches 45°C after "
           },
           {
             "type": "inline_math",
@@ -2908,8 +2940,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "7",
-          "canonical_latex": "7",
+          "canonical_answer": "9",
+          "canonical_latex": "9",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2921,11 +2953,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Its temperature is "
+                "text": "Its temperature after "
               },
               {
                 "type": "inline_math",
-                "latex": "18+4x"
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " minutes is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "18+3x"
               },
               {
                 "type": "text",
@@ -2942,7 +2982,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "18+4x=46"
+                "latex": "18+3x=45"
               },
               {
                 "type": "text",
@@ -2956,8 +2996,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "18+4x=46"
+                "type": "inline_math",
+                "latex": "18+3x=45"
               }
             ],
             "mark_type": "M",
@@ -2967,8 +3007,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=7"
+                "type": "inline_math",
+                "latex": "x=9"
               }
             ],
             "mark_type": "A",
@@ -3142,14 +3182,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n7-l3-016",
     "bank_key": "g3-sec1-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N7",
     "primary_outcome": "7.4",
-    "title": "Comparing two savings accounts",
+    "title": "Two amounts with a known difference",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3162,23 +3202,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Lina has S$18 more than Amir. Together they have S$126. Let "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": " dollars be Amir's amount. Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": "."
+            "text": "Lina has S$18 more than Amir. Together they have S$126. Let Amir's amount be S$x. Find x. Enter only the number."
           }
         ],
         "marks": 3,
@@ -3217,15 +3241,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Form "
+                "text": "Add the two amounts in terms of "
               },
               {
                 "type": "inline_math",
-                "latex": "x+(x+18)=126"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": " and set the total equal to 126."
               }
             ]
           }

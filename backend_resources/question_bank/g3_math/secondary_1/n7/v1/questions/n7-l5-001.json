@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l5-001",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.1",
-  "title": "Parameter producing infinitely many solutions",
+  "title": "Parameter giving no solution",
   "difficulty": 5,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Choose "
+          "text": "Find the value of "
         },
         {
           "type": "inline_math",
@@ -28,31 +28,11 @@
         },
         {
           "type": "text",
-          "text": " so that the equation is an identity, true for every real "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "text": " for which the equation has no solution."
         },
         {
           "type": "display_math",
-          "latex": "(k-2)x+6=4x+6"
-        },
-        {
-          "type": "text",
-          "text": "Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "latex": "(k-2)x+5=4x+9"
         }
       ],
       "marks": 3,
@@ -74,7 +54,15 @@
           "content": [
             {
               "type": "text",
-              "text": "For an identity, corresponding coefficients and constants must match."
+              "text": "No solution means the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "-terms cancel and a false statement remains."
             }
           ]
         },
@@ -83,7 +71,15 @@
           "content": [
             {
               "type": "text",
-              "text": "In an identity, the x-coefficients on both sides must match."
+              "text": "Make the coefficients of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " on both sides equal, then check that the constants differ."
             }
           ]
         }
@@ -93,7 +89,7 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "k-2=4"
             }
           ],
@@ -104,8 +100,24 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k=6"
+              "type": "text",
+              "text": "Then the left-hand side and the right-hand side differ by 4 for every value of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": ", so no value of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " works."
             }
           ],
           "mark_type": "M",
@@ -115,8 +127,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "(6-2)x+6=4x+6"
+              "type": "inline_math",
+              "latex": "k=6"
             }
           ],
           "mark_type": "A",

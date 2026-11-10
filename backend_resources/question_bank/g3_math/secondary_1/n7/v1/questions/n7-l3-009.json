@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-009",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.1",
-  "title": "Matching an expanded equation",
+  "title": "Testing candidate solutions",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,31 +20,19 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Expanding the bracket gives an equation of the form "
+          "text": "Exactly one of the values "
         },
         {
           "type": "inline_math",
-          "latex": "5x-k=30"
+          "latex": "x=7"
         },
         {
           "type": "text",
-          "text": "."
+          "text": ", 8, 9 and 10 satisfies the equation. Find that value by testing."
         },
         {
           "type": "display_math",
-          "latex": "5(x-1)=30"
-        },
-        {
-          "type": "text",
-          "text": "Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "latex": "4(x-2)=28"
         }
       ],
       "marks": 3,
@@ -53,8 +41,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "5",
-        "canonical_latex": "5",
+        "canonical_answer": "9",
+        "canonical_latex": "9",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -66,7 +54,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Distribute 5 to both terms in the bracket."
+              "text": "A solution makes both sides equal."
             }
           ]
         },
@@ -75,7 +63,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply each term inside the bracket by 5."
+              "text": "Substitute each value in turn and work out the left-hand side."
             }
           ]
         }
@@ -85,8 +73,20 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "5(x-1)=5x-5"
+              "type": "text",
+              "text": "For "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=9"
+            },
+            {
+              "type": "text",
+              "text": ": "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4(9-2)"
             }
           ],
           "mark_type": "M",
@@ -96,8 +96,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "5x-5=30"
+              "type": "inline_math",
+              "latex": "=4(7)=28"
             }
           ],
           "mark_type": "M",
@@ -107,8 +107,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k=5"
+              "type": "inline_math",
+              "latex": "x=9"
             }
           ],
           "mark_type": "A",
