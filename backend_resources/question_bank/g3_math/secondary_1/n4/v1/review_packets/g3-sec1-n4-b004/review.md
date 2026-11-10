@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l2-026 — Average labelling rate
+## n4-l2-026 — Two machines working together
 
 [Open this question in the HTML preview](index.html#n4-l2-026)
 
@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l3-024 — Average data transfer rate
+## n4-l3-024 — Highest rate from a table
 
 [Open this question in the HTML preview](index.html#n4-l3-024)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l3-025 — Coach speed including a break
+## n4-l3-025 — Length of a stop
 
 [Open this question in the HTML preview](index.html#n4-l3-025)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l4-014 — Paper web distance per day
+## n4-l4-014 — Comparing two conveyor speeds
 
 [Open this question in the HTML preview](index.html#n4-l4-014)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l3-031 — Walking against a travelator
+## n4-l3-031 — Walking against a moving walkway
 
 [Open this question in the HTML preview](index.html#n4-l3-031)
 

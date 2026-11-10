@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n4-l3-024",
   "bank_key": "g3-sec1-n4-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N4",
   "primary_outcome": "4.1",
-  "title": "Average data transfer rate",
+  "title": "Highest rate from a table",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A server transfers 1.8 GB of data in the first 6 minutes and 3.2 GB in the next 10 minutes. Find its average transfer rate over the 16 minutes in gigabytes per minute."
+          "text": "A table shows the water used by a factory on three days: Monday 240 litres in 8 hours, Tuesday 300 litres in 12 hours, and Wednesday 280 litres in 7 hours. Find the highest rate of water use, in litres per hour."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "0.3125",
-        "canonical_latex": "0.3125\\text{ GB/min}",
+        "canonical_answer": "40",
+        "canonical_latex": "40",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Average rate uses the combined amount of data and the combined time."
+              "text": "Find the hourly rate for each day."
             }
           ]
         },
@@ -51,15 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add 1.8 GB and 3.2 GB, then divide by "
-            },
-            {
-              "type": "inline_math",
-              "latex": "6+10"
-            },
-            {
-              "type": "text",
-              "text": " minutes."
+              "text": "Divide the litres by the hours for each day, then compare."
             }
           ]
         }
@@ -69,8 +61,32 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Total data}=1.8+3.2=5\\text{ GB}"
+              "type": "text",
+              "text": "Rates: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "240\\div8=30"
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "inline_math",
+              "latex": "300\\div12=25"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "280\\div7=40"
+            },
+            {
+              "type": "text",
+              "text": " litres per hour."
             }
           ],
           "mark_type": "M",
@@ -80,8 +96,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Total time}=6+10=16\\text{ min}"
+              "type": "text",
+              "text": "The highest rate is on Wednesday."
             }
           ],
           "mark_type": "M",
@@ -91,8 +107,12 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{5}{16}=0.3125\\text{ GB/min}"
+              "type": "inline_math",
+              "latex": "40"
+            },
+            {
+              "type": "text",
+              "text": " litres per hour"
             }
           ],
           "mark_type": "A",
