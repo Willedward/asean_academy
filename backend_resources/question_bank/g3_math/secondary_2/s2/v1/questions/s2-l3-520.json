@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s2-l3-520",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -44,7 +44,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the complement: no 6 on either roll."
+              "text": "Draw a 6 by 6 possibility table of the two rolls."
             }
           ]
         },
@@ -53,15 +53,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\left(\\frac{5}{6}\\right)^{2}"
-            },
-            {
-              "type": "text",
-              "text": " from 1."
+              "text": "Count the cells in the row and the column for a 6, counting the (6, 6) cell only once."
             }
           ]
         }
@@ -71,8 +63,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "In the 36-cell table, the row for a first 6 has 6 cells and the column for a second 6 has 6 cells, with (6, 6) in both. "
+            },
+            {
               "type": "display_math",
-              "latex": "P=\\frac{11}{36}=\\frac{11}{36}"
+              "latex": "6+6-1=11"
             }
           ],
           "mark_type": "M",
@@ -83,7 +79,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{\\frac{11}{36}}"
+              "latex": "P=\\boxed{\\frac{11}{36}}"
             }
           ],
           "mark_type": "A",
