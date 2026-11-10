@@ -511,6 +511,12 @@ def sas_condition(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagra
 
 
 def shared_side(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """Triangles ABC and ADC on either side of their shared side AC.
+
+    With no inputs the sides carry only their equal-length ticks. With ``ab``, ``ad`` and ``dc``
+    expressions in x, the congruence AB = AD and BC = DC fixes x, and the figure labels those
+    three sides; the perimeter of ABCD is the value withheld.
+    """
     points = {"A": (0.0, 1.0), "C": (0.0, -0.72), "B": (-0.74, 0.28), "D": (0.74, 0.28)}
     figure = _Scene(points, max_width=340, max_height=320, top=44)
     figure.canvas.polygon(("A", "B", "C", "D"), role="figure")
@@ -526,20 +532,47 @@ def shared_side(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
     centre = figure.centre("ABCD")
     for name in "ABCD":
         figure.vertex_label(name, away_from=centre)
-    figure.omit_codes("1", "2", "3", "4")
+    if "ab" not in inputs:
+        figure.omit_codes("1", "2", "3", "4")
+        return figure.scene(
+            template="shared_side",
+            inputs=inputs,
+            kind="shared_side",
+            dimensions={"sides": "AB = AD and BC = DC, with AC shared"},
+            title="Triangles ABC and ADC sharing side AC",
+            alt_text=(
+                "Two triangles ABC and ADC, on either side of their shared side AC. AB and AD have "
+                "one tick, and BC and DC have two ticks."
+            ),
+            answers=answers,
+            words=TEST_NAMES,
+            extra={"answer_kind": "classification_code", "forbid_right_angle_marker": True},
+        )
+    ab, ad, dc = inputs["ab"], inputs["ad"], inputs["dc"]
+    x = _solve_equal(ab, ad)
+    long_side = ab["coefficient"] * x + ab["constant"]
+    short_side = dc["coefficient"] * x + dc["constant"]
+    _require(long_side > 0 and short_side > 0, "The expressions give an impossible side.")
+    perimeter = 2 * (long_side + short_side)
+    labels = {key: f"{_text(inputs[key])} cm" for key in ("ab", "ad", "dc")}
+    figure.length_label(labels["ab"], "A", "B", away_from=centre)
+    figure.length_label(labels["ad"], "A", "D", away_from=centre)
+    figure.length_label(labels["dc"], "D", "C", away_from=centre)
     return figure.scene(
         template="shared_side",
         inputs=inputs,
         kind="shared_side",
-        dimensions={"sides": "AB = AD and BC = DC, with AC shared"},
-        title="Triangles ABC and ADC sharing side AC",
+        dimensions={"AB": labels["ab"], "AD": labels["ad"], "DC": labels["dc"]},
+        title="Congruent triangles ABC and ADC sharing side AC",
         alt_text=(
-            "Two triangles ABC and ADC, on either side of their shared side AC. AB and AD have one "
-            "tick, and BC and DC have two ticks."
+            f"Two triangles ABC and ADC, on either side of their shared side AC. AB is marked "
+            f"{labels['ab']}, AD is marked {labels['ad']} and DC is marked {labels['dc']}. AB and "
+            "AD have one tick, and BC and DC have two ticks."
         ),
         answers=answers,
-        words=TEST_NAMES,
-        extra={"answer_kind": "classification_code", "forbid_right_angle_marker": True},
+        derived=[x, long_side, short_side, perimeter],
+        findings=_key_findings(perimeter, answers),
+        extra={"forbid_right_angle_marker": True},
     )
 
 
