@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l4-015",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.4",
-  "title": "Carry an intermediate calculator value",
+  "title": "Subtract from an unrounded value",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -23,7 +23,15 @@
     },
     {
       "type": "text",
-      "text": ". Use the unrounded value of B."
+      "text": ". Use the unrounded value of "
+    },
+    {
+      "type": "inline_math",
+      "latex": "B"
+    },
+    {
+      "type": "text",
+      "text": "."
     }
   ],
   "parts": [
@@ -37,7 +45,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "100\\frac{B-10}{B+10}"
+          "latex": "B-7.2^{2}"
         },
         {
           "type": "text",
@@ -50,8 +58,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_sf",
-        "canonical_answer": "31.9",
-        "canonical_latex": "31.9",
+        "canonical_answer": "-32.5",
+        "canonical_latex": "-32.5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 3,
@@ -63,7 +71,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Store B using the complete numerator and denominator."
+              "text": "Store "
+            },
+            {
+              "type": "inline_math",
+              "latex": "B"
+            },
+            {
+              "type": "text",
+              "text": " using the complete numerator and denominator."
             }
           ]
         },
@@ -72,7 +88,23 @@
           "content": [
             {
               "type": "text",
-              "text": "B≈19.36122117; substitute the stored value into the second expression."
+              "text": "Subtract "
+            },
+            {
+              "type": "inline_math",
+              "latex": "7.2^{2}"
+            },
+            {
+              "type": "text",
+              "text": " from the stored value of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "B"
+            },
+            {
+              "type": "text",
+              "text": " on your calculator."
             }
           ]
         }
@@ -82,7 +114,7 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "B=\\frac{\\sqrt{92.4}+6.15^{2}}{2.8-0.35}=19.361221"
             }
           ],
@@ -93,8 +125,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "100\\frac{B-10}{B+10}=31.882942"
+              "type": "inline_math",
+              "latex": "B-51.84=-32.478779"
             }
           ],
           "mark_type": "M",
@@ -105,7 +137,7 @@
           "content": [
             {
               "type": "text",
-              "text": "To 3 significant figures, the answer is 31.9."
+              "text": "To 3 significant figures, the answer is -32.5."
             }
           ],
           "mark_type": "A",

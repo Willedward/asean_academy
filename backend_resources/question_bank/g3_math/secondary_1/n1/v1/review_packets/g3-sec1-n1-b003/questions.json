@@ -123,14 +123,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l3-024",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.1",
-    "title": "Complete a product to a square",
+    "title": "Largest prime factor",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -143,23 +143,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the least positive integer "
-          },
-          {
-            "type": "inline_math",
-            "latex": "p"
-          },
-          {
-            "type": "text",
-            "text": " for which "
-          },
-          {
-            "type": "inline_math",
-            "latex": "1176p"
-          },
-          {
-            "type": "text",
-            "text": " is a perfect square."
+            "text": "Find the largest prime factor of 1176."
           }
         ],
         "marks": 2,
@@ -168,8 +152,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "6",
-          "canonical_latex": "6",
+          "canonical_answer": "7",
+          "canonical_latex": "7",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -181,7 +165,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write 1176 as a product of prime powers and identify odd exponents."
+                "text": "Write 1176 as a product of prime factors."
               }
             ]
           },
@@ -189,12 +173,8 @@
             "stage": 2,
             "content": [
               {
-                "type": "inline_math",
-                "latex": "1176=2^{3}\\times 3\\times 7^{2}"
-              },
-              {
                 "type": "text",
-                "text": "; one factor each of 2 and 3 completes the square."
+                "text": "Divide out powers of 2 and 3, then see what prime remains."
               }
             ]
           }
@@ -204,8 +184,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "1176=2^{3}\\times 3\\times 7^{2}"
+                "type": "inline_math",
+                "latex": "1176=2^{3}\\times3\\times7^{2}"
               }
             ],
             "mark_type": "M",
@@ -215,20 +195,8 @@
             "position": 2,
             "content": [
               {
-                "type": "inline_math",
-                "latex": "p=2\\times 3=6"
-              },
-              {
                 "type": "text",
-                "text": ", giving "
-              },
-              {
-                "type": "inline_math",
-                "latex": "1176p=84^{2}"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "The largest prime factor is 7."
               }
             ],
             "mark_type": "A",
@@ -257,14 +225,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l4-012",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.1",
-    "title": "Use divisibility and divisor count",
+    "title": "Smallest value with a divisibility condition",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -276,7 +244,7 @@
       },
       {
         "type": "inline_math",
-        "latex": "N=2^{a}\\times 3^{b}\\times 7"
+        "latex": "N=2^{a}\\times3^{b}\\times7"
       },
       {
         "type": "text",
@@ -304,7 +272,15 @@
       },
       {
         "type": "text",
-        "text": ". N is divisible by 216 and has exactly 64 positive factors."
+        "text": ". "
+      },
+      {
+        "type": "inline_math",
+        "latex": "N"
+      },
+      {
+        "type": "text",
+        "text": " is divisible by 216."
       }
     ],
     "parts": [
@@ -314,7 +290,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find N."
+            "text": "Find the smallest possible value of "
+          },
+          {
+            "type": "inline_math",
+            "latex": "N"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 2,
@@ -323,8 +307,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "24192",
-          "canonical_latex": "24192",
+          "canonical_answer": "3024",
+          "canonical_latex": "3024",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -336,11 +320,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the divisor count into "
+                "text": "Use divisibility by 216 to find the smallest values of "
               },
               {
                 "type": "inline_math",
-                "latex": "2(a+1)(b+1)=64"
+                "latex": "a"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b"
               },
               {
                 "type": "text",
@@ -353,23 +345,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Divisibility by "
+                "text": "Choose the smallest "
               },
               {
                 "type": "inline_math",
-                "latex": "216=2^{3}\\times 3^{3}"
+                "latex": "a"
               },
               {
                 "type": "text",
-                "text": " gives "
+                "text": " and "
               },
               {
                 "type": "inline_math",
-                "latex": "a, b\\ge 3"
+                "latex": "b"
               },
               {
                 "type": "text",
-                "text": "; combine this with "
+                "text": " that also satisfy "
               },
               {
                 "type": "inline_math",
@@ -388,15 +380,7 @@
             "content": [
               {
                 "type": "inline_math",
-                "latex": "(a+1)(b+1)=32"
-              },
-              {
-                "type": "text",
-                "text": "; the only ordered pair meeting the conditions is "
-              },
-              {
-                "type": "inline_math",
-                "latex": "8\\times 4"
+                "latex": "216=2^{3}\\times3^{3}"
               },
               {
                 "type": "text",
@@ -404,11 +388,35 @@
               },
               {
                 "type": "inline_math",
-                "latex": "a=7"
+                "latex": "a\\ge3"
               },
               {
                 "type": "text",
                 "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b\\ge3"
+              },
+              {
+                "type": "text",
+                "text": ". With "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a>b"
+              },
+              {
+                "type": "text",
+                "text": ", the smallest choice is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a=4"
+              },
+              {
+                "type": "text",
+                "text": ", "
               },
               {
                 "type": "inline_math",
@@ -426,8 +434,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "N=2^{7}\\times 3^{3}\\times 7=24192"
+                "type": "inline_math",
+                "latex": "N=2^{4}\\times3^{3}\\times7=3024"
               }
             ],
             "mark_type": "A",
@@ -456,7 +464,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l3-025",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -471,7 +479,7 @@
     "stem": [
       {
         "type": "text",
-        "text": "Two ribbons are 168 cm and 252 cm long. Each is cut completely into pieces of the same greatest possible integer length."
+        "text": "Two ribbons are 96 cm and 120 cm long. Each is cut completely into pieces of the same greatest possible integer length."
       }
     ],
     "parts": [
@@ -490,8 +498,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "5",
-          "canonical_latex": "5",
+          "canonical_answer": "9",
+          "canonical_latex": "9",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -522,8 +530,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{HCF}(168, 252)=84\\text{ cm}"
+                "type": "inline_math",
+                "latex": "\\text{HCF}(96,120)=24\\text{ cm}"
               }
             ],
             "mark_type": "M",
@@ -534,7 +542,7 @@
             "content": [
               {
                 "type": "inline_math",
-                "latex": "168\\div 84+252\\div 84=2+3=5"
+                "latex": "96\\div24+120\\div24=4+5=9"
               },
               {
                 "type": "text",
@@ -839,7 +847,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l4-014",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -870,7 +878,7 @@
       },
       {
         "type": "text",
-        "text": " of the remainder and has $80 left."
+        "text": " of the remainder and has S$80 left."
       }
     ],
     "parts": [
@@ -880,7 +888,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the amount of money at the start, in dollars."
+            "text": "Find the amount of money, in S$, at the start. Enter only the number."
           }
         ],
         "marks": 2,
@@ -938,7 +946,7 @@
             "content": [
               {
                 "type": "inline_math",
-                "latex": "(\\frac{2}{3})(\\frac{5}{7})=\\frac{10}{21}"
+                "latex": "(\\frac23)(\\frac57)=\\frac{10}{21}"
               },
               {
                 "type": "text",
@@ -953,15 +961,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Starting amount = "
+                "text": "Starting amount "
               },
               {
                 "type": "inline_math",
-                "latex": "80\\times\\frac{21}{10}"
+                "latex": "=80\\times\\frac{21}{10}="
               },
               {
                 "type": "text",
-                "text": "=$168."
+                "text": " S$168."
               }
             ],
             "mark_type": "A",
@@ -1314,14 +1322,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l4-015",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.4",
-    "title": "Carry an intermediate calculator value",
+    "title": "Subtract from an unrounded value",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -1337,7 +1345,15 @@
       },
       {
         "type": "text",
-        "text": ". Use the unrounded value of B."
+        "text": ". Use the unrounded value of "
+      },
+      {
+        "type": "inline_math",
+        "latex": "B"
+      },
+      {
+        "type": "text",
+        "text": "."
       }
     ],
     "parts": [
@@ -1351,7 +1367,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "100\\frac{B-10}{B+10}"
+            "latex": "B-7.2^{2}"
           },
           {
             "type": "text",
@@ -1364,8 +1380,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "rounded_sf",
-          "canonical_answer": "31.9",
-          "canonical_latex": "31.9",
+          "canonical_answer": "-32.5",
+          "canonical_latex": "-32.5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": 3,
@@ -1377,7 +1393,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Store B using the complete numerator and denominator."
+                "text": "Store "
+              },
+              {
+                "type": "inline_math",
+                "latex": "B"
+              },
+              {
+                "type": "text",
+                "text": " using the complete numerator and denominator."
               }
             ]
           },
@@ -1386,7 +1410,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "B≈19.36122117; substitute the stored value into the second expression."
+                "text": "Subtract "
+              },
+              {
+                "type": "inline_math",
+                "latex": "7.2^{2}"
+              },
+              {
+                "type": "text",
+                "text": " from the stored value of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "B"
+              },
+              {
+                "type": "text",
+                "text": " on your calculator."
               }
             ]
           }
@@ -1396,7 +1436,7 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "B=\\frac{\\sqrt{92.4}+6.15^{2}}{2.8-0.35}=19.361221"
               }
             ],
@@ -1407,8 +1447,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "100\\frac{B-10}{B+10}=31.882942"
+                "type": "inline_math",
+                "latex": "B-51.84=-32.478779"
               }
             ],
             "mark_type": "M",
@@ -1419,7 +1459,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "To 3 significant figures, the answer is 31.9."
+                "text": "To 3 significant figures, the answer is -32.5."
               }
             ],
             "mark_type": "A",
@@ -1552,14 +1592,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l3-027",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.5",
-    "title": "Track an elevator between levels",
+    "title": "Levels between start and finish",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1577,7 +1617,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "At which level does the elevator finish?"
+            "text": "How many levels apart are the start and finish on a vertical number line?"
           }
         ],
         "marks": 2,
@@ -1586,8 +1626,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "-6",
-          "canonical_latex": "-6",
+          "canonical_answer": "3",
+          "canonical_latex": "3",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1599,7 +1639,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Represent rising by addition and descending by subtraction."
+                "text": "Represent rising by moving up and descending by moving down."
               }
             ]
           },
@@ -1608,15 +1648,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Evaluate "
-              },
-              {
-                "type": "inline_math",
-                "latex": "-3+8-11"
-              },
-              {
-                "type": "text",
-                "text": " in chronological order."
+                "text": "Find the finish level, then count the levels between it and the start."
               }
             ]
           }
@@ -1626,8 +1658,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "-3+8=5"
+                "type": "inline_math",
+                "latex": "-3+8-11=-6"
               }
             ],
             "mark_type": "M",
@@ -1637,8 +1669,24 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "5-11=-6"
+                "type": "text",
+                "text": "Levels "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-3"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-6"
+              },
+              {
+                "type": "text",
+                "text": " are 3 levels apart."
               }
             ],
             "mark_type": "A",
@@ -1667,14 +1715,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l3-028",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.5",
-    "title": "Mean of signed measurements",
+    "title": "Spread of signed measurements",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1692,7 +1740,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find their mean."
+            "text": "Find the difference between the largest and the smallest measurement."
           }
         ],
         "marks": 2,
@@ -1701,8 +1749,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "0.5",
-          "canonical_latex": "0.5",
+          "canonical_answer": "5.6",
+          "canonical_latex": "5.6",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1714,7 +1762,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add all four signed values before dividing."
+                "text": "Locate the largest and smallest values on a number line."
               }
             ]
           },
@@ -1723,7 +1771,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add the four signed values, keeping track of the negatives, then divide the total by the number of measurements."
+                "text": "Subtract the smallest value from the largest value."
               }
             ]
           }
@@ -1733,8 +1781,24 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "-2.4+1.8-0.6+3.2=2.0"
+                "type": "text",
+                "text": "Largest "
+              },
+              {
+                "type": "inline_math",
+                "latex": "=3.2"
+              },
+              {
+                "type": "text",
+                "text": " and smallest "
+              },
+              {
+                "type": "inline_math",
+                "latex": "=-2.4"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -1744,16 +1808,8 @@
             "position": 2,
             "content": [
               {
-                "type": "text",
-                "text": "Mean = "
-              },
-              {
                 "type": "inline_math",
-                "latex": "2.0\\div 4=0.5"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "latex": "3.2-(-2.4)=5.6"
               }
             ],
             "mark_type": "A",
@@ -1782,14 +1838,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l5-004",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.5",
-    "title": "Divide a rational interval exactly",
+    "title": "Division points that are positive",
     "difficulty": 5,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1813,15 +1869,7 @@
       },
       {
         "type": "text",
-        "text": ". Point P is "
-      },
-      {
-        "type": "inline_math",
-        "latex": "\\frac{4}{7}"
-      },
-      {
-        "type": "text",
-        "text": " of the way from A to B."
+        "text": ". The segment AB is divided into 7 equal parts."
       }
     ],
     "parts": [
@@ -1831,7 +1879,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the exact coordinate of P."
+            "text": "How many of the division points between A and B have a positive coordinate?"
           }
         ],
         "marks": 2,
@@ -1840,8 +1888,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "5/84",
-          "canonical_latex": "\\frac5{84}",
+          "canonical_answer": "3",
+          "canonical_latex": "3",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1853,15 +1901,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use "
-              },
-              {
-                "type": "inline_math",
-                "latex": "P=A+(\\frac{4}{7})(B-A)"
-              },
-              {
-                "type": "text",
-                "text": ", keeping all values as fractions."
+                "text": "Find the length of AB, then the length of one part."
               }
             ]
           },
@@ -1869,20 +1909,8 @@
             "stage": 2,
             "content": [
               {
-                "type": "inline_math",
-                "latex": "B-A=\\frac{59}{12}"
-              },
-              {
                 "type": "text",
-                "text": "; multiply this directed distance by "
-              },
-              {
-                "type": "inline_math",
-                "latex": "\\frac{4}{7}"
-              },
-              {
-                "type": "text",
-                "text": " before adding A."
+                "text": "Add one part at a time to A, keeping all values as fractions with a common denominator, and see when the coordinate becomes positive."
               }
             ]
           }
@@ -1892,8 +1920,36 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "B-A=\\frac{13}{6}-(-\\frac{11}{4})=\\frac{59}{12}"
+                "type": "inline_math",
+                "latex": "AB=\\frac{59}{12}"
+              },
+              {
+                "type": "text",
+                "text": ", so one part is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{59}{84}"
+              },
+              {
+                "type": "text",
+                "text": ", and the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "k"
+              },
+              {
+                "type": "text",
+                "text": "th point is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{-231+59k}{84}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -1903,8 +1959,16 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "P=-\\frac{11}{4}+(\\frac{4}{7})(\\frac{59}{12})=-\\frac{231}{84}+\\frac{236}{84}=\\frac{5}{84}"
+                "type": "text",
+                "text": "This is positive for "
+              },
+              {
+                "type": "inline_math",
+                "latex": "k=4,5,6"
+              },
+              {
+                "type": "text",
+                "text": ", so there are 3 such points."
               }
             ],
             "mark_type": "A",
@@ -1933,14 +1997,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l2-031",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.6",
-    "title": "Arrange negative rational numbers",
+    "title": "Which inequality is true",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1953,40 +2017,45 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Write "
+            "text": "Enter 1 if "
           },
           {
             "type": "inline_math",
-            "latex": "-\\frac{9}{5}"
+            "latex": "-\\frac{9}{5}\\ge-1.72"
           },
           {
             "type": "text",
-            "text": ", -1.72, "
+            "text": " is true, 2 if "
           },
           {
             "type": "inline_math",
-            "latex": "-\\frac{13}{8}"
+            "latex": "-\\frac{13}{8}>-1.7"
           },
           {
             "type": "text",
-            "text": " and -1.7 in ascending order."
+            "text": " is true, or 3 if "
+          },
+          {
+            "type": "inline_math",
+            "latex": "-1.72>-1.7"
+          },
+          {
+            "type": "text",
+            "text": " is true. Exactly one statement is true."
           }
         ],
         "marks": 2,
         "primary_outcome": "1.6",
         "secondary_outcomes": [],
         "response": {
-          "type": "algebraic_expression",
-          "comparison_mode": "ordered_numeric_list",
-          "canonical_expression": "[-1.8,-1.72,-1.7,-1.625]",
-          "canonical_latex": "-\\frac95,\\;-1.72,\\;-1.7,\\;-\\frac{13}{8}",
-          "variables": [],
-          "domain_constraints": [],
-          "accepted_equivalents": [],
-          "checker_config": {
-            "order": "ascending",
-            "allow_equivalent_fractions": true
-          }
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "2",
+          "canonical_latex": "2",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
         },
         "hints": [
           {
@@ -1994,7 +2063,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Convert the fractions to terminating decimals."
+                "text": "Convert the fractions to decimals."
               }
             ]
           },
@@ -2002,8 +2071,19 @@
             "stage": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Compare the two numbers in each statement using a number line."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
                 "type": "inline_math",
-                "latex": "-\\frac{9}{5}=-1.8"
+                "latex": "-\\frac95=-1.8"
               },
               {
                 "type": "text",
@@ -2015,18 +2095,7 @@
               },
               {
                 "type": "text",
-                "text": "; place the most negative number first."
-              }
-            ]
-          }
-        ],
-        "solution": [
-          {
-            "position": 1,
-            "content": [
-              {
-                "type": "text",
-                "text": "The decimal values are -1.8, -1.72, -1.625 and -1.7."
+                "text": "; compare each pair."
               }
             ],
             "mark_type": "M",
@@ -2037,23 +2106,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Ascending order: "
+                "text": "Only "
               },
               {
                 "type": "inline_math",
-                "latex": "-\\frac{9}{5}"
+                "latex": "-1.625>-1.7"
               },
               {
                 "type": "text",
-                "text": ", -1.72, -1.7, "
-              },
-              {
-                "type": "inline_math",
-                "latex": "-\\frac{13}{8}"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": " is true, so the code is 2."
               }
             ],
             "mark_type": "A",
@@ -2082,14 +2143,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l3-029",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.6",
-    "title": "List integers inside rational bounds",
+    "title": "Integers between given bounds",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2123,7 +2184,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "-\\frac{5}{2}\\le\\frac{k}{3}<\\frac{4}{3}"
+            "latex": "-\\frac{15}{2}\\le k<4"
           },
           {
             "type": "text",
@@ -2154,7 +2215,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply every part by 3; the inequality directions remain unchanged."
+                "text": "Convert "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-\\frac{15}{2}"
+              },
+              {
+                "type": "text",
+                "text": " to a decimal."
               }
             ]
           },
@@ -2163,15 +2232,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The new bounds are "
-              },
-              {
-                "type": "inline_math",
-                "latex": "-\\frac{15}{2}\\le k<4"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Note which endpoint is included, then list the integers."
               }
             ]
           }
@@ -2181,8 +2242,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "-7.5\\le k<4"
+                "type": "inline_math",
+                "latex": "-\\frac{15}{2}=-7.5"
               }
             ],
             "mark_type": "M",
@@ -2197,7 +2258,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "k=-7,-6,-5,-4,-3,-2,-1, 0, 1, 2, 3"
+                "latex": "k=-7,-6,-5,-4,-3,-2,-1,0,1,2,3"
               },
               {
                 "type": "text",
@@ -2378,14 +2439,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l5-005",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.6",
-    "title": "Solve a compound rational inequality",
+    "title": "Sum of integers between bounds",
     "difficulty": 5,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2407,7 +2468,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "List all possible values of "
+            "text": "Find the sum of all integers "
           },
           {
             "type": "inline_math",
@@ -2415,11 +2476,11 @@
           },
           {
             "type": "text",
-            "text": " if "
+            "text": " satisfying "
           },
           {
             "type": "inline_math",
-            "latex": "-\\frac{11}{6}<\\frac{2n-1}{5}\\le\\frac{7}{10}"
+            "latex": "-\\frac{49}{12}<n\\le\\frac{9}{4}"
           },
           {
             "type": "text",
@@ -2430,19 +2491,14 @@
         "primary_outcome": "1.6",
         "secondary_outcomes": [],
         "response": {
-          "type": "algebraic_expression",
-          "comparison_mode": "ordered_numeric_list",
-          "canonical_expression": "[-4,-3,-2,-1,0,1,2]",
-          "canonical_latex": "-4,\\;-3,\\;-2,\\;-1,\\;0,\\;1,\\;2",
-          "variables": [
-            "n"
-          ],
-          "domain_constraints": [],
-          "accepted_equivalents": [],
-          "checker_config": {
-            "order": "ascending",
-            "allow_equivalent_fractions": true
-          }
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "-7",
+          "canonical_latex": "-7",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
         },
         "hints": [
           {
@@ -2450,7 +2506,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply all parts by 5, then add 1 before dividing by 2."
+                "text": "Convert the bounds to decimals."
               }
             ]
           },
@@ -2459,15 +2515,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The resulting bounds are "
-              },
-              {
-                "type": "inline_math",
-                "latex": "-\\frac{49}{12}<n\\le\\frac{9}{4}"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "List the integers between the bounds, then add them."
               }
             ]
           }
@@ -2478,15 +2526,23 @@
             "content": [
               {
                 "type": "inline_math",
-                "latex": "-\\frac{55}{6}<2n-1\\le\\frac{7}{2}"
+                "latex": "-\\frac{49}{12}\\approx-4.08"
               },
               {
                 "type": "text",
-                "text": ", hence "
+                "text": " and "
               },
               {
                 "type": "inline_math",
-                "latex": "-\\frac{49}{6}<2n\\le\\frac{9}{2}"
+                "latex": "\\frac94=2.25"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "n=-4,-3,-2,-1,0,1,2"
               },
               {
                 "type": "text",
@@ -2500,16 +2556,12 @@
             "position": 2,
             "content": [
               {
-                "type": "inline_math",
-                "latex": "-\\frac{49}{12}<n\\le\\frac{9}{4}"
-              },
-              {
                 "type": "text",
-                "text": ", so "
+                "text": "The sum is "
               },
               {
                 "type": "inline_math",
-                "latex": "n=-4,-3,-2,-1, 0, 1, 2"
+                "latex": "-7"
               },
               {
                 "type": "text",
@@ -2542,24 +2594,19 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l3-031",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.7",
-    "title": "Estimate using one significant figure",
+    "title": "Estimate a root and a power",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [
-      {
-        "type": "text",
-        "text": "Round every given number to 1 significant figure before calculating."
-      }
-    ],
+    "stem": [],
     "parts": [
       {
         "position": 1,
@@ -2571,11 +2618,11 @@
           },
           {
             "type": "inline_math",
-            "latex": "\\frac{398\\times 0.0204}{1.98}"
+            "latex": "\\sqrt{99.2}+4.97^{2}"
           },
           {
             "type": "text",
-            "text": "."
+            "text": " by rounding each number to 1 significant figure before calculating."
           }
         ],
         "marks": 2,
@@ -2584,8 +2631,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "4",
-          "canonical_latex": "4",
+          "canonical_answer": "35",
+          "canonical_latex": "35",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2597,7 +2644,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Round 398, 0.0204 and 1.98 separately."
+                "text": "Round each number to 1 significant figure."
               }
             ]
           },
@@ -2606,7 +2653,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use 398≈400, 0.0204≈0.02 and 1.98≈2."
+                "text": "Use 99.2≈100 and 4.97≈5."
               }
             ]
           }
@@ -2616,8 +2663,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "(400\\times 0.02)\\div 2"
+                "type": "inline_math",
+                "latex": "\\sqrt{100}+5^{2}"
               }
             ],
             "mark_type": "M",
@@ -2627,8 +2674,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "8\\div 2=4"
+                "type": "inline_math",
+                "latex": "10+25=35"
               }
             ],
             "mark_type": "A",
@@ -2657,14 +2704,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l4-016",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.7",
-    "title": "Upper bound of a product",
+    "title": "Estimate and accurate value of a product",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2676,7 +2723,7 @@
       },
       {
         "type": "text",
-        "text": " correct to 1 decimal place and "
+        "text": " and "
       },
       {
         "type": "inline_math",
@@ -2684,7 +2731,7 @@
       },
       {
         "type": "text",
-        "text": " correct to 2 decimal places. Both values are positive."
+        "text": "."
       }
     ],
     "parts": [
@@ -2694,7 +2741,31 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the upper bound of ab."
+            "text": "Find the difference between "
+          },
+          {
+            "type": "inline_math",
+            "latex": "ab"
+          },
+          {
+            "type": "text",
+            "text": " rounded to 1 significant figure and the estimate obtained by rounding "
+          },
+          {
+            "type": "inline_math",
+            "latex": "a"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "b"
+          },
+          {
+            "type": "text",
+            "text": " each to 1 significant figure before multiplying."
           }
         ],
         "marks": 2,
@@ -2703,8 +2774,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "40.77375",
-          "canonical_latex": "40.77375",
+          "canonical_answer": "10",
+          "canonical_latex": "10",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2716,7 +2787,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "For a product of positive quantities, multiply their upper bounds."
+                "text": "Find the estimate and the accurate product separately."
               }
             ]
           },
@@ -2725,7 +2796,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "The upper bounds are 12.45 and 3.275."
+                "text": "Round "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b"
+              },
+              {
+                "type": "text",
+                "text": " to 1 s.f. and multiply; then calculate "
+              },
+              {
+                "type": "inline_math",
+                "latex": "ab"
+              },
+              {
+                "type": "text",
+                "text": " exactly and round it to 1 s.f."
               }
             ]
           }
@@ -2736,11 +2831,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Upper bound = "
+                "text": "Estimate "
               },
               {
                 "type": "inline_math",
-                "latex": "12.45\\times 3.275"
+                "latex": "=10\\times3=30"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "ab=40.548"
+              },
+              {
+                "type": "text",
+                "text": ", which is 40 to 1 s.f."
               }
             ],
             "mark_type": "M",
@@ -2750,8 +2857,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "12.45\\times 3.275=40.77375"
+                "type": "inline_math",
+                "latex": "40-30=10"
               }
             ],
             "mark_type": "A",
