@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l3-523",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "At midpoints 10, 20 and 30, the class frequencies are 6, "
+          "text": "At midpoints 10, 20 and 30, the class frequencies are 2, "
         },
         {
           "type": "inline_math",
@@ -28,7 +28,7 @@
         },
         {
           "type": "text",
-          "text": " and 18. The estimated mean is 24. Determine the central frequency "
+          "text": " and 10. The estimated mean is 24. Determine the central frequency "
         },
         {
           "type": "inline_math",
@@ -45,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "6",
-        "canonical_latex": "6",
+        "canonical_answer": "8",
+        "canonical_latex": "8",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -75,15 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
+              "text": "Multiply both sides by the total frequency before collecting the "
             },
             {
               "type": "inline_math",
-              "latex": "\\frac{10(6)+20f+30(18)}{6+f+18}=24"
+              "latex": "f"
             },
             {
               "type": "text",
-              "text": "."
+              "text": " terms."
             }
           ]
         }
@@ -94,11 +94,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Form the equation. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{60+20f+540}{6+f+18}=24\\Rightarrow f=6"
+              "latex": "\\frac{10(2)+20f+30(10)}{2+f+10}=24\\Rightarrow 320+20f=288+24f"
             }
           ],
           "mark_type": "M",
@@ -109,11 +109,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "6"
+              "latex": "4f=32,\\ f=8"
             }
           ],
           "mark_type": "A",

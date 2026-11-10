@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 4,
+  "revision": 5,
   "stable_key": "s1-l2-529",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.7",
-  "title": "Displayed bar increase",
+  "title": "Apparent increase in shop sales",
   "difficulty": 2,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -39,7 +39,7 @@
         "type": "numeric",
         "comparison_mode": "exact_numeric",
         "canonical_answer": "100",
-        "canonical_latex": "100\\%",
+        "canonical_latex": "100",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -84,7 +84,7 @@
             },
             {
               "type": "text",
-              "text": "."
+              "text": ". Compare the increase with the first visible height."
             }
           ]
         }
@@ -95,11 +95,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Measure heights from the truncated baseline. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{(125-105)-(115-105)}{115-105}\\times100=100"
+              "latex": "\\frac{(125-105)-(115-105)}{115-105}\\times100=\\frac{10}{10}\\times100"
             }
           ],
           "mark_type": "M",
@@ -110,7 +110,7 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "So the apparent increase is "
             },
             {
               "type": "display_math",
@@ -129,8 +129,8 @@
       "asset_key": "s1-l2-529-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l2-529-diagram-r4.svg",
-      "alt_text": "Bar chart with First week: 115, Second week: 125.",
+      "path": "assets/s1-l2-529-diagram-r5.svg",
+      "alt_text": "Bar chart with First: 115, Second: 125.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "bar_chart",
@@ -140,8 +140,8 @@
         "inputs": {
           "title": "Weekly sales",
           "categories": [
-            "First week",
-            "Second week"
+            "First",
+            "Second"
           ],
           "values": [
             115,
@@ -149,7 +149,7 @@
           ],
           "y_min": 105,
           "y_max": 125,
-          "tick_step": 10,
+          "tick_step": 5,
           "y_label": "Sales",
           "forbidden_visible_labels": [
             "100"
@@ -194,11 +194,25 @@
             "label": "105"
           },
           {
+            "key": "y:110",
+            "axis": "y",
+            "value": "110",
+            "position": "315",
+            "label": "110"
+          },
+          {
             "key": "y:115",
             "axis": "y",
             "value": "115",
             "position": "245",
             "label": "115"
+          },
+          {
+            "key": "y:120",
+            "axis": "y",
+            "value": "120",
+            "position": "175",
+            "label": "120"
           },
           {
             "key": "y:125",
@@ -208,18 +222,18 @@
             "label": "125"
           },
           {
-            "key": "x:First week",
+            "key": "x:First",
             "axis": "x",
-            "value": "First week",
+            "value": "First",
             "position": "237.5",
-            "label": "First week"
+            "label": "First"
           },
           {
-            "key": "x:Second week",
+            "key": "x:Second",
             "axis": "x",
-            "value": "Second week",
+            "value": "Second",
             "position": "532.5",
-            "label": "Second week"
+            "label": "Second"
           }
         ],
         "forbidden_visible_labels": [
@@ -229,10 +243,10 @@
         "axis": {
           "y_min": 105.0,
           "y_max": 125.0,
-          "tick_step": 10.0
+          "tick_step": 5.0
         }
       },
-      "sha256": "181274b8a9e2a568255da08db770878cc70357614bf1778120d876b95c897386",
+      "sha256": "b4ef1c8361d679eec47ed63733ecf92f5b20ad7d0b8b219a6927b042d674db9e",
       "width": 720,
       "height": 480
     }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-528",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The vertical axis of a bar chart is cut off at 125. The first bar reaches 170 and the second reaches 197. The difference between their displayed heights is what percentage of the first bar's displayed height?"
+          "text": "The vertical axis of a bar chart is cut off at 125. The first bar reaches 170 and the second reaches 215. The difference between their displayed heights is what percentage of the first bar's displayed height?"
         }
       ],
       "marks": 3,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "60",
-        "canonical_latex": "60\\%",
+        "canonical_answer": "100",
+        "canonical_latex": "100",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -68,7 +68,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The first displayed height is 45, and the difference between displayed heights is 27."
+              "text": "The visible heights are "
+            },
+            {
+              "type": "inline_math",
+              "latex": "170-125"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "215-125"
+            },
+            {
+              "type": "text",
+              "text": ". Compare the increase with the first visible height."
             }
           ]
         }
@@ -79,11 +95,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Measure heights from the truncated baseline. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{197-170}{170-125}\\times100=60"
+              "latex": "\\frac{(215-125)-(170-125)}{170-125}\\times100=\\frac{45}{45}\\times100"
             }
           ],
           "mark_type": "M",
@@ -94,11 +110,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "So the apparent increase is "
             },
             {
               "type": "display_math",
-              "latex": "60\\%"
+              "latex": "100\\%"
             }
           ],
           "mark_type": "A",
@@ -113,8 +129,8 @@
       "asset_key": "s1-l3-528-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l3-528-diagram-r2.svg",
-      "alt_text": "Bar chart with First: 170, Second: 197.",
+      "path": "assets/s1-l3-528-diagram-r3.svg",
+      "alt_text": "Bar chart with First: 170, Second: 215.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "bar_chart",
@@ -129,14 +145,14 @@
           ],
           "values": [
             170,
-            197
+            215
           ],
           "y_min": 125,
-          "y_max": 205,
+          "y_max": 215,
           "tick_step": 10,
           "y_label": "Value",
           "forbidden_visible_labels": [
-            "60"
+            "100"
           ]
         },
         "viewbox": [
@@ -151,21 +167,21 @@
             "tag": "rect",
             "geometry": {
               "x": "149",
-              "y": "227.5",
+              "y": "245",
               "width": "177",
-              "height": "157.5"
+              "height": "140"
             }
           },
           {
             "key": "bar-1",
             "kind": "bar",
-            "value": "197",
+            "value": "215",
             "tag": "rect",
             "geometry": {
               "x": "444",
-              "y": "133",
+              "y": "105",
               "width": "177",
-              "height": "252"
+              "height": "280"
             }
           }
         ],
@@ -181,57 +197,64 @@
             "key": "y:135",
             "axis": "y",
             "value": "135",
-            "position": "350",
+            "position": "353.888889",
             "label": "135"
           },
           {
             "key": "y:145",
             "axis": "y",
             "value": "145",
-            "position": "315",
+            "position": "322.777778",
             "label": "145"
           },
           {
             "key": "y:155",
             "axis": "y",
             "value": "155",
-            "position": "280",
+            "position": "291.666667",
             "label": "155"
           },
           {
             "key": "y:165",
             "axis": "y",
             "value": "165",
-            "position": "245",
+            "position": "260.555556",
             "label": "165"
           },
           {
             "key": "y:175",
             "axis": "y",
             "value": "175",
-            "position": "210",
+            "position": "229.444444",
             "label": "175"
           },
           {
             "key": "y:185",
             "axis": "y",
             "value": "185",
-            "position": "175",
+            "position": "198.333333",
             "label": "185"
           },
           {
             "key": "y:195",
             "axis": "y",
             "value": "195",
-            "position": "140",
+            "position": "167.222222",
             "label": "195"
           },
           {
             "key": "y:205",
             "axis": "y",
             "value": "205",
-            "position": "105",
+            "position": "136.111111",
             "label": "205"
+          },
+          {
+            "key": "y:215",
+            "axis": "y",
+            "value": "215",
+            "position": "105",
+            "label": "215"
           },
           {
             "key": "x:First",
@@ -249,16 +272,16 @@
           }
         ],
         "forbidden_visible_labels": [
-          "60"
+          "100"
         ],
         "min_phone_font_px": 12.43,
         "axis": {
           "y_min": 125.0,
-          "y_max": 205.0,
+          "y_max": 215.0,
           "tick_step": 10.0
         }
       },
-      "sha256": "0cb908f51027c2360099c4bbbf623b079c5d913b24e8bf5c55c957e6fdce02fb",
+      "sha256": "2715954ea49fe5b28deefef50677bc766f608cc7e6c8a965c154487deaeb5b48",
       "width": 720,
       "height": 480
     }

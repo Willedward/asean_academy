@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l1-516",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -21,7 +21,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two grouped classes have midpoints 5 and 15, and both contain 5 values. Calculate the estimated mean."
+            "text": "Grouped data have two classes with midpoints 12 and 18, and both contain 5 values. Calculate the estimated mean."
           }
         ],
         "marks": 1,
@@ -30,8 +30,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "10",
-          "canonical_latex": "10",
+          "canonical_answer": "15",
+          "canonical_latex": "15",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -52,7 +52,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add the products and divide by the total frequency."
+                "text": "Add the products and divide by the total frequency "
+              },
+              {
+                "type": "inline_math",
+                "latex": "10"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -63,7 +71,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\bar x\\approx\\frac{5(5)+15(5)}{10}=10"
+                "latex": "\\bar x\\approx\\frac{12(5)+18(5)}{10}=\\frac{150}{10}=15"
               }
             ],
             "mark_type": "A",
@@ -92,7 +100,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l2-526",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -112,7 +120,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A grouped table has midpoints 5, 15 and 25. The outer classes each have frequency 7 and the middle class has frequency 9. Find the estimated mean."
+            "text": "A grouped table has midpoints 5, 15 and 25. The frequencies of the three classes are 7, 9 and 4. Find the estimated mean."
           }
         ],
         "marks": 2,
@@ -121,8 +129,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "15.0",
-          "canonical_latex": "15.0",
+          "canonical_answer": "13.5",
+          "canonical_latex": "13.5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -134,7 +142,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Form the products midpoint × frequency for all classes."
+                "text": "Multiply each midpoint by its frequency."
               }
             ]
           },
@@ -143,7 +151,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Divide the sum of products by total frequency 23."
+                "text": "Add the products, then divide by the total frequency "
+              },
+              {
+                "type": "inline_math",
+                "latex": "20"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -154,11 +170,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Multiply midpoints by frequencies and add. "
               },
               {
                 "type": "display_math",
-                "latex": "\\bar x\\approx\\frac{5(7)+15(9)+25(7)}{23}=15"
+                "latex": "5(7)+15(9)+25(4)=270"
               }
             ],
             "mark_type": "M",
@@ -169,11 +185,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "Divide by the total frequency "
+              },
+              {
+                "type": "inline_math",
+                "latex": "20"
+              },
+              {
+                "type": "text",
+                "text": ": "
               },
               {
                 "type": "display_math",
-                "latex": "15.0"
+                "latex": "\\bar x\\approx13.5"
               }
             ],
             "mark_type": "A",
@@ -202,7 +226,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l3-523",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -222,7 +246,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "At midpoints 10, 20 and 30, the class frequencies are 6, "
+            "text": "At midpoints 10, 20 and 30, the class frequencies are 2, "
           },
           {
             "type": "inline_math",
@@ -230,7 +254,7 @@
           },
           {
             "type": "text",
-            "text": " and 18. The estimated mean is 24. Determine the central frequency "
+            "text": " and 10. The estimated mean is 24. Determine the central frequency "
           },
           {
             "type": "inline_math",
@@ -247,8 +271,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "6",
-          "canonical_latex": "6",
+          "canonical_answer": "8",
+          "canonical_latex": "8",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -277,15 +301,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
+                "text": "Multiply both sides by the total frequency before collecting the "
               },
               {
                 "type": "inline_math",
-                "latex": "\\frac{10(6)+20f+30(18)}{6+f+18}=24"
+                "latex": "f"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": " terms."
               }
             ]
           }
@@ -296,11 +320,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Form the equation. "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{60+20f+540}{6+f+18}=24\\Rightarrow f=6"
+                "latex": "\\frac{10(2)+20f+30(10)}{2+f+10}=24\\Rightarrow 320+20f=288+24f"
               }
             ],
             "mark_type": "M",
@@ -311,11 +335,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "6"
+                "latex": "4f=32,\\ f=8"
               }
             ],
             "mark_type": "A",
@@ -344,7 +368,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l4-514",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -415,11 +439,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Bar area gives frequency, so multiply width by density for each class. "
               },
               {
                 "type": "display_math",
-                "latex": "5(5)+10(4)=65"
+                "latex": "5(5)+10(4)"
               }
             ],
             "mark_type": "M",
@@ -430,7 +454,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "The total frequency is "
               },
               {
                 "type": "display_math",
@@ -449,7 +473,7 @@
         "asset_key": "s1-l4-514-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l4-514-diagram-r3.svg",
+        "path": "assets/s1-l4-514-diagram-r4.svg",
         "alt_text": "Histogram with 2 classes; density values 5, 4.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -608,7 +632,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l1-517",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -637,7 +661,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A dot diagram represents 6, 8, 9, 8, 10, 8 and 7. Count the dots aligned above the value 8."
+            "text": "Use the dot diagram. How many dots are above the value 8?"
           }
         ],
         "marks": 1,
@@ -668,7 +692,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Mark each occurrence of 8 in the data list."
+                "text": "Count only the dots directly above the value 8."
               }
             ]
           }
@@ -694,7 +718,7 @@
         "asset_key": "s1-l1-517-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l1-517-diagram-r3.svg",
+        "path": "assets/s1-l1-517-diagram-r4.svg",
         "alt_text": "Dot diagram of 6, 8, 9, 8, 10, 8, 7.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -865,14 +889,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l2-527",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.5",
-    "title": "Extreme difference on an 80s stem",
+    "title": "Spread of the 80s row",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -894,7 +918,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "In the row 8 | 1 3 4 7 8, the entry 8|1 represents 81. Find the difference between the greatest and least represented values."
+            "text": "Use the stem-and-leaf diagram. Find the difference between the greatest and least values."
           }
         ],
         "marks": 2,
@@ -903,8 +927,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "7",
-          "canonical_latex": "7",
+          "canonical_answer": "6",
+          "canonical_latex": "6",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -925,7 +949,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract the value represented by the first leaf from the value represented by the last leaf."
+                "text": "Read the smallest and largest values from the diagram, using the key, then subtract."
               }
             ]
           }
@@ -936,11 +960,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Read the smallest and largest values. "
               },
               {
                 "type": "display_math",
-                "latex": "(88)-(81)=7"
+                "latex": "89-83"
               }
             ],
             "mark_type": "M",
@@ -951,11 +975,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "The answer is "
               },
               {
                 "type": "display_math",
-                "latex": "7"
+                "latex": "6"
               }
             ],
             "mark_type": "A",
@@ -970,8 +994,8 @@
         "asset_key": "s1-l2-527-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l2-527-diagram-r3.svg",
-        "alt_text": "Stem-and-leaf diagram. stem 8, leaves 1 3 4 7 8. Key: 8 | 1 means 81.",
+        "path": "assets/s1-l2-527-diagram-r4.svg",
+        "alt_text": "Stem-and-leaf diagram. stem 8, leaves 3 3 6 9 9. Key: 8|3 means 83.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
           "diagram_kind": "stem_leaf",
@@ -984,15 +1008,15 @@
               {
                 "stem": 8,
                 "leaves": [
-                  1,
                   3,
-                  4,
-                  7,
-                  8
+                  3,
+                  6,
+                  9,
+                  9
                 ]
               }
             ],
-            "key": "8 | 1 means 81"
+            "key": "8|3 means 83"
           },
           "viewbox": [
             720,
@@ -1002,7 +1026,7 @@
             {
               "key": "row-0",
               "kind": "stem-leaf-row",
-              "value": "8|1 3 4 7 8",
+              "value": "8|3 3 6 9 9",
               "tag": "text",
               "geometry": {
                 "x": "335",
@@ -1014,7 +1038,7 @@
           "forbidden_visible_labels": [],
           "min_phone_font_px": 12.43
         },
-        "sha256": "9887805b57be376d1e0c80a5a7a6f5ba41140fe9d120e5a61e2e3b122af809dc",
+        "sha256": "28a8be6c0dbd9dcb7101182c72d4228460888ee783ae210d06ad44c6ba3d64d4",
         "width": 720,
         "height": 480
       }
@@ -1037,7 +1061,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l3-524",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1057,7 +1081,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Classes centred at 10, 20 and 30 contain 7, "
+            "text": "Classes centred at 10, 20 and 30 contain 1, "
           },
           {
             "type": "inline_math",
@@ -1065,7 +1089,7 @@
           },
           {
             "type": "text",
-            "text": " and 21 observations. Form the weighted-total equation for an estimated mean of 24 and solve for "
+            "text": " and 5 observations. Form the weighted-total equation for an estimated mean of 24 and solve for "
           },
           {
             "type": "inline_math",
@@ -1082,8 +1106,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "7",
-          "canonical_latex": "7",
+          "canonical_answer": "4",
+          "canonical_latex": "4",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1112,15 +1136,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
+                "text": "Multiply both sides by the total frequency before collecting the "
               },
               {
                 "type": "inline_math",
-                "latex": "\\frac{10(7)+20f+30(21)}{7+f+21}=24"
+                "latex": "f"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": " terms."
               }
             ]
           }
@@ -1131,11 +1155,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Form the equation. "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{70+20f+630}{7+f+21}=24\\Rightarrow f=7"
+                "latex": "\\frac{10(1)+20f+30(5)}{1+f+5}=24\\Rightarrow 160+20f=144+24f"
               }
             ],
             "mark_type": "M",
@@ -1146,11 +1170,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "7"
+                "latex": "4f=16,\\ f=4"
               }
             ],
             "mark_type": "A",
@@ -1179,14 +1203,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l3-525",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.5",
-    "title": "Total in the last twenty histogram units",
+    "title": "Observations from 10 to 30 on a histogram",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -1208,7 +1232,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A histogram records frequencies 8, 10 and 9 over the intervals 0–10, 10–20 and 20–30. How many observations fall within the last twenty units, from 10 up to 30?"
+            "text": "Use the histogram. How many observations are in the classes "
+          },
+          {
+            "type": "inline_math",
+            "latex": "10\\leq x<20"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "20\\leq x<30"
+          },
+          {
+            "type": "text",
+            "text": " altogether?"
           }
         ],
         "marks": 3,
@@ -1239,7 +1279,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use the frequencies for 10–20 and 20–30 only."
+                "text": "Read the two relevant bar heights from the histogram, then add them."
               }
             ]
           }
@@ -1250,11 +1290,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Read the bar heights for the two classes and add. "
               },
               {
                 "type": "display_math",
-                "latex": "10+9=19"
+                "latex": "10+9"
               }
             ],
             "mark_type": "M",
@@ -1265,11 +1305,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "Altogether "
               },
               {
                 "type": "display_math",
                 "latex": "19"
+              },
+              {
+                "type": "text",
+                "text": " observations."
               }
             ],
             "mark_type": "A",
@@ -1284,7 +1328,7 @@
         "asset_key": "s1-l3-525-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l3-525-diagram-r3.svg",
+        "path": "assets/s1-l3-525-diagram-r4.svg",
         "alt_text": "Histogram with 3 classes; frequency values 8, 10, 9.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -1467,7 +1511,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l5-504",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1561,11 +1605,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Form the grouped-mean equation. "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{130+40k}{8+k}=30\\Rightarrow k=11"
+                "latex": "\\frac{10(3)+20(5)+40k}{3+5+k}=30\\Rightarrow130+40k=240+30k"
               }
             ],
             "mark_type": "M",
@@ -1576,11 +1620,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "11"
+                "latex": "10k=110,\\ k=11"
               }
             ],
             "mark_type": "A",
@@ -1609,14 +1653,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l1-518",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.6",
-    "title": "Choose a graph that preserves continuous class boundaries",
+    "title": "Display yearly temperature readings",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1629,7 +1673,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. A teacher needs a graph for 150 continuous reaction times grouped into intervals, with adjoining bars preserving the class boundaries. Enter the most suitable code."
+            "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. A weather station has 365 daily maximum temperatures measured to one decimal place and grouped into equal intervals. The aim is to show the overall shape of the data as a graph. Enter the most suitable code."
           }
         ],
         "marks": 1,
@@ -1660,7 +1704,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Rule out any display that shows each of the 150 values separately. Which of the remaining displays shows the shape of the grouped data, not just a list of counts?"
+                "text": "Which display uses touching bars for grouped continuous data?"
               }
             ]
           }
@@ -1700,14 +1744,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l2-528",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.6",
-    "title": "Retain archaeological measurements",
+    "title": "Graph the masses of stone tools",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1720,7 +1764,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. A field survey dates 31 stone tools to whole-number ages from 210 to 590 years. The chosen display must keep every age, sort the ages and show their distribution. Enter the most suitable code."
+            "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. A field survey weighs 200 stone tools to the nearest gram and groups the masses into equal intervals. The team wants a graph that shows the overall spread, without listing each mass. Enter the most suitable code."
           }
         ],
         "marks": 2,
@@ -1729,8 +1773,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "3",
-          "canonical_latex": "3",
+          "canonical_answer": "2",
+          "canonical_latex": "2",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1742,7 +1786,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Choose a display that preserves rather than groups the original measurements."
+                "text": "The masses are continuous and grouped, and a graph is wanted."
               }
             ]
           },
@@ -1751,7 +1795,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Rule out any display that groups the ages into intervals. Of the displays left, which one keeps each age in an ordered list?"
+                "text": "Which display uses touching bars for grouped continuous data?"
               }
             ]
           }
@@ -1762,11 +1806,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "A graph of grouped continuous masses is a histogram. "
               },
               {
                 "type": "display_math",
-                "latex": "\\text{stem-and-leaf diagram}\\Rightarrow 3"
+                "latex": "\\text{histogram}\\Rightarrow2"
               }
             ],
             "mark_type": "M",
@@ -1777,11 +1821,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "Enter "
               },
               {
                 "type": "display_math",
-                "latex": "3"
+                "latex": "2"
               }
             ],
             "mark_type": "A",
@@ -1810,7 +1854,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l3-526",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1872,11 +1916,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Marks are whole numbers on a short scale and individual marks must stay visible, so a dot diagram is suitable. "
               },
               {
                 "type": "display_math",
-                "latex": "\\text{dot diagram}\\Rightarrow 1"
+                "latex": "\\text{dot diagram}\\Rightarrow1"
               }
             ],
             "mark_type": "M",
@@ -1887,7 +1931,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "Enter "
               },
               {
                 "type": "display_math",
@@ -1920,14 +1964,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "s1-l4-515",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.7",
-    "title": "Frequency difference when the wider class has sixty",
+    "title": "True density ratio when one class has sixty",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -1949,7 +1993,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A misleading histogram uses frequency as bar height. A width-5 class has frequency 10 and a width-15 class has frequency 60. By how much does the wider class frequency exceed the narrower class frequency?"
+            "text": "A misleading histogram uses frequency as bar height. A class of width 5 has frequency 10, and a class of width 15 has frequency 60. The second bar is 6 times as tall as the first. How many times the frequency density of the first class is the frequency density of the second class?"
           }
         ],
         "marks": 4,
@@ -1958,8 +2002,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "50",
-          "canonical_latex": "50",
+          "canonical_answer": "2",
+          "canonical_latex": "2",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1971,7 +2015,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The numerical comparison must use frequencies, even though a correct histogram would use frequency density for height."
+                "text": "Frequency density is frequency divided by class width."
               }
             ]
           },
@@ -1980,7 +2024,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Ignore the widths here: you only need how much more one frequency is than the other. Which calculation gives that?"
+                "text": "Find the density of each class, then divide the second density by the first."
               }
             ]
           }
@@ -1991,11 +2035,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Find each frequency density. "
               },
               {
                 "type": "display_math",
-                "latex": "60-10=50"
+                "latex": "\\frac{10}{5}=2,\\quad\\frac{60}{15}=4"
               }
             ],
             "mark_type": "M",
@@ -2006,11 +2050,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "So the true ratio of densities is "
               },
               {
                 "type": "display_math",
-                "latex": "50"
+                "latex": "\\frac{4}{2}=2"
               }
             ],
             "mark_type": "A",
@@ -2025,7 +2069,7 @@
         "asset_key": "s1-l4-515-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l4-515-diagram-r4.svg",
+        "path": "assets/s1-l4-515-diagram-r5.svg",
         "alt_text": "Histogram with 2 classes; frequency values 10, 60.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -2170,7 +2214,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l1-519",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2230,7 +2274,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Focus on the scale, spacing, bar-area rule, symbol area or selected time window."
+                "text": "Compare the years shown with the years the records cover."
               }
             ]
           }
@@ -2256,7 +2300,7 @@
         "asset_key": "s1-l1-519-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l1-519-diagram-r2.svg",
+        "path": "assets/s1-l1-519-diagram-r3.svg",
         "alt_text": "Line graph with 2022: 8, 2023: 12, 2024: 10.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -2414,14 +2458,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "s1-l2-529",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.7",
-    "title": "Displayed bar increase",
+    "title": "Apparent increase in shop sales",
     "difficulty": 2,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2453,7 +2497,7 @@
           "type": "numeric",
           "comparison_mode": "exact_numeric",
           "canonical_answer": "100",
-          "canonical_latex": "100\\%",
+          "canonical_latex": "100",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2498,7 +2542,7 @@
               },
               {
                 "type": "text",
-                "text": "."
+                "text": ". Compare the increase with the first visible height."
               }
             ]
           }
@@ -2509,11 +2553,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Measure heights from the truncated baseline. "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{(125-105)-(115-105)}{115-105}\\times100=100"
+                "latex": "\\frac{(125-105)-(115-105)}{115-105}\\times100=\\frac{10}{10}\\times100"
               }
             ],
             "mark_type": "M",
@@ -2524,7 +2568,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "So the apparent increase is "
               },
               {
                 "type": "display_math",
@@ -2543,8 +2587,8 @@
         "asset_key": "s1-l2-529-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l2-529-diagram-r4.svg",
-        "alt_text": "Bar chart with First week: 115, Second week: 125.",
+        "path": "assets/s1-l2-529-diagram-r5.svg",
+        "alt_text": "Bar chart with First: 115, Second: 125.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
           "diagram_kind": "bar_chart",
@@ -2554,8 +2598,8 @@
           "inputs": {
             "title": "Weekly sales",
             "categories": [
-              "First week",
-              "Second week"
+              "First",
+              "Second"
             ],
             "values": [
               115,
@@ -2563,7 +2607,7 @@
             ],
             "y_min": 105,
             "y_max": 125,
-            "tick_step": 10,
+            "tick_step": 5,
             "y_label": "Sales",
             "forbidden_visible_labels": [
               "100"
@@ -2608,11 +2652,25 @@
               "label": "105"
             },
             {
+              "key": "y:110",
+              "axis": "y",
+              "value": "110",
+              "position": "315",
+              "label": "110"
+            },
+            {
               "key": "y:115",
               "axis": "y",
               "value": "115",
               "position": "245",
               "label": "115"
+            },
+            {
+              "key": "y:120",
+              "axis": "y",
+              "value": "120",
+              "position": "175",
+              "label": "120"
             },
             {
               "key": "y:125",
@@ -2622,18 +2680,18 @@
               "label": "125"
             },
             {
-              "key": "x:First week",
+              "key": "x:First",
               "axis": "x",
-              "value": "First week",
+              "value": "First",
               "position": "237.5",
-              "label": "First week"
+              "label": "First"
             },
             {
-              "key": "x:Second week",
+              "key": "x:Second",
               "axis": "x",
-              "value": "Second week",
+              "value": "Second",
               "position": "532.5",
-              "label": "Second week"
+              "label": "Second"
             }
           ],
           "forbidden_visible_labels": [
@@ -2643,10 +2701,10 @@
           "axis": {
             "y_min": 105.0,
             "y_max": 125.0,
-            "tick_step": 10.0
+            "tick_step": 5.0
           }
         },
-        "sha256": "181274b8a9e2a568255da08db770878cc70357614bf1778120d876b95c897386",
+        "sha256": "b4ef1c8361d679eec47ed63733ecf92f5b20ad7d0b8b219a6927b042d674db9e",
         "width": 720,
         "height": 480
       }
@@ -2669,14 +2727,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l3-527",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.6",
-    "title": "Inspect paired quiz patterns",
+    "title": "Compare exact marks in two classes",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2689,7 +2747,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. Two language classes of 22 students each sit a spelling quiz marked from 0 to 8. Their teacher wants to compare repeated marks, empty intervals and clusters while keeping each student's mark visible. Enter the best code."
+            "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. Two language classes of 22 students each sit a test marked out of 100, with marks from 31 to 98 and few repeats. Their teacher wants to compare the two classes while still being able to read off each exact mark. Enter the best code."
           }
         ],
         "marks": 3,
@@ -2698,8 +2756,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "1",
-          "canonical_latex": "1",
+          "canonical_answer": "3",
+          "canonical_latex": "3",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2711,7 +2769,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Choose a display whose separate marks make frequencies and gaps easy to compare."
+                "text": "Each exact mark must stay readable."
               }
             ]
           },
@@ -2720,7 +2778,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "You want each quiz mark to appear as its own mark, so that clusters and gaps stand out when you compare the two classes. Which display does that?"
+                "text": "Rule out displays that group marks into intervals. Which remaining display keeps each mark in an ordered list?"
               }
             ]
           }
@@ -2731,11 +2789,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Keeping every exact mark while showing the spread suggests a stem-and-leaf diagram. "
               },
               {
                 "type": "display_math",
-                "latex": "\\text{dot diagram}\\Rightarrow 1"
+                "latex": "\\text{stem-and-leaf diagram}\\Rightarrow3"
               }
             ],
             "mark_type": "M",
@@ -2746,11 +2804,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "Enter "
               },
               {
                 "type": "display_math",
-                "latex": "1"
+                "latex": "3"
               }
             ],
             "mark_type": "A",
@@ -2779,14 +2837,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l4-516",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.8",
-    "title": "Increase in average after adding nineteen",
+    "title": "Increase in average after adding fourteen",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2799,7 +2857,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The original values are 6, 8, 10 and 12. After 19 is added, by how much does their mean increase?"
+            "text": "The original values are 6, 8, 10 and 12. After 14 is added, by how much does their mean increase?"
           }
         ],
         "marks": 4,
@@ -2808,8 +2866,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "2.0",
-          "canonical_latex": "2.0",
+          "canonical_answer": "1",
+          "canonical_latex": "1",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2841,11 +2899,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Find the two means. "
               },
               {
                 "type": "display_math",
-                "latex": "\\bar x_1=36/4=9,\\quad \\bar x_2=55/5=11,\\quad \\Delta=2"
+                "latex": "\\bar x_1=\\frac{36}{4}=9,\\quad\\bar x_2=\\frac{50}{5}=10"
               }
             ],
             "mark_type": "M",
@@ -2856,11 +2914,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "The mean increases by "
               },
               {
                 "type": "display_math",
-                "latex": "2.0"
+                "latex": "1"
               }
             ],
             "mark_type": "A",
@@ -2980,7 +3038,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l2-530",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3042,11 +3100,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Add the five values and divide by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "5"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "\\bar x=\\frac{70}{5}=14"
+                "latex": "\\bar x=\\frac{10+12+14+16+18}{5}=\\frac{70}{5}"
               }
             ],
             "mark_type": "M",
@@ -3057,7 +3123,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "So the mean is "
               },
               {
                 "type": "display_math",
@@ -3090,7 +3156,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-528",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3119,7 +3185,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The vertical axis of a bar chart is cut off at 125. The first bar reaches 170 and the second reaches 197. The difference between their displayed heights is what percentage of the first bar's displayed height?"
+            "text": "The vertical axis of a bar chart is cut off at 125. The first bar reaches 170 and the second reaches 215. The difference between their displayed heights is what percentage of the first bar's displayed height?"
           }
         ],
         "marks": 3,
@@ -3128,8 +3194,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "60",
-          "canonical_latex": "60\\%",
+          "canonical_answer": "100",
+          "canonical_latex": "100",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3158,7 +3224,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "The first displayed height is 45, and the difference between displayed heights is 27."
+                "text": "The visible heights are "
+              },
+              {
+                "type": "inline_math",
+                "latex": "170-125"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "215-125"
+              },
+              {
+                "type": "text",
+                "text": ". Compare the increase with the first visible height."
               }
             ]
           }
@@ -3169,11 +3251,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Measure heights from the truncated baseline. "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{197-170}{170-125}\\times100=60"
+                "latex": "\\frac{(215-125)-(170-125)}{170-125}\\times100=\\frac{45}{45}\\times100"
               }
             ],
             "mark_type": "M",
@@ -3184,11 +3266,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "So the apparent increase is "
               },
               {
                 "type": "display_math",
-                "latex": "60\\%"
+                "latex": "100\\%"
               }
             ],
             "mark_type": "A",
@@ -3203,8 +3285,8 @@
         "asset_key": "s1-l3-528-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l3-528-diagram-r2.svg",
-        "alt_text": "Bar chart with First: 170, Second: 197.",
+        "path": "assets/s1-l3-528-diagram-r3.svg",
+        "alt_text": "Bar chart with First: 170, Second: 215.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
           "diagram_kind": "bar_chart",
@@ -3219,14 +3301,14 @@
             ],
             "values": [
               170,
-              197
+              215
             ],
             "y_min": 125,
-            "y_max": 205,
+            "y_max": 215,
             "tick_step": 10,
             "y_label": "Value",
             "forbidden_visible_labels": [
-              "60"
+              "100"
             ]
           },
           "viewbox": [
@@ -3241,21 +3323,21 @@
               "tag": "rect",
               "geometry": {
                 "x": "149",
-                "y": "227.5",
+                "y": "245",
                 "width": "177",
-                "height": "157.5"
+                "height": "140"
               }
             },
             {
               "key": "bar-1",
               "kind": "bar",
-              "value": "197",
+              "value": "215",
               "tag": "rect",
               "geometry": {
                 "x": "444",
-                "y": "133",
+                "y": "105",
                 "width": "177",
-                "height": "252"
+                "height": "280"
               }
             }
           ],
@@ -3271,57 +3353,64 @@
               "key": "y:135",
               "axis": "y",
               "value": "135",
-              "position": "350",
+              "position": "353.888889",
               "label": "135"
             },
             {
               "key": "y:145",
               "axis": "y",
               "value": "145",
-              "position": "315",
+              "position": "322.777778",
               "label": "145"
             },
             {
               "key": "y:155",
               "axis": "y",
               "value": "155",
-              "position": "280",
+              "position": "291.666667",
               "label": "155"
             },
             {
               "key": "y:165",
               "axis": "y",
               "value": "165",
-              "position": "245",
+              "position": "260.555556",
               "label": "165"
             },
             {
               "key": "y:175",
               "axis": "y",
               "value": "175",
-              "position": "210",
+              "position": "229.444444",
               "label": "175"
             },
             {
               "key": "y:185",
               "axis": "y",
               "value": "185",
-              "position": "175",
+              "position": "198.333333",
               "label": "185"
             },
             {
               "key": "y:195",
               "axis": "y",
               "value": "195",
-              "position": "140",
+              "position": "167.222222",
               "label": "195"
             },
             {
               "key": "y:205",
               "axis": "y",
               "value": "205",
-              "position": "105",
+              "position": "136.111111",
               "label": "205"
+            },
+            {
+              "key": "y:215",
+              "axis": "y",
+              "value": "215",
+              "position": "105",
+              "label": "215"
             },
             {
               "key": "x:First",
@@ -3339,16 +3428,16 @@
             }
           ],
           "forbidden_visible_labels": [
-            "60"
+            "100"
           ],
           "min_phone_font_px": 12.43,
           "axis": {
             "y_min": 125.0,
-            "y_max": 205.0,
+            "y_max": 215.0,
             "tick_step": 10.0
           }
         },
-        "sha256": "0cb908f51027c2360099c4bbbf623b079c5d913b24e8bf5c55c957e6fdce02fb",
+        "sha256": "2715954ea49fe5b28deefef50677bc766f608cc7e6c8a965c154487deaeb5b48",
         "width": 720,
         "height": 480
       }
@@ -3371,7 +3460,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l3-529",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3441,11 +3530,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "The total of the five values is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "5\\times15=75"
+              },
+              {
+                "type": "text",
+                "text": ". The four known values add to "
+              },
+              {
+                "type": "inline_math",
+                "latex": "52"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "x=5(15)-52=23"
+                "latex": "x=75-52"
               }
             ],
             "mark_type": "M",
@@ -3456,7 +3561,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "So the missing value is "
               },
               {
                 "type": "display_math",
@@ -3580,14 +3685,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l2-531",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.9",
-    "title": "Choose a centre for the shoe size stocked most often",
+    "title": "Choose a measure that uses every score",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3600,7 +3705,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for mean, 2 for median and 3 for mode. A retailer will stock the requested shoe size that appears most frequently in its order records. Which measure identifies that size?"
+            "text": "Use code 1 for mean, 2 for median and 3 for mode. A class of 5 students scores 6, 7, 8, 8 and 9 on a quiz. The teacher wants a single value that takes every score into account. Which measure should she use?"
           }
         ],
         "marks": 2,
@@ -3609,8 +3714,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "3",
-          "canonical_latex": "3",
+          "canonical_answer": "1",
+          "canonical_latex": "1",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3622,7 +3727,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The question asks for the value with greatest frequency."
+                "text": "Which measure uses every value in its calculation?"
               }
             ]
           },
@@ -3631,7 +3736,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Which of the three measures can be read off from the highest frequency, with no adding up or ordering?"
+                "text": "Think about which measure is found by adding all the scores."
               }
             ]
           }
@@ -3642,11 +3747,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "The mean is found from the sum of every score. "
               },
               {
                 "type": "display_math",
-                "latex": "\\text{mode}\\Rightarrow 3"
+                "latex": "\\text{mean}\\Rightarrow1"
               }
             ],
             "mark_type": "M",
@@ -3657,11 +3762,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "Enter "
               },
               {
                 "type": "display_math",
-                "latex": "3"
+                "latex": "1"
               }
             ],
             "mark_type": "A",
@@ -3690,7 +3795,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l3-530",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3752,11 +3857,35 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "The median is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "14"
+              },
+              {
+                "type": "text",
+                "text": "; the mean is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "26"
+              },
+              {
+                "type": "text",
+                "text": ", dominated by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "77"
+              },
+              {
+                "type": "text",
+                "text": "; no time repeats. "
               },
               {
                 "type": "display_math",
-                "latex": "\\text{median}=14,\\quad \\text{mean}=26,\\quad \\text{no value repeats, so no mode}\\Rightarrow 2"
+                "latex": "\\text{median}\\Rightarrow2"
               }
             ],
             "mark_type": "M",
@@ -3767,7 +3896,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "Enter "
               },
               {
                 "type": "display_math",
@@ -3800,7 +3929,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l3-531",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3862,11 +3991,35 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "The median is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "14"
+              },
+              {
+                "type": "text",
+                "text": "; the mean is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{132}{5}=26.4"
+              },
+              {
+                "type": "text",
+                "text": ", dominated by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "78"
+              },
+              {
+                "type": "text",
+                "text": "; no time repeats. "
               },
               {
                 "type": "display_math",
-                "latex": "\\text{median}=14,\\quad \\text{mean}=26.4,\\quad \\text{no value repeats, so no mode}\\Rightarrow 2"
+                "latex": "\\text{median}\\Rightarrow2"
               }
             ],
             "mark_type": "M",
@@ -3877,7 +4030,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "Enter "
               },
               {
                 "type": "display_math",
@@ -3910,7 +4063,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l5-505",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3972,11 +4125,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Extract the relevant values and apply the stated statistical method."
+                "text": "Exact retrieval rules out grouped displays; visible clusters with 70 values spread from 10 to 99 suit a stem-and-leaf diagram, which keeps ordered exact values. "
               },
               {
                 "type": "display_math",
-                "latex": "\\text{exact values + order + shape}\\Rightarrow 3"
+                "latex": "\\text{stem-and-leaf diagram}\\Rightarrow3"
               }
             ],
             "mark_type": "M",
@@ -3987,7 +4140,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value and check that it matches the data and representation."
+                "text": "Enter "
               },
               {
                 "type": "display_math",

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l2-527",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.5",
-  "title": "Extreme difference on an 80s stem",
+  "title": "Spread of the 80s row",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "In the row 8 | 1 3 4 7 8, the entry 8|1 represents 81. Find the difference between the greatest and least represented values."
+          "text": "Use the stem-and-leaf diagram. Find the difference between the greatest and least values."
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "7",
-        "canonical_latex": "7",
+        "canonical_answer": "6",
+        "canonical_latex": "6",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract the value represented by the first leaf from the value represented by the last leaf."
+              "text": "Read the smallest and largest values from the diagram, using the key, then subtract."
             }
           ]
         }
@@ -71,11 +71,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Read the smallest and largest values. "
             },
             {
               "type": "display_math",
-              "latex": "(88)-(81)=7"
+              "latex": "89-83"
             }
           ],
           "mark_type": "M",
@@ -86,11 +86,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "The answer is "
             },
             {
               "type": "display_math",
-              "latex": "7"
+              "latex": "6"
             }
           ],
           "mark_type": "A",
@@ -105,8 +105,8 @@
       "asset_key": "s1-l2-527-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l2-527-diagram-r3.svg",
-      "alt_text": "Stem-and-leaf diagram. stem 8, leaves 1 3 4 7 8. Key: 8 | 1 means 81.",
+      "path": "assets/s1-l2-527-diagram-r4.svg",
+      "alt_text": "Stem-and-leaf diagram. stem 8, leaves 3 3 6 9 9. Key: 8|3 means 83.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "stem_leaf",
@@ -119,15 +119,15 @@
             {
               "stem": 8,
               "leaves": [
-                1,
                 3,
-                4,
-                7,
-                8
+                3,
+                6,
+                9,
+                9
               ]
             }
           ],
-          "key": "8 | 1 means 81"
+          "key": "8|3 means 83"
         },
         "viewbox": [
           720,
@@ -137,7 +137,7 @@
           {
             "key": "row-0",
             "kind": "stem-leaf-row",
-            "value": "8|1 3 4 7 8",
+            "value": "8|3 3 6 9 9",
             "tag": "text",
             "geometry": {
               "x": "335",
@@ -149,7 +149,7 @@
         "forbidden_visible_labels": [],
         "min_phone_font_px": 12.43
       },
-      "sha256": "9887805b57be376d1e0c80a5a7a6f5ba41140fe9d120e5a61e2e3b122af809dc",
+      "sha256": "28a8be6c0dbd9dcb7101182c72d4228460888ee783ae210d06ad44c6ba3d64d4",
       "width": 720,
       "height": 480
     }

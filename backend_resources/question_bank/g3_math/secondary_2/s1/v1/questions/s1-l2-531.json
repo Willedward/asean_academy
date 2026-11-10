@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l2-531",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.9",
-  "title": "Choose a centre for the shoe size stocked most often",
+  "title": "Choose a measure that uses every score",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for mean, 2 for median and 3 for mode. A retailer will stock the requested shoe size that appears most frequently in its order records. Which measure identifies that size?"
+          "text": "Use code 1 for mean, 2 for median and 3 for mode. A class of 5 students scores 6, 7, 8, 8 and 9 on a quiz. The teacher wants a single value that takes every score into account. Which measure should she use?"
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3",
-        "canonical_latex": "3",
+        "canonical_answer": "1",
+        "canonical_latex": "1",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The question asks for the value with greatest frequency."
+              "text": "Which measure uses every value in its calculation?"
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Which of the three measures can be read off from the highest frequency, with no adding up or ordering?"
+              "text": "Think about which measure is found by adding all the scores."
             }
           ]
         }
@@ -62,11 +62,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "The mean is found from the sum of every score. "
             },
             {
               "type": "display_math",
-              "latex": "\\text{mode}\\Rightarrow 3"
+              "latex": "\\text{mean}\\Rightarrow1"
             }
           ],
           "mark_type": "M",
@@ -77,11 +77,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "Enter "
             },
             {
               "type": "display_math",
-              "latex": "3"
+              "latex": "1"
             }
           ],
           "mark_type": "A",

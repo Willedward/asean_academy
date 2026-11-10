@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-527 — Extreme difference on an 80s stem
+## s1-l2-527 — Spread of the 80s row
 
 [Open this question in the HTML preview](index.html#s1-l2-527)
 
@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-525 — Total in the last twenty histogram units
+## s1-l3-525 — Observations from 10 to 30 on a histogram
 
 [Open this question in the HTML preview](index.html#s1-l3-525)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-518 — Choose a graph that preserves continuous class boundaries
+## s1-l1-518 — Display yearly temperature readings
 
 [Open this question in the HTML preview](index.html#s1-l1-518)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-528 — Retain archaeological measurements
+## s1-l2-528 — Graph the masses of stone tools
 
 [Open this question in the HTML preview](index.html#s1-l2-528)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-515 — Frequency difference when the wider class has sixty
+## s1-l4-515 — True density ratio when one class has sixty
 
 [Open this question in the HTML preview](index.html#s1-l4-515)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-529 — Displayed bar increase
+## s1-l2-529 — Apparent increase in shop sales
 
 [Open this question in the HTML preview](index.html#s1-l2-529)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-527 — Inspect paired quiz patterns
+## s1-l3-527 — Compare exact marks in two classes
 
 [Open this question in the HTML preview](index.html#s1-l3-527)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-516 — Increase in average after adding nineteen
+## s1-l4-516 — Increase in average after adding fourteen
 
 [Open this question in the HTML preview](index.html#s1-l4-516)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-531 — Choose a centre for the shoe size stocked most often
+## s1-l2-531 — Choose a measure that uses every score
 
 [Open this question in the HTML preview](index.html#s1-l2-531)
 
