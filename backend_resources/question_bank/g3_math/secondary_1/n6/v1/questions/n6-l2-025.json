@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l2-025",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N6",
   "primary_outcome": "6.2",
-  "title": "Finding an input",
+  "title": "Continuing a table to find an input",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,15 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "For the relationship "
+          "text": "A linear relationship has this table of values: when "
         },
         {
           "type": "inline_math",
-          "latex": "y=5x-1"
+          "latex": "x"
         },
         {
           "type": "text",
-          "text": ", find "
+          "text": " is 1, 2 and 3, "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " is 4, 9 and 14. Continue the pattern to find "
         },
         {
           "type": "inline_math",
@@ -66,7 +74,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Replace "
+              "text": "Find how much "
             },
             {
               "type": "inline_math",
@@ -74,7 +82,7 @@
             },
             {
               "type": "text",
-              "text": " by 24 and form an equation in "
+              "text": " changes each time "
             },
             {
               "type": "inline_math",
@@ -82,7 +90,7 @@
             },
             {
               "type": "text",
-              "text": "."
+              "text": " increases by 1."
             }
           ]
         },
@@ -91,15 +99,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
-            },
-            {
-              "type": "inline_math",
-              "latex": "5x-1=24"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Keep adding that change until you reach 24."
             }
           ]
         }
@@ -109,8 +109,12 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "5x=25"
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": " increases by 5 each step: 4, 9, 14, 19, 24"
             }
           ],
           "mark_type": "M",
@@ -120,7 +124,7 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "x=5"
             }
           ],

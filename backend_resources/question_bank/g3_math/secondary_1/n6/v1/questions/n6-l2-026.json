@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l2-026",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "For the relationship "
+          "text": "Does the point "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(5,16)"
+        },
+        {
+          "type": "text",
+          "text": " lie on the graph of "
         },
         {
           "type": "inline_math",
@@ -28,23 +36,7 @@
         },
         {
           "type": "text",
-          "text": ", the point "
-        },
-        {
-          "type": "inline_math",
-          "latex": "(5, k)"
-        },
-        {
-          "type": "text",
-          "text": " lies on its graph. Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "text": "? Enter 1 for yes and 0 for no."
         }
       ],
       "marks": 2,
@@ -53,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "17",
-        "canonical_latex": "17",
+        "canonical_answer": "0",
+        "canonical_latex": "0",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -66,7 +58,7 @@
           "content": [
             {
               "type": "text",
-              "text": "A point on the graph satisfies the relationship."
+              "text": "A point lies on a graph only if its coordinates satisfy the equation."
             }
           ]
         },
@@ -83,15 +75,7 @@
             },
             {
               "type": "text",
-              "text": " into "
-            },
-            {
-              "type": "inline_math",
-              "latex": "y=3x+2"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": " and compare the result with 16."
             }
           ]
         }
@@ -101,8 +85,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k=3(5)+2"
+              "type": "inline_math",
+              "latex": "y=3(5)+2=17"
             }
           ],
           "mark_type": "M",
@@ -112,8 +96,12 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k=17"
+              "type": "inline_math",
+              "latex": "17\\ne16"
+            },
+            {
+              "type": "text",
+              "text": ", so the point is not on the graph: 0."
             }
           ],
           "mark_type": "A",
