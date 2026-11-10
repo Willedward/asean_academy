@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l4-007",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.2",
-  "title": "Synchronise three repeating signals",
+  "title": "Third signal from a common time",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -15,7 +15,23 @@
   "stem": [
     {
       "type": "text",
-      "text": "Three signals flash together, then repeat every 18 minutes, 24 minutes and 30 minutes respectively."
+      "text": "Three signals flash together. Two of them repeat every 18 minutes and 24 minutes. The third repeats every "
+    },
+    {
+      "type": "inline_math",
+      "latex": "n"
+    },
+    {
+      "type": "text",
+      "text": " minutes, where "
+    },
+    {
+      "type": "inline_math",
+      "latex": "n"
+    },
+    {
+      "type": "text",
+      "text": " is a whole number less than 8."
     }
   ],
   "parts": [
@@ -25,7 +41,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "How many minutes pass before all three signals next flash together?"
+          "text": "All three signals next flash together after 360 minutes. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "n"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -34,8 +58,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "360",
-        "canonical_latex": "360",
+        "canonical_answer": "5",
+        "canonical_latex": "5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -47,7 +71,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The waiting time is the lowest common multiple of the three intervals."
+              "text": "Compare the lowest common multiple of 18 and 24 with 360."
             }
           ]
         },
@@ -56,31 +80,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use "
-            },
-            {
-              "type": "inline_math",
-              "latex": "18=2\\times 3^{2}"
-            },
-            {
-              "type": "text",
-              "text": ", "
-            },
-            {
-              "type": "inline_math",
-              "latex": "24=2^{3}\\times 3"
-            },
-            {
-              "type": "text",
-              "text": " and "
-            },
-            {
-              "type": "inline_math",
-              "latex": "30=2\\times 3\\times 5"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Decide which prime factor of 360 is missing from 18 and 24."
             }
           ]
         }
@@ -90,8 +90,20 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{LCM}=2^{3}\\times 3^{2}\\times 5"
+              "type": "inline_math",
+              "latex": "\\text{LCM}(18,24)=2^{3}\\times3^{2}=72"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "360=2^{3}\\times3^{2}\\times5"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -101,8 +113,28 @@
           "position": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "n"
+            },
+            {
               "type": "text",
-              "text": "The signals next coincide after 360 minutes."
+              "text": " must supply the factor 5, and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "n<8"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "n=5"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",

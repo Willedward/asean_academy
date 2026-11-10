@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l3-019",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.1",
-  "title": "Complete a product to a cube",
+  "title": "Exponents in a prime factorisation",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,23 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the smallest positive integer "
+          "text": "Given that "
         },
         {
           "type": "inline_math",
-          "latex": "m"
+          "latex": "3240=2^{a}\\times3^{b}\\times5"
         },
         {
           "type": "text",
-          "text": " such that "
+          "text": ", find "
         },
         {
           "type": "inline_math",
-          "latex": "540m"
+          "latex": "a+b"
         },
         {
           "type": "text",
-          "text": " is a perfect cube."
+          "text": "."
         }
       ],
       "marks": 2,
@@ -45,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "50",
-        "canonical_latex": "50",
+        "canonical_answer": "7",
+        "canonical_latex": "7",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +58,7 @@
           "content": [
             {
               "type": "text",
-              "text": "In a perfect cube, every exponent in the prime factorisation is a multiple of 3."
+              "text": "Write 3240 as a product of prime factors."
             }
           ]
         },
@@ -66,12 +66,8 @@
           "stage": 2,
           "content": [
             {
-              "type": "inline_math",
-              "latex": "540=2^{2}\\times 3^{3}\\times 5"
-            },
-            {
               "type": "text",
-              "text": "; complete the powers of 2 and 5."
+              "text": "Divide out the 5, then find the power of 2 and the power of 3 in what is left."
             }
           ]
         }
@@ -81,8 +77,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "540=2^{2}\\times 3^{3}\\times 5"
+              "type": "inline_math",
+              "latex": "3240=2^{3}\\times3^{4}\\times5"
             }
           ],
           "mark_type": "M",
@@ -93,15 +89,7 @@
           "content": [
             {
               "type": "inline_math",
-              "latex": "m=2\\times 5^{2}=50"
-            },
-            {
-              "type": "text",
-              "text": ", and "
-            },
-            {
-              "type": "inline_math",
-              "latex": "540m=27000=30^{3}"
+              "latex": "a+b=3+4=7"
             }
           ],
           "mark_type": "A",

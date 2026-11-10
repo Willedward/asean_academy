@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l3-023",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.6",
-  "title": "Integers in a scaled inequality",
+  "title": "Integers between rational bounds",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -41,7 +41,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "-\\frac{7}{3}<\\frac{x}{2}\\le\\frac{5}{4}"
+          "latex": "-\\frac{14}{3}<x\\le\\frac{5}{2}"
         },
         {
           "type": "text",
@@ -72,7 +72,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply all three parts by 2; the direction of the inequalities stays unchanged."
+              "text": "Convert the fractions to decimals to locate the bounds."
             }
           ]
         },
@@ -81,15 +81,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The equivalent bounds are "
-            },
-            {
-              "type": "inline_math",
-              "latex": "-\\frac{14}{3}<x\\le\\frac{5}{2}"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Decide which endpoint is included, then list the integers between them."
             }
           ]
         }
@@ -99,8 +91,20 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "-\\frac{14}{3}<x\\le\\frac{5}{2}"
+              "type": "inline_math",
+              "latex": "-\\frac{14}{3}"
+            },
+            {
+              "type": "text",
+              "text": " is between -5 and -4, and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{5}{2}=2.5"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -115,7 +119,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "-4,-3,-2,-1, 0, 1, 2"
+              "latex": "-4,-3,-2,-1,0,1,2"
             },
             {
               "type": "text",
