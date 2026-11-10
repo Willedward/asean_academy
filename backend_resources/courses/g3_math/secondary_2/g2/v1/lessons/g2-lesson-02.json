@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-lesson-02",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-g2",
@@ -46,7 +46,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Similar figures have equal corresponding angles and proportional corresponding lengths. The image length equals scale factor times original length. Perimeters use the same linear factor, while areas use the square of that factor."
+          "text": "Similar figures have equal corresponding angles and proportional corresponding lengths. The diagram shows two similar triangles: the base of the smaller is 6 cm and the corresponding base of the larger is 15 cm, and the arrow marked × k shows that every length of the smaller triangle is multiplied by the same scale factor k. Perimeters use the same factor k, while areas use k²."
         },
         {
           "type": "asset_ref",
@@ -70,17 +70,21 @@
       "stable_key": "g2-22-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: find a scale factor",
       "prompt": [
         {
           "type": "text",
-          "text": "A 6 cm side becomes 15 cm in a similar figure. Find the scale factor."
+          "text": "In the diagram, a 6 cm side of the smaller triangle corresponds to a 15 cm side of the larger triangle. Find the scale factor from the smaller triangle to the larger one."
         }
       ],
       "steps": [
         {
           "position": 1,
           "content": [
+            {
+              "type": "text",
+              "text": "Divide the image length by the corresponding original length."
+            },
             {
               "type": "display_math",
               "latex": "k=\\frac{15}{6}"
@@ -92,18 +96,18 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "k=2.5"
+              "latex": "k=\\frac52=2.5"
             }
           ]
         }
       ],
-      "verification_note": "Check that every side and angle was matched in the stated corresponding order."
+      "verification_note": "6 × 2.5 = 15. The factor is greater than 1 because the image is larger."
     },
     {
       "stable_key": "g2-lesson-02-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Worked example: apply the method",
+      "title": "Worked example: from an area factor to a length",
       "prompt": [
         {
           "type": "text",
@@ -116,7 +120,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The area factor is 150/54=25/9."
+              "text": "The area factor is the ratio of the areas."
+            },
+            {
+              "type": "display_math",
+              "latex": "k^2=\\frac{150}{54}=\\frac{25}{9}"
             }
           ]
         },
@@ -125,7 +133,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The positive linear factor is √(25/9)=5/3."
+              "text": "The length factor is the positive square root."
+            },
+            {
+              "type": "display_math",
+              "latex": "k=\\sqrt{\\frac{25}{9}}=\\frac53"
             }
           ]
         },
@@ -133,13 +145,13 @@
           "position": 3,
           "content": [
             {
-              "type": "text",
-              "text": "The corresponding side is 9×5/3=15 cm."
+              "type": "display_math",
+              "latex": "9\\times\\frac53=15\\text{ cm}"
             }
           ]
         }
       ],
-      "verification_note": "The length factor 5/3 squared gives the area factor 25/9."
+      "verification_note": "The length factor 5/3 squared gives the area factor 25/9, and 54 × 25/9 = 150."
     },
     {
       "stable_key": "g2-lesson-02-pitfalls",
@@ -161,14 +173,14 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A perimeter of 20 cm is enlarged by scale factor 3. Find the new perimeter."
+          "text": "A figure with perimeter 14 cm is enlarged by scale factor 4. Find the perimeter of the image, in cm."
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "60",
-        "canonical_latex": "60",
+        "canonical_answer": "56",
+        "canonical_latex": "56",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -177,7 +189,7 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Perimeters are linear, so 20 × 3 = 60."
+          "text": "Perimeter is a length, so it uses the linear factor: 14 × 4 = 56 cm."
         }
       ]
     },
@@ -189,11 +201,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Write the correspondence first, use one consistent scale factor, preserve equal angles, and check whether a length, perimeter or area needs a linear or squared factor."
+          "text": "Similar figures have equal corresponding angles and corresponding lengths in a constant ratio, the scale factor k = image length ÷ original length."
         },
         {
           "type": "text",
-          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
+          "text": "Lengths and perimeters are multiplied by k and areas by k². To go back from an area factor to a length factor, take the positive square root."
         }
       ]
     }
@@ -203,16 +215,191 @@
       "asset_key": "g2-lesson-02-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-lesson-02-similar.svg",
-      "alt_text": "A small rectangle and an enlarged similar rectangle with corresponding sides and a scale-factor arrow.",
+      "path": "assets/g2-lesson-02-similar-r3.svg",
+      "alt_text": "Two similar triangles, with an arrow marked × k from the smaller to the larger. The corresponding base edges are marked 6 cm and 15 cm. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "similar",
-        "lesson_key": "g2-lesson-02"
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "similar_triangles",
+        "lesson_key": "g2-lesson-02",
+        "template": "similar_edges",
+        "inputs": {
+          "small": {
+            "value": 6,
+            "unit": "cm"
+          },
+          "large": {
+            "value": 15,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "small": {
+            "value": 6,
+            "unit": "cm"
+          },
+          "large": {
+            "value": 15,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "2.5",
+          "2.50"
+        ],
+        "unknowns": [],
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "first": [
+            "S1",
+            "S2",
+            "S3"
+          ],
+          "second": [
+            "T1",
+            "T2",
+            "T3"
+          ]
+        },
+        "arrows": [
+          {
+            "key": "scale",
+            "from": "first",
+            "to": "second",
+            "factor": 2.5
+          }
+        ],
+        "viewbox": [
+          600.0,
+          351.0
+        ],
+        "points": {
+          "S1": [
+            45.0,
+            241.05
+          ],
+          "S2": [
+            160.91,
+            241.05
+          ],
+          "S3": [
+            84.41,
+            162.23
+          ],
+          "T1": [
+            265.23,
+            241.05
+          ],
+          "T2": [
+            555.0,
+            241.05
+          ],
+          "T3": [
+            363.75,
+            44.0
+          ],
+          "Tail": [
+            177.6,
+            201.64
+          ],
+          "Tip": [
+            248.54,
+            201.64
+          ]
+        },
+        "segments": [
+          {
+            "key": "S1S2",
+            "from": "S1",
+            "to": "S2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S2S3",
+            "from": "S2",
+            "to": "S3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S3S1",
+            "from": "S3",
+            "to": "S1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T1T2",
+            "from": "T1",
+            "to": "T2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T2T3",
+            "from": "T2",
+            "to": "T3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T3T1",
+            "from": "T3",
+            "to": "T1",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "× k",
+            "target": "caption:arrow-scale"
+          },
+          {
+            "text": "6 cm",
+            "target": "segment:S1S2"
+          },
+          {
+            "text": "15 cm",
+            "target": "segment:T1T2"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "similar",
+            "figures": [
+              "first",
+              "second"
+            ],
+            "value": 2.5
+          },
+          {
+            "type": "to_scale",
+            "lengths": [
+              [
+                [
+                  "S1",
+                  "S2"
+                ],
+                6.0
+              ],
+              [
+                [
+                  "T1",
+                  "T2"
+                ],
+                15.0
+              ]
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "ab08c09d1e83a879b5b922557ca7ac21ccea68cb65cf1ccff45515675757b88f",
-      "width": 940,
-      "height": 390
+      "sha256": "a16728331fd6c51e931a6363b802fe1eed55853dbc848e6c7b032703147f2ea8",
+      "width": 600,
+      "height": 351
     }
   ],
   "provenance": {
@@ -221,6 +408,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }

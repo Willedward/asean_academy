@@ -319,7 +319,7 @@ def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     lesson_response = get("/api/v1/content-assets/lesson/g2-lesson-01/g2-lesson-01-diagram")
     assert lesson_response.status_code == 200
     assert lesson_response.headers["content-type"].startswith("image/svg+xml")
-    assert b"Congruent figures" in lesson_response.content
+    assert b"Congruent triangles" in lesson_response.content
 
     s2_lesson_response = get(
         "/api/v1/content-assets/lesson/s2-lesson-01/s2-lesson-01-probability-scale"
