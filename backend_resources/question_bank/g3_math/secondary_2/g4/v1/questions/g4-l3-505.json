@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l3-505",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Student engineers noted limited access during heavy rain while preparing a replacement frame. A triangular support at the library staircase has side lengths 12 cm, 16 cm and 21 cm. Enter 1 if it is right-angled and 0 if it is not."
+          "text": "A small triangular wedge is cut for a library bookend. It has side lengths 12 cm, 0.16 m and 21 cm. Enter 1 if it is right-angled and 0 if it is not."
         }
       ],
       "marks": 3,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Treat the longest side as the possible hypotenuse."
+              "text": "Write all three sides in the same unit, then treat the longest side as the possible hypotenuse."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare "
+              "text": "In centimetres, compare "
             },
             {
               "type": "inline_math",
@@ -78,7 +78,22 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "Write every side in centimetres."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.16\\text{ m}=16\\text{ cm}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Square the two shorter sides and the longest side."
             },
             {
               "type": "display_math",
@@ -86,11 +101,15 @@
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
-          "position": 2,
+          "position": 3,
           "content": [
+            {
+              "type": "text",
+              "text": "400 is not equal to 441, so by the converse of Pythagoras’ theorem the triangle is not right-angled."
+            },
             {
               "type": "display_math",
               "latex": "\\boxed{0}"
@@ -117,6 +136,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }

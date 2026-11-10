@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l5-501",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Field researchers noted limited access during heavy rain while preparing a replacement frame. A triangular boundary around the aquaculture walkway has perimeter 108 m. Two sides measure 27 m and 36 m. Find the third side x, then verify that the triangle is right-angled. Enter x only."
+          "text": "A triangular vegetable plot beside an aquaculture walkway has perimeter 84 m. Two sides measure 12 m and 35 m. Find the third side x, then verify that the triangle is right-angled. Enter x only."
         }
       ],
       "marks": 5,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "45",
-        "canonical_latex": "45",
+        "canonical_answer": "37",
+        "canonical_latex": "37",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -79,22 +79,59 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "The three sides add up to the perimeter."
             },
             {
               "type": "display_math",
-              "latex": "x=108-27-36=45,\\quad 27^2+36^2=45^2"
+              "latex": "x+12+35=84"
             }
           ],
           "mark_type": "M",
-          "mark_value": 4
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{45}"
+              "latex": "x=84-12-35=37"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The longest side is x, so compare the squares."
+            },
+            {
+              "type": "display_math",
+              "latex": "12^2+35^2=144+1225=1369,\\quad 37^2=1369"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "text",
+              "text": "The results are equal, so by the converse of Pythagoras’ theorem the triangle is right-angled, with the right angle opposite the 37 m side."
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 5,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "x=37"
             }
           ],
           "mark_type": "A",
@@ -109,8 +146,8 @@
       "asset_key": "g4-l5-501-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l5-501-diagram-r3.svg",
-      "alt_text": "Triangle with perimeter 108 m. Two sides are 27 m and 36 m; the third side is labelled x. No angle is marked. Not drawn to scale.",
+      "path": "assets/g4-l5-501-diagram-r4.svg",
+      "alt_text": "Triangle with perimeter 84 m. Two sides are 12 m and 35 m; the third side is labelled x. No angle is marked. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
@@ -119,16 +156,16 @@
         "template": "perimeter_verify",
         "inputs": {
           "perimeter": {
-            "value": 108,
+            "value": 84,
             "unit": "m"
           },
           "sides": [
             {
-              "value": 27,
+              "value": 12,
               "unit": "m"
             },
             {
-              "value": 36,
+              "value": 35,
               "unit": "m"
             }
           ]
@@ -136,22 +173,22 @@
         "not_to_scale": true,
         "dimensions": {
           "perimeter": {
-            "value": 108,
+            "value": 84,
             "unit": "m"
           },
           "sides": [
             {
-              "value": 27,
+              "value": 12,
               "unit": "m"
             },
             {
-              "value": 36,
+              "value": 35,
               "unit": "m"
             }
           ]
         },
         "forbidden_visible_labels": [
-          "45",
+          "37",
           "right-angled",
           "right angled",
           "right angle",
@@ -172,20 +209,20 @@
         "forbid_right_angle_marker": true,
         "viewbox": [
           600.0,
-          382.0
+          317.0
         ],
         "points": {
           "A": [
             110.0,
-            242.4
+            176.58
           ],
           "B": [
-            246.8,
+            149.97,
             60.0
           ],
           "C": [
             490.0,
-            242.4
+            176.58
           ]
         },
         "segments": [
@@ -214,11 +251,11 @@
         "right_angles": [],
         "labels": [
           {
-            "text": "27 m",
+            "text": "12 m",
             "target": "segment:AB"
           },
           {
-            "text": "36 m",
+            "text": "35 m",
             "target": "segment:BC"
           },
           {
@@ -233,7 +270,7 @@
               "AB",
               "AC"
             ],
-            "value": 0.6,
+            "value": 0.3243,
             "tolerance": 0.02
           },
           {
@@ -242,15 +279,15 @@
               "BC",
               "AC"
             ],
-            "value": 0.8,
+            "value": 0.9459,
             "tolerance": 0.02
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "25c5493f17a12c60899759aa43d21c7a7dfb4a1dedc89c1d76b918ea121439e0",
+      "sha256": "2a9d6dfa48d8b2c15653b5b1dfb7cdef95fea738ebf4793b6e911c9347c8320c",
       "width": 600,
-      "height": 382
+      "height": 317
     }
   ],
   "provenance": {
