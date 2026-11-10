@@ -483,6 +483,12 @@ def test_successive_factors_stay_text_only():
         "factor 2/3. The resulting triangle is enlarged again by scale factor 5/2."
     )
     assert "cancelling" in text_only_reason(question)
+    # The bank item sets the factors as inline maths, so its text blocks hold no fractions.
+    inline = g2_question(
+        "A triangle of area 32 cm² is enlarged by scale factor  and then reduced by scale "
+        "factor  . The resulting triangle is enlarged again by scale factor  ."
+    )
+    assert "cancelling" in text_only_reason(inline)
 
 
 def _bank_question(repository_root, key):

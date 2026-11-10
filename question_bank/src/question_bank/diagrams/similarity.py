@@ -2040,7 +2040,11 @@ PATTERNS: list[tuple[str, re.Pattern[str], Callable[[re.Match[str]], dict[str, A
 # draw a false relationship, so the question stays text-only.
 TEXT_ONLY: list[tuple[re.Pattern[str], str]] = [
     (
-        re.compile(r"enlarged by scale factor 3/2 and then reduced by scale factor 2/3"),
+        # The factors may be typed as text or set as inline maths, which leaves only spaces here.
+        re.compile(
+            r"enlarged by scale factor\s+(?:3/2\s+)?and then reduced by scale factor"
+            r"(?:\s+2/3)?\s*\.\s*The resulting triangle is enlarged again"
+        ),
         "An accurate chain draws the second reduction back at the original size, which shows the "
         "cancelling step this item assesses. Any other sizes would draw false factors.",
     ),
