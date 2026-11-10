@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l3-509",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.1",
-  "title": "Recognising RHS",
+  "title": "Corresponding sides of congruent triangles",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two right-angled triangles have equal hypotenuses and one other pair of corresponding sides equal. Use code 1 for SSS, 2 for SAS, 3 for ASA and 4 for RHS. Enter the numerical value only."
+          "text": "Triangles ABC and XYZ are congruent, with A, B and C corresponding to X, Y and Z. AB = (2k + 1) cm, XY = 13 cm and YZ = (k + 4) cm. Find the length of BC in cm. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "4",
-        "canonical_latex": "4",
+        "canonical_answer": "10",
+        "canonical_latex": "10",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the criterion designed for right-angled triangles."
+              "text": "Match each side of triangle ABC with the side of triangle XYZ that joins the corresponding vertices."
             }
           ]
         },
@@ -51,7 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Which test is only for right-angled triangles?"
+              "text": "AB corresponds to XY, so solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2k+1=13"
+            },
+            {
+              "type": "text",
+              "text": ". Then BC corresponds to YZ."
             }
           ]
         }
@@ -61,8 +69,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "AB corresponds to XY, so they are equal."
+            },
+            {
               "type": "display_math",
-              "latex": "\\text{criterion}=\\text{RHS}"
+              "latex": "2k+1=13\\ \\Rightarrow\\ k=6"
             }
           ],
           "mark_type": "M",
@@ -72,8 +84,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "BC corresponds to YZ."
+            },
+            {
               "type": "display_math",
-              "latex": "\\text{code}=4"
+              "latex": "BC=YZ=6+4=10"
             }
           ],
           "mark_type": "A",

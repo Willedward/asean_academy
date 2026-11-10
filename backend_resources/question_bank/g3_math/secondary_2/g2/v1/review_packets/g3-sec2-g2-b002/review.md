@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l3-509 — Recognising RHS
+## g2-l3-509 — Corresponding sides of congruent triangles
 
 [Open this question in the HTML preview](index.html#g2-l3-509)
 
@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l4-505 — Shared-side congruence proof
+## g2-l4-505 — Perimeter from congruent triangles on a shared side
 
 [Open this question in the HTML preview](index.html#g2-l4-505)
 

@@ -320,14 +320,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l3-509",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.1",
-    "title": "Recognising RHS",
+    "title": "Corresponding sides of congruent triangles",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -340,7 +340,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two right-angled triangles have equal hypotenuses and one other pair of corresponding sides equal. Use code 1 for SSS, 2 for SAS, 3 for ASA and 4 for RHS. Enter the numerical value only."
+            "text": "Triangles ABC and XYZ are congruent, with A, B and C corresponding to X, Y and Z. AB = (2k + 1) cm, XY = 13 cm and YZ = (k + 4) cm. Find the length of BC in cm. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -349,8 +349,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "4",
-          "canonical_latex": "4",
+          "canonical_answer": "10",
+          "canonical_latex": "10",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -362,7 +362,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use the criterion designed for right-angled triangles."
+                "text": "Match each side of triangle ABC with the side of triangle XYZ that joins the corresponding vertices."
               }
             ]
           },
@@ -371,7 +371,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Which test is only for right-angled triangles?"
+                "text": "AB corresponds to XY, so solve "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2k+1=13"
+              },
+              {
+                "type": "text",
+                "text": ". Then BC corresponds to YZ."
               }
             ]
           }
@@ -381,8 +389,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "AB corresponds to XY, so they are equal."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{criterion}=\\text{RHS}"
+                "latex": "2k+1=13\\ \\Rightarrow\\ k=6"
               }
             ],
             "mark_type": "M",
@@ -392,8 +404,12 @@
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "BC corresponds to YZ."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{code}=4"
+                "latex": "BC=YZ=6+4=10"
               }
             ],
             "mark_type": "A",
@@ -422,14 +438,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g2-l4-505",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.1",
-    "title": "Shared-side congruence proof",
+    "title": "Perimeter from congruent triangles on a shared side",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -451,7 +467,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Triangles ABC and ADC share side AC. Also AB = AD and BC = DC. Use code 1 for SSS, 2 for SAS, 3 for ASA and 4 for RHS to identify the congruence criterion. Enter the numerical value only."
+            "text": "Triangle ABC is congruent to triangle ADC, with A, B and C corresponding to A, D and C. AB = (3x − 2) cm, AD = (x + 8) cm and DC = (2x − 1) cm. Find the perimeter of quadrilateral ABCD in cm. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -460,8 +476,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "1",
-          "canonical_latex": "1",
+          "canonical_answer": "44",
+          "canonical_latex": "44",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -473,7 +489,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Count the three matching side pairs, including the common side."
+                "text": "Corresponding sides of congruent triangles are equal. Which side of triangle ADC matches AB, and which side of triangle ABC matches DC?"
               }
             ]
           },
@@ -482,7 +498,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Is there a side the two triangles share?"
+                "text": "AB corresponds to AD, so solve "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3x-2=x+8"
+              },
+              {
+                "type": "text",
+                "text": ". BC corresponds to DC."
               }
             ]
           }
@@ -492,8 +516,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "AB corresponds to AD, so they are equal."
+              },
+              {
                 "type": "display_math",
-                "latex": "AB=AD,\\quad BC=DC,\\quad AC=AC"
+                "latex": "3x-2=x+8\\ \\Rightarrow\\ x=5"
               }
             ],
             "mark_type": "M",
@@ -503,8 +531,12 @@
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "So AB = AD = 13 cm, and BC = DC = 2(5) − 1 = 9 cm."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\triangle ABC\\cong\\triangle ADC\\text{ by SSS}"
+                "latex": "AB=AD=13,\\quad BC=DC=9"
               }
             ],
             "mark_type": "M",
@@ -515,7 +547,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\text{code}=1"
+                "latex": "P=13+13+9+9=44"
               }
             ],
             "mark_type": "A",
@@ -530,29 +562,41 @@
         "asset_key": "g2-l4-505-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g2-l4-505-diagram-r3.svg",
-        "alt_text": "Two triangles ABC and ADC, on either side of their shared side AC. AB and AD have one tick, and BC and DC have two ticks. Not drawn to scale.",
+        "path": "assets/g2-l4-505-diagram-r4.svg",
+        "alt_text": "Two triangles ABC and ADC, on either side of their shared side AC. AB is marked (3x − 2) cm, AD is marked (x + 8) cm and DC is marked (2x − 1) cm. AB and AD have one tick, and BC and DC have two ticks. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-similarity-svg-v1",
           "diagram_kind": "shared_side",
           "question_key": "g2-l4-505",
           "outcome": "2.1",
           "template": "shared_side",
-          "inputs": {},
+          "inputs": {
+            "ab": {
+              "coefficient": 3,
+              "constant": -2
+            },
+            "ad": {
+              "coefficient": 1,
+              "constant": 8
+            },
+            "dc": {
+              "coefficient": 2,
+              "constant": -1
+            }
+          },
           "not_to_scale": true,
           "dimensions": {
-            "sides": "AB = AD and BC = DC, with AC shared"
+            "AB": "(3x − 2) cm",
+            "AD": "(x + 8) cm",
+            "DC": "(2x − 1) cm"
           },
           "forbidden_visible_labels": [
-            "1",
-            "SSS",
-            "SAS",
-            "ASA",
-            "RHS",
-            "included"
+            "44",
+            "5",
+            "13",
+            "9"
           ],
           "unknowns": [],
-          "answer_kind": "classification_code",
           "forbid_right_angle_marker": true,
           "figures": {
             "ABC": [
@@ -566,24 +610,6 @@
               "C"
             ]
           },
-          "omitted_givens": [
-            {
-              "value": "1",
-              "reason": "A response code in the question, not a measurement of the figure."
-            },
-            {
-              "value": "2",
-              "reason": "A response code in the question, not a measurement of the figure."
-            },
-            {
-              "value": "3",
-              "reason": "A response code in the question, not a measurement of the figure."
-            },
-            {
-              "value": "4",
-              "reason": "A response code in the question, not a measurement of the figure."
-            }
-          ],
           "equal_marks": [
             {
               "segments": [
@@ -676,6 +702,18 @@
             {
               "text": "D",
               "target": "point:D"
+            },
+            {
+              "text": "(3x − 2) cm",
+              "target": "segment:AB"
+            },
+            {
+              "text": "(x + 8) cm",
+              "target": "segment:AD"
+            },
+            {
+              "text": "(2x − 1) cm",
+              "target": "segment:DC"
             }
           ],
           "relationships": [
@@ -689,7 +727,7 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "03f8c9e53baae4ebff18398b94f90b70d11bc3e72a5b9593b816930c128bf2d0",
+        "sha256": "f75dac21c691cb65f1c018c608b2d05fff53e82c200a0c4a41c0579450840376",
         "width": 600,
         "height": 474
       }

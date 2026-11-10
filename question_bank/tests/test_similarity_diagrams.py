@@ -553,3 +553,20 @@ def test_apply_revisions_files_and_records_the_decisions(repository_root, tmp_pa
 
     again = regenerate_batch(bank, "B004", apply=True, add=NEW_FIGURES["B004"])
     assert all(asset.unchanged for asset in again.assets)
+
+
+def test_shared_side_can_label_its_sides_in_x_and_withhold_the_perimeter(tmp_path):
+    inputs = {"ab": linear(3, -2), "ad": linear(1, 8), "dc": linear(2, -1)}
+    diagram = sim.shared_side(inputs, ["44"])
+    spec = diagram.generation_spec
+    stated = (
+        "Triangle ABC is congruent to triangle ADC, with A, B and C corresponding to A, D and C. "
+        "AB = (3x − 2) cm, AD = (x + 8) cm and DC = (2x − 1) cm."
+    )
+
+    assert diagram.content_findings == []
+    assert findings(tmp_path, diagram, ["44"], stated=stated) == []
+    # x = 5, AB = AD = 13 and BC = DC = 9; none is printed.
+    assert {"44", "5", "13", "9"} <= set(spec["forbidden_visible_labels"])
+    assert "answer_kind" not in spec
+    assert sim.shared_side(inputs, ["40"]).content_findings
