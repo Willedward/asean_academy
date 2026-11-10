@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-lesson-01",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n7",
@@ -236,18 +236,65 @@
   "assets": [
     {
       "asset_key": "n7-lesson-01-equation-balance",
-      "kind": "chart",
+      "kind": "image",
       "format": "svg",
-      "path": "assets/n7-lesson-01-equation-balance-r3.svg",
-      "alt_text": "A level balance scale with 2x plus 3 on the left pan and 11 on the right pan, representing the equation 2x + 3 = 11.",
+      "path": "assets/n7-lesson-01-equation-balance-r4.svg",
+      "alt_text": "A level balance scale with 2x + 3 on the left pan and 11 on the right pan, representing the equation 2x + 3 = 11.",
       "generation_spec": {
-        "renderer": "nextscholar-balance-svg-v1",
+        "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "equation_balance",
-        "lesson_key": "n7-lesson-01"
+        "lesson_key": "n7-lesson-01",
+        "template": "balance_scale",
+        "inputs": {
+          "left": "2x + 3",
+          "right": "11",
+          "balanced": true,
+          "alt_text": "A level balance scale with 2x + 3 on the left pan and 11 on the right pan, representing the equation 2x + 3 = 11."
+        },
+        "viewbox": [
+          600,
+          300
+        ],
+        "chart_marks": [
+          {
+            "key": "beam",
+            "kind": "beam",
+            "value": "level",
+            "tag": "line",
+            "geometry": {
+              "x1": "120",
+              "y1": "70",
+              "x2": "480",
+              "y2": "70"
+            }
+          },
+          {
+            "key": "pan-left",
+            "kind": "pan",
+            "value": "2x + 3",
+            "tag": "path",
+            "geometry": {
+              "d": "M12 210 Q120 280 228 210 Z"
+            }
+          },
+          {
+            "key": "pan-right",
+            "kind": "pan",
+            "value": "11",
+            "tag": "path",
+            "geometry": {
+              "d": "M372 210 Q480 280 588 210 Z"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 14.92,
+        "balanced": true
       },
-      "sha256": "6f9db56a21716df96fa8753bf72d0387f146532e997f2fc8a9481518fbc7f3f6",
-      "width": 940,
-      "height": 460
+      "sha256": "a020058891553195ccb3c615744f606a04cdaa69d16878bf4ecf48500157f584",
+      "width": 600,
+      "height": 300
     }
   ],
   "provenance": {
@@ -256,6 +303,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Revision 2 expands the teaching sequence and worked examples; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
