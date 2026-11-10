@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-503 — Spread represented by a 50s stem-and-leaf row
+## s1-l2-503 — Spread of values in a stem-and-leaf diagram
 
 [Open this question in the HTML preview](index.html#s1-l2-503)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-504 — Preserve exact values
+## s1-l2-504 — Keep every exact value
 
 [Open this question in the HTML preview](index.html#s1-l2-504)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-505 — Displayed bar increase
+## s1-l2-505 — Apparent increase from a shortened axis
 
 [Open this question in the HTML preview](index.html#s1-l2-505)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-506 — Displayed bar increase
+## s1-l2-506 — Apparent increase for club membership
 
 [Open this question in the HTML preview](index.html#s1-l2-506)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-504 — Apparent increase on a truncated axis
+## s1-l3-504 — Apparent increase from a truncated baseline
 
 [Open this question in the HTML preview](index.html#s1-l3-504)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-504 — Compare frequencies in unequal-width classes
+## s1-l4-504 — True frequency density behind a misleading histogram
 
 [Open this question in the HTML preview](index.html#s1-l4-504)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-505 — Change in mean after adding an outlier
+## s1-l4-505 — Change in mean after adding a large value
 
 [Open this question in the HTML preview](index.html#s1-l4-505)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-509 — Choose the measure for the most common shoe size
+## s1-l2-509 — Choose a measure for equal sharing
 
 [Open this question in the HTML preview](index.html#s1-l2-509)
 

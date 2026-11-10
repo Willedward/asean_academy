@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 4,
+  "revision": 5,
   "stable_key": "s1-l2-505",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.7",
-  "title": "Displayed bar increase",
+  "title": "Apparent increase from a shortened axis",
   "difficulty": 2,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A vertical axis starts at 85. Two values are 95 and 105. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
+          "text": "A vertical axis starts at 85. Two bars show the values 95 and 110. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "100",
-        "canonical_latex": "100\\%",
+        "canonical_answer": "150",
+        "canonical_latex": "150",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -80,7 +80,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "105-85"
+              "latex": "110-85"
             },
             {
               "type": "text",
@@ -95,11 +95,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Measure heights from the shortened baseline. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{(105-85)-(95-85)}{95-85}\\times100=100"
+              "latex": "\\frac{(110-85)-(95-85)}{95-85}\\times100=\\frac{15}{10}\\times100"
             }
           ],
           "mark_type": "M",
@@ -110,11 +110,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "So the apparent increase is "
             },
             {
               "type": "display_math",
-              "latex": "100\\%"
+              "latex": "150\\%"
             }
           ],
           "mark_type": "A",
@@ -129,8 +129,8 @@
       "asset_key": "s1-l2-505-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l2-505-diagram-r4.svg",
-      "alt_text": "Bar chart with First: 95, Second: 105.",
+      "path": "assets/s1-l2-505-diagram-r5.svg",
+      "alt_text": "Bar chart with First: 95, Second: 110.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "bar_chart",
@@ -143,11 +143,11 @@
             "Second"
           ],
           "values": [
-            95.0,
-            105.0
+            95,
+            110
           ],
-          "y_min": 85.0,
-          "y_max": 105,
+          "y_min": 85,
+          "y_max": 110,
           "tick_step": 5
         },
         "viewbox": [
@@ -162,15 +162,15 @@
             "tag": "rect",
             "geometry": {
               "x": "149",
-              "y": "245",
+              "y": "273",
               "width": "177",
-              "height": "140"
+              "height": "112"
             }
           },
           {
             "key": "bar-1",
             "kind": "bar",
-            "value": "105",
+            "value": "110",
             "tag": "rect",
             "geometry": {
               "x": "444",
@@ -192,29 +192,36 @@
             "key": "y:90",
             "axis": "y",
             "value": "90",
-            "position": "315",
+            "position": "329",
             "label": "90"
           },
           {
             "key": "y:95",
             "axis": "y",
             "value": "95",
-            "position": "245",
+            "position": "273",
             "label": "95"
           },
           {
             "key": "y:100",
             "axis": "y",
             "value": "100",
-            "position": "175",
+            "position": "217",
             "label": "100"
           },
           {
             "key": "y:105",
             "axis": "y",
             "value": "105",
-            "position": "105",
+            "position": "161",
             "label": "105"
+          },
+          {
+            "key": "y:110",
+            "axis": "y",
+            "value": "110",
+            "position": "105",
+            "label": "110"
           },
           {
             "key": "x:First",
@@ -235,11 +242,11 @@
         "min_phone_font_px": 12.43,
         "axis": {
           "y_min": 85.0,
-          "y_max": 105.0,
+          "y_max": 110.0,
           "tick_step": 5.0
         }
       },
-      "sha256": "a269f474e56b6a7223bfa8ac6e5b10bcbb609304de631cc8fe6142fe8079bc7d",
+      "sha256": "75e13b770100e7851df74c7a82b5a7e59f7d0b98b364a4fbff956d90ae5998cb",
       "width": 720,
       "height": 480
     }

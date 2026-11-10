@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l3-501",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Class midpoints 10, 20 and 30 have frequencies 3, "
+          "text": "Class midpoints 10, 20 and 30 have frequencies 2, "
         },
         {
           "type": "inline_math",
@@ -28,7 +28,7 @@
         },
         {
           "type": "text",
-          "text": " and 9. The estimated mean is 24. Find "
+          "text": " and 8. The estimated mean is 24. Find "
         },
         {
           "type": "inline_math",
@@ -45,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3",
-        "canonical_latex": "3",
+        "canonical_answer": "5",
+        "canonical_latex": "5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -75,15 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
+              "text": "Multiply both sides by the total frequency before collecting the "
             },
             {
               "type": "inline_math",
-              "latex": "\\frac{10(3)+20f+30(9)}{3+f+9}=24"
+              "latex": "f"
             },
             {
               "type": "text",
-              "text": "."
+              "text": " terms."
             }
           ]
         }
@@ -94,11 +94,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Form the equation. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{30+20f+270}{3+f+9}=24\\Rightarrow f=3"
+              "latex": "\\frac{10(2)+20f+30(8)}{2+f+8}=24\\Rightarrow260+20f=240+24f"
             }
           ],
           "mark_type": "M",
@@ -109,11 +109,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "3"
+              "latex": "4f=20,\\ f=5"
             }
           ],
           "mark_type": "A",
