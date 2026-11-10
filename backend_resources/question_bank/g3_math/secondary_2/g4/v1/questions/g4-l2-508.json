@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l2-508",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Student engineers noted a narrow foundation beside drainage while preparing a replacement frame. A safety brace in the laboratory equipment stand forms a right triangle. Its hypotenuse is 41 m and one shorter side is 9 m. Find the other shorter side in metres. Enter the numerical value only."
+          "text": "A straight cable runs from the top of a vertical pole down to an anchor on level ground. Here the hypotenuse is 41 m and one shorter side is 9 m. Find the other shorter side b, the distance from the foot of the pole to the anchor, in metres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -79,11 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "The 41 m side is the hypotenuse, so by Pythagoras’ theorem"
             },
             {
               "type": "display_math",
-              "latex": "b=\\sqrt{41^2-9^2}=40"
+              "latex": "b^2=41^2-9^2=1681-81=1600"
             }
           ],
           "mark_type": "M",
@@ -94,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{40}"
+              "latex": "b=\\sqrt{1600}=40"
             }
           ],
           "mark_type": "A",
@@ -109,7 +109,7 @@
       "asset_key": "g4-l2-508-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l2-508-diagram-r3.svg",
+      "path": "assets/g4-l2-508-diagram-r4.svg",
       "alt_text": "Right-angled triangle with hypotenuse 41 m and one perpendicular side 9 m, right angle marked; the other perpendicular side is labelled b. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
@@ -245,6 +245,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }
