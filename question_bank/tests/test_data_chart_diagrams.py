@@ -356,6 +356,7 @@ def test_explicit_chart_request_applies_revisioned_asset(repository_root, tmp_pa
         }
     }
 
+    before = json.loads((bank / "questions/s1-l3-001.json").read_text())
     report = regenerate_batch(
         bank,
         "B001",
@@ -368,13 +369,14 @@ def test_explicit_chart_request_applies_revisioned_asset(repository_root, tmp_pa
     assert report.ok, report.as_dict()
     question = json.loads((bank / "questions/s1-l3-001.json").read_text())
     [asset] = question["assets"]
-    assert question["revision"] == 2
+    # The question already has its table, so the stored figure is kept unchanged.
+    assert question["revision"] == before["revision"]
     assert question["stem"][:2] == [
         {"type": "text", "text": DATA_DISPLAY_STEM},
         {"type": "asset_ref", "asset_key": "s1-l3-001-diagram"},
     ]
     assert asset["kind"] == "chart"
-    assert asset["path"] == "assets/s1-l3-001-diagram-r2.svg"
+    assert asset["path"] == f"assets/s1-l3-001-diagram-r{before['revision']}.svg"
     assert asset["generation_spec"]["template"] == "data_table"
     validation = validate_bank(
         bank,
