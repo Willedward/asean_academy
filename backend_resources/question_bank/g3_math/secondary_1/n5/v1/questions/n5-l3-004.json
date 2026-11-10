@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-l3-004",
   "bank_key": "g3-sec1-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A meal costs $c before a $12 delivery fee is added. The total is shared equally among n people. Write each person's share."
+          "text": "A meal costs S$c before a S$12 delivery fee is added. The total is shared equally among n people. Write each person's share in dollars."
         }
       ],
       "marks": 3,
@@ -35,7 +35,9 @@
           "c",
           "n"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "n > 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {}
       },
@@ -45,7 +47,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Assign an expression to each quantity described in the situation."
+              "text": "Write an expression for each part of the situation, in the order it happens."
             }
           ]
         },
@@ -54,7 +56,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the events in the order in which they occur, using brackets where needed."
+              "text": "Start by writing: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "c+12"
             }
           ]
         }
