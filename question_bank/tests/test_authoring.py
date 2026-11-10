@@ -234,7 +234,7 @@ def test_executor_repairs_and_validates_complete_planned_work_order(repository_r
         syllabus_path=isolated_root
         / "backend_resources/syllabi/g3_math/v1/catalogue.json",
         house_rules_path=isolated_root
-        / "backend_resources/question_bank/authoring/house-rules-v1.json",
+        / "backend_resources/question_bank/authoring/house-rules-v2.json",
     )
     work_order = json.loads((output / "work-order.json").read_text())
     valid_response = _generated_response_for(work_order)
@@ -275,7 +275,7 @@ def test_executor_rejects_wrong_slot_order_without_writing(repository_root, tmp_
         syllabus_path=isolated_root
         / "backend_resources/syllabi/g3_math/v1/catalogue.json",
         house_rules_path=isolated_root
-        / "backend_resources/question_bank/authoring/house-rules-v1.json",
+        / "backend_resources/question_bank/authoring/house-rules-v2.json",
     )
     work_order = json.loads((output / "work-order.json").read_text())
     response = _generated_response_for(work_order)
