@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-lesson-04",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n5",
@@ -50,7 +50,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A meal costs c dollars before a $12 delivery fee. The entire total is shared equally by n people. Write each person’s share."
+          "text": "A group hires a boat for S$c, and a S$15 cleaning fee is added. The whole total is shared equally by n people. Write each person’s share. (S$ means Singapore dollars.)"
         }
       ],
       "steps": [
@@ -59,11 +59,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the one-time delivery fee to the meal cost."
+              "text": "Add the one-time cleaning fee to the hire cost."
             },
             {
               "type": "display_math",
-              "latex": "c+12"
+              "latex": "c+15"
             }
           ]
         },
@@ -72,11 +72,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Treat the subtotal as one quantity using a numerator or brackets."
+              "text": "Treat the total as one quantity, using brackets or a fraction bar."
             },
             {
               "type": "display_math",
-              "latex": "(c+12)"
+              "latex": "(c+15)"
             }
           ]
         },
@@ -85,16 +85,16 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide the complete subtotal by the number of people."
+              "text": "Divide the complete total by the number of people."
             },
             {
               "type": "display_math",
-              "latex": "\\frac{c+12}{n}"
+              "latex": "\\frac{c+15}{n}"
             }
           ]
         }
       ],
-      "verification_note": "Multiplying one person’s share by n reconstructs c + 12, the complete bill."
+      "verification_note": "Multiplying one person’s share by n gives back c + 15, the complete bill. For c = 105 and n = 6, each person pays 120 ÷ 6 = S$20."
     },
     {
       "stable_key": "language-to-operations",
@@ -124,7 +124,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A delivery costs $4.50 plus $1.20 per kilometre for d kilometres. A voucher reduces the whole charge by 10%. Write the final charge."
+          "text": "A delivery costs S$4.50 plus S$1.20 per kilometre for d kilometres. A voucher reduces the whole charge by 10%. Write the final charge."
         }
       ],
       "steps": [
@@ -168,7 +168,7 @@
           ]
         }
       ],
-      "verification_note": "For d = 5, the original charge is $10.50; 90% is $9.45, and 4.05 + 1.08(5) also gives $9.45."
+      "verification_note": "For d = 5, the original charge is S$10.50; 90% is S$9.45, and 4.05 + 1.08(5) also gives S$9.45."
     },
     {
       "stable_key": "model-validation",
@@ -198,7 +198,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A bus fare is $2.50 plus $0.80 per kilometre. Write the fare for d kilometres."
+          "text": "A bus fare is S$2.50 plus S$0.80 per kilometre. Write the fare for d kilometres."
         }
       ],
       "response": {
@@ -216,7 +216,7 @@
       "feedback": [
         {
           "type": "text",
-          "text": "The fixed fare is 2.50 and the distance charge is 0.8d."
+          "text": "The fixed fare is S$2.50, added once, and the distance charge is 0.80d, so the fare is 2.50 + 0.80d (or 2.5 + 0.8d) dollars."
         }
       ]
     },

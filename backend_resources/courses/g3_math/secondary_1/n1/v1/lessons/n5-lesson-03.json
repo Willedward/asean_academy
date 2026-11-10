@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-lesson-03",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n5",
@@ -34,11 +34,11 @@
         },
         {
           "type": "display_math",
-          "latex": "2p^2-3p+1\\text{ at }p=-2:\\quad 2(-2)^2-3(-2)+1"
+          "latex": "2p^2-5p+3\\text{ at }p=-1:\\quad 2(-1)^2-5(-1)+3"
         },
         {
           "type": "text",
-          "text": "After substitution, follow the usual operation order: brackets, powers, multiplication and division, then addition and subtraction. Do not calculate from left to right when this would ignore a power or product. In the example, (−2)² is 4 and −3(−2) is +6."
+          "text": "After substitution, follow the usual operation order: brackets, powers, multiplication and division, then addition and subtraction. Do not calculate from left to right when this would ignore a power or product. In the example, (−1)² is 1 and −5(−1) is +5, so the value is 2 + 5 + 3 = 10."
         }
       ]
     },
@@ -50,7 +50,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use s = ut + at²/2 when u = 4, a = 6 and t = 3."
+          "text": "Use "
+        },
+        {
+          "type": "inline_math",
+          "latex": "s=ut+\\frac{at^2}{2}"
+        },
+        {
+          "type": "text",
+          "text": " when u = 5, a = 4 and t = 3."
         }
       ],
       "steps": [
@@ -63,7 +71,7 @@
             },
             {
               "type": "display_math",
-              "latex": "s=4(3)+\\frac{6(3^2)}2"
+              "latex": "s=5(3)+\\frac{4(3^2)}{2}"
             }
           ]
         },
@@ -76,7 +84,7 @@
             },
             {
               "type": "display_math",
-              "latex": "s=12+\\frac{6\\times9}{2}"
+              "latex": "s=15+\\frac{4\\times9}{2}"
             }
           ]
         },
@@ -85,16 +93,16 @@
           "content": [
             {
               "type": "text",
-              "text": "Complete the division and addition."
+              "text": "Divide, then add."
             },
             {
               "type": "display_math",
-              "latex": "s=12+27=39"
+              "latex": "s=15+18=33"
             }
           ]
         }
       ],
-      "verification_note": "Evaluating 3² first gives 39. Substitution into the original formula with a calculator produces the same value."
+      "verification_note": "Check by a different route: the formula can also be written s = t(u + at/2) = 3(5 + 4 × 3 ÷ 2) = 3(5 + 6) = 33."
     },
     {
       "stable_key": "formula-inputs-and-units",
@@ -124,7 +132,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A trapezium has parallel sides a = 8 cm and b = 14 cm, with height h = 5 cm. Use A = (a + b)h/2."
+          "text": "A trapezium (a four-sided shape with exactly one pair of parallel sides) has parallel sides a = 7 cm and b = 11 cm, with height h = 6 cm. Use "
+        },
+        {
+          "type": "inline_math",
+          "latex": "A=\\frac{(a+b)h}{2}"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "steps": [
@@ -137,7 +153,7 @@
             },
             {
               "type": "display_math",
-              "latex": "A=\\frac{(8+14)\\times5}{2}"
+              "latex": "A=\\frac{(7+11)\\times6}{2}"
             }
           ]
         },
@@ -150,7 +166,7 @@
             },
             {
               "type": "display_math",
-              "latex": "A=\\frac{22\\times5}{2}"
+              "latex": "A=\\frac{18\\times6}{2}"
             }
           ]
         },
@@ -163,12 +179,12 @@
             },
             {
               "type": "display_math",
-              "latex": "A=55\\text{ cm}^2"
+              "latex": "A=54\\text{ cm}^2"
             }
           ]
         }
       ],
-      "verification_note": "The average of the parallel sides is 11 cm; 11 × 5 cm gives the same area, 55 cm²."
+      "verification_note": "The average of the parallel sides is 9 cm, and 9 × 6 gives the same area, 54 cm²."
     },
     {
       "stable_key": "evaluation-checks",
