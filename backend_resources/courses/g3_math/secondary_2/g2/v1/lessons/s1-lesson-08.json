@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-lesson-08",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-s1",
@@ -30,7 +30,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Add all values and divide by the number of observations. The mean balances the data total equally across observations. Because every magnitude contributes, one extreme value can move the mean substantially."
+          "text": "Add all values and divide by the number of observations. The mean balances the data total equally across observations. Because every magnitude contributes, one extreme value can move the mean substantially. The diagram shows the data of the second worked example: the mean, 6, is the balance point of the five dots, while the median and mode are both 4."
         },
         {
           "type": "asset_ref",
@@ -66,11 +66,11 @@
       "stable_key": "s1-08-example-1",
       "position": 4,
       "type": "worked_example",
-      "title": "Recover a missing value",
+      "title": "Worked example: recover a missing value",
       "prompt": [
         {
           "type": "text",
-          "text": "Five values have mean 12. Four values total 43. Find the fifth value."
+          "text": "Five values have mean 12. Four of the values total 43. Find the fifth value."
         }
       ],
       "steps": [
@@ -79,7 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The required total is 5×12=60."
+              "text": "The total of all five values is the mean multiplied by the number of values."
+            },
+            {
+              "type": "display_math",
+              "latex": "5\\times12=60"
             }
           ]
         },
@@ -87,32 +91,23 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "Subtract the known total: 60-43=17."
-            }
-          ]
-        },
-        {
-          "position": 3,
-          "content": [
-            {
-              "type": "text",
-              "text": "The missing value is 17."
+              "type": "display_math",
+              "latex": "60-43=17"
             }
           ]
         }
       ],
-      "verification_note": "The reconstructed total 43+17=60 gives mean 12."
+      "verification_note": "With the fifth value, the total is 43 + 17 = 60, and 60 ÷ 5 = 12."
     },
     {
       "stable_key": "s1-08-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Compare all three measures",
+      "title": "Worked example: compare all three measures",
       "prompt": [
         {
           "type": "text",
-          "text": "For 2, 4, 4, 7, 13, find mean, median and mode."
+          "text": "For the data 2, 4, 4, 7, 13 in the diagram, find the mean, median and mode."
         }
       ],
       "steps": [
@@ -120,8 +115,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "The total is 30, so mean=30/5=6."
+              "type": "display_math",
+              "latex": "\\text{mean}=\\frac{2+4+4+7+13}{5}=\\frac{30}{5}=6"
             }
           ]
         },
@@ -130,7 +125,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The ordered middle value is 4, so median=4."
+              "text": "The values are already in order, and the middle (third) value is 4, so the median is 4."
             }
           ]
         },
@@ -139,12 +134,12 @@
           "content": [
             {
               "type": "text",
-              "text": "The repeated value is 4, so mode=4."
+              "text": "4 appears twice and every other value once, so the mode is 4."
             }
           ]
         }
       ],
-      "verification_note": "Each result follows a different definition."
+      "verification_note": "The distances from the mean, −4, −2, −2, +1 and +7, add to 0, which confirms that 6 is the balance point. The value 13 pulls the mean above the median."
     },
     {
       "stable_key": "s1-08-recall",
@@ -182,11 +177,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Read the scale, key, class boundaries and units before calculating or interpreting."
+          "text": "Mean = total ÷ number of values. Median = middle value of the ordered data (the mean of the two middle values for an even count). Mode = most frequent value."
         },
         {
           "type": "text",
-          "text": "Show the statistical definition or formula, calculate carefully, then explain what the result means for the displayed data."
+          "text": "For a missing value, find the required total from the mean first. Order the data before finding the median."
         }
       ]
     }
@@ -196,15 +191,199 @@
       "asset_key": "s1-lesson-08-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-lesson-08-centre.svg",
-      "alt_text": "An ordered data strip identifying the mean, median and mode.",
+      "path": "assets/s1-lesson-08-centre-r2.svg",
+      "alt_text": "Dot diagram of the values 2, 4, 4, 7 and 13 on a number line from 0 to 14, with two dots stacked at 4.",
       "generation_spec": {
-        "renderer": "nextscholar-statistics-svg-v1",
-        "diagram_kind": "centre_measures",
-        "lesson_key": "s1-lesson-08"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "dot_plot",
+        "lesson_key": "s1-lesson-08",
+        "template": "dot_plot",
+        "inputs": {
+          "values": [
+            2,
+            4,
+            4,
+            7,
+            13
+          ],
+          "x_min": 0,
+          "x_max": 14,
+          "title": "The data 2, 4, 4, 7 and 13",
+          "alt_text": "Dot diagram of the values 2, 4, 4, 7 and 13 on a number line from 0 to 14, with two dots stacked at 4."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "dot-0",
+            "kind": "dot",
+            "value": "2",
+            "tag": "circle",
+            "geometry": {
+              "cx": "165.714286",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-1",
+            "kind": "dot",
+            "value": "4",
+            "tag": "circle",
+            "geometry": {
+              "cx": "251.428571",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-2",
+            "kind": "dot",
+            "value": "4",
+            "tag": "circle",
+            "geometry": {
+              "cx": "251.428571",
+              "cy": "323",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-3",
+            "kind": "dot",
+            "value": "7",
+            "tag": "circle",
+            "geometry": {
+              "cx": "380",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-4",
+            "kind": "dot",
+            "value": "13",
+            "tag": "circle",
+            "geometry": {
+              "cx": "637.142857",
+              "cy": "357",
+              "r": "9"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "80",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "122.857143",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "165.714286",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "208.571429",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "251.428571",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "294.285714",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "337.142857",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "380",
+            "label": "7"
+          },
+          {
+            "key": "x:8",
+            "axis": "x",
+            "value": "8",
+            "position": "422.857143",
+            "label": "8"
+          },
+          {
+            "key": "x:9",
+            "axis": "x",
+            "value": "9",
+            "position": "465.714286",
+            "label": "9"
+          },
+          {
+            "key": "x:10",
+            "axis": "x",
+            "value": "10",
+            "position": "508.571429",
+            "label": "10"
+          },
+          {
+            "key": "x:11",
+            "axis": "x",
+            "value": "11",
+            "position": "551.428571",
+            "label": "11"
+          },
+          {
+            "key": "x:12",
+            "axis": "x",
+            "value": "12",
+            "position": "594.285714",
+            "label": "12"
+          },
+          {
+            "key": "x:13",
+            "axis": "x",
+            "value": "13",
+            "position": "637.142857",
+            "label": "13"
+          },
+          {
+            "key": "x:14",
+            "axis": "x",
+            "value": "14",
+            "position": "680",
+            "label": "14"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
       },
-      "sha256": "e8cf0ce88b1b1cd4b3eadd24e08a4ab98000e768e15c298e8477608c775fac05",
-      "width": 960,
+      "sha256": "5b3d559371ac02417fb9826b967c24c1890eb5f45d4b000c37a901afad2acc28",
+      "width": 720,
       "height": 480
     }
   ],
@@ -214,6 +393,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

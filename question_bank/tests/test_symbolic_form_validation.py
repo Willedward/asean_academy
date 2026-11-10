@@ -128,8 +128,19 @@ def test_setting_a_form_clears_the_issue(repository_root, tmp_path):
     assert any(path.endswith("n5-l1-015.json") for path in flagged(report, "warning"))
 
 
-def test_lesson_recall_warns_for_drafts_and_blocks_publication(repository_root, course_bank_root):
-    course_root = repository_root / SECONDARY_1_COURSE
+def test_lesson_recall_warns_for_drafts_and_blocks_publication(
+    repository_root, course_bank_root, tmp_path
+):
+    course_root = tmp_path / "course"
+    shutil.copytree(repository_root / SECONDARY_1_COURSE, course_root)
+    # The committed recalls set their forms; strip them to check that a missing form is caught.
+    for key in ("n5-lesson-06", "n5-lesson-07", "n5-lesson-08"):
+        lesson_path = course_root / "lessons" / f"{key}.json"
+        lesson = json.loads(lesson_path.read_text())
+        for section in lesson["sections"]:
+            if section["type"] == "active_recall":
+                section["response"]["checker_config"] = {}
+        lesson_path.write_text(json.dumps(lesson))
     draft = validate_course(course_root, course_bank_root)
     assert draft.valid
     warned = flagged(draft, "warning")

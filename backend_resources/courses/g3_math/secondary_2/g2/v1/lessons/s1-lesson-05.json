@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-lesson-05",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-s1",
@@ -28,7 +28,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Each dot represents one observation. Read the horizontal scale first, then count stacked dots to obtain a frequency. The layout exposes repeated values, gaps, clusters and possible outliers while preserving every observation. Range is the greatest value minus the least value."
+          "text": "A dot diagram (also called a dot plot) shows each observation as one dot above a number line. Read the horizontal scale first, then count stacked dots to obtain a frequency. The layout exposes repeated values, gaps, clusters and possible outliers while preserving every observation. Range is the greatest value minus the least value."
         },
         {
           "type": "asset_ref",
@@ -37,8 +37,54 @@
       ]
     },
     {
-      "stable_key": "s1-05-explanation-2",
+      "stable_key": "s1-05-example-dot",
       "position": 2,
+      "type": "worked_example",
+      "title": "Worked example: read a dot diagram",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The dot diagram shows the number of hours of sport that 10 students played in one week. Find the mode and the range, and describe any gap."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Count the dots above each value. The tallest stack is three dots above 4, so the mode is 4 hours."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The least value is 2 and the greatest is 9."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\text{range}=9-2=7\\text{ hours}"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "No student played 7 or 8 hours, so the value 9 stands apart from the main cluster from 2 to 6."
+            }
+          ]
+        }
+      ],
+      "verification_note": "There are 1 + 2 + 3 + 2 + 1 + 1 = 10 dots, one for each student."
+    },
+    {
+      "stable_key": "s1-05-explanation-2",
+      "position": 3,
       "type": "explanation",
       "title": "Decode stem-and-leaf values",
       "blocks": [
@@ -50,7 +96,7 @@
     },
     {
       "stable_key": "s1-05-explanation-3",
-      "position": 3,
+      "position": 4,
       "type": "explanation",
       "title": "Use area in a histogram",
       "blocks": [
@@ -62,13 +108,13 @@
     },
     {
       "stable_key": "s1-05-example-1",
-      "position": 4,
+      "position": 5,
       "type": "worked_example",
-      "title": "Interpret unequal widths",
+      "title": "Worked example: interpret unequal widths",
       "prompt": [
         {
           "type": "text",
-          "text": "A class of width 5 has density 4 and a class of width 10 has density 2. Find both frequencies."
+          "text": "A class of width 5 has frequency density 4 and a class of width 10 has frequency density 2. Find both frequencies."
         }
       ],
       "steps": [
@@ -85,32 +131,23 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "The first frequency is 5×4=20."
-            }
-          ]
-        },
-        {
-          "position": 3,
-          "content": [
-            {
-              "type": "text",
-              "text": "The second frequency is 10×2=20."
+              "type": "display_math",
+              "latex": "5\\times4=20,\\qquad 10\\times2=20"
             }
           ]
         }
       ],
-      "verification_note": "Equal bar areas confirm equal frequencies even though the heights differ."
+      "verification_note": "Both bars have area 20 although the first is twice as tall, which is why area, not height, shows frequency here."
     },
     {
       "stable_key": "s1-05-example-2",
-      "position": 5,
+      "position": 6,
       "type": "worked_example",
-      "title": "Read a stem-and-leaf diagram",
+      "title": "Worked example: read a stem-and-leaf diagram",
       "prompt": [
         {
           "type": "text",
-          "text": "The row 3 | 1 4 4 8 has key 3|1=31. Find its median and range."
+          "text": "The row 3 | 1 4 4 8 has key 3 | 1 = 31. Find its median and range."
         }
       ],
       "steps": [
@@ -128,7 +165,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The median is (34+34)/2=34."
+              "text": "There are four values, so the median is the mean of the middle two."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{34+34}{2}=34"
             }
           ]
         },
@@ -136,17 +177,17 @@
           "position": 3,
           "content": [
             {
-              "type": "text",
-              "text": "The range is 38-31=7."
+              "type": "display_math",
+              "latex": "\\text{range}=38-31=7"
             }
           ]
         }
       ],
-      "verification_note": "All four values were preserved by the display."
+      "verification_note": "Two values lie below 34 and two at or above it, and 31 + 7 = 38."
     },
     {
       "stable_key": "s1-05-recall",
-      "position": 6,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -174,17 +215,17 @@
     },
     {
       "stable_key": "s1-05-summary",
-      "position": 7,
+      "position": 8,
       "type": "summary",
       "title": "Lesson checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Read the scale, key, class boundaries and units before calculating or interpreting."
+          "text": "Dot diagram: count the dots at each value to read frequencies, the mode, the range and gaps. Stem-and-leaf diagram: use the key to decode exact values, already in order. Histogram: with unequal class widths, bar area shows frequency and height shows frequency density."
         },
         {
           "type": "text",
-          "text": "Show the statistical definition or formula, calculate carefully, then explain what the result means for the displayed data."
+          "text": "Read the scale or key first, then calculate, and say what the result means for the data."
         }
       ]
     }
@@ -194,15 +235,208 @@
       "asset_key": "s1-lesson-05-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-lesson-05-distributions.svg",
-      "alt_text": "Side-by-side examples of a dot plot, histogram and stem-and-leaf diagram.",
+      "path": "assets/s1-lesson-05-distributions-r2.svg",
+      "alt_text": "Dot diagram of the hours of sport played by 10 students in one week: one dot at 2, two at 3, three at 4, two at 5, one at 6 and one at 9, on a scale from 2 to 9.",
       "generation_spec": {
-        "renderer": "nextscholar-statistics-svg-v1",
-        "diagram_kind": "distribution_representations",
-        "lesson_key": "s1-lesson-05"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "dot_plot",
+        "lesson_key": "s1-lesson-05",
+        "template": "dot_plot",
+        "inputs": {
+          "values": [
+            2,
+            3,
+            3,
+            4,
+            4,
+            4,
+            5,
+            5,
+            6,
+            9
+          ],
+          "title": "Hours of sport in one week",
+          "alt_text": "Dot diagram of the hours of sport played by 10 students in one week: one dot at 2, two at 3, three at 4, two at 5, one at 6 and one at 9, on a scale from 2 to 9."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "dot-0",
+            "kind": "dot",
+            "value": "2",
+            "tag": "circle",
+            "geometry": {
+              "cx": "80",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-1",
+            "kind": "dot",
+            "value": "3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "165.714286",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-2",
+            "kind": "dot",
+            "value": "3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "165.714286",
+              "cy": "323",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-3",
+            "kind": "dot",
+            "value": "4",
+            "tag": "circle",
+            "geometry": {
+              "cx": "251.428571",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-4",
+            "kind": "dot",
+            "value": "4",
+            "tag": "circle",
+            "geometry": {
+              "cx": "251.428571",
+              "cy": "323",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-5",
+            "kind": "dot",
+            "value": "4",
+            "tag": "circle",
+            "geometry": {
+              "cx": "251.428571",
+              "cy": "289",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-6",
+            "kind": "dot",
+            "value": "5",
+            "tag": "circle",
+            "geometry": {
+              "cx": "337.142857",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-7",
+            "kind": "dot",
+            "value": "5",
+            "tag": "circle",
+            "geometry": {
+              "cx": "337.142857",
+              "cy": "323",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-8",
+            "kind": "dot",
+            "value": "6",
+            "tag": "circle",
+            "geometry": {
+              "cx": "422.857143",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-9",
+            "kind": "dot",
+            "value": "9",
+            "tag": "circle",
+            "geometry": {
+              "cx": "680",
+              "cy": "357",
+              "r": "9"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "80",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "165.714286",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "251.428571",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "337.142857",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "422.857143",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "508.571429",
+            "label": "7"
+          },
+          {
+            "key": "x:8",
+            "axis": "x",
+            "value": "8",
+            "position": "594.285714",
+            "label": "8"
+          },
+          {
+            "key": "x:9",
+            "axis": "x",
+            "value": "9",
+            "position": "680",
+            "label": "9"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
       },
-      "sha256": "cd832f88325351cc82594f9dae48eb143df4bb4dd193992576dfb7a412cdf24d",
-      "width": 960,
+      "sha256": "a8a07da24b1ca2c2aab0b207f8409487d11977a85bdba243a105952f4c677c2c",
+      "width": 720,
       "height": 480
     }
   ],
@@ -212,6 +446,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

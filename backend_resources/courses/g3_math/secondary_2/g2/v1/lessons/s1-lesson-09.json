@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-lesson-09",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-s1",
@@ -30,7 +30,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Use the mode when the most common category or size matters. Use the median when the middle ranked observation should resist extreme values. Use the mean when totals matter and the numerical distribution is reasonably balanced."
+          "text": "Use the mode when the most common category or size matters. Use the median when the middle ranked observation should resist extreme values. Use the mean when totals matter and the numerical distribution is reasonably balanced. In the diagram, seven walking times lie between 3 and 6 minutes and one is 18 minutes. The median is (5 + 5) ÷ 2 = 5 minutes, but the mean is 50 ÷ 8 = 6.25 minutes, pulled up by the single long walk."
         },
         {
           "type": "asset_ref",
@@ -66,11 +66,11 @@
       "stable_key": "s1-09-example-1",
       "position": 4,
       "type": "worked_example",
-      "title": "Choose for household income",
+      "title": "Worked example: choose for household income",
       "prompt": [
         {
           "type": "text",
-          "text": "Most incomes cluster below one very large income. Choose a representative measure."
+          "text": "Most household incomes in a village cluster together, but one household’s income is very large. Choose a measure that describes a typical household."
         }
       ],
       "steps": [
@@ -79,7 +79,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The extreme income strongly raises the mean."
+              "text": "The extreme income adds a lot to the total, so it strongly raises the mean."
             }
           ]
         },
@@ -88,7 +88,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The median depends on the middle position."
+              "text": "The median depends on the middle position, so one extreme value moves it very little."
             }
           ]
         },
@@ -102,17 +102,17 @@
           ]
         }
       ],
-      "verification_note": "The choice is tied to skew and the intended interpretation."
+      "verification_note": "Removing the very large income would change the mean a lot but the median hardly at all, which shows that the median describes the cluster."
     },
     {
       "stable_key": "s1-09-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Choose for stock planning",
+      "title": "Worked example: choose for the most popular option",
       "prompt": [
         {
           "type": "text",
-          "text": "A shop needs the most frequently requested shoe size."
+          "text": "A café wants to know which cup size, small, medium or large, is ordered most often."
         }
       ],
       "steps": [
@@ -121,7 +121,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The decision concerns the most common value."
+              "text": "The data are categories, so a mean or median cannot be calculated."
             }
           ]
         },
@@ -130,7 +130,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Count the frequency of each size."
+              "text": "Count how often each size is ordered."
             }
           ]
         },
@@ -139,12 +139,12 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the mode."
+              "text": "Use the mode: the size with the greatest count."
             }
           ]
         }
       ],
-      "verification_note": "The modal size directly answers the stocking question."
+      "verification_note": "The mode answers the question directly, and it is the only one of the three measures that works for categories."
     },
     {
       "stable_key": "s1-09-recall",
@@ -182,11 +182,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Read the scale, key, class boundaries and units before calculating or interpreting."
+          "text": "Mode: the most common value or category. Median: the typical middle value, resistant to outliers and skew. Mean: uses every value, best when totals matter and the data are balanced."
         },
         {
           "type": "text",
-          "text": "Show the statistical definition or formula, calculate carefully, then explain what the result means for the displayed data."
+          "text": "Justify a choice by linking it to the shape of the data and the purpose, and say why another measure could mislead."
         }
       ]
     }
@@ -196,15 +196,249 @@
       "asset_key": "s1-lesson-09-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-lesson-09-resistant-centre.svg",
-      "alt_text": "A data strip showing a central cluster, one outlier and the different locations of the median and mean.",
+      "path": "assets/s1-lesson-09-resistant-centre-r2.svg",
+      "alt_text": "Dot diagram of eight walking times in minutes: 3, 4, 4, 5, 5, 5, 6 and 18, on a scale from 2 to 18. Seven dots cluster between 3 and 6, and one dot is at 18.",
       "generation_spec": {
-        "renderer": "nextscholar-statistics-svg-v1",
-        "diagram_kind": "outlier_effect",
-        "lesson_key": "s1-lesson-09"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "dot_plot",
+        "lesson_key": "s1-lesson-09",
+        "template": "dot_plot",
+        "inputs": {
+          "values": [
+            3,
+            4,
+            4,
+            5,
+            5,
+            5,
+            6,
+            18
+          ],
+          "x_min": 2,
+          "x_max": 18,
+          "title": "Minutes to walk to school",
+          "alt_text": "Dot diagram of eight walking times in minutes: 3, 4, 4, 5, 5, 5, 6 and 18, on a scale from 2 to 18. Seven dots cluster between 3 and 6, and one dot is at 18."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "dot-0",
+            "kind": "dot",
+            "value": "3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "117.5",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-1",
+            "kind": "dot",
+            "value": "4",
+            "tag": "circle",
+            "geometry": {
+              "cx": "155",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-2",
+            "kind": "dot",
+            "value": "4",
+            "tag": "circle",
+            "geometry": {
+              "cx": "155",
+              "cy": "323",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-3",
+            "kind": "dot",
+            "value": "5",
+            "tag": "circle",
+            "geometry": {
+              "cx": "192.5",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-4",
+            "kind": "dot",
+            "value": "5",
+            "tag": "circle",
+            "geometry": {
+              "cx": "192.5",
+              "cy": "323",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-5",
+            "kind": "dot",
+            "value": "5",
+            "tag": "circle",
+            "geometry": {
+              "cx": "192.5",
+              "cy": "289",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-6",
+            "kind": "dot",
+            "value": "6",
+            "tag": "circle",
+            "geometry": {
+              "cx": "230",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-7",
+            "kind": "dot",
+            "value": "18",
+            "tag": "circle",
+            "geometry": {
+              "cx": "680",
+              "cy": "357",
+              "r": "9"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "80",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "117.5",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "155",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "192.5",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "230",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "267.5",
+            "label": "7"
+          },
+          {
+            "key": "x:8",
+            "axis": "x",
+            "value": "8",
+            "position": "305",
+            "label": "8"
+          },
+          {
+            "key": "x:9",
+            "axis": "x",
+            "value": "9",
+            "position": "342.5",
+            "label": "9"
+          },
+          {
+            "key": "x:10",
+            "axis": "x",
+            "value": "10",
+            "position": "380",
+            "label": "10"
+          },
+          {
+            "key": "x:11",
+            "axis": "x",
+            "value": "11",
+            "position": "417.5",
+            "label": "11"
+          },
+          {
+            "key": "x:12",
+            "axis": "x",
+            "value": "12",
+            "position": "455",
+            "label": "12"
+          },
+          {
+            "key": "x:13",
+            "axis": "x",
+            "value": "13",
+            "position": "492.5",
+            "label": "13"
+          },
+          {
+            "key": "x:14",
+            "axis": "x",
+            "value": "14",
+            "position": "530",
+            "label": "14"
+          },
+          {
+            "key": "x:15",
+            "axis": "x",
+            "value": "15",
+            "position": "567.5",
+            "label": "15"
+          },
+          {
+            "key": "x:16",
+            "axis": "x",
+            "value": "16",
+            "position": "605",
+            "label": "16"
+          },
+          {
+            "key": "x:17",
+            "axis": "x",
+            "value": "17",
+            "position": "642.5",
+            "label": "17"
+          },
+          {
+            "key": "x:18",
+            "axis": "x",
+            "value": "18",
+            "position": "680",
+            "label": "18"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
       },
-      "sha256": "cf83f848c9a5aef3e3cbc50d0951508c0b5f0d5f7ac752562e12cfec8603da18",
-      "width": 960,
+      "sha256": "7deeaf19c03df460f4d03720356a5d7c7d20f7e7962621b0acc922c3df5aa2f3",
+      "width": 720,
       "height": 480
     }
   ],
@@ -214,6 +448,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "ex-l5-002",
   "bank_key": "english-ex-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -17,14 +17,26 @@
   "parts": [
     {
       "position": 1,
-      "prompt": "Which reverse outline best captures the model’s reusable structural move?",
+      "prompt": "Which one-line summary of each sentence best captures the model’s reusable pattern?",
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "repair café → tools → tables → queues → newcomers"},
-          {"key": "B", "text": "initial approach → specific weakness and consequence → targeted response → observable result → wider significance"},
-          {"key": "C", "text": "firstly → secondly → moreover → finally → in conclusion"},
-          {"key": "D", "text": "long sentence → short sentence → long sentence → short sentence → long sentence"}
+          {
+            "key": "A",
+            "text": "repair café → tools → tables → queues → newcomers"
+          },
+          {
+            "key": "B",
+            "text": "initial approach → specific weakness and consequence → targeted response → observable result → wider significance"
+          },
+          {
+            "key": "C",
+            "text": "firstly → secondly → moreover → finally → in conclusion"
+          },
+          {
+            "key": "D",
+            "text": "long sentence → short sentence → long sentence → short sentence → long sentence → short sentence"
+          }
         ],
         "correct_key": "B",
         "choice_rationales": {
@@ -35,7 +47,7 @@
         }
       },
       "hint": "Choose labels that would still make sense after every repair-café noun was removed.",
-      "correct_explanation": "A transferable reverse outline records sentence functions and relationships rather than subject-specific vocabulary."
+      "correct_explanation": "A transferable summary records sentence functions and relationships rather than subject-specific vocabulary."
     },
     {
       "position": 2,
@@ -43,13 +55,32 @@
       "response": {
         "type": "multiple_response",
         "options": [
-          {"key": "A", "text": "It shows a concrete consequence of the missing tools before introducing the response."},
-          {"key": "B", "text": "It makes the tool stations answer the exact weakness already established."},
-          {"key": "C", "text": "It moves from an immediate result to a wider significance for newcomers."},
-          {"key": "D", "text": "It uses the number three, which every transferred paragraph should preserve."},
-          {"key": "E", "text": "It describes the colour and brand of every tool."}
+          {
+            "key": "A",
+            "text": "It shows a concrete consequence of the missing tools before introducing the response."
+          },
+          {
+            "key": "B",
+            "text": "It makes the tool stations answer the exact weakness already established."
+          },
+          {
+            "key": "C",
+            "text": "It moves from an immediate result to a wider significance for newcomers."
+          },
+          {
+            "key": "D",
+            "text": "It uses the number three, which every transferred paragraph should preserve."
+          },
+          {
+            "key": "E",
+            "text": "It describes the colour and brand of every tool."
+          }
         ],
-        "correct_keys": ["A", "B", "C"],
+        "correct_keys": [
+          "A",
+          "B",
+          "C"
+        ],
         "choice_rationales": {
           "A": "The consequence gives the later response a clear reason.",
           "B": "The response is coherent because it is designed for the identified problem.",
@@ -67,10 +98,22 @@
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "Replace repair café with canteen, tools with food and newcomers with students."},
-          {"key": "B", "text": "Begin with ‘At first’, create exactly three stations and claim improvement within one hour."},
-          {"key": "C", "text": "Copy the final sentence now and change several words after drafting the body."},
-          {"key": "D", "text": "Show the original routine, its observable waste, a response based on that evidence, the resulting change and why the change matters."}
+          {
+            "key": "A",
+            "text": "Replace repair café with canteen, tools with food and newcomers with students."
+          },
+          {
+            "key": "B",
+            "text": "Begin with ‘At first’, create exactly three stations as the model did and claim improvement within one hour."
+          },
+          {
+            "key": "C",
+            "text": "Copy the final sentence now and change several words after drafting the body."
+          },
+          {
+            "key": "D",
+            "text": "Show the original routine, its observable waste, a response based on that evidence, the resulting change and why the change matters."
+          }
         ],
         "correct_key": "D",
         "choice_rationales": {
@@ -89,10 +132,22 @@
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "Food is important, and waste is bad for many reasons."},
-          {"key": "B", "text": "For three days, the team sorted unopened items, untouched portions and scraps, revealing that oversized servings caused most avoidable waste."},
-          {"key": "C", "text": "Trays disappeared between tables, and several lunches stopped while students searched for missing parts."},
-          {"key": "D", "text": "Exactly three labelled food stations solved every problem within one hour."}
+          {
+            "key": "A",
+            "text": "Food is important, and waste is bad for many reasons."
+          },
+          {
+            "key": "B",
+            "text": "For three days, the team sorted unopened items, untouched portions and scraps, revealing that oversized servings caused most avoidable waste."
+          },
+          {
+            "key": "C",
+            "text": "Trays disappeared between tables, and several lunches stopped while students searched for missing parts of their meals."
+          },
+          {
+            "key": "D",
+            "text": "Exactly three labelled food stations solved every problem within one hour."
+          }
         ],
         "correct_key": "B",
         "choice_rationales": {
@@ -111,10 +166,22 @@
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "The smaller serving option reduced the number of untouched portions. More importantly, it let students choose an amount they expected to finish instead of treating one portion as suitable for everyone."},
-          {"key": "B", "text": "The simple system did more than save food: it turned a crowded canteen into a shared process that newcomers could follow."},
-          {"key": "C", "text": "In conclusion, the result was good, useful, successful and positive."},
-          {"key": "D", "text": "The project reduced waste by 97.4 per cent, although no measurements were recorded."}
+          {
+            "key": "A",
+            "text": "The smaller serving option reduced the number of untouched portions. More importantly, it let students choose an amount they expected to finish instead of treating one portion as suitable for everyone."
+          },
+          {
+            "key": "B",
+            "text": "The simple system did more than save food: it turned a crowded canteen into a shared process that newcomers could follow, just as the repair café's stations did."
+          },
+          {
+            "key": "C",
+            "text": "In conclusion, the result was good, useful, successful and positive."
+          },
+          {
+            "key": "D",
+            "text": "The project reduced waste by 97.4 per cent, although no measurements were recorded."
+          }
         ],
         "correct_key": "A",
         "choice_rationales": {
@@ -133,10 +200,22 @@
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "At first, food disappeared between tables. The team created three labelled tool stations. Within an hour, the queues moved. The simple system helped newcomers."},
-          {"key": "B", "text": "Food waste is a global issue. There are many causes. Schools are important. Everyone should care."},
-          {"key": "C", "text": "The team initially reminded students to waste less, but the bins revealed no reason for what was discarded. A three-day sorting audit showed that oversized servings produced many untouched portions, so the canteen offered a smaller first serving with free second helpings. The number of untouched portions fell during the trial. The change mattered because students gained control over portion size rather than being blamed for a choice they had not made."},
-          {"key": "D", "text": "The team conducted an audit. Furthermore, the canteen changed. Moreover, waste fell. In conclusion, the project was successful."}
+          {
+            "key": "A",
+            "text": "At first, food disappeared between tables. The team created three labelled tool stations. Within an hour, the queues moved. The simple system helped newcomers."
+          },
+          {
+            "key": "B",
+            "text": "Food waste is a global issue. There are many causes. Schools are important. Everyone should care."
+          },
+          {
+            "key": "C",
+            "text": "The team initially reminded students to waste less, but the bins revealed no reason for what was discarded. A three-day sorting audit showed that oversized servings produced many untouched portions, so the canteen offered a smaller first serving with free second helpings. The number of untouched portions fell during the trial. The change mattered because students gained control over portion size rather than being blamed for a choice they had not made."
+          },
+          {
+            "key": "D",
+            "text": "The team conducted an audit of the bins for three days. Furthermore, oversized servings existed. Moreover, the canteen offered a smaller first serving with free second helpings. Additionally, the number of untouched portions fell during the trial. In conclusion, the project was successful, and students were happy because waste is bad and the canteen changed."
+          }
         ],
         "correct_key": "C",
         "choice_rationales": {
