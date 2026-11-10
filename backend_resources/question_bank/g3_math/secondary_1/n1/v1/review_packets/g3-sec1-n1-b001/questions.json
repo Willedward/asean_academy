@@ -1958,7 +1958,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n1-l1-017",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1978,7 +1978,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Insert < or > to make a true statement: -3.4 ___ -3.04. Write the complete statement, for example "
+            "text": "Insert < or > to make a true statement: "
+          },
+          {
+            "type": "inline_math",
+            "latex": "-3.4\\ \\underline{\\quad}\\ -3.04"
+          },
+          {
+            "type": "text",
+            "text": ". Write the complete statement, for example "
           },
           {
             "type": "inline_math",
@@ -2023,7 +2031,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write -3.4 as -3.40; it lies farther left than -3.04."
+                "text": "Write "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-3.4"
+              },
+              {
+                "type": "text",
+                "text": " as "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-3.40"
+              },
+              {
+                "type": "text",
+                "text": "; it lies farther left than "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-3.04"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
