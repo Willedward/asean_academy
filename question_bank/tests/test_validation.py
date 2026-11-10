@@ -32,6 +32,14 @@ def test_unreviewed_draft_cannot_be_published(bank_root):
 
 def test_changed_assets_use_a_revisioned_storage_path():
     assert revisioned_asset_path_issues("assets/angle.svg", 2) == []
+    assert revisioned_asset_path_issues("assets/angle.svg", 1, minimum_revision=2) == []
+    assert revisioned_asset_path_issues("assets/angle-r2.svg", 2, minimum_revision=2) == []
+    assert revisioned_asset_path_issues("assets/angle.svg", 2, minimum_revision=2) == [
+        (
+            "asset_revision_path",
+            "Revision 2 assets require an -r2 filename before the extension.",
+        )
+    ]
     assert revisioned_asset_path_issues("assets/angle-r3.svg", 3) == []
     assert revisioned_asset_path_issues("assets/angle.svg", 3) == [
         (
