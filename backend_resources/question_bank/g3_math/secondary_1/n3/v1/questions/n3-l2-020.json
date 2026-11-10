@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n3-l2-020",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A household uses 450 kWh of electricity in June and 405 kWh in July. By what percentage is the July usage lower than the June usage?"
+          "text": "A household uses 450 kWh of electricity in June and 369 kWh in July. By what percentage is the July usage lower than the June usage?"
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "10",
-        "canonical_latex": "10\\%",
+        "canonical_answer": "18",
+        "canonical_latex": "18",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 405 from 450, then divide by 450."
+              "text": "Subtract 369 from 450, then divide by 450."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "450-405=45"
+              "type": "inline_math",
+              "latex": "450-369=81"
             }
           ],
           "mark_type": "M",
@@ -72,8 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{45}{450}\\times100\\%=10\\%"
+              "type": "inline_math",
+              "latex": "\\frac{81}{450}\\times100\\%=18\\%"
             }
           ],
           "mark_type": "A",
