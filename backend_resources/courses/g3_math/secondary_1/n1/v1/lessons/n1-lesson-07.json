@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-lesson-07",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n1",
@@ -45,7 +45,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Round the magnitude using the ordinary place-value rule, then retain the negative sign. For example, -6.47 rounds to -6.5 to one decimal place because 6.47 rounds to 6.5. On the number line, -6.5 is slightly smaller than -6.47, but it is the nearer tenth. Trailing zeros may be necessary to communicate accuracy: 4.50 to three significant figures is more precise than 4.5."
+          "text": "Round the magnitude using the ordinary place-value rule, then retain the negative sign. For example, -6.47 rounds to -6.5 to one decimal place because 6.47 rounds to 6.5. On the number line, -6.5 is slightly smaller than -6.47, but it is the nearer tenth. Trailing zeros may be necessary to communicate accuracy: writing 4.50 (3 s.f.) shows greater precision than 4.5 (2 s.f.)."
         }
       ]
     },
@@ -77,7 +77,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "0.007846"
+          "latex": "0.004638"
         },
         {
           "type": "text",
@@ -90,11 +90,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Leading zeros locate the decimal point but are not significant. The first three significant digits are 7, 8 and 4."
+              "text": "Leading zeros locate the decimal point but are not significant. The first three significant digits are 4, 6 and 3."
             },
             {
               "type": "display_math",
-              "latex": "0.00\\underline{784}6"
+              "latex": "0.00\\underline{463}8"
             }
           ]
         },
@@ -103,16 +103,16 @@
           "content": [
             {
               "type": "text",
-              "text": "The next digit is 6, so increase the third significant digit from 4 to 5."
+              "text": "The next digit is 8, so increase the third significant digit from 3 to 4."
             },
             {
               "type": "display_math",
-              "latex": "0.007846\\approx0.00785"
+              "latex": "0.004638\\approx0.00464"
             }
           ]
         }
       ],
-      "verification_note": "The rounded value has exactly three significant digits—7, 8 and 5—and remains close to 0.008."
+      "verification_note": "The rounded value has exactly three significant digits, 4, 6 and 4, and differs from 0.004638 by only 0.000002."
     },
     {
       "stable_key": "estimation-example",
@@ -126,7 +126,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "\\frac{19.8\\times0.503}{4.98}"
+          "latex": "\\frac{39.7\\times0.198}{2.03}"
         },
         {
           "type": "text",
@@ -143,7 +143,7 @@
             },
             {
               "type": "display_math",
-              "latex": "19.8\\approx20,\\qquad0.503\\approx0.5,\\qquad4.98\\approx5"
+              "latex": "39.7\\approx40,\\qquad0.198\\approx0.2,\\qquad2.03\\approx2"
             }
           ]
         },
@@ -156,12 +156,12 @@
             },
             {
               "type": "display_math",
-              "latex": "\\frac{20\\times0.5}{5}=\\frac{10}{5}=2"
+              "latex": "\\frac{40\\times0.2}{2}=\\frac{8}{2}=4"
             }
           ]
         }
       ],
-      "verification_note": "The exact numerator is close to 10 and the denominator is close to 5, so an estimate of 2 has a sensible magnitude."
+      "verification_note": "A calculator gives 3.87…, so the estimate 4 has the right size."
     },
     {
       "stable_key": "approximation-recall",
@@ -184,20 +184,18 @@
       ],
       "response": {
         "type": "numeric",
-        "comparison_mode": "exact_numeric",
+        "comparison_mode": "rounded_sf",
         "canonical_answer": "78600",
         "canonical_latex": "78\\,600",
-        "accepted_answers": [
-          "78600.0"
-        ],
+        "accepted_answers": [],
         "absolute_tolerance": null,
-        "rounding_precision": null,
+        "rounding_precision": 3,
         "unit": null
       },
       "feedback": [
         {
           "type": "text",
-          "text": "The first three significant digits are 7, 8 and 6. The next digit is 4, so keep 6 unchanged and replace the remaining places with zeros: 78,600."
+          "text": "The first three significant digits are 7, 8 and 6. The next digit is 4, so keep 6 unchanged and replace the remaining places with zeros: 78 600."
         }
       ]
     },
