@@ -1756,6 +1756,18 @@ def _drilled(
     block = ln * d * h
     hole = pi * r * r * h
     remaining = block - hole
+    asks = inputs.get("asks", "volume")
+    _require(asks in {"volume", "surface_area"}, f"Unknown quantity {asks!r}.")
+    if asks == "surface_area":
+        # The outside faces lose a circle top and bottom; the hole adds its curved inside.
+        faces = 2 * (ln * d + ln * h + d * h)
+        circles = 2 * pi * r * r
+        lining = 2 * pi * r * h
+        expected = faces - circles + lining
+        derived = [expected, faces, circles, lining, pi * r * r, faces - circles]
+    else:
+        expected = remaining
+        derived = [remaining, block, hole, pi * r * r]
     top_centre = _iso(ln / 2, d / 2, h)
     far_centre = _iso(ln / 2, d / 2, 0)
     points = {
@@ -1823,15 +1835,15 @@ def _drilled(
         template=template,
         inputs=inputs,
         kind="drilled_solid",
-        dimensions={key: inputs[key] for key in inputs},
+        dimensions={key: inputs[key] for key in inputs if key != "asks"},
         title=title,
         alt_text=(
             f"{alt_solid} A cylindrical hole of radius {radius.text} opens on the top face and "
             "passes straight down through the solid. The hole's far rim and sides are dashed."
         ),
         answers=answers,
-        derived=[remaining, block, hole, pi * r * r],
-        findings=_key_findings(remaining, answers),
+        derived=derived,
+        findings=_key_findings(expected, answers),
     )
 
 

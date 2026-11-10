@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l5-005 — Cube with a cylindrical core removed
+## g5-l5-005 — Surface area of a cube with a cylindrical hole
 
 [Open this question in the HTML preview](index.html#g5-l5-005)
 

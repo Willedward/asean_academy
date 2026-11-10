@@ -4373,14 +4373,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "g5-l5-005",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G5",
     "primary_outcome": "5.5",
-    "title": "Cube with a cylindrical core removed",
+    "title": "Surface area of a cube with a cylindrical hole",
     "difficulty": 5,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -4402,7 +4402,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A cube of side 14 cm has a cylindrical hole of radius 3.5 cm drilled straight through it. Using "
+            "text": "A cube of side 14 cm has a cylindrical hole of radius 3.5 cm drilled straight through it, from the centre of one face to the centre of the opposite face. Using "
           },
           {
             "type": "inline_math",
@@ -4410,7 +4410,7 @@
           },
           {
             "type": "text",
-            "text": ", find the remaining volume in cm³. Enter the numerical value only."
+            "text": ", find the total surface area of the remaining solid, including the inside of the hole, in cm². Enter the numerical value only."
           }
         ],
         "marks": 5,
@@ -4419,8 +4419,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "2205",
-          "canonical_latex": "2205",
+          "canonical_answer": "1407",
+          "canonical_latex": "1407",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -4432,7 +4432,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract the cylinder volume from the cube volume."
+                "text": "Start from the cube's six faces. Drilling removes a circle from two of them but adds the curved inside of the hole."
               }
             ]
           },
@@ -4441,15 +4441,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "The cube volume is "
+                "text": "Find "
               },
               {
                 "type": "inline_math",
-                "latex": "14^{3}"
+                "latex": "6\\times14^{2}"
               },
               {
                 "type": "text",
-                "text": " and the cylinder height is 14 cm."
+                "text": ", the area of two circles of radius 3.5 cm, and the curved surface area of a cylinder of radius 3.5 cm and height 14 cm."
               }
             ]
           }
@@ -4459,12 +4459,72 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "The six faces of the cube:"
+              },
+              {
                 "type": "display_math",
-                "latex": "V=14^3-\\frac{22}{7}(3.5^2)(14)=2744-539=2205"
+                "latex": "6\\times14^2=1176"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Two circles are removed, one from each face the hole passes through:"
+              },
+              {
+                "type": "display_math",
+                "latex": "2\\times\\frac{22}{7}\\times3.5^2=77"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "text",
+                "text": "The inside of the hole is a cylinder's curved surface of height 14 cm:"
+              },
+              {
+                "type": "display_math",
+                "latex": "2\\times\\frac{22}{7}\\times3.5\\times14=308"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 4,
+            "content": [
+              {
+                "type": "text",
+                "text": "Combine the three parts:"
+              },
+              {
+                "type": "display_math",
+                "latex": "A=1176-77+308"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 5,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "A=1407"
               }
             ],
             "mark_type": "A",
-            "mark_value": 5
+            "mark_value": 1
           }
         ]
       }
@@ -4475,7 +4535,7 @@
         "asset_key": "g5-l5-005-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l5-005-diagram-r4.svg",
+        "path": "assets/g5-l5-005-diagram-r5.svg",
         "alt_text": "A cube of side 14 cm, with equal marks on three of its edges. A cylindrical hole of radius 3.5 cm opens on the top face and passes straight down through the solid. The hole's far rim and sides are dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-sec1-mensuration-svg-v1",
@@ -4491,7 +4551,8 @@
             "radius": {
               "value": 3.5,
               "unit": "cm"
-            }
+            },
+            "asks": "surface_area"
           },
           "not_to_scale": true,
           "dimensions": {
@@ -4505,11 +4566,13 @@
             }
           },
           "forbidden_visible_labels": [
-            "2205",
-            "2744",
-            "539",
+            "1407",
+            "1176",
+            "77",
+            "308",
             "38.5",
-            "38.50"
+            "38.50",
+            "1099"
           ],
           "unknowns": [],
           "drawn_scale": 11.4286,
