@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g2-l1-505",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.4",
-  "title": "Beacon point enlargement",
+  "title": "Point enlargement",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A beacon at A = (2, 3) is enlarged from the origin by factor 2. Find the x-coordinate of its image. Enter the numerical value only."
+          "text": "A point at A = (3, 4) is enlarged from the origin by scale factor 2. Find the x-coordinate of its image. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "4",
-        "canonical_latex": "4",
+        "canonical_answer": "6",
+        "canonical_latex": "6",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -60,7 +60,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply the original x-coordinate by 2."
+              "text": "Multiply the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "-coordinate of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "A"
+            },
+            {
+              "type": "text",
+              "text": " by the scale factor."
             }
           ]
         }
@@ -71,7 +87,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "x'=2\\times 2=4"
+              "latex": "x'=3\\times2=6"
             }
           ],
           "mark_type": "A",
@@ -86,8 +102,8 @@
       "asset_key": "g2-l1-505-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l1-505-diagram-r3.svg",
-      "alt_text": "Coordinate axes x and y with a unit grid and origin O. Point A(2, 3) is plotted, with dashed lines to each axis. A straight ray runs from O through A and beyond. The image point is not plotted. A caption reads scale factor 2. Not drawn to scale.",
+      "path": "assets/g2-l1-505-diagram-r4.svg",
+      "alt_text": "Coordinate axes x and y with a unit grid and origin O. Point A(3, 4) is plotted, with dashed lines to each axis. A straight ray runs from O through A and beyond. The image point is not plotted. A caption reads scale factor 2. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-similarity-svg-v1",
         "diagram_kind": "coordinate_grid",
@@ -96,49 +112,49 @@
         "template": "origin_point_ray",
         "inputs": {
           "point": [
-            2,
-            3
+            3,
+            4
           ],
           "factor": 2
         },
         "not_to_scale": true,
         "dimensions": {
           "point": [
-            2,
-            3
+            3,
+            4
           ],
           "factor": 2
         },
         "forbidden_visible_labels": [
-          "4",
-          "(4, 6)",
-          "6"
+          "6",
+          "(6, 8)",
+          "8"
         ],
         "unknowns": [],
         "forbid_right_angle_marker": true,
         "grid": {
           "origin": "O",
-          "unit": 51.02,
+          "unit": 42.37,
           "x": [
             -1,
-            7
+            9
           ],
           "y": [
             -1,
-            8
+            10
           ],
           "points": {
             "A": [
-              2.0,
-              3.0
+              3.0,
+              4.0
             ]
           },
           "ticks": {
             "x": [
-              2
+              3
             ],
             "y": [
-              3
+              4
             ]
           }
         },
@@ -148,52 +164,52 @@
         ],
         "points": {
           "GridA": [
-            90.82,
-            556.69
+            83.9,
+            559.29
           ],
           "GridB": [
-            498.98,
-            97.51
+            507.63,
+            93.19
           ],
           "O": [
-            141.84,
-            505.67
+            126.27,
+            516.92
           ],
           "UnitX": [
-            192.86,
-            505.67
+            168.64,
+            516.92
           ],
           "XEnd": [
-            524.49,
-            505.67
+            528.81,
+            516.92
           ],
           "XStart": [
-            75.51,
-            505.67
+            71.19,
+            516.92
           ],
           "YEnd": [
-            141.84,
+            126.27,
             72.0
           ],
           "YStart": [
-            141.84,
+            126.27,
             572.0
           ],
           "A": [
-            243.88,
-            352.61
+            253.39,
+            347.42
           ],
           "RayEnd": [
-            413.95,
-            97.51
+            444.07,
+            93.19
           ],
           "FootX": [
-            243.88,
-            505.67
+            253.39,
+            516.92
           ],
           "FootY": [
-            141.84,
-            352.61
+            126.27,
+            347.42
           ]
         },
         "segments": [
@@ -236,12 +252,12 @@
         "right_angles": [],
         "labels": [
           {
-            "text": "2",
-            "target": "tick:x:2"
+            "text": "3",
+            "target": "tick:x:3"
           },
           {
-            "text": "3",
-            "target": "tick:y:3"
+            "text": "4",
+            "target": "tick:y:4"
           },
           {
             "text": "x",
@@ -256,7 +272,7 @@
             "target": "point:O"
           },
           {
-            "text": "A(2, 3)",
+            "text": "A(3, 4)",
             "target": "point:A"
           },
           {
@@ -276,7 +292,7 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "06e5099cd3337dea28c49ac310b8284b13d631c5b1f8b064b887d75d5600c973",
+      "sha256": "3063a59c5c2a1f770e2da62c9253ea6103ccc50738308d79f9d2a08251ed36e3",
       "width": 600,
       "height": 628
     }

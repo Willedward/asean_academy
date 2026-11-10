@@ -488,14 +488,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-501",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.1",
-    "title": "Congruent triangles",
+    "title": "Congruent triangles with an unknown",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -508,15 +508,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A fabricator checks two triangular brackets cut from the same template. The congruent figures have corresponding sides of length 7 cm and "
+            "text": "Triangles ABC and PQR are congruent, with AB corresponding to PQ. AB = "
           },
           {
             "type": "inline_math",
-            "latex": "x"
+            "latex": "(x+3)"
           },
           {
             "type": "text",
-            "text": " cm. Find "
+            "text": " cm and PQ = 10 cm. Find "
           },
           {
             "type": "inline_math",
@@ -546,7 +546,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Locate the matching side or angle before calculating."
+                "text": "Corresponding sides of congruent triangles are equal."
               }
             ]
           },
@@ -555,7 +555,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Which given side matches the side of length "
+                "text": "Write AB = PQ as an equation in "
               },
               {
                 "type": "inline_math",
@@ -563,7 +563,7 @@
               },
               {
                 "type": "text",
-                "text": " cm? Think about what congruence tells you about matching sides."
+                "text": "."
               }
             ]
           }
@@ -574,7 +574,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "x=7"
+                "latex": "x+3=10\\Rightarrow x=7"
               }
             ],
             "mark_type": "A",
@@ -603,14 +603,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "g2-l3-501",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.1",
-    "title": "SSS side equation",
+    "title": "Congruent sides equation",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -632,7 +632,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Triangles ABC and PQR are congruent with AB corresponding to PQ. If AB = (3x + 1) cm and PQ = 16 cm, find x. Enter the numerical value only."
+            "text": "Triangles ABC and PQR are congruent with AB corresponding to PQ. If AB = (2x + 3) cm and PQ = 17 cm, find x. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -641,8 +641,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "5",
-          "canonical_latex": "5",
+          "canonical_answer": "7",
+          "canonical_latex": "7",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -663,15 +663,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
+                "text": "Write AB = PQ as an equation in "
               },
               {
                 "type": "inline_math",
-                "latex": "3x+1=16"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": " and solve."
               }
             ]
           }
@@ -681,8 +681,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Use AB = PQ. "
+              },
+              {
                 "type": "display_math",
-                "latex": "3x+1=16"
+                "latex": "2x+3=17"
               }
             ],
             "mark_type": "M",
@@ -693,7 +697,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "3x=15"
+                "latex": "2x=14"
               }
             ],
             "mark_type": "M",
@@ -703,8 +707,12 @@
             "position": 3,
             "content": [
               {
+                "type": "text",
+                "text": "So "
+              },
+              {
                 "type": "display_math",
-                "latex": "x=5"
+                "latex": "x=7"
               }
             ],
             "mark_type": "A",
@@ -719,8 +727,8 @@
         "asset_key": "g2-l3-501-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g2-l3-501-diagram-r4.svg",
-        "alt_text": "Two triangles ABC and PQR, with PQR turned upside down. AB is marked (3x + 1) cm and PQ is marked 16 cm. AB and PQ have one tick, BC and QR have two ticks, and CA and RP have three ticks. Not drawn to scale.",
+        "path": "assets/g2-l3-501-diagram-r5.svg",
+        "alt_text": "Two triangles ABC and PQR, with PQR turned upside down. AB is marked (2x + 3) cm and PQ is marked 17 cm. AB and PQ have one tick, BC and QR have two ticks, and CA and RP have three ticks. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-similarity-svg-v1",
           "diagram_kind": "congruent_triangles",
@@ -729,24 +737,24 @@
           "template": "congruent_algebra",
           "inputs": {
             "ab": {
-              "coefficient": 3,
-              "constant": 1
+              "coefficient": 2,
+              "constant": 3
             },
             "pq": {
-              "value": 16,
+              "value": 17,
               "unit": "cm"
             }
           },
           "not_to_scale": true,
           "dimensions": {
             "PQ": {
-              "value": 16,
+              "value": 17,
               "unit": "cm"
             },
-            "AB": "(3x + 1) cm"
+            "AB": "(2x + 3) cm"
           },
           "forbidden_visible_labels": [
-            "5"
+            "7"
           ],
           "unknowns": [],
           "forbid_right_angle_marker": true,
@@ -886,11 +894,11 @@
               "target": "point:R"
             },
             {
-              "text": "(3x + 1) cm",
+              "text": "(2x + 3) cm",
               "target": "segment:AB"
             },
             {
-              "text": "16 cm",
+              "text": "17 cm",
               "target": "segment:PQ"
             }
           ],
@@ -905,7 +913,7 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "146a1c687f4c4c15a891e804149f1aa75bc1e415469e63c0b0205c24596e4d0a",
+        "sha256": "74c4011c387975b699db3a18057417008c0ad25eddc2dcb354f67fbf34980291",
         "width": 600,
         "height": 300
       }
@@ -1030,7 +1038,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "g2-l5-501",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1059,7 +1067,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two congruent pentagons have corresponding sides (3x + 2) cm and (5x − 10) cm. One pentagon has side lengths (3x + 2) cm, 12 cm, 15 cm, 17 cm and 18 cm. Find its perimeter. Enter the numerical value only."
+            "text": "Two congruent pentagons have corresponding sides (3x + 2) cm and (5x − 10) cm. One pentagon has side lengths (3x + 2) cm, 12 cm, 15 cm, 17 cm and 18 cm. Find its perimeter. Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -1157,7 +1165,7 @@
         "asset_key": "g2-l5-501-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g2-l5-501-diagram-r4.svg",
+        "path": "assets/g2-l5-501-diagram-r5.svg",
         "alt_text": "Two pentagons, the second turned upside down below the first. The sides of the first are marked (3x + 2) cm, 12 cm, 15 cm, 17 cm and 18 cm. One side of the second is marked (5x − 10) cm. These two sides correspond, and each has one tick. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-similarity-svg-v1",
@@ -1774,7 +1782,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-502",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1825,15 +1833,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
+                "text": "Multiply "
               },
               {
                 "type": "inline_math",
-                "latex": "4\\times 3"
+                "latex": "4"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": " by the scale factor."
               }
             ]
           }
@@ -1884,7 +1892,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "g2-l3-503",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1913,7 +1921,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A triangle with perimeter 24 cm is enlarged by scale factor 3 to form a similar triangle. Find the new perimeter. Enter the numerical value only."
+            "text": "A triangle with perimeter 24 cm is enlarged by scale factor 3 to form a similar triangle. Find the new perimeter. Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -1981,7 +1989,7 @@
         "asset_key": "g2-l3-503-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g2-l3-503-diagram-r4.svg",
+        "path": "assets/g2-l3-503-diagram-r5.svg",
         "alt_text": "Two similar triangles, with an arrow marked × 3 from the smaller to the larger. The smaller is marked perimeter 24 cm and the larger is marked perimeter p. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-similarity-svg-v1",
@@ -2268,14 +2276,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l4-501",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.2",
-    "title": "Two-stage similar enlargement",
+    "title": "Two-stage scaling: find the second factor",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2288,15 +2296,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A logo is enlarged by scale factor 3 and the enlarged copy is then reduced by scale factor "
-          },
-          {
-            "type": "inline_math",
-            "latex": "\\frac{1}{2}"
-          },
-          {
-            "type": "text",
-            "text": ". An original side is 10 cm. Find the final corresponding side length. Enter the numerical value only."
+            "text": "A logo has an original side of 10 cm. It is enlarged by scale factor 3, and the enlarged copy is then scaled so that the final side is 15 cm. Find the scale factor of the second step. Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -2305,8 +2305,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "15",
-          "canonical_latex": "15",
+          "canonical_answer": "0.5",
+          "canonical_latex": "0.5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2318,7 +2318,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply the two scale factors to obtain one overall factor."
+                "text": "Work out the side length after the first enlargement."
               }
             ]
           },
@@ -2327,7 +2327,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply your overall factor to the original 10 cm side."
+                "text": "The second scale factor is the final length divided by the length after the first step."
               }
             ]
           }
@@ -2337,8 +2337,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Find the length after the first enlargement. "
+              },
+              {
                 "type": "display_math",
-                "latex": "k=3\\times\\frac12=\\frac32"
+                "latex": "10\\times3=30"
               }
             ],
             "mark_type": "M",
@@ -2348,8 +2352,12 @@
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Compare the final length with this length. "
+              },
+              {
                 "type": "display_math",
-                "latex": "L=10\\times\\frac32"
+                "latex": "k=\\frac{15}{30}"
               }
             ],
             "mark_type": "M",
@@ -2359,8 +2367,12 @@
             "position": 3,
             "content": [
               {
+                "type": "text",
+                "text": "So the second scale factor is "
+              },
+              {
                 "type": "display_math",
-                "latex": "L=15"
+                "latex": "0.5"
               }
             ],
             "mark_type": "A",
@@ -3354,14 +3366,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l4-502",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.3",
-    "title": "Coupled angle and side similarity",
+    "title": "Coupled angle similarity",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -3390,7 +3402,7 @@
           },
           {
             "type": "text",
-            "text": ". A side of 9 cm in ABC corresponds to 15 cm in PQR. Find "
+            "text": ". Find "
           },
           {
             "type": "inline_math",
@@ -3420,7 +3432,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use the equality of corresponding angles; the side data confirms the correspondence."
+                "text": "Corresponding angles of similar triangles are equal."
               }
             ]
           },
@@ -3429,15 +3441,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
-              },
-              {
-                "type": "inline_math",
-                "latex": "4x-6=2x+34"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Write an equation using angle A and angle P."
               }
             ]
           }
@@ -3499,14 +3503,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g2-l1-505",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.4",
-    "title": "Beacon point enlargement",
+    "title": "Point enlargement",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3528,7 +3532,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A beacon at A = (2, 3) is enlarged from the origin by factor 2. Find the x-coordinate of its image. Enter the numerical value only."
+            "text": "A point at A = (3, 4) is enlarged from the origin by scale factor 2. Find the x-coordinate of its image. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -3537,8 +3541,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "4",
-          "canonical_latex": "4",
+          "canonical_answer": "6",
+          "canonical_latex": "6",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3559,7 +3563,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply the original x-coordinate by 2."
+                "text": "Multiply the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "-coordinate of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "A"
+              },
+              {
+                "type": "text",
+                "text": " by the scale factor."
               }
             ]
           }
@@ -3570,7 +3590,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "x'=2\\times 2=4"
+                "latex": "x'=3\\times2=6"
               }
             ],
             "mark_type": "A",
@@ -3585,8 +3605,8 @@
         "asset_key": "g2-l1-505-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g2-l1-505-diagram-r3.svg",
-        "alt_text": "Coordinate axes x and y with a unit grid and origin O. Point A(2, 3) is plotted, with dashed lines to each axis. A straight ray runs from O through A and beyond. The image point is not plotted. A caption reads scale factor 2. Not drawn to scale.",
+        "path": "assets/g2-l1-505-diagram-r4.svg",
+        "alt_text": "Coordinate axes x and y with a unit grid and origin O. Point A(3, 4) is plotted, with dashed lines to each axis. A straight ray runs from O through A and beyond. The image point is not plotted. A caption reads scale factor 2. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-similarity-svg-v1",
           "diagram_kind": "coordinate_grid",
@@ -3595,49 +3615,49 @@
           "template": "origin_point_ray",
           "inputs": {
             "point": [
-              2,
-              3
+              3,
+              4
             ],
             "factor": 2
           },
           "not_to_scale": true,
           "dimensions": {
             "point": [
-              2,
-              3
+              3,
+              4
             ],
             "factor": 2
           },
           "forbidden_visible_labels": [
-            "4",
-            "(4, 6)",
-            "6"
+            "6",
+            "(6, 8)",
+            "8"
           ],
           "unknowns": [],
           "forbid_right_angle_marker": true,
           "grid": {
             "origin": "O",
-            "unit": 51.02,
+            "unit": 42.37,
             "x": [
               -1,
-              7
+              9
             ],
             "y": [
               -1,
-              8
+              10
             ],
             "points": {
               "A": [
-                2.0,
-                3.0
+                3.0,
+                4.0
               ]
             },
             "ticks": {
               "x": [
-                2
+                3
               ],
               "y": [
-                3
+                4
               ]
             }
           },
@@ -3647,52 +3667,52 @@
           ],
           "points": {
             "GridA": [
-              90.82,
-              556.69
+              83.9,
+              559.29
             ],
             "GridB": [
-              498.98,
-              97.51
+              507.63,
+              93.19
             ],
             "O": [
-              141.84,
-              505.67
+              126.27,
+              516.92
             ],
             "UnitX": [
-              192.86,
-              505.67
+              168.64,
+              516.92
             ],
             "XEnd": [
-              524.49,
-              505.67
+              528.81,
+              516.92
             ],
             "XStart": [
-              75.51,
-              505.67
+              71.19,
+              516.92
             ],
             "YEnd": [
-              141.84,
+              126.27,
               72.0
             ],
             "YStart": [
-              141.84,
+              126.27,
               572.0
             ],
             "A": [
-              243.88,
-              352.61
+              253.39,
+              347.42
             ],
             "RayEnd": [
-              413.95,
-              97.51
+              444.07,
+              93.19
             ],
             "FootX": [
-              243.88,
-              505.67
+              253.39,
+              516.92
             ],
             "FootY": [
-              141.84,
-              352.61
+              126.27,
+              347.42
             ]
           },
           "segments": [
@@ -3735,12 +3755,12 @@
           "right_angles": [],
           "labels": [
             {
-              "text": "2",
-              "target": "tick:x:2"
+              "text": "3",
+              "target": "tick:x:3"
             },
             {
-              "text": "3",
-              "target": "tick:y:3"
+              "text": "4",
+              "target": "tick:y:4"
             },
             {
               "text": "x",
@@ -3755,7 +3775,7 @@
               "target": "point:O"
             },
             {
-              "text": "A(2, 3)",
+              "text": "A(3, 4)",
               "target": "point:A"
             },
             {
@@ -3775,7 +3795,7 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "06e5099cd3337dea28c49ac310b8284b13d631c5b1f8b064b887d75d5600c973",
+        "sha256": "3063a59c5c2a1f770e2da62c9253ea6103ccc50738308d79f9d2a08251ed36e3",
         "width": 600,
         "height": 628
       }
@@ -3908,7 +3928,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-505",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3936,7 +3956,7 @@
           },
           {
             "type": "text",
-            "text": ". Find the image length. Enter the numerical value only."
+            "text": ". Find the image length. Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -4643,14 +4663,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "g2-l1-506",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.5",
-    "title": "Toy car length",
+    "title": "Toy car on a design sketch",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -4672,7 +4692,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A toy car is enlarged from a 2 cm design segment using scale factor 5. Find the matching toy length in centimetres. Enter the numerical value only."
+            "text": "On a design sketch, a toy car is 2 cm long. The toy itself is 5 times as long. Find the length of the toy in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -4737,7 +4757,7 @@
         "asset_key": "g2-l1-506-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g2-l1-506-diagram-r4.svg",
+        "path": "assets/g2-l1-506-diagram-r5.svg",
         "alt_text": "Two straight segments, one above the other. The upper, labelled design, is marked 2 cm. An arrow marked × 5 points down to the lower, longer segment, labelled toy, which is marked y. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-similarity-svg-v1",
@@ -4999,14 +5019,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g2-l2-507",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.5",
-    "title": "Tree shadow",
+    "title": "Shadow of a tree",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -5028,7 +5048,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "At the same time, a 2 m pole casts a 3 m shadow and a tree casts a 12 m shadow. Find the tree height in metres. Enter the numerical value only."
+            "text": "At the same time, a 3 m pole casts a 2 m shadow and a tree casts an 8 m shadow. Find the height of the tree, in metres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -5037,8 +5057,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "8",
-          "canonical_latex": "8",
+          "canonical_answer": "12",
+          "canonical_latex": "12",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -5050,7 +5070,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The height-to-shadow ratios are equal."
+                "text": "The sun's rays make the same angle with the ground, so the pole and tree triangles are similar."
               }
             ]
           },
@@ -5059,15 +5079,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use "
-              },
-              {
-                "type": "inline_math",
-                "latex": "\\frac{h}{12}=\\frac{2}{3}"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Write the ratio of height to shadow for both triangles and solve."
               }
             ]
           }
@@ -5077,8 +5089,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Corresponding sides of the similar triangles are proportional. "
+              },
+              {
                 "type": "display_math",
-                "latex": "\\frac{h}{12}=\\frac23"
+                "latex": "\\frac{h}{3}=\\frac{8}{2}"
               }
             ],
             "mark_type": "M",
@@ -5088,8 +5104,12 @@
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "So "
+              },
+              {
                 "type": "display_math",
-                "latex": "h=8"
+                "latex": "h=3\\times4=12"
               }
             ],
             "mark_type": "A",
@@ -5104,8 +5124,8 @@
         "asset_key": "g2-l2-507-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g2-l2-507-diagram-r3.svg",
-        "alt_text": "Two triangles, each with an upright, its shadow along level ground and a dashed sun ray. The pole is marked 2 m and its shadow 3 m. The tree is marked h. The second shadow is marked 12 m. A right angle is shown with a corner mark at each foot. One arc in each triangle marks the equal angle of the sun ray with the ground. Not drawn to scale.",
+        "path": "assets/g2-l2-507-diagram-r4.svg",
+        "alt_text": "Two triangles, each with an upright, its shadow along level ground and a dashed sun ray. The pole is marked 3 m and its shadow 2 m. The tree is marked h. The second shadow is marked 8 m. A right angle is shown with a corner mark at each foot. One arc in each triangle marks the equal angle of the sun ray with the ground. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-similarity-svg-v1",
           "diagram_kind": "shadow",
@@ -5114,15 +5134,15 @@
           "template": "shadow_pair",
           "inputs": {
             "height": {
-              "value": 2,
-              "unit": "m"
-            },
-            "shadow": {
               "value": 3,
               "unit": "m"
             },
+            "shadow": {
+              "value": 2,
+              "unit": "m"
+            },
             "other_shadow": {
-              "value": 12,
+              "value": 8,
               "unit": "m"
             },
             "names": [
@@ -5133,22 +5153,22 @@
           "not_to_scale": true,
           "dimensions": {
             "height": {
-              "value": 2,
-              "unit": "m"
-            },
-            "shadow": {
               "value": 3,
               "unit": "m"
             },
-            "other_shadow": 12.0
+            "shadow": {
+              "value": 2,
+              "unit": "m"
+            },
+            "other_shadow": 8.0
           },
           "forbidden_visible_labels": [
-            "8",
+            "12",
             "4"
           ],
           "forbidden_label_exemptions": [
             {
-              "value": "12",
+              "value": "8",
               "reason": "equals a stated value shown on the diagram"
             }
           ],
@@ -5172,36 +5192,36 @@
           },
           "viewbox": [
             600.0,
-            344.0
+            510.0
           ],
           "points": {
             "S1": [
-              50.0,
-              219.88
+              76.26,
+              386.0
             ],
             "F1": [
-              111.46,
-              219.88
+              131.26,
+              386.0
             ],
             "T1": [
-              111.46,
-              178.91
+              131.26,
+              303.5
             ],
             "S2": [
-              246.66,
-              219.88
+              252.26,
+              386.0
             ],
             "F2": [
-              492.48,
-              219.88
+              472.26,
+              386.0
             ],
             "T2": [
-              492.48,
+              472.26,
               56.0
             ],
             "PadR": [
-              550.0,
-              219.88
+              523.74,
+              386.0
             ]
           },
           "segments": [
@@ -5263,7 +5283,7 @@
                 "S1",
                 "T1"
               ],
-              "marker_size": 13.1104
+              "marker_size": 16.0
             }
           ],
           "angles": [
@@ -5274,7 +5294,7 @@
                 "T1"
               ],
               "marker_key": "sun-first",
-              "drawn_degrees": 33.69
+              "drawn_degrees": 56.31
             },
             {
               "vertex": "S2",
@@ -5283,24 +5303,24 @@
                 "T2"
               ],
               "marker_key": "sun-second",
-              "drawn_degrees": 33.69
+              "drawn_degrees": 56.31
             }
           ],
           "angle_markers": [
             {
               "marker_key": "sun-first",
               "center": [
-                50.0,
-                219.88
+                76.26,
+                386.0
               ],
-              "radius": 30.73,
+              "radius": 27.5,
               "start_ray_point": [
-                111.46,
-                219.88
+                131.26,
+                386.0
               ],
               "end_ray_point": [
-                111.46,
-                178.91
+                131.26,
+                303.5
               ],
               "large_arc": 0,
               "sweep": 0
@@ -5308,16 +5328,16 @@
             {
               "marker_key": "sun-second",
               "center": [
-                246.66,
-                219.88
+                252.26,
+                386.0
               ],
               "radius": 38.0,
               "start_ray_point": [
-                492.48,
-                219.88
+                472.26,
+                386.0
               ],
               "end_ray_point": [
-                492.48,
+                472.26,
                 56.0
               ],
               "large_arc": 0,
@@ -5326,7 +5346,7 @@
           ],
           "labels": [
             {
-              "text": "2 m",
+              "text": "3 m",
               "target": "segment:F1T1"
             },
             {
@@ -5334,11 +5354,11 @@
               "target": "segment:F2T2"
             },
             {
-              "text": "3 m",
+              "text": "2 m",
               "target": "segment:S1F1"
             },
             {
-              "text": "12 m",
+              "text": "8 m",
               "target": "segment:S2F2"
             },
             {
@@ -5367,28 +5387,28 @@
                     "F1",
                     "T1"
                   ],
-                  2.0
+                  3.0
                 ],
                 [
                   [
                     "S1",
                     "F1"
                   ],
-                  3.0
+                  2.0
                 ],
                 [
                   [
                     "S2",
                     "F2"
                   ],
-                  12.0
+                  8.0
                 ],
                 [
                   [
                     "F2",
                     "T2"
                   ],
-                  8.0
+                  12.0
                 ]
               ]
             },
@@ -5406,9 +5426,9 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "d48cf1947347db73aebf2396ab989efa4ec04520dd1fe2b7e5afae4fa304f3b5",
+        "sha256": "6e0b5de56fce32af9407e6cd7f0eb7b16b3a9339e47c13db80d43513298162db",
         "width": 600,
-        "height": 344
+        "height": 510
       }
     ],
     "provenance": {

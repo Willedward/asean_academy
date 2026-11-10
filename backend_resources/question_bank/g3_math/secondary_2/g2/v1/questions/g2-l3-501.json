@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 4,
+  "revision": 5,
   "stable_key": "g2-l3-501",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.1",
-  "title": "SSS side equation",
+  "title": "Congruent sides equation",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Triangles ABC and PQR are congruent with AB corresponding to PQ. If AB = (3x + 1) cm and PQ = 16 cm, find x. Enter the numerical value only."
+          "text": "Triangles ABC and PQR are congruent with AB corresponding to PQ. If AB = (2x + 3) cm and PQ = 17 cm, find x. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "5",
-        "canonical_latex": "5",
+        "canonical_answer": "7",
+        "canonical_latex": "7",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -60,15 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
+              "text": "Write AB = PQ as an equation in "
             },
             {
               "type": "inline_math",
-              "latex": "3x+1=16"
+              "latex": "x"
             },
             {
               "type": "text",
-              "text": "."
+              "text": " and solve."
             }
           ]
         }
@@ -78,8 +78,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Use AB = PQ. "
+            },
+            {
               "type": "display_math",
-              "latex": "3x+1=16"
+              "latex": "2x+3=17"
             }
           ],
           "mark_type": "M",
@@ -90,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "3x=15"
+              "latex": "2x=14"
             }
           ],
           "mark_type": "M",
@@ -100,8 +104,12 @@
           "position": 3,
           "content": [
             {
+              "type": "text",
+              "text": "So "
+            },
+            {
               "type": "display_math",
-              "latex": "x=5"
+              "latex": "x=7"
             }
           ],
           "mark_type": "A",
@@ -116,8 +124,8 @@
       "asset_key": "g2-l3-501-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l3-501-diagram-r4.svg",
-      "alt_text": "Two triangles ABC and PQR, with PQR turned upside down. AB is marked (3x + 1) cm and PQ is marked 16 cm. AB and PQ have one tick, BC and QR have two ticks, and CA and RP have three ticks. Not drawn to scale.",
+      "path": "assets/g2-l3-501-diagram-r5.svg",
+      "alt_text": "Two triangles ABC and PQR, with PQR turned upside down. AB is marked (2x + 3) cm and PQ is marked 17 cm. AB and PQ have one tick, BC and QR have two ticks, and CA and RP have three ticks. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-similarity-svg-v1",
         "diagram_kind": "congruent_triangles",
@@ -126,24 +134,24 @@
         "template": "congruent_algebra",
         "inputs": {
           "ab": {
-            "coefficient": 3,
-            "constant": 1
+            "coefficient": 2,
+            "constant": 3
           },
           "pq": {
-            "value": 16,
+            "value": 17,
             "unit": "cm"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "PQ": {
-            "value": 16,
+            "value": 17,
             "unit": "cm"
           },
-          "AB": "(3x + 1) cm"
+          "AB": "(2x + 3) cm"
         },
         "forbidden_visible_labels": [
-          "5"
+          "7"
         ],
         "unknowns": [],
         "forbid_right_angle_marker": true,
@@ -283,11 +291,11 @@
             "target": "point:R"
           },
           {
-            "text": "(3x + 1) cm",
+            "text": "(2x + 3) cm",
             "target": "segment:AB"
           },
           {
-            "text": "16 cm",
+            "text": "17 cm",
             "target": "segment:PQ"
           }
         ],
@@ -302,7 +310,7 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "146a1c687f4c4c15a891e804149f1aa75bc1e415469e63c0b0205c24596e4d0a",
+      "sha256": "74c4011c387975b699db3a18057417008c0ad25eddc2dcb354f67fbf34980291",
       "width": 600,
       "height": 300
     }
