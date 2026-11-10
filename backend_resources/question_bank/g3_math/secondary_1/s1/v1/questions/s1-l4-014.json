@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l4-014",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A pie chart shows 30% of 180 students prefer cycling. A pictogram accounts for 38 of these cycling students from two classes. How many cycling students come from the remaining class? Enter the numerical value only."
+          "text": "A pie chart of 180 students has a sector of 108° for cycling. A pictogram of the cycling students in two classes has 5.5 icons for Class A and 4 icons for Class B, and each icon represents 4 students. How many cycling students come from the remaining class? Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate the total cycling frequency."
+              "text": "Find the total number of cycling students from the sector angle."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract the two-class pictogram count."
+              "text": "Use the key to convert each class's icons to students, then subtract both classes from the total."
             }
           ]
         }
@@ -61,8 +61,24 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "0.30(180)=54"
+              "type": "text",
+              "text": "Cycling students: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{108}{360}\\times180=54"
+            },
+            {
+              "type": "text",
+              "text": ". Classes A and B: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "5.5\\times4+4\\times4=38"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -72,7 +88,7 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "54-38=16"
             }
           ],

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l1-018",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for qualitative data and code 2 for quantitative data. Which code describes the data item \u2018number of siblings\u2019? Enter the numerical value only."
+          "text": "Use code 1 for categorical data (names or qualities) and code 2 for numerical data (counts or measurements). Which code describes the data item ‘number of siblings’? Enter the code only."
         }
       ],
       "marks": 1,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Decide whether the values are numerical counts."
+              "text": "Decide whether the values are names or numbers."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "A number of siblings is a numerical quantity."
+              "text": "Ask whether the answer to ‘How many siblings?’ is a name or a count."
             }
           ]
         }
@@ -61,8 +61,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The number of siblings is a count, so the data item is numerical."
+            },
+            {
               "type": "display_math",
-              "latex": "\\text{number of siblings is quantitative}\\Rightarrow 2"
+              "latex": "\\Rightarrow 2"
             }
           ],
           "mark_type": "A",
