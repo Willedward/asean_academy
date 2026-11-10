@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 4,
+  "revision": 5,
   "stable_key": "g5-l3-001",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A parallelogram panel has base 12 cm and height 6 cm. Beside it is a trapezium with parallel sides 8 cm and 14 cm and height 6 cm. Find their combined area in cm². Enter the numerical value only."
+          "text": "A parallelogram panel has base 12 cm and height 6 cm. Beside it is a trapezium with parallel sides 10 cm and 12 cm and height 5 cm. Find their combined area in cm². Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "138",
-        "canonical_latex": "138",
+        "canonical_answer": "127",
+        "canonical_latex": "127",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -70,12 +70,23 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "A=12(6)+\\frac12(8+14)(6)=72+66=138"
+              "type": "inline_math",
+              "latex": "A=12(6)+\\frac12(10+12)(5)"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "=72+55=127"
             }
           ],
           "mark_type": "A",
-          "mark_value": 3
+          "mark_value": 1
         }
       ]
     }
@@ -86,8 +97,8 @@
       "asset_key": "g5-l3-001-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l3-001-diagram-r4.svg",
-      "alt_text": "A parallelogram with base 12 cm and dashed perpendicular height 6 cm, beside a trapezium with parallel sides 8 cm and 14 cm and dashed perpendicular height 6 cm. A right angle is marked at the foot of each height. Not drawn to scale.",
+      "path": "assets/g5-l3-001-diagram-r5.svg",
+      "alt_text": "A parallelogram with base 12 cm and dashed perpendicular height 6 cm, beside a trapezium with parallel sides 10 cm and 12 cm and dashed perpendicular height 5 cm. A right angle is marked at the foot of each height. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-sec1-mensuration-svg-v1",
         "diagram_kind": "two_quadrilaterals",
@@ -104,15 +115,15 @@
             "unit": "cm"
           },
           "parallel_short": {
-            "value": 8,
+            "value": 10,
             "unit": "cm"
           },
           "parallel_long": {
-            "value": 14,
+            "value": 12,
             "unit": "cm"
           },
           "trapezium_height": {
-            "value": 6,
+            "value": 5,
             "unit": "cm"
           }
         },
@@ -127,25 +138,25 @@
             "unit": "cm"
           },
           "parallel_short": {
-            "value": 8,
+            "value": 10,
             "unit": "cm"
           },
           "parallel_long": {
-            "value": 14,
+            "value": 12,
             "unit": "cm"
           },
           "trapezium_height": {
-            "value": 6,
+            "value": 5,
             "unit": "cm"
           }
         },
         "forbidden_visible_labels": [
-          "138",
+          "127",
           "72",
-          "66"
+          "55"
         ],
         "unknowns": [],
-        "drawn_scale": 17.2313,
+        "drawn_scale": 18.4297,
         "depth_factor": 0.5,
         "figures": [
           {
@@ -218,21 +229,21 @@
           },
           {
             "segment": "TATB",
-            "label": "14 cm",
+            "label": "12 cm",
             "factor": 1.0,
-            "value": 14.0
+            "value": 12.0
           },
           {
             "segment": "TCTD",
-            "label": "8 cm",
+            "label": "10 cm",
             "factor": 1.0,
-            "value": 8.0
+            "value": 10.0
           },
           {
             "segment": "TDTF",
-            "label": "6 cm",
+            "label": "5 cm",
             "factor": 1.0,
-            "value": 6.0
+            "value": 5.0
           }
         ],
         "captions": [],
@@ -247,43 +258,43 @@
         "points": {
           "PA": [
             35.0,
-            159.39
+            166.58
           ],
           "PB": [
-            241.78,
-            159.39
+            256.16,
+            166.58
           ],
           "PC": [
-            288.3,
+            305.92,
             56.0
           ],
           "PD": [
-            81.52,
+            84.76,
             56.0
           ],
           "PF": [
-            81.52,
-            159.39
+            84.76,
+            166.58
           ],
           "TA": [
-            323.76,
-            159.39
+            343.84,
+            166.58
           ],
           "TB": [
             565.0,
-            159.39
+            166.58
           ],
           "TC": [
-            513.31,
-            56.0
+            546.57,
+            74.43
           ],
           "TD": [
-            375.46,
-            56.0
+            362.27,
+            74.43
           ],
           "TF": [
-            375.46,
-            159.39
+            362.27,
+            166.58
           ]
         },
         "segments": [
@@ -386,15 +397,15 @@
             "target": "segment:PDPF"
           },
           {
-            "text": "14 cm",
+            "text": "12 cm",
             "target": "segment:TATB"
           },
           {
-            "text": "8 cm",
+            "text": "10 cm",
             "target": "segment:TCTD"
           },
           {
-            "text": "6 cm",
+            "text": "5 cm",
             "target": "segment:TDTF"
           }
         ],
@@ -418,7 +429,7 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "825ba495f5b77308e1c7ac865419521f72a3b10d789f44e25d07a25bf4cd4f04",
+      "sha256": "52196f58e1cfb99a7d62539438b8b19eef09ce08e60c7abc6a71ccead6b02776",
       "width": 600,
       "height": 300
     }

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l3-006",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G5",
   "primary_outcome": "5.3",
-  "title": "Cylinder dimensions from volume",
+  "title": "Cylinder height from volume",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A cylinder of radius 7 cm has volume 2156 cm³. Using "
+          "text": "A cylinder of radius 14 cm has volume 6160 cm³. Using "
         },
         {
           "type": "inline_math",
@@ -37,8 +37,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "14",
-        "canonical_latex": "14",
+        "canonical_answer": "10",
+        "canonical_latex": "10",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -59,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The base area is 154 cm²."
+              "text": "Find the area of the circular base, then divide the volume by it."
             }
           ]
         }
@@ -69,12 +69,23 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "h=\\frac{2156}{154}=14"
+              "type": "inline_math",
+              "latex": "\\pi r^2=\\frac{22}{7}(14^2)=616"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "h=\\frac{6160}{616}=10"
             }
           ],
           "mark_type": "A",
-          "mark_value": 3
+          "mark_value": 1
         }
       ]
     }

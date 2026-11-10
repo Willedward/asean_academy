@@ -386,7 +386,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-001",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -456,11 +456,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "h=\\frac{A}{b}=\\frac{84}{12}=7"
+                "latex": "h=\\frac{A}{b}=\\frac{84}{12}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "h=7"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -485,7 +496,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "g5-l3-001",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -514,7 +525,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A parallelogram panel has base 12 cm and height 6 cm. Beside it is a trapezium with parallel sides 8 cm and 14 cm and height 6 cm. Find their combined area in cm². Enter the numerical value only."
+            "text": "A parallelogram panel has base 12 cm and height 6 cm. Beside it is a trapezium with parallel sides 10 cm and 12 cm and height 5 cm. Find their combined area in cm². Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -523,8 +534,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "138",
-          "canonical_latex": "138",
+          "canonical_answer": "127",
+          "canonical_latex": "127",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -555,12 +566,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "A=12(6)+\\frac12(8+14)(6)=72+66=138"
+                "type": "inline_math",
+                "latex": "A=12(6)+\\frac12(10+12)(5)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "=72+55=127"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -571,8 +593,8 @@
         "asset_key": "g5-l3-001-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-001-diagram-r4.svg",
-        "alt_text": "A parallelogram with base 12 cm and dashed perpendicular height 6 cm, beside a trapezium with parallel sides 8 cm and 14 cm and dashed perpendicular height 6 cm. A right angle is marked at the foot of each height. Not drawn to scale.",
+        "path": "assets/g5-l3-001-diagram-r5.svg",
+        "alt_text": "A parallelogram with base 12 cm and dashed perpendicular height 6 cm, beside a trapezium with parallel sides 10 cm and 12 cm and dashed perpendicular height 5 cm. A right angle is marked at the foot of each height. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-sec1-mensuration-svg-v1",
           "diagram_kind": "two_quadrilaterals",
@@ -589,15 +611,15 @@
               "unit": "cm"
             },
             "parallel_short": {
-              "value": 8,
+              "value": 10,
               "unit": "cm"
             },
             "parallel_long": {
-              "value": 14,
+              "value": 12,
               "unit": "cm"
             },
             "trapezium_height": {
-              "value": 6,
+              "value": 5,
               "unit": "cm"
             }
           },
@@ -612,25 +634,25 @@
               "unit": "cm"
             },
             "parallel_short": {
-              "value": 8,
+              "value": 10,
               "unit": "cm"
             },
             "parallel_long": {
-              "value": 14,
+              "value": 12,
               "unit": "cm"
             },
             "trapezium_height": {
-              "value": 6,
+              "value": 5,
               "unit": "cm"
             }
           },
           "forbidden_visible_labels": [
-            "138",
+            "127",
             "72",
-            "66"
+            "55"
           ],
           "unknowns": [],
-          "drawn_scale": 17.2313,
+          "drawn_scale": 18.4297,
           "depth_factor": 0.5,
           "figures": [
             {
@@ -703,21 +725,21 @@
             },
             {
               "segment": "TATB",
-              "label": "14 cm",
+              "label": "12 cm",
               "factor": 1.0,
-              "value": 14.0
+              "value": 12.0
             },
             {
               "segment": "TCTD",
-              "label": "8 cm",
+              "label": "10 cm",
               "factor": 1.0,
-              "value": 8.0
+              "value": 10.0
             },
             {
               "segment": "TDTF",
-              "label": "6 cm",
+              "label": "5 cm",
               "factor": 1.0,
-              "value": 6.0
+              "value": 5.0
             }
           ],
           "captions": [],
@@ -732,43 +754,43 @@
           "points": {
             "PA": [
               35.0,
-              159.39
+              166.58
             ],
             "PB": [
-              241.78,
-              159.39
+              256.16,
+              166.58
             ],
             "PC": [
-              288.3,
+              305.92,
               56.0
             ],
             "PD": [
-              81.52,
+              84.76,
               56.0
             ],
             "PF": [
-              81.52,
-              159.39
+              84.76,
+              166.58
             ],
             "TA": [
-              323.76,
-              159.39
+              343.84,
+              166.58
             ],
             "TB": [
               565.0,
-              159.39
+              166.58
             ],
             "TC": [
-              513.31,
-              56.0
+              546.57,
+              74.43
             ],
             "TD": [
-              375.46,
-              56.0
+              362.27,
+              74.43
             ],
             "TF": [
-              375.46,
-              159.39
+              362.27,
+              166.58
             ]
           },
           "segments": [
@@ -871,15 +893,15 @@
               "target": "segment:PDPF"
             },
             {
-              "text": "14 cm",
+              "text": "12 cm",
               "target": "segment:TATB"
             },
             {
-              "text": "8 cm",
+              "text": "10 cm",
               "target": "segment:TCTD"
             },
             {
-              "text": "6 cm",
+              "text": "5 cm",
               "target": "segment:TDTF"
             }
           ],
@@ -903,7 +925,7 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "825ba495f5b77308e1c7ac865419521f72a3b10d789f44e25d07a25bf4cd4f04",
+        "sha256": "52196f58e1cfb99a7d62539438b8b19eef09ce08e60c7abc6a71ccead6b02776",
         "width": 600,
         "height": 300
       }
@@ -1872,7 +1894,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-002",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1892,7 +1914,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A 14 m by 10 m rectangular floor has a 6 m by 4 m rectangular section removed from one corner. Find the remaining area in m². Enter the numerical value only."
+            "text": "A 13 m by 9 m rectangular floor has a 5 m by 400 cm rectangular section removed from one corner. Find the remaining area in m². Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -1901,8 +1923,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "116",
-          "canonical_latex": "116",
+          "canonical_answer": "97",
+          "canonical_latex": "97",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1914,7 +1936,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use large rectangle area minus removed rectangle area."
+                "text": "Convert 400 cm to metres first."
               }
             ]
           },
@@ -1923,15 +1945,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
-              },
-              {
-                "type": "inline_math",
-                "latex": "140-24"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Subtract the area of the removed section from the area of the floor."
               }
             ]
           }
@@ -1941,12 +1955,31 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "A=14(10)-6(4)=116"
+                "type": "inline_math",
+                "latex": "400\\text{ cm}=4\\text{ m}"
+              },
+              {
+                "type": "text",
+                "text": ", so the removed area is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "5(4)=20\\text{ m}^2"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "A=13(9)-20=97"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -1971,7 +2004,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l3-003",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2000,7 +2033,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A 16 m by 12 m lobby has a 6 m by 5 m rectangular corner removed. Square tiles each cover 0.5 m². How many tiles cover the remaining floor with no wastage? Enter the numerical value only."
+            "text": "A 16 m by 12 m lobby has a 6 m by 5 m rectangular corner removed. Square tiles each cover 0.25 m². How many tiles cover the remaining floor with no wastage? Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -2009,8 +2042,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "324",
-          "canonical_latex": "324",
+          "canonical_answer": "648",
+          "canonical_latex": "648",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2031,7 +2064,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The remaining area is 162 m²."
+                "text": "Find the area of the L-shape, then divide by the area of one tile."
               }
             ]
           }
@@ -2041,7 +2074,7 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "A=16(12)-6(5)=162"
               }
             ],
@@ -2052,8 +2085,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "N=\\frac{162}{0.5}=324"
+                "type": "inline_math",
+                "latex": "N=\\frac{162}{0.25}=648"
               }
             ],
             "mark_type": "A",
@@ -2068,7 +2101,7 @@
         "asset_key": "g5-l3-003-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-003-diagram-r3.svg",
+        "path": "assets/g5-l3-003-diagram-r4.svg",
         "alt_text": "An L-shape. The full bottom edge is 16 m and the full left edge is 12 m. The removed top-right corner has edges 6 m and 5 m. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-sec1-mensuration-svg-v1",
@@ -2093,7 +2126,7 @@
               "value": 5,
               "unit": "m"
             },
-            "tile_area": 0.5
+            "tile_area": 0.25
           },
           "not_to_scale": true,
           "dimensions": {
@@ -2115,7 +2148,7 @@
             }
           },
           "forbidden_visible_labels": [
-            "324",
+            "648",
             "162",
             "192",
             "30",
@@ -2296,7 +2329,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-004",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2316,7 +2349,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A sign consists of a 10 m by 6 m rectangle and a triangle of base 10 m and height 4 m. Painting costs $7 per m². Find the total painting cost in dollars. Enter the numerical value only."
+            "text": "A sign consists of a 10 m by 6 m rectangle and a triangle of base 10 m and height 4 m. Painting costs S$7 per m². Find the total painting cost in S$. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -2398,7 +2431,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l4-001",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2418,31 +2451,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A composite figure consists of a square of side "
+            "text": "A composite figure consists of a square of side 6 cm and a rectangle 6 cm by "
           },
           {
             "type": "inline_math",
-            "latex": "x"
+            "latex": "(x+4)"
           },
           {
             "type": "text",
-            "text": " cm and a rectangle "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": " cm by "
-          },
-          {
-            "type": "inline_math",
-            "latex": "(x+4)\\text{ cm}"
-          },
-          {
-            "type": "text",
-            "text": ", without overlap. Its total area is 96 cm². Find "
+            "text": " cm, without overlap. Its total area is 96 cm². Find "
           },
           {
             "type": "inline_math",
@@ -2472,7 +2489,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Translate the two areas into one quadratic equation."
+                "text": "Write the area of each part in terms of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -2481,15 +2506,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
-              },
-              {
-                "type": "inline_math",
-                "latex": "x^{2}+x(x+4)=96"
-              },
-              {
-                "type": "text",
-                "text": " and take the positive root."
+                "text": "Add the two areas, set the total equal to 96 and solve the linear equation."
               }
             ]
           }
@@ -2499,8 +2516,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x^2+x(x+4)=96"
+                "type": "inline_math",
+                "latex": "36+6(x+4)=96"
               }
             ],
             "mark_type": "M",
@@ -2510,8 +2527,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2x^2+4x-96=0"
+                "type": "inline_math",
+                "latex": "6x+60=96"
               }
             ],
             "mark_type": "M",
@@ -2521,8 +2538,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "(x-6)(x+8)=0"
+                "type": "inline_math",
+                "latex": "6x=36"
               }
             ],
             "mark_type": "M",
@@ -2532,7 +2549,7 @@
             "position": 4,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "x=6"
               }
             ],
@@ -2920,7 +2937,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l2-003",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2999,11 +3016,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "V=\\frac12(6)(4)(10)=120"
+                "latex": "V=\\frac12(6)(4)(10)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=120"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -3014,7 +3042,7 @@
         "asset_key": "g5-l2-003-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l2-003-diagram-r3.svg",
+        "path": "assets/g5-l2-003-diagram-r4.svg",
         "alt_text": "A triangular prism. Its front face is a right triangle with perpendicular sides 6 cm and 4 cm, and the right angle is marked. The prism is 10 cm long, and hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-sec1-mensuration-svg-v1",
@@ -3265,7 +3293,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l3-005",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3336,11 +3364,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "S=2(6)+12(10)=132"
+                "latex": "S=2(6)+12(10)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "S=132"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -3351,7 +3390,7 @@
         "asset_key": "g5-l3-005-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-005-diagram-r3.svg",
+        "path": "assets/g5-l3-005-diagram-r4.svg",
         "alt_text": "A triangular prism. Its front face is a right triangle with perpendicular sides 4 cm and 3 cm and longest side 5 cm, and the right angle is marked. The prism is 10 cm long, and hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-sec1-mensuration-svg-v1",
@@ -3626,14 +3665,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-006",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G5",
     "primary_outcome": "5.3",
-    "title": "Cylinder dimensions from volume",
+    "title": "Cylinder height from volume",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -3646,7 +3685,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A cylinder of radius 7 cm has volume 2156 cm³. Using "
+            "text": "A cylinder of radius 14 cm has volume 6160 cm³. Using "
           },
           {
             "type": "inline_math",
@@ -3663,8 +3702,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "14",
-          "canonical_latex": "14",
+          "canonical_answer": "10",
+          "canonical_latex": "10",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3685,7 +3724,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The base area is 154 cm²."
+                "text": "Find the area of the circular base, then divide the volume by it."
               }
             ]
           }
@@ -3695,12 +3734,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "h=\\frac{2156}{154}=14"
+                "type": "inline_math",
+                "latex": "\\pi r^2=\\frac{22}{7}(14^2)=616"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "h=\\frac{6160}{616}=10"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -3961,14 +4011,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-004",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G5",
     "primary_outcome": "5.4",
-    "title": "Decimal square metre conversion",
+    "title": "Square centimetres to square metres",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3981,7 +4031,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Convert 1.8 m² to cm². Enter the numerical value only."
+            "text": "A metal sheet has an area of 18 000 cm². Write this area in m². Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -3990,8 +4040,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "18000",
-          "canonical_latex": "18000",
+          "canonical_answer": "1.8",
+          "canonical_latex": "1.8",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -4003,7 +4053,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply by 10 000."
+                "text": "Divide by 10 000."
               }
             ]
           },
@@ -4012,15 +4062,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
-              },
-              {
-                "type": "inline_math",
-                "latex": "1.8\\times 10\\,000"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Divide by the number of square centimetres in one square metre."
               }
             ]
           }
@@ -4030,12 +4072,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "1.8\\text{ m}^2=18000\\text{ cm}^2"
+                "type": "inline_math",
+                "latex": "18000\\div10000"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "=1.8\\text{ m}^2"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -4060,14 +4113,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g5-l2-005",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G5",
     "primary_outcome": "5.4",
-    "title": "Small cubic-metre conversion",
+    "title": "Cubic centimetres to cubic metres",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -4080,7 +4133,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Convert 0.035 m³ to cm³. Enter the numerical value only."
+            "text": "A container has a volume of 35 000 cm³. Write this volume in m³. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -4089,8 +4142,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "35000",
-          "canonical_latex": "35000",
+          "canonical_answer": "0.035",
+          "canonical_latex": "0.035",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -4102,7 +4155,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply cubic metres by 1 000 000."
+                "text": "Divide cubic centimetres by 1 000 000."
               }
             ]
           },
@@ -4111,7 +4164,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Move the decimal six places to the right."
+                "text": "Move the decimal point six places to the left."
               }
             ]
           }
@@ -4121,12 +4174,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "0.035\\text{ m}^3=35000\\text{ cm}^3"
+                "type": "inline_math",
+                "latex": "35000\\div1000000"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "=0.035\\text{ m}^3"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -4151,7 +4215,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "g5-l3-007",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4212,12 +4276,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
+                "latex": "2.4\\text{ m}^2=24000\\text{ cm}^2"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
                 "latex": "24000-6500=17500\\text{ cm}^2"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -4242,7 +4317,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l4-003",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4304,11 +4379,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "w=\\frac{36000}{240}=150\\text{ cm}"
+                "latex": "w=\\frac{36000}{240}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 3
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "w=150\\text{ cm}"
               }
             ],
             "mark_type": "A",
-            "mark_value": 4
+            "mark_value": 1
           }
         ]
       }
@@ -4432,7 +4518,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l2-006",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4510,11 +4596,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "V=8(5)(3)+4(5)(2)=120+40=160"
+                "latex": "V=8(5)(3)+4(5)(2)=120+40"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=160"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -4539,7 +4636,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l2-007",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4618,11 +4715,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "V=480-60=420"
+                "latex": "V=480-60"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=420"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -4633,7 +4741,7 @@
         "asset_key": "g5-l2-007-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l2-007-diagram-r3.svg",
+        "path": "assets/g5-l2-007-diagram-r4.svg",
         "alt_text": "A cuboid with a front face 12 cm by 8 cm and depth 5 cm. A rectangular tunnel 4 cm by 3 cm opens on the front face and runs through the 5 cm depth. The tunnel's hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-sec1-mensuration-svg-v1",
@@ -5058,7 +5166,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "g5-l3-008",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -5129,11 +5237,22 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "S=12(16)-2(16)=160"
+                "latex": "S=12(16)-2(16)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "S=160"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -5144,7 +5263,7 @@
         "asset_key": "g5-l3-008-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-008-diagram-r4.svg",
+        "path": "assets/g5-l3-008-diagram-r5.svg",
         "alt_text": "Two equal cubes of side 4 cm joined face to face to make one long block. The shared face is shaded, the four marked edges are equal, and hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-sec1-mensuration-svg-v1",

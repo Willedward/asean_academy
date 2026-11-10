@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l3-006 — Cylinder dimensions from volume
+## g5-l3-006 — Cylinder height from volume
 
 [Open this question in the HTML preview](index.html#g5-l3-006)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l2-004 — Decimal square metre conversion
+## g5-l2-004 — Square centimetres to square metres
 
 [Open this question in the HTML preview](index.html#g5-l2-004)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l2-005 — Small cubic-metre conversion
+## g5-l2-005 — Cubic centimetres to cubic metres
 
 [Open this question in the HTML preview](index.html#g5-l2-005)
 
