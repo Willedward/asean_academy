@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n2-l4-514",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A transport corridor appears 6 cm long on a 1 : 100,000 regional plan. A second plan of the same corridor uses scale 1 : 80,000. Determine its length on the second plan in centimetres. Enter the numerical value only."
+          "text": "A transport corridor appears 10 cm long on a 1 : 25 000 regional plan. A second plan of the same corridor uses scale 1 : 100 000. Determine its length on the second plan in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "7.5",
-        "canonical_latex": "7.5",
+        "canonical_answer": "2.5",
+        "canonical_latex": "2.5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the actual distance using Map A, then divide by Map B's denominator."
+              "text": "Find the real length in centimetres from the first plan, then divide by the second denominator."
             }
           ]
         }
@@ -62,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "d=6(100{,}000)=600{,}000\\text{ cm},\\quad \\text{Map B}=\\frac{600{,}000}{80{,}000}=7.5\\text{ cm}"
+              "latex": "d=10(25\\,000)=250\\,000\\text{ cm},\\quad\\text{second plan}=\\frac{250\\,000}{100\\,000}=2.5\\text{ cm}"
             }
           ],
           "mark_type": "M",
@@ -73,7 +73,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{7.5}"
+              "latex": "\\boxed{2.5}"
             }
           ],
           "mark_type": "A",
