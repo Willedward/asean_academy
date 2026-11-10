@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l4-513",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.1",
-  "title": "Congruent frame perimeter",
+  "title": "Congruent frames with an algebraic length",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -28,7 +28,15 @@
         },
         {
           "type": "text",
-          "text": " cm and 13 cm. Their common length is 18 cm. Find the perimeter of either frame. Enter the numerical value only."
+          "text": " cm and 13 cm. The length of each frame is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3x"
+        },
+        {
+          "type": "text",
+          "text": " cm. Find the perimeter of either frame, in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -67,15 +75,15 @@
             },
             {
               "type": "text",
-              "text": ", use "
+              "text": ", find the length, then use "
             },
             {
               "type": "inline_math",
-              "latex": "P=2"
+              "latex": "P=2(\\text{length}+\\text{width})"
             },
             {
               "type": "text",
-              "text": "(length + width)."
+              "text": "."
             }
           ]
         }
@@ -97,7 +105,19 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "x=6"
+              "latex": "x="
+            },
+            {
+              "type": "text",
+              "text": ", so the length is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3x=18"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",

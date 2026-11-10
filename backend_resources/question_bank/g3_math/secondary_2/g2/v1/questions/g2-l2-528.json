@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l2-528",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.3",
-  "title": "Triangle proportionality",
+  "title": "Similar triangles: three-term ratio",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,23 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two similar triangular frames pair a 9 cm side with a 4 cm side. The side corresponding to 27 cm is labelled "
-        },
-        {
-          "type": "inline_math",
-          "latex": "y"
-        },
-        {
-          "type": "text",
-          "text": ". Calculate "
-        },
-        {
-          "type": "inline_math",
-          "latex": "y"
-        },
-        {
-          "type": "text",
-          "text": ". Enter the numerical value only."
+          "text": "Triangle S has sides 9 cm, 12 cm and 18 cm. Triangle T is similar to triangle S, and its shortest side is 4 cm. Find the longest side of triangle T, in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -45,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "12",
-        "canonical_latex": "12",
+        "canonical_answer": "8",
+        "canonical_latex": "8",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use one constant ratio for all corresponding sides."
+              "text": "Use the ratio between the two shortest sides."
             }
           ]
         },
@@ -67,15 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Set "
+              "text": "The scale factor from S to T is "
             },
             {
               "type": "inline_math",
-              "latex": "\\frac{y}{27}=\\frac{4}{9}"
+              "latex": "\\frac{4}{9}"
             },
             {
               "type": "text",
-              "text": "."
+              "text": ". Apply it to the longest side of S."
             }
           ]
         }
@@ -85,8 +69,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Find the scale factor from the shortest sides. "
+            },
+            {
               "type": "display_math",
-              "latex": "\\frac{y}{27}=\\frac{4}{9}"
+              "latex": "k=\\frac{4}{9}"
             }
           ],
           "mark_type": "M",
@@ -96,8 +84,20 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Multiply the longest side by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k"
+            },
+            {
+              "type": "text",
+              "text": ": "
+            },
+            {
               "type": "display_math",
-              "latex": "y=12"
+              "latex": "y=18\\times\\frac49=8"
             }
           ],
           "mark_type": "A",

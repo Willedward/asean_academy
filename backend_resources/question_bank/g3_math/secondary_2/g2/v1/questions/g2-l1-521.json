@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l1-521",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.5",
-  "title": "Photo enlargement",
+  "title": "Scale factor from two matching features",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A photograph feature measuring 5 cm is magnified by factor 8. Find the feature's enlarged length in centimetres. Enter the numerical value only."
+          "text": "A photograph is enlarged so that a 5 cm feature becomes 40 cm. Another feature on the original is 3 cm. Find its enlarged length in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "40",
-        "canonical_latex": "40",
+        "canonical_answer": "24",
+        "canonical_latex": "24",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply the represented length by the stated scale factor."
+              "text": "Find the scale factor from the matching pair of lengths."
             }
           ]
         },
@@ -51,15 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
+              "text": "The scale factor is "
             },
             {
               "type": "inline_math",
-              "latex": "5\\times 8"
+              "latex": "40\\div5"
             },
             {
               "type": "text",
-              "text": "."
+              "text": ". Apply it to the 3 cm feature."
             }
           ]
         }
@@ -70,7 +70,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "L=5\\times8=40"
+              "latex": "k=\\frac{40}{5}=8\\Rightarrow L=3\\times8=24"
             }
           ],
           "mark_type": "A",

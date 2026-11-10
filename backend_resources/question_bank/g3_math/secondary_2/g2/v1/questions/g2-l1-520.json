@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l1-520",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.4",
-  "title": "Miniature coordinate label",
+  "title": "Find a scale factor from coordinates",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,23 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A coordinate label "
+          "text": "A point at "
         },
         {
           "type": "inline_math",
-          "latex": "A=(9,3)"
+          "latex": "(2,5)"
         },
         {
           "type": "text",
-          "text": " is copied as a miniature centred at the origin with factor "
+          "text": " is mapped from the origin to "
         },
         {
           "type": "inline_math",
-          "latex": "\\frac{1}{3}"
+          "latex": "(8,20)"
         },
         {
           "type": "text",
-          "text": ". Find the image y-coordinate. Enter the numerical value only."
+          "text": ". Find the scale factor of this enlargement. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -45,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +58,7 @@
           "content": [
             {
               "type": "text",
-              "text": "An enlargement about the origin multiplies each coordinate by the scale factor."
+              "text": "Compare the image coordinate with the original coordinate."
             }
           ]
         },
@@ -67,15 +67,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply the original y-coordinate by "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\frac{1}{3}"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Divide an image coordinate by the matching original coordinate."
             }
           ]
         }
@@ -86,7 +78,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "y'=3\\times 1/3=1"
+              "latex": "k=\\frac{8}{2}=4"
             }
           ],
           "mark_type": "A",

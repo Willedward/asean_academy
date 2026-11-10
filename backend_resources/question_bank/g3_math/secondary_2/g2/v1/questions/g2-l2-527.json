@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l2-527",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.3",
-  "title": "Similar trapezium sides",
+  "title": "Vertex order in similar triangles",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,23 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Similar trapeziums have corresponding short bases 8 cm and 5 cm. The first long base is 24 cm and the second is "
-        },
-        {
-          "type": "inline_math",
-          "latex": "y"
-        },
-        {
-          "type": "text",
-          "text": " cm. Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "y"
-        },
-        {
-          "type": "text",
-          "text": ". Enter the numerical value only."
+          "text": "Triangle ABC is similar to triangle RPQ, with vertices in that order. AB = 8 cm, BC = 24 cm and RP = 5 cm. Find PQ, in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -58,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use one constant ratio for all corresponding sides."
+              "text": "The order of the vertices tells you which sides correspond."
             }
           ]
         },
@@ -67,15 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Set "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\frac{y}{24}=\\frac{5}{8}"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "A matches R, B matches P and C matches Q, so BC corresponds to PQ."
             }
           ]
         }
@@ -85,8 +61,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Sides correspond in vertex order. "
+            },
+            {
               "type": "display_math",
-              "latex": "\\frac{y}{24}=\\frac{5}{8}"
+              "latex": "\\frac{PQ}{24}=\\frac{5}{8}"
             }
           ],
           "mark_type": "M",
@@ -96,8 +76,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "So "
+            },
+            {
               "type": "display_math",
-              "latex": "y=15"
+              "latex": "PQ=15"
             }
           ],
           "mark_type": "A",
