@@ -1967,14 +1967,14 @@ def test_e1_checkpoint_passes_without_answer_leak_and_atomically_records_mastery
         app,
         session_id,
         question,
-        {"1": "A", "2": "A", "3": "A", "4": "A", "5": "B"},
+        {"1": "A", "2": "C", "3": "B", "4": "A", "5": "B"},
         "e1-checkpoint-pass-attempt",
     )
     replayed = submit_checkpoint(
         app,
         session_id,
         question,
-        {"1": "A", "2": "A", "3": "A", "4": "A", "5": "B"},
+        {"1": "A", "2": "C", "3": "B", "4": "A", "5": "B"},
         "e1-checkpoint-pass-attempt",
     )
     assert answered.status_code == 200, answered.text
@@ -2030,7 +2030,7 @@ def test_failed_e1_checkpoint_preserves_proficiency_and_retake_uses_form_b():
         app,
         retry_id,
         retry_question,
-        {str(position): "A" for position in range(1, 6)},
+        {"1": "B", "2": "A", "3": "C", "4": "C", "5": "A"},
         "e1-checkpoint-retake-attempt",
     )
     assert passed.status_code == 200, passed.text
@@ -2054,7 +2054,7 @@ def test_e1_checkpoint_does_not_partially_complete_if_proficiency_changes():
         app,
         session_id,
         question,
-        {str(position): "A" for position in range(1, 6)},
+        {"1": "A", "2": "C", "3": "B", "4": "A", "5": "C"},
         "e1-checkpoint-prerequisite-race-attempt",
     )
 
