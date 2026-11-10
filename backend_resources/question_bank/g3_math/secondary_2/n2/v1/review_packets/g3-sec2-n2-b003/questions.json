@@ -501,7 +501,7 @@
     "school_level": "secondary_2",
     "topic_code": "N2",
     "primary_outcome": "2.4",
-    "title": "Rectangular land area",
+    "title": "Area of a square field in hectares",
     "difficulty": 2,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -514,7 +514,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A rectangular plot measures 5 cm by 5 cm on a map with scale 1 : 10 000. Find its actual area in hectares. (1 hectare "
+            "text": "A square field is drawn with sides of 5 cm on a farm map at scale 1 : 10 000. What is the real area of the field in hectares? (1 hectare "
           },
           {
             "type": "inline_math",
@@ -2437,7 +2437,7 @@
     "school_level": "secondary_2",
     "topic_code": "N2",
     "primary_outcome": "2.5",
-    "title": "Test and extend a proportional table",
+    "title": "Cost from a price list",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2450,63 +2450,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A table of values shows "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=5,\\ y=8"
-          },
-          {
-            "type": "text",
-            "text": "; "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=10,\\ y=16"
-          },
-          {
-            "type": "text",
-            "text": "; "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=15,\\ y=24"
-          },
-          {
-            "type": "text",
-            "text": ". Check that "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": " is directly proportional to "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": ", then find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": " when "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=10"
-          },
-          {
-            "type": "text",
-            "text": ". Enter the exact numerical value only."
+            "text": "A price list shows that 5 notebooks cost S$8, 10 notebooks cost S$16 and 15 notebooks cost S$24. The cost is directly proportional to the number of notebooks. Find the cost of 12 notebooks, in dollars. Type the number only."
           }
         ],
         "marks": 3,
@@ -2515,8 +2459,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "16",
-          "canonical_latex": "16",
+          "canonical_answer": "19.2",
+          "canonical_latex": "19.2",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2545,15 +2489,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set "
-              },
-              {
-                "type": "inline_math",
-                "latex": "\\frac{y}{10}=\\frac{8}{5}"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Find the cost of one notebook from any row, then multiply by 12."
               }
             ]
           }
@@ -2564,7 +2500,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\frac{y}{10}=\\frac{8}{5}\\Rightarrow y=\\frac{8(10)}{5}=16"
+                "latex": "\\frac{y}{12}=\\frac{8}{5}\\Rightarrow y=\\frac{8(12)}{5}=19.2"
               }
             ],
             "mark_type": "M",
@@ -2575,7 +2511,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{16}"
+                "latex": "\\boxed{19.2}"
               }
             ],
             "mark_type": "A",
