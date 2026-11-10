@@ -1,11 +1,11 @@
 # Current project handoff
 
-Updated: 10 November 2026 (Asia/Singapore)
+Updated: 11 November 2026 (Asia/Singapore)
 
 This is the short restart file for a new session or collaborator. Read it before loading
 the larger plans; do not use the full chat transcript as project state.
 
-## Start here: state on 10 November 2026
+## Start here: state on 11 November 2026
 
 This section replaces the older status notes further down, which are kept as history. Where they
 disagree, trust this section and the repo.
@@ -89,6 +89,27 @@ Don't ask about these again.
 - **Diagnostic:** connected to the Mathematics course (#418-#431). Students wait on human approval of
   its 76 questions. The English diagnostic is 43 parts in 60 minutes (#370).
 - **Release:** two-course gate (#313), single invitation (#280).
+- **Review deploy fixed (#648):** every review-API deploy from 9 November 10:58 UTC failed, because
+  three G5 diagnostic questions reused revision 1's figure filename at revision 2 and
+  `math_question_assets.storage_path` is unique across revisions. CI imports into an empty database,
+  so it never saw it. Question assets now need an `-rN` filename from revision 2. The first good
+  deploy since then is `a12cefd5` (10 November 15:53 UTC). To check what the live API runs, read the
+  `x-release-sha` header on `/api/v1/ready`, and see Render's deploy statuses on GitHub.
+- **Second pass, 10-11 November:**
+  - Visual check of 380 practice questions and all 87 lessons in the real app at 390 and 1440 px,
+    with six display bugs fixed: equations cut off on phones, stranded punctuation, glued sentences,
+    the generic recall message, prompt size and step alignment, and split spaced numbers
+    (#651-#661).
+  - New generator templates: balance scale, angle types with reflex arcs, a points-only grid,
+    sine/cosine, and label placement that avoids plotted lines (#654, #690, #695, #700, #702).
+  - The Sec 1 S1 diagram audit (#657). The five test-pinned questions were fixed (#662-#677).
+  - D3 A congruence rewrites in Sec 2 G2 (#686, #687, #696, #699). New keys: `g2-l3-502` 55,
+    `g2-l3-509` 10, `g2-l4-505` 44, `g2-l4-509` 70; also `n3-l1-001` 64 and `g5-l5-005` 1407.
+  - 11 manifests now cite house rules v2 (CFL-612, 787, and Sec 2 N7).
+  - English: nine editing items and six correct-the-text prompts replaced, with rules against both;
+    diagnostic and mock passages at 300-450 words, with a rule; 12 draft essay prompts; a
+    form-equivalence report, `question-bank english-form-equivalence` (#649-#683). English findings
+    are down to 23.
 
 ### Still to do, in suggested order
 
@@ -126,6 +147,11 @@ Ledger records with `resolution.status` `left_open` (112). By kind:
 ### Questions for William
 
 New:
+
+- **Diagnostic outcome tags:** the fix for B13, E13, B28, E27 and E28 is ready and tested, but all 19
+  diagnostic manifests store `plan.json`'s checksum, so it must change 19 batches in one PR, which
+  pr-check rejects. Recommended: approve one multi-batch PR as an exception. The patch is kept with
+  the coordinator's notes.
 
 - **Locked lessons:** Learn and Progress link to locked lessons, where "Start draft practice" leads to
   an error page. Recommended: show the lock state up front.
