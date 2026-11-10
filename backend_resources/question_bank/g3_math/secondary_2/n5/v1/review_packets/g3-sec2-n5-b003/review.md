@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-516 — Change the subject of an area formula
+## n5-l3-516 — Make v the subject of the kinetic energy formula
 
 [Open this question in the HTML preview](index.html#n5-l3-516)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-517 — Substitute into a motion formula
+## n5-l3-517 — Braking car: a negative acceleration
 
 [Open this question in the HTML preview](index.html#n5-l3-517)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-518 — Difference of squares as a shortcut
+## n5-l3-518 — Evaluate a product using an identity
 
 [Open this question in the HTML preview](index.html#n5-l3-518)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l2-520 — Factorise when the middle sign is negative
+## n5-l2-520 — Quadratic with a negative constant term
 
 [Open this question in the HTML preview](index.html#n5-l2-520)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l4-511 — Simplify using square identities
+## n5-l4-511 — Factorise a difference of two squares with a bracket
 
 [Open this question in the HTML preview](index.html#n5-l4-511)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l4-512 — Show the grouping that reveals a bracket
+## n5-l4-512 — Group terms with a negative common factor
 
 [Open this question in the HTML preview](index.html#n5-l4-512)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-521 — Simplify a product by cancelling
+## n5-l3-521 — Divide algebraic fractions with a repeated bracket
 
 [Open this question in the HTML preview](index.html#n5-l3-521)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l2-523 — Multiply a pair of brackets
+## n5-l2-523 — Two brackets with negative terms
 
 [Open this question in the HTML preview](index.html#n5-l2-523)
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l5-503",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -42,7 +42,10 @@
         "variables": [
           "x"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "x != 0",
+          "x-5 != 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {
           "form": "simplified_fraction"
@@ -54,7 +57,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor every numerator and denominator, and record values excluded by the original expression."
+              "text": "Dividing by a fraction is the same as multiplying by its reciprocal, and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x^2-25"
+            },
+            {
+              "type": "text",
+              "text": " should be factorised first."
             }
           ]
         },
@@ -63,7 +74,23 @@
           "content": [
             {
               "type": "text",
-              "text": "For division, multiply by the reciprocal; cancel complete factors and apply index laws."
+              "text": "After inverting, cancel the common bracket and the powers of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": ". Keep track of the values of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " that make any denominator or divisor zero."
             }
           ]
         }
@@ -74,11 +101,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Factorise "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x^2-25"
+            },
+            {
+              "type": "text",
+              "text": " and multiply by the reciprocal. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{(x-5)(x+5)}{4x^2}\\times\\frac{5x}{x-5}=\\frac{5(x+5)}{4x}"
+              "latex": "\\frac{(x-5)(x+5)}{4x^2}\\times\\frac{5x}{x-5}=\\frac{5x(x+5)}{4x^2}"
             }
           ],
           "mark_type": "M",
@@ -89,11 +124,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Cancel the common factor "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": ": "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{5(x+5)}{4x}"
+              "latex": "\\frac{5(x+5)}{4x},\\quad x\\neq0,\\ x\\neq5"
             }
           ],
           "mark_type": "A",

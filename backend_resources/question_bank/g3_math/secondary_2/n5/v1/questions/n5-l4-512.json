@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l4-512",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.13",
-  "title": "Show the grouping that reveals a bracket",
+  "title": "Group terms with a negative common factor",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -24,11 +24,11 @@
         },
         {
           "type": "inline_math",
-          "latex": "ax+bx+2ay+2by"
+          "latex": "6xy-9y-4x+6"
         },
         {
           "type": "text",
-          "text": " completely. Show the grouping that exposes the repeated factor."
+          "text": " completely."
         }
       ],
       "marks": 4,
@@ -37,11 +37,9 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "(a+b)*(x+2*y)",
-        "canonical_latex": "(a+b)(x+2y)",
+        "canonical_expression": "(2*x-3)*(3*y-2)",
+        "canonical_latex": "(2x-3)(3y-2)",
         "variables": [
-          "a",
-          "b",
           "x",
           "y"
         ],
@@ -57,7 +55,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Reorder if needed, then factor a common term from each useful pair."
+              "text": "Group the first two terms and the last two terms."
             }
           ]
         },
@@ -66,7 +64,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The two groups should contain the same bracket; factor that bracket and expand to check."
+              "text": "Take "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3y"
+            },
+            {
+              "type": "text",
+              "text": " out of the first pair, and choose the sign of the factor from the second pair so that the brackets match."
             }
           ]
         }
@@ -77,11 +83,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Take "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3y"
+            },
+            {
+              "type": "text",
+              "text": " out of the first pair and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-2"
+            },
+            {
+              "type": "text",
+              "text": " out of the second pair. "
             },
             {
               "type": "display_math",
-              "latex": "x(a+b)+2y(a+b)=(a+b)(x+2y)"
+              "latex": "6xy-9y-4x+6=3y(2x-3)-2(2x-3)"
             }
           ],
           "mark_type": "M",
@@ -92,11 +114,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Take out the common bracket "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(2x-3)"
+            },
+            {
+              "type": "text",
+              "text": ": "
             },
             {
               "type": "display_math",
-              "latex": "(a+b)(x+2y)"
+              "latex": "(2x-3)(3y-2)"
             }
           ],
           "mark_type": "A",

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l2-520",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.14",
-  "title": "Factorise when the middle sign is negative",
+  "title": "Quadratic with a negative constant term",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -24,7 +24,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "x^{2}-12x+35"
+          "latex": "x^{2}+2x-35"
         },
         {
           "type": "text",
@@ -37,8 +37,8 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "(x-5)*(x-7)",
-        "canonical_latex": "(x-5)(x-7)",
+        "canonical_expression": "(x+7)*(x-5)",
+        "canonical_latex": "(x+7)(x-5)",
         "variables": [
           "x"
         ],
@@ -54,7 +54,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Remove any overall common factor, then use the required sum and product."
+              "text": "You need two numbers that multiply to "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-35"
+            },
+            {
+              "type": "text",
+              "text": " and add to "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -63,7 +79,7 @@
           "content": [
             {
               "type": "text",
-              "text": "For a non-monic quadratic, split the middle term and group; expand the factors to verify."
+              "text": "One number is positive and one is negative, and the larger one is positive."
             }
           ]
         }
@@ -74,11 +90,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Find two numbers with product "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-35"
+            },
+            {
+              "type": "text",
+              "text": " and sum "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "-5+(-7)=-12,\\ (-5)(-7)=35\\Rightarrow (x-5)(x-7)"
+              "latex": "7+(-5)=2,\\quad7\\times(-5)=-35"
             }
           ],
           "mark_type": "M",
@@ -89,11 +121,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "(x-5)(x-7)"
+              "latex": "(x+7)(x-5)"
             }
           ],
           "mark_type": "A",
