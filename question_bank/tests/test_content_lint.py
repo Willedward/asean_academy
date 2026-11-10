@@ -23,6 +23,7 @@ from question_bank.content_lint import (
     load_policy,
     math_duplicate_findings,
     parse_value,
+    plain_text_math_findings,
     question_math_items,
 )
 from question_bank.course_models import Lesson
@@ -100,12 +101,18 @@ def test_failing_question_fixture_is_reported(fixture, code):
         "hint-reveals-answer-pass",
         "answer-solution-mismatch-pass",
         "math-duplicate-latex",
-        "math-duplicate-plain-fail",
-        "math-duplicate-plain-pass",
     ],
 )
 def test_passing_question_fixture_is_clean(fixture):
     assert lint_question(_question(fixture)) == []
+
+
+@pytest.mark.parametrize("fixture", ["math-duplicate-plain-fail", "math-duplicate-plain-pass"])
+def test_plain_text_duplicate_fixtures_only_report_their_plain_text_fraction(fixture):
+    # These fixtures keep "3/4 of 120" as text on purpose, to test notation normalisation.
+    (finding,) = lint_question(_question(fixture))
+    assert finding.code == "content_plain_text_math"
+    assert "slash fraction" in finding.message
 
 
 def test_tab_message_names_the_swallowed_command():
@@ -235,6 +242,86 @@ def test_latex_fraction_hint_with_a_decimal_answer_does_not_crash():
         hint,
     )
     assert lint_question(given) == []
+
+
+@pytest.mark.parametrize(
+    ("text", "label"),
+    [
+        ("A blue ribbon is 3/4 m long.", "slash fraction"),
+        ("Use x/25 = 1.8/3.", "slash fraction"),
+        ("Convert −5/3 to a decimal.", "slash fraction"),
+        ("Mira walks 2 1/3 km.", "mixed number"),
+        ("Calculate 2^3.", "caret exponent"),
+        ("Find sqrt(49).", "function-call root"),
+        ("Show that x <= 4.", "ASCII relation"),
+        ("Show that y >= 2.", "ASCII relation"),
+    ],
+)
+def test_plain_text_math_flags_numeric_fractions_and_notation(text, label):
+    (finding,) = plain_text_math_findings([("parts[0].prompt[0]", text)], "fixture")
+    assert finding.code == "content_plain_text_math"
+    assert f"{label} in" in finding.message
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        # Prompts that teach the answer format keep the caret as text.
+        "Give your answer in index notation. Type powers with ^, for example 2^3.",
+        # Ratios, including ratios of fractions and mixed numbers.
+        "Write 1 1/2:2 1/4 in its simplest form.",
+        "Write 1 1/4 : 2 1/2 : 3 3/4 in its simplest form.",
+        "Since the ratio is 0.6:1.4, simplify it.",
+        # Times and dates.
+        "The train leaves at 9:30 and arrives at 11:05.",
+        "The fair opens on 12/05/2026.",
+        # Units and words with slashes are not fractions.
+        "The car travels at 60 km/h for 2 hours.",
+        "Use red/white counters.",
+    ],
+)
+def test_plain_text_math_ignores_intentional_text(text):
+    assert plain_text_math_findings([("parts[0].prompt[0]", text)], "fixture") == []
+
+
+def test_geometry_figure_prompts_keep_given_numbers_as_text():
+    document = json.loads((FIXTURES / "questions" / "clean.json").read_text())
+    part = document["parts"][0]
+    part["prompt"] = [
+        {
+            "type": "text",
+            "text": "A similar stage has sides equal to 3/5 of the courtyard's sides. "
+            "Find the stage area.",
+        }
+    ]
+    assert _codes(lint_question(Question.model_validate(document))) == [
+        "content_plain_text_math"
+    ]
+    document["assets"] = [
+        {
+            "asset_key": "fixture-diagram",
+            "kind": "geometry",
+            "format": "svg",
+            "path": "assets/fixture-diagram.svg",
+            "alt_text": "Two similar rectangles.",
+            "generation_spec": {"renderer": "nextscholar-similarity-svg-v1"},
+            "sha256": "0" * 64,
+            "width": 600,
+            "height": 400,
+        }
+    ]
+    assert lint_question(Question.model_validate(document)) == []
+    # Hints and worked solutions are not read by the geometry checks, so they are still linted.
+    part["hints"][0]["content"] = [{"type": "text", "text": "Multiply by 3/5 twice."}]
+    assert _codes(lint_question(Question.model_validate(document))) == [
+        "content_plain_text_math"
+    ]
+    # Raw LaTeX is never acceptable, even in a figure prompt.
+    part["hints"][0]["content"] = [{"type": "text", "text": "Use the scale factor."}]
+    part["prompt"][0]["text"] = "Find \\frac{3}{5} of the area."
+    assert _codes(lint_question(Question.model_validate(document))) == [
+        "content_plain_text_math"
+    ]
 
 
 def test_latex_and_plain_text_normalise_to_the_same_value():
