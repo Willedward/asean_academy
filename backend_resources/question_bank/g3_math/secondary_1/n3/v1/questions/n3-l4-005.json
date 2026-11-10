@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n3-l4-005",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A jacket is discounted by 10%. Then 9% GST is charged on the discounted price. The final amount paid is S$196.20. Find the jacket's list price in dollars."
+          "text": "A jacket is discounted by 20%. Then 9% GST (goods and services tax, a tax added to the price) is charged on the discounted price. The final amount paid is S$218. Find the jacket's list price in dollars. Enter only the number."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "200",
-        "canonical_latex": "200",
+        "canonical_answer": "250",
+        "canonical_latex": "250",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The final amount is the list price multiplied by 0.90 and then by 1.09."
+              "text": "The final amount is the list price multiplied by 0.80 and then by 1.09."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "0.90\\times1.09=0.981"
+              "type": "inline_math",
+              "latex": "0.80\\times1.09=0.872"
             }
           ],
           "mark_type": "M",
@@ -72,8 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{List price}=196.20\\div0.981"
+              "type": "inline_math",
+              "latex": "\\text{List price}=218\\div0.872"
             }
           ],
           "mark_type": "M",
@@ -83,8 +83,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{List price}=200"
+              "type": "inline_math",
+              "latex": "\\text{List price}=250"
             }
           ],
           "mark_type": "A",

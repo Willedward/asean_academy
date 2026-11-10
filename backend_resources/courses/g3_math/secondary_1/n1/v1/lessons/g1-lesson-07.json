@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-lesson-07",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g1",
@@ -46,7 +46,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Straightedge-and-compass construction preserves exact geometric conditions. Equal-radius arcs from the endpoints of a segment locate points equidistant from both endpoints; joining the arc intersections gives the perpendicular bisector. Equal arcs from the sides of an angle locate its angle bisector."
+          "text": "Straightedge-and-compass construction keeps exact geometric conditions. The diagram shows an SSS construction: segment AB is drawn first, then an arc centred at A and an arc centred at B. The arcs meet at C above AB and at C′ below it, so there are two possible triangles, mirror images of each other in AB. Equal-radius arcs from the two ends of a segment locate points the same distance from both ends; joining two such points gives the perpendicular bisector."
         },
         {
           "type": "asset_ref",
@@ -70,35 +70,11 @@
       "stable_key": "g1-17-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: decide whether a triangle can be constructed",
       "prompt": [
         {
           "type": "text",
-          "text": "A 92° angle is bisected. Find either constructed angle."
-        }
-      ],
-      "steps": [
-        {
-          "position": 1,
-          "content": [
-            {
-              "type": "display_math",
-              "latex": "92^\\circ\\div2=46^\\circ"
-            }
-          ]
-        }
-      ],
-      "verification_note": "The result follows the stated property and satisfies the original geometric conditions."
-    },
-    {
-      "stable_key": "g1-lesson-07-example-2",
-      "position": 5,
-      "type": "worked_example",
-      "title": "Worked example: apply the method",
-      "prompt": [
-        {
-          "type": "text",
-          "text": "Construct triangle ABC with AB=7 cm, AC=5 cm and BC=4 cm, then describe why the construction is unique up to reflection."
+          "text": "Can a triangle be constructed with sides 3 cm, 4 cm and 8 cm?"
         }
       ],
       "steps": [
@@ -107,7 +83,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Draw AB=7 cm."
+              "text": "Draw the longest side, 8 cm. Then draw an arc of radius 3 cm from one end and an arc of radius 4 cm from the other end."
             }
           ]
         },
@@ -116,7 +92,44 @@
           "content": [
             {
               "type": "text",
-              "text": "With centre A and radius 5 cm draw an arc. With centre B and radius 4 cm draw a second arc."
+              "text": "The arcs can reach at most 3 + 4 = 7 cm along the 8 cm side, so they never meet. There is no point for the third vertex."
+            },
+            {
+              "type": "display_math",
+              "latex": "3+4=7<8"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Any two sides of a triangle must add to more than the third side. Here 3 + 4 is less than 8, so no triangle exists."
+    },
+    {
+      "stable_key": "g1-lesson-07-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: an SSS construction",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Construct triangle ABC with AB = 7 cm, AC = 5 cm and BC = 8 cm, then explain why there are two possible positions for C."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Draw AB = 7 cm."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "With centre A and radius 5 cm, draw an arc. With centre B and radius 8 cm, draw a second arc."
             }
           ]
         },
@@ -125,12 +138,12 @@
           "content": [
             {
               "type": "text",
-              "text": "Label an intersection C and join AC and BC. The two possible intersections are mirror images across AB."
+              "text": "Label an intersection C and join AC and BC. The arcs also meet at a second point C′ on the other side of AB, as in the diagram; triangle ABC′ is the mirror image of triangle ABC."
             }
           ]
         }
       ],
-      "verification_note": "Measure AC and BC and keep both intersecting arcs visible as evidence of the SSS construction."
+      "verification_note": "Check: 5 + 7 > 8, so the arcs do meet. Measure AC and BC, and keep both arcs visible as evidence of the construction."
     },
     {
       "stable_key": "g1-lesson-07-pitfalls",
@@ -180,11 +193,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Name the relevant property, write the complete angle or construction relationship, calculate carefully, and check that every angle and length is geometrically possible."
+          "text": "SSS: draw one side, then intersect arcs from its ends. SAS: construct the included angle between the two sides. ASA: construct both angles at the ends of the given side. Equal-radius arcs from the ends of a segment give its perpendicular bisector."
         },
         {
           "type": "text",
-          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
+          "text": "Check that the data can make a figure (any two sides of a triangle must add to more than the third), keep every arc visible, and measure the finished figure."
         }
       ]
     }
@@ -194,16 +207,203 @@
       "asset_key": "g1-lesson-07-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-lesson-07-construction.svg",
-      "alt_text": "A line segment AB with intersecting compass arcs locating C, together with a perpendicular-bisector construction.",
+      "path": "assets/g1-lesson-07-construction-r3.svg",
+      "alt_text": "Segment AB marked 7 cm. Compass arcs centred at A and B meet at C above the segment and at C′ below it. Triangle ABC has AC marked 5 cm and BC marked 8 cm. Triangle ABC′, the mirror image in AB, is dashed. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
         "diagram_kind": "construction",
-        "lesson_key": "g1-lesson-07"
+        "lesson_key": "g1-lesson-07",
+        "template": "sss_mirror_image",
+        "inputs": {
+          "sides": [
+            {
+              "value": 7,
+              "unit": "cm"
+            },
+            {
+              "value": 5,
+              "unit": "cm"
+            },
+            {
+              "value": 8,
+              "unit": "cm"
+            }
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "sides": [
+            {
+              "value": 7,
+              "unit": "cm"
+            },
+            {
+              "value": 5,
+              "unit": "cm"
+            },
+            {
+              "value": 8,
+              "unit": "cm"
+            }
+          ]
+        },
+        "forbidden_visible_labels": [
+          "one triangle",
+          "congruent"
+        ],
+        "unknowns": [],
+        "mirror_image": true,
+        "arcs": {
+          "arc-a-1": {
+            "center": "A",
+            "radius": 171.76,
+            "through": "C"
+          },
+          "arc-a-2": {
+            "center": "A",
+            "radius": 171.76,
+            "through": "D"
+          },
+          "arc-b-1": {
+            "center": "B",
+            "radius": 274.82,
+            "through": "C"
+          },
+          "arc-b-2": {
+            "center": "B",
+            "radius": 274.82,
+            "through": "D"
+          }
+        },
+        "viewbox": [
+          600.0,
+          462.0
+        ],
+        "points": {
+          "A": [
+            179.77,
+            218.0
+          ],
+          "B": [
+            420.23,
+            218.0
+          ],
+          "C": [
+            204.3,
+            48.0
+          ],
+          "D": [
+            204.3,
+            388.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AD",
+            "from": "A",
+            "to": "D",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "BD",
+            "from": "B",
+            "to": "D",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "A",
+            "target": "point:A"
+          },
+          {
+            "text": "B",
+            "target": "point:B"
+          },
+          {
+            "text": "C",
+            "target": "point:C"
+          },
+          {
+            "text": "C′",
+            "target": "point:D"
+          },
+          {
+            "text": "7 cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:AC"
+          },
+          {
+            "text": "8 cm",
+            "target": "segment:BC"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AC",
+              "AD"
+            ],
+            "value": 1
+          },
+          {
+            "type": "length_ratio",
+            "segments": [
+              "BC",
+              "BD"
+            ],
+            "value": 1
+          },
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AB",
+              "AC"
+            ],
+            "value": 1.4
+          },
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AB",
+              "BC"
+            ],
+            "value": 0.875
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "645010227789f956a49b0d51e96f676834e1f1ebe3bdb5bacd09d1187621a188",
-      "width": 940,
-      "height": 390
+      "sha256": "1de301514363a64468b95bf7fb829281e312d1b0dae1f6adba410e1e3d0ecf3a",
+      "width": 600,
+      "height": 462
     }
   ],
   "provenance": {
@@ -212,6 +412,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

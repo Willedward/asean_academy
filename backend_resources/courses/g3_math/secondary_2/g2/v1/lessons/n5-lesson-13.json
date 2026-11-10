@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n5",
   "status": "draft",
@@ -99,7 +99,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Reorder and group the terms with and without k."
+              "text": "Group the terms without k and the terms with k."
             },
             {
               "type": "display_math",
@@ -144,7 +144,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Factorise ax-bx+3ay-3by."
+          "text": "Factorise ax − bx − 3ay + 3by."
         }
       ],
       "steps": [
@@ -153,11 +153,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Group the x-terms and y-terms."
+              "text": "Group the x-terms and the y-terms. Take out −3y from the second group, so that both brackets are a − b."
             },
             {
               "type": "display_math",
-              "latex": "x(a-b)+3y(a-b)"
+              "latex": "x(a-b)-3y(a-b)"
             }
           ]
         },
@@ -166,16 +166,16 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor the common bracket."
+              "text": "Factor out the common bracket."
             },
             {
               "type": "display_math",
-              "latex": "(a-b)(x+3y)"
+              "latex": "(a-b)(x-3y)"
             }
           ]
         }
       ],
-      "verification_note": "Expanding (a-b)(x+3y) gives ax-bx+3ay-3by in the original order."
+      "verification_note": "Expanding (a − b)(x − 3y) gives ax − 3ay − bx + 3by, the original four terms. Taking out +3y instead would give the bracket (−a + b), which does not match a − b."
     },
     {
       "stable_key": "n5-13-recall",
@@ -201,7 +201,9 @@
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
-        "checker_config": {}
+        "checker_config": {
+          "form": "factorised_completely"
+        }
       },
       "feedback": [
         {
