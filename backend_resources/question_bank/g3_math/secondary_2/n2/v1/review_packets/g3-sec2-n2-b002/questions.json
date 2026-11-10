@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l1-507",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -21,7 +21,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A real straight-line distance is 600 m. On a map with scale 1 : 10,000, find its length in centimetres. Enter the numerical value only."
+            "text": "A footpath in a park is 600 m long. How long is it on a plan drawn to a scale of 1 : 10 000? Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -52,7 +52,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Divide the real distance in centimetres by 10,000."
+                "text": "Divide the real distance in centimetres by 10 000."
               }
             ]
           }
@@ -63,7 +63,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "600\\text{ m}=60000\\text{ cm},\\quad 60000\\div 10{,}000=6\\text{ cm}"
+                "latex": "600\\text{ m}=60\\,000\\text{ cm},\\quad 60\\,000\\div 10\\,000=6\\text{ cm}"
               }
             ],
             "mark_type": "A",
@@ -92,14 +92,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l1-508",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N2",
     "primary_outcome": "2.4",
-    "title": "Statement scale as a ratio",
+    "title": "Statement scale in metres to a ratio scale",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -112,7 +112,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A map states that 1 cm represents 6 km. Write the missing denominator in the scale 1 : ____. Enter the numerical value only."
+            "text": "A map states that 1 cm represents 250 m. Write the missing denominator in the scale 1 : ____. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -121,8 +121,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "600000",
-          "canonical_latex": "600000",
+          "canonical_answer": "25000",
+          "canonical_latex": "25000",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -134,7 +134,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Both sides of a ratio scale must use the same unit."
+                "text": "Write both lengths in the same unit."
               }
             ]
           },
@@ -143,15 +143,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Convert 6 km to centimetres using "
-              },
-              {
-                "type": "inline_math",
-                "latex": "1\\text{ km}=100\\,000"
-              },
-              {
-                "type": "text",
-                "text": " cm."
+                "text": "Change 250 m into centimetres."
               }
             ]
           }
@@ -162,7 +154,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "6\\text{ km}=6\\times100\\,000\\text{ cm}=600000\\text{ cm}"
+                "latex": "250\\text{ m}=25\\,000\\text{ cm, so the scale is }1:25\\,000"
               }
             ],
             "mark_type": "A",
@@ -191,7 +183,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l1-509",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -211,7 +203,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A river section is 8 cm long on a map with scale 1 : 25,000. Find its real length in metres. Enter the numerical value only."
+            "text": "A river section is 8 cm long on a map with scale 1 : 25 000. Find its real length in metres. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -246,7 +238,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "8\\times 25{,}000"
+                "latex": "8\\times 25\\,000"
               },
               {
                 "type": "text",
@@ -261,7 +253,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "8\\times 25{,}000\\text{ cm}=2000\\text{ m}"
+                "latex": "8\\times 25\\,000\\text{ cm}=2000\\text{ m}"
               }
             ],
             "mark_type": "A",
@@ -290,14 +282,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l2-509",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N2",
     "primary_outcome": "2.4",
-    "title": "Route distance in kilometres",
+    "title": "Real length of a canal",
     "difficulty": 2,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -310,7 +302,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. On a map with scale 1 : 125,000, a heritage walk measures 10 cm. Find the real distance in kilometres. Enter the numerical value only."
+            "text": "On a map with scale 1 : 40 000, a canal measures 7.5 cm. Find the real length of the canal in kilometres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -319,8 +311,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "12.5",
-          "canonical_latex": "12.5",
+          "canonical_answer": "3",
+          "canonical_latex": "3",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -332,7 +324,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use the scale to find the real distance in centimetres."
+                "text": "Multiply the map length by the scale denominator to get the real length in centimetres."
               }
             ]
           },
@@ -341,7 +333,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "After multiplying, divide by 100 000 to convert centimetres to kilometres."
+                "text": "There are "
+              },
+              {
+                "type": "inline_math",
+                "latex": "100\\,000"
+              },
+              {
+                "type": "text",
+                "text": " cm in 1 km."
               }
             ]
           }
@@ -352,7 +352,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "10\\times 125{,}000=1{,}250{,}000\\text{ cm}=12.5\\text{ km}"
+                "latex": "7.5\\times40\\,000=300\\,000\\text{ cm}"
               }
             ],
             "mark_type": "M",
@@ -363,7 +363,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{12.5}"
+                "latex": "300\\,000\\text{ cm}=3\\text{ km}"
               }
             ],
             "mark_type": "A",
@@ -392,7 +392,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l2-510",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -412,7 +412,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. Two landmarks are 0.5 km apart. A map has scale 1 : 10,000. Find their separation on the map in millimetres. Enter the numerical value only."
+            "text": "On a hiking map drawn at 1 : 25 000, how many millimetres apart are two huts that are 0.5 km apart on the ground? Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -421,8 +421,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "50",
-          "canonical_latex": "50",
+          "canonical_answer": "20",
+          "canonical_latex": "20",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -443,7 +443,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The quotient gives map centimetres; multiply it by 10 for millimetres."
+                "text": "Convert 0.5 km to centimetres, divide by the scale denominator, then convert to millimetres."
               }
             ]
           }
@@ -454,7 +454,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "0.5\\text{ km}=50{,}000\\text{ cm},\\quad \\frac{50{,}000}{10{,}000}\\times10=50\\text{ mm}"
+                "latex": "0.5\\text{ km}=50\\,000\\text{ cm},\\quad\\frac{50\\,000}{25\\,000}=2\\text{ cm}=20\\text{ mm}"
               }
             ],
             "mark_type": "M",
@@ -465,7 +465,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{50}"
+                "latex": "\\boxed{20}"
               }
             ],
             "mark_type": "A",
@@ -494,14 +494,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n2-l2-511",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N2",
     "primary_outcome": "2.4",
-    "title": "Rectangular land area",
+    "title": "Area of an orchard in hectares",
     "difficulty": 2,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -514,7 +514,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A rectangular plot measures 2 cm by 3 cm on a map with scale 1 : 10 000. Find its actual area in hectares. Enter the numerical value only."
+            "text": "A rectangular orchard measures 2 cm by 3 cm on a plan drawn at 1 : 10 000. How many hectares does the orchard cover? (1 hectare "
+          },
+          {
+            "type": "inline_math",
+            "latex": "=10\\,000"
+          },
+          {
+            "type": "text",
+            "text": " m"
+          },
+          {
+            "type": "inline_math",
+            "latex": "^2"
+          },
+          {
+            "type": "text",
+            "text": ".) Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -556,7 +572,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "2\\text{ cm}=200\\text{ m},\\quad 3\\text{ cm}=300\\text{ m},\\quad \\frac{200\\times300}{10\\,000}=6\\text{ ha}"
+                "latex": "2\\text{ cm}\\mapsto 200\\text{ m},\\quad 3\\text{ cm}\\mapsto 300\\text{ m},\\quad \\frac{200\\times300}{10\\,000}=6\\text{ ha}"
               }
             ],
             "mark_type": "M",
@@ -596,7 +612,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n2-l2-512",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -616,7 +632,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A map uses the statement scale 1 cm represents 250 m. A river section measures 4 cm. Find its real length in kilometres. Enter the numerical value only."
+            "text": "A tourist map says that 1 cm stands for 250 m. Two temples are 4 cm apart on the map. How far apart are they in kilometres? Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -698,7 +714,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l3-509",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -718,7 +734,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A mapped journey has consecutive sections of 2 cm, 7 cm and 5 cm on a scale 1 : 50,000 map. Find the total real distance in kilometres. Enter the numerical value only."
+            "text": "A cyclist's route on a 1 : 50 000 map is made of three straight stretches measuring 2 cm, 7 cm and 5 cm. How far does the cyclist ride, in kilometres? Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -749,7 +765,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply 14 cm by 50,000, then convert centimetres to kilometres."
+                "text": "Multiply 14 cm by 50 000, then convert centimetres to kilometres."
               }
             ]
           }
@@ -760,7 +776,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "(2+7+5)\\times 50{,}000=700{,}000\\text{ cm}=7\\text{ km}"
+                "latex": "(2+7+5)\\times 50\\,000=700\\,000\\text{ cm}=7\\text{ km}"
               }
             ],
             "mark_type": "M",
@@ -800,7 +816,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n2-l3-510",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -820,7 +836,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. On an unlabelled map, 3 cm represents 750 m. Another route measures 7 cm. Find its real length in metres. Enter the numerical value only."
+            "text": "A sketch map has no scale printed, but a bridge that is 1200 m long is drawn 3 cm long. A road on the same map is 7 cm long. How long is the road in metres? Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -829,8 +845,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "1750",
-          "canonical_latex": "1750",
+          "canonical_answer": "2800",
+          "canonical_latex": "2800",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -851,7 +867,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Divide 750 by 3, then multiply by 7."
+                "text": "Find how many metres 1 cm represents first."
               }
             ]
           }
@@ -862,7 +878,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "1\\text{ cm}=750\\div3=250\\text{ m},\\quad 7\\times250=1750\\text{ m}"
+                "latex": "1\\text{ cm}\\mapsto 1200\\div3=400\\text{ m},\\quad 7\\times400=2800\\text{ m}"
               }
             ],
             "mark_type": "M",
@@ -873,7 +889,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{1750}"
+                "latex": "\\boxed{2800}"
               }
             ],
             "mark_type": "A",
@@ -902,7 +918,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l3-511",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -922,7 +938,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A rectangular wetland is 4 cm by 5 cm on a map with scale 1 : 25,000. Find its actual area in square kilometres. Enter the numerical value only."
+            "text": "A lake is drawn as a rectangle 4 cm long and 5 cm wide on a 1 : 25 000 map. What is the real area of the lake in square kilometres? Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -1004,7 +1020,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l3-512",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1024,7 +1040,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A square site has actual area 6250000 m². It is shown on a scale 1 : 50,000 map. Find its map area in square centimetres. Enter the numerical value only."
+            "text": "A square farm has a real area of 6 250 000 m². How much area does it cover on a 1 : 50 000 map, in square centimetres? Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -1066,7 +1082,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\sqrt{6250000}=2500\\text{ m},\\quad \\frac{250000}{50{,}000}=5\\text{ cm},\\quad A=5^2=25\\text{ cm}^2"
+                "latex": "\\sqrt{6250000}=2500\\text{ m},\\quad \\frac{250000}{50\\,000}=5\\text{ cm},\\quad A=5^2=25\\text{ cm}^2"
               }
             ],
             "mark_type": "M",
@@ -1106,7 +1122,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l4-505",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1126,7 +1142,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A path measures 7 cm on Map A with scale 1 : 100,000. Map B shows the same path at scale 1 : 80,000. Find its length on Map B in centimetres. Enter the numerical value only."
+            "text": "A cable route is 7 cm long on a 1 : 100 000 map. The same route is printed on a more detailed map at 1 : 80 000. How long is the route on the more detailed map, in centimetres? Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -1168,7 +1184,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "d=7(100{,}000)=700{,}000\\text{ cm},\\quad \\text{Map B}=\\frac{700{,}000}{80{,}000}=8.75\\text{ cm}"
+                "latex": "d=7(100\\,000)=700\\,000\\text{ cm},\\quad \\text{Map B}=\\frac{700\\,000}{80\\,000}=8.75\\text{ cm}"
               }
             ],
             "mark_type": "M",
@@ -1208,7 +1224,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l4-506",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1228,19 +1244,19 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A square district has actual area 36 km² and appears as a square of area 36 cm² on a map. Find the denominator "
-          },
-          {
-            "type": "inline_math",
-            "latex": "n"
-          },
-          {
-            "type": "text",
-            "text": " of the scale "
+            "text": "A square nature park covers 36 km² of land. On a map it appears as a square of area 36 cm². The map scale is "
           },
           {
             "type": "inline_math",
             "latex": "1:n"
+          },
+          {
+            "type": "text",
+            "text": ". Find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "n"
           },
           {
             "type": "text",
@@ -1294,7 +1310,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "n=\\frac{6\\times100\\,000}{6}=100{,}000"
+                "latex": "n=\\frac{6\\times100\\,000}{6}=100\\,000"
               }
             ],
             "mark_type": "M",
@@ -1334,7 +1350,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l1-510",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1354,55 +1370,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": " is directly proportional to "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": " and "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y=18"
-          },
-          {
-            "type": "text",
-            "text": " when "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=9"
-          },
-          {
-            "type": "text",
-            "text": ". Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": " when "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=11"
-          },
-          {
-            "type": "text",
-            "text": ". Enter the numerical value only."
+            "text": "The cost of ribbon is directly proportional to its length. 9 m of ribbon costs S$18. Find the cost of 11 m of ribbon in dollars. Type the number only."
           }
         ],
         "marks": 1,
@@ -1497,7 +1465,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l1-511",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1517,55 +1485,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": " is inversely proportional to "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": ". When "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=3"
-          },
-          {
-            "type": "text",
-            "text": ", "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y=4"
-          },
-          {
-            "type": "text",
-            "text": ". Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": " when "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=5"
-          },
-          {
-            "type": "text",
-            "text": ". Enter the exact numerical value only."
+            "text": "The time taken to fill a tank is inversely proportional to the number of taps used. With 3 taps it takes 4 hours. How many hours does it take with 5 taps? Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -1644,7 +1564,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l1-512",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1664,23 +1584,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. "
+            "text": "In the relation "
           },
           {
             "type": "inline_math",
-            "latex": "y"
+            "latex": "y=kx"
           },
           {
             "type": "text",
-            "text": " is directly proportional to "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": ". When "
+            "text": ", the values "
           },
           {
             "type": "inline_math",
@@ -1688,7 +1600,7 @@
           },
           {
             "type": "text",
-            "text": ", "
+            "text": " and "
           },
           {
             "type": "inline_math",
@@ -1696,19 +1608,11 @@
           },
           {
             "type": "text",
-            "text": ". Find the constant of proportionality "
+            "text": " belong together. Work out "
           },
           {
             "type": "inline_math",
             "latex": "k"
-          },
-          {
-            "type": "text",
-            "text": " in "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y=kx"
           },
           {
             "type": "text",
@@ -1799,7 +1703,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n2-l2-513",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1819,7 +1723,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. The material used to make identical water filters is directly proportional to the number made. 7 items use 42 units of material. How many units are needed for 15 items? Enter the numerical value only."
+            "text": "A baker uses 42 cups of flour for 7 identical cakes. The flour used is directly proportional to the number of cakes. How many cups are needed for 15 cakes? Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -1901,7 +1805,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n2-l2-514",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1921,7 +1825,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A divisible task takes 9 equally productive workers 8 days. Assuming inverse proportion, how many days would 7 workers take? Give your answer as an exact fraction, or as a decimal correct to 3 significant figures."
+            "text": "A divisible task takes 9 equally productive workers 8 days. Assuming inverse proportion, how many days would 7 workers take? Give your answer as an exact fraction, or as a decimal correct to 3 significant figures."
           }
         ],
         "marks": 2,
@@ -2013,7 +1917,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l2-515",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2032,8 +1936,12 @@
         "label": null,
         "prompt": [
           {
+            "type": "inline_math",
+            "latex": "q"
+          },
+          {
             "type": "text",
-            "text": "Use the data from a community planning study. The variables "
+            "text": " varies directly as "
           },
           {
             "type": "inline_math",
@@ -2041,23 +1949,7 @@
           },
           {
             "type": "text",
-            "text": " and "
-          },
-          {
-            "type": "inline_math",
-            "latex": "q"
-          },
-          {
-            "type": "text",
-            "text": " are directly proportional. When "
-          },
-          {
-            "type": "inline_math",
-            "latex": "p=4"
-          },
-          {
-            "type": "text",
-            "text": ", "
+            "text": ", and "
           },
           {
             "type": "inline_math",
@@ -2065,7 +1957,15 @@
           },
           {
             "type": "text",
-            "text": ". Find "
+            "text": " when "
+          },
+          {
+            "type": "inline_math",
+            "latex": "p=4"
+          },
+          {
+            "type": "text",
+            "text": ". Work out "
           },
           {
             "type": "inline_math",
@@ -2195,7 +2095,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n2-l2-516",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2215,7 +2115,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A vehicle covers a fixed route in 3 hours at a constant speed of 40 km/h. Assuming travel time is inversely proportional to speed, find the time in hours at 60 km/h. Enter the exact numerical value only."
+            "text": "A vehicle covers a fixed route in 3 hours at a constant speed of 40 km/h. Assuming travel time is inversely proportional to speed, find the time in hours at 60 km/h. Enter the exact numerical value only."
           }
         ],
         "marks": 2,
@@ -2305,7 +2205,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l3-513",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2325,7 +2225,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A batch of 10 identical ceramic tiles has total mass 9 kg. Total mass is directly proportional to the number of items. Find the mass in kilograms of 20 items. Enter the exact numerical value only."
+            "text": "A batch of 10 identical ceramic tiles has total mass 9 kg. Total mass is directly proportional to the number of tiles. Find the mass in kilograms of 20 tiles. Enter the exact numerical value only."
           }
         ],
         "marks": 3,
@@ -2415,7 +2315,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l3-514",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2435,7 +2335,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A fixed order takes 3 identical machines 15 hours. Assuming continuous operation at equal rates, find the time in hours for 8 machines. Enter the exact numerical value only."
+            "text": "A fixed order takes 3 identical machines 15 hours. Assuming continuous operation at equal rates, find the time in hours for 8 machines. Enter the exact numerical value only."
           }
         ],
         "marks": 3,
@@ -2533,7 +2433,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l3-515",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2553,7 +2453,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A table contains the pair "
+            "text": "Here are some values of "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": ": when "
           },
           {
             "type": "inline_math",
@@ -2569,7 +2485,63 @@
           },
           {
             "type": "text",
-            "text": ". The relationship is direct proportion. Find the y-value paired with "
+            "text": "; when "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x=6"
+          },
+          {
+            "type": "text",
+            "text": ", "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=24"
+          },
+          {
+            "type": "text",
+            "text": "; when "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x=9"
+          },
+          {
+            "type": "text",
+            "text": ", "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=36"
+          },
+          {
+            "type": "text",
+            "text": ". Show that "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": " is directly proportional to "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": ", and use this to find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": " when "
           },
           {
             "type": "inline_math",
@@ -2675,7 +2647,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l4-507",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2695,7 +2667,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A 840-unit task is shared equally. Each worker completes 30 units per hour. Find the time in hours needed by 10 workers, assuming the task is perfectly divisible and all workers maintain the same rate. Enter the exact numerical value only."
+            "text": "A 840-unit task is shared equally. Each worker completes 30 units per hour. Find the time in hours needed by 10 workers, assuming the task is perfectly divisible and all workers maintain the same rate. Enter the exact numerical value only."
           }
         ],
         "marks": 4,
@@ -2785,7 +2757,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l4-508",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2805,7 +2777,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A project would take 6 equally productive workers 9 days. After 3 days, 3 more equally productive workers join. Find the additional number of days required to finish the project. Enter the exact numerical value only."
+            "text": "A project would take 6 equally productive workers 9 days. After 3 days, 3 more equally productive workers join. Find the additional number of days required to finish the project. Enter the exact numerical value only."
           }
         ],
         "marks": 4,
@@ -2887,7 +2859,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n2-l5-501",
     "bank_key": "g3-sec2-n2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2907,7 +2879,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use the data from a community planning study. A task is planned for 10 equally productive workers to complete in 12 days. They all work for 6 days, after which 2 workers leave. Assuming inverse proportion for the remaining divisible work, how many additional days will the remaining workers need? Enter the exact numerical value only."
+            "text": "A task is planned for 10 equally productive workers to complete in 12 days. They all work for 6 days, after which 2 workers leave. Assuming inverse proportion for the remaining divisible work, how many additional days will the remaining workers need? Enter the exact numerical value only."
           }
         ],
         "marks": 5,

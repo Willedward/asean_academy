@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l1-508 — Statement scale as a ratio
+## n2-l1-508 — Statement scale in metres to a ratio scale
 
 [Open this question in the HTML preview](index.html#n2-l1-508)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l2-509 — Route distance in kilometres
+## n2-l2-509 — Real length of a canal
 
 [Open this question in the HTML preview](index.html#n2-l2-509)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l2-511 — Rectangular land area
+## n2-l2-511 — Area of an orchard in hectares
 
 [Open this question in the HTML preview](index.html#n2-l2-511)
 
